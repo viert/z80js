@@ -38,16 +38,21 @@ const Z80 = function(memory) {
     this[method] = memory[method].bind(memory)
   })
 
+  this.tStates = 0
+
   // Creating registers
   this.r1 = {}
   this.r2 = {}
 
+  let bf0 = new ArrayBuffer(16)
   let bf1 = new ArrayBuffer(14)
   let bf2 = new ArrayBuffer(14)
+  this.b0 = new Uint8Array(bf0)
+  this.w0 = new Uint16Array(bf0)
   this.b1 = new Uint8Array(bf1)
   this.w1 = new Uint16Array(bf1)
   this.b2 = new Uint8Array(bf2)
-  this.w2 = new Uint16Array(bf3)
+  this.w2 = new Uint16Array(bf2)
   this._defineByteRegister('f', 0)
   this._defineByteRegister('a', 1)
   this._defineByteRegister('c', 2)
@@ -67,6 +72,30 @@ const Z80 = function(memory) {
   this._defineWordRegister('ix', 4)
   this._defineWordRegister('iy', 5)
   this._defineWordRegister('sp', 6)
+  Object.defineProperty(this, 'pc', {
+    get: () => {
+      return this.w0[0]
+    },
+    set: (val) => {
+      this.w0[0] = val
+    }
+  })
+  Object.defineProperty(this, 'r', {
+    get: () => {
+      return this.b0[2]
+    },
+    set: (val) => {
+      this.b0[2] = val
+    }
+  })
+  Object.defineProperty(this, 'i', {
+    get: () => {
+      return this.b0[3]
+    },
+    set: (val) => {
+      this.b0[3] = val
+    }
+  })
 }
 
 Z80.prototype._defineByteRegister = function(name, position) {
@@ -117,12 +146,47 @@ Z80.prototype.opcodeTableDDCB = new Array(256)
 Z80.prototype.opcodeTableFDCB = new Array(256)
 
 // Creating cross-table links
-Z80.prototype.opcodeTable[0xcb] = Z80.prototype.opcodeTableCB
-Z80.prototype.opcodeTable[0xed] = Z80.prototype.opcodeTableED
-Z80.prototype.opcodeTable[0xfd] = Z80.prototype.opcodeTableFD
-Z80.prototype.opcodeTable[0xdd] = Z80.prototype.opcodeTableDD
-Z80.prototype.opcodeTableDD[0xcb] = Z80.prototype.opcodeTableDDCB
-Z80.prototype.opcodeTableFD[0xcb] = Z80.prototype.opcodeTableFDCB
+Z80.prototype.opcodeTable[0xcb] = { nextTable: Z80.prototype.opcodeTableCB }
+Z80.prototype.opcodeTable[0xed] = { nextTable: Z80.prototype.opcodeTableED }
+Z80.prototype.opcodeTable[0xfd] = { nextTable: Z80.prototype.opcodeTableFD }
+Z80.prototype.opcodeTable[0xdd] = { nextTable: Z80.prototype.opcodeTableDD }
+Z80.prototype.opcodeTableDD[0xcb] = { nextTable: Z80.prototype.opcodeTableDDCB }
+Z80.prototype.opcodeTableFD[0xcb] = { nextTable: Z80.prototype.opcodeTableFDCB }
+
+Z80.prototype.execInstruction = function() {
+  let opCode = this.read8(this.pc)
+  let codesString = opCode.toString(16) + ' '
+  let instr = this.opcodeTable[opCode]
+  if (!instr) {
+    throw 'Unknown instruction (opcode ' + codesString + ')'
+  }
+
+  while ('nextTable' in instr) {
+    let nextTable = operation.nextTable
+    this.tStates += 3
+    this.pc++
+    opCode = this.read8(this.pc)
+    codesString += opCode.toString(16)
+    instr = nextTable[opCode]
+    if (!operation) {
+      throw 'Unknown instruction (opcode ' + codesString + ')'
+    }
+  }
+
+  let { funcName, tStates } = instr
+  if (!(funcName in this)) {
+    throw 'Instruction ' + funcName + ' is not implemented'
+  }
+  this[funcName].call(this)
+  this.tStates += tStates
+}
+
+// Here comes all the CPU operations available
+//
+// Tables are filled dynamically in class compile time
+//
+// Implementations are made with a simple template engine and should
+// be precompiled with a compile.js script
 
 // LD r, r'
 for (let dst in RegisterMap) {
@@ -711,3 +775,5 @@ Z80.prototype.opcodeTableED[0b01011111] = { funcName: 'ld_a_r', tStates: 9, cycl
 Z80.prototype.opcodeTableED[0b01000111] = { funcName: 'ld_i_a', tStates: 9, cycles: 2, dasm: 'ld i, a', argLen: 0 }
 // LD R, A
 Z80.prototype.opcodeTableED[0b01001111] = { funcName: 'ld_r_a', tStates: 9, cycles: 2, dasm: 'ld r, a', argLen: 0 }
+
+module.exports = Z80
