@@ -8,14 +8,74 @@ const RegisterMap = {
 	0b101: 'l'
 }
 
+const MemoryMethods = [ 'read8', 'read16', 'write8', 'write16' ]
+
 // Z80 constructor
-const Z80 = function() {
+const Z80 = function(memory) {
 	if (!(this instanceof Z80)) {
 		throw 'Z80 is a constructor, use "new" keyword'
 	}
+
+	if (!memory) {
+		throw 'Constructor should be called with a Memory instance as the first argument'
+	}
+
+	// Binding memory access methods
+	MemoryMethods.forEach((method) => {
+		if (!memory[method] || typeof memory[method] !== 'function') {
+			throw 'Memory instance should have a ' + method + ' method'
+		}
+		this[method] = memory[method].bind(memory)
+	})
+
+	// Creating registers
+	let regBuffer = new ArrayBuffer(14)
+	this.byteRegs = new Uint8Array(regBuffer)
+	this.wordRegs = new Uint16Array(regBuffer)
+	this._defineByteRegister('f', 0)
+	this._defineByteRegister('a', 1)
+	this._defineByteRegister('c', 2)
+	this._defineByteRegister('b', 3)
+	this._defineByteRegister('e', 4)
+	this._defineByteRegister('d', 5)
+	this._defineByteRegister('l', 6)
+	this._defineByteRegister('h', 7)
+	this._defineByteRegister('ixl', 8)
+	this._defineByteRegister('ixh', 9)
+	this._defineByteRegister('iyl', 10)
+	this._defineByteRegister('iyh', 11)
+	this._defineWordRegister('af', 0)
+	this._defineWordRegister('bc', 1)
+	this._defineWordRegister('de', 2)
+	this._defineWordRegister('hl', 3)
+	this._defineWordRegister('ix', 4)
+	this._defineWordRegister('iy', 5)
+	this._defineWordRegister('sp', 6)
 }
 
-// creating opcode tables
+Z80.prototype._defineByteRegister = function(name, position) {
+	Object.defineProperty(this, name, {
+		get: () => {
+			return this.byteRegs[position]
+		},
+		set: (value) => {
+			this.byteRegs[position] = value
+		}
+	})
+}
+
+Z80.prototype._defineWordRegister = function(name, position) {
+	Object.defineProperty(this, name, {
+		get: () => {
+			return this.wordRegs[position]
+		},
+		set: (value) => {
+			this.wordRegs[position] = value
+		}
+	})
+}
+
+// Creating opcode tables
 Z80.prototype.opcodeTable = new Array(256)
 Z80.prototype.opcodeTableCB = new Array(256)
 Z80.prototype.opcodeTableED = new Array(256)
@@ -24,7 +84,7 @@ Z80.prototype.opcodeTableDD = new Array(256)
 Z80.prototype.opcodeTableDDCB = new Array(256)
 Z80.prototype.opcodeTableFDCB = new Array(256)
 
-// creating cross-table links
+// Creating cross-table links
 Z80.prototype.opcodeTable[0xcb] = Z80.prototype.opcodeTableCB
 Z80.prototype.opcodeTable[0xed] = Z80.prototype.opcodeTableED
 Z80.prototype.opcodeTable[0xfd] = Z80.prototype.opcodeTableFD
