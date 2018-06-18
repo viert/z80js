@@ -39,8 +39,18 @@ const c_pe = 6
 const c_po = 7
 
 const MemoryMethods = [ 'read8', 'read16', 'write8', 'write16' ]
+const _convertBuffer = new ArrayBuffer(1)
+const _ui8 = new Uint8Array(_convertBuffer)
+const _i8 = new Int8Array(_convertBuffer)
 
-const unot8 = (val) => 255 - val
+const unot8 = (val) => {
+  _ui8[0] = ~val
+  return _ui8[0]
+}
+const unsigned8 = (val) => {
+  _i8[0] = val
+  return _i8[0]
+}
 
 // Z80 constructor
 const Z80 = function(memory) {
@@ -453,6 +463,54 @@ Z80.prototype.opcodeTableED[0b01001111] = { funcName: 'ld_r_a', tStates: 9, cycl
 Z80.prototype.$0 = function() {
   this.tStates++
   this.$1 = this.r1.a
+}
+
+// #END
+
+// LD r, (IX/IY+d)
+for (let dst in RegisterMap) {
+  let opCode = 0b01000110 | (dst << 3)
+  for (let iReg in Prefixes) {
+    let opFuncName = `ld_${RegisterMap[dst]}__${iReg}_d_`
+    let disasmString = `ld ${RegisterMap[dst]}, (${iReg}+{0})`
+    Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
+      funcName: opFuncName,
+      tStates: 15,
+      cycles: 2,
+      dasm: disasmString,
+      argLen: 1
+    }
+  }
+}
+
+// #BEGIN ld_[a,b,c,d,e,h,l]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  let offset = unsigned8(this.read8(this.pc++))
+  this.r1.$1 = this.read8(this.$2 + offset)
+}
+
+// #END
+
+// LD (IX/IY+d), r
+for (let src in RegisterMap) {
+  let opCode = 0b01110000 | src
+  for (let iReg in Prefixes) {
+    let opFuncName = `ld__${iReg}_d__${RegisterMap[src]}`
+    let disasmString = `ld (${iReg}+{0}), ${RegisterMap[src]}`
+    Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
+      funcName: opFuncName,
+      tStates: 15,
+      cycles: 2,
+      dasm: disasmString,
+      argLen: 1
+    }
+  }
+}
+
+// #BEGIN ld_[a,b,c,d,e,h,l]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  let offset = unsigned8(this.read8(this.pc++))
+  this.write8(this.$2 + offset, this.r1.$1)
 }
 
 // #END
