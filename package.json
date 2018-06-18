@@ -1,0 +1,19 @@
+{
+  "name": "libz80js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "compile.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/viert/zcg.git"
+  },
+  "author": "Pavel Vorobyov <aquavitale@yandex.ru> (https://facebook.com/viert.fm)",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/viert/zcg#readme",
+  "devDependencies": {
+    "jest": "^23.1.0"
+  }
+}

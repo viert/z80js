@@ -52,6 +52,13 @@ const unsigned8 = (val) => {
   return _i8[0]
 }
 
+const NotImplemented = function(error) {
+  if (!(this instanceof NotImplemented)) {
+    return new NotImplemented(error)
+  }
+  this.error = error
+}
+
 // Z80 constructor
 const Z80 = function(memory) {
   if (!(this instanceof Z80)) {
@@ -249,27 +256,27 @@ Z80.prototype.opcodeTableFD[0xcb] = { nextTable: Z80.prototype.opcodeTableFDCB }
 
 Z80.prototype.execInstruction = function() {
   let opCode = this.read8(this.pc)
-  let codesString = opCode.toString(16) + ' '
+  let codesString = opCode.toString(16)
   let instr = this.opcodeTable[opCode]
   if (!instr) {
-    throw 'Unknown instruction (opcode ' + codesString + ')'
+    throw NotImplemented('Unknown instruction (opcode ' + codesString + ')')
   }
 
   while ('nextTable' in instr) {
-    let nextTable = operation.nextTable
+    let nextTable = instr.nextTable
     this.tStates += 3
     this.pc++
     opCode = this.read8(this.pc)
-    codesString += opCode.toString(16)
+    codesString += ' ' + opCode.toString(16)
     instr = nextTable[opCode]
-    if (!operation) {
-      throw 'Unknown instruction (opcode ' + codesString + ')'
+    if (!instr) {
+      throw NotImplemented('Unknown instruction (opcode ' + codesString + ')')
     }
   }
 
   let { funcName, tStates } = instr
   if (!(funcName in this)) {
-    throw 'Instruction ' + funcName + ' is not implemented'
+    throw NotImplemented('Instruction ' + funcName + ' is not implemented')
   }
   this[funcName].call(this)
   this.tStates += tStates

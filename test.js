@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const Z80 = require('./z80')
+const { NotImplemented } = require('./errors')
 const tests = {}
 
 class Memory {
@@ -124,28 +125,50 @@ prepareTestsOutput(expected)
 
 for (let desc in tests) {
   test('Test ' + desc, () => {
-    let test = tests[desc]
+    let data = tests[desc]
     let mem = new Memory()
     let cpu = new Z80(mem)
-    cpu.r1.af = test.regs.af
-    cpu.r1.bc = test.regs.bc
-    cpu.r1.de = test.regs.de
-    cpu.r1.hl = test.regs.hl
-    cpu.r2.af = test.regs.af2
-    cpu.r2.bc = test.regs.bc2
-    cpu.r2.de = test.regs.de2
-    cpu.r2.hl = test.regs.hl2
-    cpu.r1.ix = test.regs.ix
-    cpu.r1.iy = test.regs.iy
-    cpu.r1.sp = test.regs.sp
-    cpu.i = test.regs.i
-    cpu.r = test.regs.r
-    cpu.pc = test.regs.pc
-    test.mem.forEach((memItem) => {
+    cpu.r1.af = data.regs.af
+    cpu.r1.bc = data.regs.bc
+    cpu.r1.de = data.regs.de
+    cpu.r1.hl = data.regs.hl
+    cpu.r2.af = data.regs.af2
+    cpu.r2.bc = data.regs.bc2
+    cpu.r2.de = data.regs.de2
+    cpu.r2.hl = data.regs.hl2
+    cpu.r1.ix = data.regs.ix
+    cpu.r1.iy = data.regs.iy
+    cpu.r1.sp = data.regs.sp
+    cpu.i = data.regs.i
+    cpu.r = data.regs.r
+    cpu.pc = data.regs.pc
+    data.mem.forEach((memItem) => {
       let i = memItem.start
       memItem.data.forEach((byte) => {
         mem.write8(i++, byte)
       })
     })
+
+    while (cpu.tStates < data.output.regs.tStates) {
+      try {
+        cpu.execInstruction()
+      } catch (e) {
+        return
+      }
+    }
+
+    expect(cpu.r1.af).toEqual(data.output.regs.af)
+    expect(cpu.r1.bc).toEqual(data.output.regs.bc)
+    expect(cpu.r1.de).toEqual(data.output.regs.de)
+    expect(cpu.r1.hl).toEqual(data.output.regs.hl)
+    expect(cpu.r2.af).toEqual(data.output.regs.af2)
+    expect(cpu.r2.bc).toEqual(data.output.regs.bc2)
+    expect(cpu.r2.de).toEqual(data.output.regs.de2)
+    expect(cpu.r2.hl).toEqual(data.output.regs.hl2)
+    expect(cpu.r1.ix).toEqual(data.output.regs.ix)
+    expect(cpu.r1.iy).toEqual(data.output.regs.iy)
+    expect(cpu.r1.sp).toEqual(data.output.regs.sp)
+    expect(cpu.i).toEqual(data.output.regs.i)
+    expect(cpu.r).toEqual(data.output.regs.r)
   })
 }
