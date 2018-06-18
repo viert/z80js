@@ -1138,7 +1138,7 @@ for (let src in RegisterMap) {
     Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
       funcName: opFuncName,
       tStates: 15,
-      cycles: 2,
+      cycles: 5,
       dasm: disasmString,
       argLen: 1
     }
@@ -1215,5 +1215,30 @@ Z80.prototype.ld_l__iy_d_ = function() {
   this.write8(this.iy + offset, this.r1.l)
 }
 
+
+// LD (IX/IY+d), n
+for (let iReg in Prefixes) {
+  let opFuncName = `ld__${iReg}_d__n`
+  let disasmString = `ld (${iReg}+{0}), {1}`
+  Z80.prototype.opcodeTable[Prefixes[iReg]][0b00110110] = {
+    funcName: opFuncName,
+    tStates: 15,
+    cycles: 5,
+    dasm: disasmString,
+    argLen: 2
+  }
+}
+
+Z80.prototype.ld__ix_d__n = function() {
+  let offset = unsigned8(this.read8(this.pc++))
+  let n = this.read8(this.pc++)
+  this.write8(this.ix + offset, n)
+}
+
+Z80.prototype.ld__iy_d__n = function() {
+  let offset = unsigned8(this.read8(this.pc++))
+  let n = this.read8(this.pc++)
+  this.write8(this.iy + offset, n)
+}
 
 module.exports = Z80
