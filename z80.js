@@ -1,3 +1,5 @@
+const ParityBit = require('./parity')
+
 const RegisterMap = {
   0b111: 'a',
   0b000: 'b',
@@ -18,7 +20,27 @@ const Prefixes = {
   iy: 0xfd
 }
 
+const f_c = 1
+const f_n = 2
+const f_pv = 4
+const f_3 = 8
+const f_h = 16
+const f_5 = 32
+const f_z = 64
+const f_s = 128
+
+const c_z = 0
+const c_nz = 1
+const c_c = 2
+const c_nc = 3
+const c_m = 4
+const c_p = 5
+const c_pe = 6
+const c_po = 7
+
 const MemoryMethods = [ 'read8', 'read16', 'write8', 'write16' ]
+
+const unot8 = (val) => 255 - val
 
 // Z80 constructor
 const Z80 = function(memory) {
@@ -134,6 +156,68 @@ Z80.prototype._defineWordRegister = function(name, position) {
       this.w2[position] = value
     }
   })
+}
+
+// Flag operations
+
+Z80.prototype.setFlag = function(flag) {
+  this.r1.f = this.r1.f | flag
+}
+
+Z80.prototype.resFlag = function(flag) {
+  this.r1.f = this.r1.f & unot8(flag)
+}
+
+Z80.prototype.valFlag = function(flag, value) {
+  value ? this.setFlag(flag) : this.resFlag(flag)
+}
+
+Z80.prototype.getFlag = function(flag) {
+  return (this.r1.f & flag) !== 0
+}
+
+Z80.prototype.adjustFlags = function(value) {
+  this.valFlag(f_5, (value & f_5) !== 0)
+  this.valFlag(f_3, (value & f_3) !== 0)
+}
+
+Z80.prototype.adjustFlagSZP = function(value) {
+  this.valFlag(f_s, (value & 0x80) !== 0)
+  this.valFlag(f_z, value === 0)
+  this.valFlag(f_pv, ParityBit[value])
+}
+
+Z80.prototype.adjustLogicFlag = function(flag_h) {
+  this.valFlag(f_s, (this.r1.a & 0x80) !== 0)
+  this.valFlag(f_z, this.r1.a === 0)
+  this.valFlag(f_h, flag_h)
+  this.valFlag(f_n, false)
+  this.valFlag(f_c, false)
+  this.valFlag(f_pv, ParityBit[this.r1.a])
+  this.adjustFlags(this.r1.a)
+}
+
+Z80.prototype.condition = function(cond) {
+  switch (cond) {
+    case c_z:
+      return this.getFlag(f_z)
+    case c_nz:
+      return !this.getFlag(f_z)
+    case c_c:
+      return this.getFlag(f_c)
+    case c_nc:
+      return !this.getFlag(f_c)
+    case c_m:
+      return this.getFlag(f_s)
+    case c_p:
+      return !this.getFlag(f_s)
+    case c_pe:
+      return this.getFlag(f_pv)
+    case c_po:
+      return !this.getFlag(f_pv)
+    default:
+      return true
+  }
 }
 
 // Creating opcode tables
@@ -718,6 +802,51 @@ for (let dst in RegisterMap) {
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, cycles: 2, dasm: disasmString, argLen: 1 }
 }
 
+Z80.prototype.ld_a_n = function() {
+  this.r1.a = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_b_n = function() {
+  this.r1.b = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_c_n = function() {
+  this.r1.c = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_d_n = function() {
+  this.r1.d = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_e_n = function() {
+  this.r1.e = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_h_n = function() {
+  this.r1.h = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_l_n = function() {
+  this.r1.l = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_ixh_n = function() {
+  this.r1.ixh = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_ixl_n = function() {
+  this.r1.ixl = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_iyh_n = function() {
+  this.r1.iyh = this.read8(this.pc++)
+}
+
+Z80.prototype.ld_iyl_n = function() {
+  this.r1.iyl = this.read8(this.pc++)
+}
+
+
 // LD r, (HL)
 for (let dst in RegisterMap) {
   let opCode = 0b01000110 | (dst << 3)
@@ -726,6 +855,35 @@ for (let dst in RegisterMap) {
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, cycles: 2, dasm: disasmString, argLen: 0 }
 }
 
+Z80.prototype.lda__hl_ = function() {
+  this.r1.a = this.read8(this.r1.hl)
+}
+
+Z80.prototype.ldb__hl_ = function() {
+  this.r1.b = this.read8(this.r1.hl)
+}
+
+Z80.prototype.ldc__hl_ = function() {
+  this.r1.c = this.read8(this.r1.hl)
+}
+
+Z80.prototype.ldd__hl_ = function() {
+  this.r1.d = this.read8(this.r1.hl)
+}
+
+Z80.prototype.lde__hl_ = function() {
+  this.r1.e = this.read8(this.r1.hl)
+}
+
+Z80.prototype.ldh__hl_ = function() {
+  this.r1.h = this.read8(this.r1.hl)
+}
+
+Z80.prototype.ldl__hl_ = function() {
+  this.r1.l = this.read8(this.r1.hl)
+}
+
+
 // LD (HL), r
 for (let src in RegisterMap) {
   let opCode = 0b01110000 | src
@@ -733,6 +891,35 @@ for (let src in RegisterMap) {
   let disasmString = `ld (hl), ${RegisterMap[src]}`
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, cycles: 2, dasm: disasmString, argLen: 0 }
 }
+
+Z80.prototype.ld__hl__a = function() {
+  this.write8(this.r1.hl, this.r1.a)
+}
+
+Z80.prototype.ld__hl__b = function() {
+  this.write8(this.r1.hl, this.r1.b)
+}
+
+Z80.prototype.ld__hl__c = function() {
+  this.write8(this.r1.hl, this.r1.c)
+}
+
+Z80.prototype.ld__hl__d = function() {
+  this.write8(this.r1.hl, this.r1.d)
+}
+
+Z80.prototype.ld__hl__e = function() {
+  this.write8(this.r1.hl, this.r1.e)
+}
+
+Z80.prototype.ld__hl__h = function() {
+  this.write8(this.r1.hl, this.r1.h)
+}
+
+Z80.prototype.ld__hl__l = function() {
+  this.write8(this.r1.hl, this.r1.l)
+}
+
 
 // LD (HL), n
 Z80.prototype.opcodeTable[0b00110110] = {
@@ -743,10 +930,38 @@ Z80.prototype.opcodeTable[0b00110110] = {
   argLen: 1
 }
 
+Z80.prototype.ld__hl__n = function() {
+  this.write8(this.r1.hl, this.read8(this.pc++))
+}
+
 // LD A, (BC)
 Z80.prototype.opcodeTable[0b00001010] = { funcName: 'ld_a__bc_', tStates: 7, cycles: 2, dasm: 'ld a, (bc)', argLen: 0 }
 // LD A, (DE)
 Z80.prototype.opcodeTable[0b00011010] = { funcName: 'ld_a__de_', tStates: 7, cycles: 2, dasm: 'ld a, (de)', argLen: 0 }
+
+Z80.prototype.ld_a__bc_ = function() {
+  this.r1.a = this.read8(this.r1.bc)
+}
+
+Z80.prototype.ld_a__de_ = function() {
+  this.r1.a = this.read8(this.r1.de)
+}
+
+
+// LD (BC), A
+Z80.prototype.opcodeTable[0b00000010] = { funcName: 'ld__bc__a', tStates: 7, cycles: 2, dasm: 'ld (bc), a', argLen: 0 }
+// LD (DE), A
+Z80.prototype.opcodeTable[0b00010010] = { funcName: 'ld__de__a', tStates: 7, cycles: 2, dasm: 'ld (de), a', argLen: 0 }
+
+Z80.prototype.ld__bc__a = function() {
+  this.write8(this.r1.bc, this.r1.a)
+}
+
+Z80.prototype.ld__de__a = function() {
+  this.write8(this.r1.de, this.r1.a)
+}
+
+
 // LD A, (nn)
 Z80.prototype.opcodeTable[0b00111010] = {
   funcName: 'ld_a__nn_',
@@ -755,10 +970,12 @@ Z80.prototype.opcodeTable[0b00111010] = {
   dasm: 'ld a, ({0})',
   argLen: 2
 }
-// LD (BC), A
-Z80.prototype.opcodeTable[0b00000010] = { funcName: 'ld__bc__a', tStates: 7, cycles: 2, dasm: 'ld (bc), a', argLen: 0 }
-// LD (DE), A
-Z80.prototype.opcodeTable[0b00010010] = { funcName: 'ld__de__a', tStates: 7, cycles: 2, dasm: 'ld (de), a', argLen: 0 }
+
+Z80.prototype.ld_a__nn_ = function() {
+  this.r1.a = this.read8(this.read16(this.pc))
+  this.pc += 2
+}
+
 // LD (nn), A
 Z80.prototype.opcodeTable[0b00110010] = {
   funcName: 'ld__nn__a',
@@ -767,13 +984,52 @@ Z80.prototype.opcodeTable[0b00110010] = {
   dasm: 'ld ({0}), a',
   argLen: 2
 }
+
+Z80.prototype.ld__nn__a = function() {
+  this.write8(this.read16(this.pc), this.r1.a)
+  this.pc += 2
+}
+
 // LD A, I
 Z80.prototype.opcodeTableED[0b01010111] = { funcName: 'ld_a_i', tStates: 9, cycles: 2, dasm: 'ld a, i', argLen: 0 }
 // LD A, R
 Z80.prototype.opcodeTableED[0b01011111] = { funcName: 'ld_a_r', tStates: 9, cycles: 2, dasm: 'ld a, r', argLen: 0 }
+
+Z80.prototype.ld_a_i = function() {
+  this.tStates++
+  this.r1.a = this.i
+  this.adjustFlags(this.r1.a)
+  this.resFlag(f_h | f_n)
+  this.valFlag(f_pv, this.iff2)
+  this.valFlag(f_s, (this.r1.a & 0x80) !== 0)
+  this.valFlag(f_z, this.r1.a === 0)
+}
+
+Z80.prototype.ld_a_r = function() {
+  this.tStates++
+  this.r1.a = this.r
+  this.adjustFlags(this.r1.a)
+  this.resFlag(f_h | f_n)
+  this.valFlag(f_pv, this.iff2)
+  this.valFlag(f_s, (this.r1.a & 0x80) !== 0)
+  this.valFlag(f_z, this.r1.a === 0)
+}
+
+
 // LD I, A
 Z80.prototype.opcodeTableED[0b01000111] = { funcName: 'ld_i_a', tStates: 9, cycles: 2, dasm: 'ld i, a', argLen: 0 }
 // LD R, A
 Z80.prototype.opcodeTableED[0b01001111] = { funcName: 'ld_r_a', tStates: 9, cycles: 2, dasm: 'ld r, a', argLen: 0 }
+
+Z80.prototype.ld_i_a = function() {
+  this.tStates++
+  this.i = this.r1.a
+}
+
+Z80.prototype.ld_r_a = function() {
+  this.tStates++
+  this.r = this.r1.a
+}
+
 
 module.exports = Z80
