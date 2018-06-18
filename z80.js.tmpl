@@ -52,13 +52,6 @@ const unsigned8 = (val) => {
   return _i8[0]
 }
 
-const NotImplemented = function(error) {
-  if (!(this instanceof NotImplemented)) {
-    return new NotImplemented(error)
-  }
-  this.error = error
-}
-
 // Z80 constructor
 const Z80 = function(memory) {
   if (!(this instanceof Z80)) {
@@ -237,6 +230,15 @@ Z80.prototype.condition = function(cond) {
   }
 }
 
+// R register
+Z80.prototype.incr = function() {
+  this.r = (this.r & 0x80) | ((this.r + 1) & 0x7f)
+}
+
+Z80.prototype.decr = function() {
+  this.r = (this.r & 0x80) | ((this.r - 1) & 0x7f)
+}
+
 // Creating opcode tables
 Z80.prototype.opcodeTable = new Array(256)
 Z80.prototype.opcodeTableCB = new Array(256)
@@ -245,6 +247,8 @@ Z80.prototype.opcodeTableFD = new Array(256)
 Z80.prototype.opcodeTableDD = new Array(256)
 Z80.prototype.opcodeTableDDCB = new Array(256)
 Z80.prototype.opcodeTableFDCB = new Array(256)
+Z80.prototype.opcodeTableDDCB.opcodeOffset = 1
+Z80.prototype.opcodeTableFDCB.opcodeOffset = 1
 
 // Creating cross-table links
 Z80.prototype.opcodeTable[0xcb] = { nextTable: Z80.prototype.opcodeTableCB }
@@ -255,6 +259,7 @@ Z80.prototype.opcodeTableDD[0xcb] = { nextTable: Z80.prototype.opcodeTableDDCB }
 Z80.prototype.opcodeTableFD[0xcb] = { nextTable: Z80.prototype.opcodeTableFDCB }
 
 Z80.prototype.execInstruction = function() {
+  this.incr()
   let opCode = this.read8(this.pc)
   let codesString = opCode.toString(16)
   let instr = this.opcodeTable[opCode]
@@ -264,6 +269,9 @@ Z80.prototype.execInstruction = function() {
 
   while ('nextTable' in instr) {
     let nextTable = instr.nextTable
+    if (nextTable.opcodeOffset) {
+      this.decr()
+    }
     this.tStates += 3
     this.pc++
     opCode = this.read8(this.pc)
