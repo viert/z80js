@@ -1,4 +1,6 @@
 const ParityBit = require('./parity')
+const { unot8, unsigned8, hex16, hex8 } = require('./utils')
+const { NotImplemented } = require('./errors')
 
 const RegisterMap = {
   0b111: 'a',
@@ -39,21 +41,9 @@ const c_pe = 6
 const c_po = 7
 
 const MemoryMethods = [ 'read8', 'read16', 'write8', 'write16' ]
-const _convertBuffer = new ArrayBuffer(1)
-const _ui8 = new Uint8Array(_convertBuffer)
-const _i8 = new Int8Array(_convertBuffer)
-
-const unot8 = (val) => {
-  _ui8[0] = ~val
-  return _ui8[0]
-}
-const unsigned8 = (val) => {
-  _i8[0] = val
-  return _i8[0]
-}
 
 // Z80 constructor
-const Z80 = function(memory) {
+const Z80 = function(memory, debug) {
   if (!(this instanceof Z80)) {
     throw 'Z80 is a constructor, use "new" keyword'
   }
@@ -71,6 +61,7 @@ const Z80 = function(memory) {
   })
 
   this.tStates = 0
+  this.debug = !!debug
 
   // Creating registers
   this.r1 = {}
@@ -103,7 +94,14 @@ const Z80 = function(memory) {
   this._defineWordRegister('hl', 3)
   this._defineWordRegister('ix', 4)
   this._defineWordRegister('iy', 5)
-  this._defineWordRegister('sp', 6)
+  Object.defineProperty(this, 'sp', {
+    get: () => {
+      return this.w0[2]
+    },
+    set: (val) => {
+      this.w0[2] = val
+    }
+  })
   Object.defineProperty(this, 'pc', {
     get: () => {
       return this.w0[0]
@@ -166,6 +164,48 @@ Z80.prototype._defineWordRegister = function(name, position) {
       this.w2[position] = value
     }
   })
+}
+
+Z80.prototype.dump = function() {
+  console.log(`PC: ${hex16(this.pc)}`)
+  console.log(`SP: ${hex16(this.sp)}`)
+  console.log('')
+  console.log(`AF: ${hex16(this.r1.af)}         AF': ${hex16(this.r2.af)}`)
+  console.log(`BC: ${hex16(this.r1.bc)}         BC': ${hex16(this.r2.bc)}`)
+  console.log(`DE: ${hex16(this.r1.de)}         DE': ${hex16(this.r2.de)}`)
+  console.log(`HL: ${hex16(this.r1.hl)}         HL': ${hex16(this.r2.hl)}`)
+  console.log(`IX: ${hex16(this.r1.ix)}`)
+  console.log(`IY: ${hex16(this.r1.iy)}`)
+  console.log('')
+  console.log(`I: ${hex8(this.i)}`)
+  console.log(`R: ${hex8(this.r)}`)
+  console.log('')
+  let flags = []
+  if (this.getFlag(f_c)) {
+    flags.push('C')
+  }
+  if (this.getFlag(f_n)) {
+    flags.push('N')
+  }
+  if (this.getFlag(f_pv)) {
+    flags.push('PV')
+  }
+  if (this.getFlag(f_3)) {
+    flags.push('3')
+  }
+  if (this.getFlag(f_h)) {
+    flags.push('H')
+  }
+  if (this.getFlag(f_5)) {
+    flags.push('5')
+  }
+  if (this.getFlag(f_z)) {
+    flags.push('Z')
+  }
+  if (this.getFlag(f_s)) {
+    flags.push('S')
+  }
+  console.log(`FLAGS: ${flags.join(' ')}`)
 }
 
 // Flag operations
@@ -253,41 +293,60 @@ Z80.prototype.opcodeTableFDCB.opcodeOffset = 1
 // Creating cross-table links
 Z80.prototype.opcodeTable[0xcb] = { nextTable: Z80.prototype.opcodeTableCB }
 Z80.prototype.opcodeTable[0xed] = { nextTable: Z80.prototype.opcodeTableED }
-Z80.prototype.opcodeTable[0xfd] = { nextTable: Z80.prototype.opcodeTableFD }
 Z80.prototype.opcodeTable[0xdd] = { nextTable: Z80.prototype.opcodeTableDD }
+Z80.prototype.opcodeTable[0xfd] = { nextTable: Z80.prototype.opcodeTableFD }
 Z80.prototype.opcodeTableDD[0xcb] = { nextTable: Z80.prototype.opcodeTableDDCB }
 Z80.prototype.opcodeTableFD[0xcb] = { nextTable: Z80.prototype.opcodeTableFDCB }
 
 Z80.prototype.execInstruction = function() {
   this.incr()
   let opCode = this.read8(this.pc)
+  if (this.debug) {
+    console.log('read opCode ' + hex8(opCode))
+  }
   let codesString = opCode.toString(16)
   let instr = this.opcodeTable[opCode]
+  if (this.debug) {
+    console.log('instruction is ' + instr)
+  }
   if (!instr) {
     throw NotImplemented('Unknown instruction (opcode ' + codesString + ')')
   }
 
   while ('nextTable' in instr) {
     let nextTable = instr.nextTable
+    if (this.debug) {
+      console.log('Next table reached')
+    }
     if (nextTable.opcodeOffset) {
       this.decr()
     }
     this.tStates += 3
     this.pc++
     opCode = this.read8(this.pc)
+    if (this.debug) {
+      console.log('read opCode ' + hex8(opCode))
+    }
     codesString += ' ' + opCode.toString(16)
     instr = nextTable[opCode]
+    if (this.debug) {
+      console.log('instruction is ' + JSON.stringify(instr))
+    }
     if (!instr) {
       throw NotImplemented('Unknown instruction (opcode ' + codesString + ')')
     }
   }
 
-  let { funcName, tStates } = instr
+  let { funcName, tStates, dasm } = instr
+  if (this.debug) {
+    console.log(dasm)
+  }
   if (!(funcName in this)) {
     throw NotImplemented('Instruction ' + funcName + ' is not implemented')
   }
   this[funcName].call(this)
   this.tStates += tStates
+  this.pc++
 }
 
 // Here comes all the CPU operations available
@@ -313,15 +372,11 @@ for (let dst in RegisterMap) {
       argLen: 0
     }
     for (let pref in Prefixes) {
-      if (srcRegName === 'l' || srcRegName === 'h') {
-        srcRegName = pref + srcRegName
-      }
-      if (dstRegName === 'l' || dstRegName === 'h') {
-        dstRegName = pref + dstRegName
-      }
-      opFuncName = `ld_${dstRegName}_${srcRegName}`
-      disasmString = `ld ${dstRegName}, ${srcRegName}`
-      let table = pref === 'ix' ? Z80.prototype.opcodeTableDD : Z80.prototype.opcodeTableFD
+      let nsrcRegName = srcRegName === 'l' || srcRegName === 'h' ? pref + srcRegName : srcRegName
+      let ndstRegName = dstRegName === 'l' || dstRegName === 'h' ? pref + dstRegName : dstRegName
+      opFuncName = `ld_${ndstRegName}_${nsrcRegName}`
+      disasmString = `ld ${ndstRegName}, ${nsrcRegName}`
+      let table = Z80.prototype.opcodeTable[Prefixes[pref]].nextTable
       table[opCode] = {
         funcName: opFuncName,
         tStates: 4,
@@ -1254,6 +1309,20 @@ Z80.prototype.ld__iy_d__n = function() {
   let offset = unsigned8(this.read8(this.pc++))
   let n = this.read8(this.pc++)
   this.write8(this.iy + offset, n)
+}
+
+
+// NOP
+Z80.prototype.opcodeTable[0x00] = {
+  funcName: 'nop',
+  tStates: 4,
+  cycles: 1,
+  dasm: 'nop',
+  argLen: 0
+}
+
+Z80.prototype.nop = function() {
+  // nop
 }
 
 module.exports = Z80

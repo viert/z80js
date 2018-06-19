@@ -4,6 +4,7 @@
   "description": "",
   "main": "compile.js",
   "scripts": {
+    "build": "node compile.js",
     "test": "jest"
   },
   "repository": {
