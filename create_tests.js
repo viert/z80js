@@ -149,11 +149,7 @@ for (let desc in tests) {
   })
   testLines.push(`
   while (cpu.pc !== 0x${data.output.regs.pc}) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   `)
   testLines.push(`  expect(cpu.r1.af).toEqual(0x${hex16(data.output.regs.af)})`)

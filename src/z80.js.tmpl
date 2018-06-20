@@ -1,6 +1,5 @@
 const ParityBit = require('./parity')
 const { unot8, unsigned8, hex16, hex8 } = require('./utils')
-const { NotImplemented } = require('./errors')
 
 const RegisterMap = {
   0b111: 'a',
@@ -310,7 +309,7 @@ Z80.prototype.execInstruction = function() {
     console.log('instruction is ' + instr)
   }
   if (!instr) {
-    throw NotImplemented('Unknown instruction (opcode ' + codesString + ')')
+    throw 'Unknown instruction (opcode ' + codesString + ')'
   }
 
   while ('nextTable' in instr) {
@@ -333,20 +332,20 @@ Z80.prototype.execInstruction = function() {
       console.log('instruction is ' + JSON.stringify(instr))
     }
     if (!instr) {
-      throw NotImplemented('Unknown instruction (opcode ' + codesString + ')')
+      throw 'Unknown instruction (opcode ' + codesString + ')'
     }
   }
 
+  this.pc++
   let { funcName, tStates, dasm } = instr
   if (this.debug) {
     console.log(dasm)
   }
   if (!(funcName in this)) {
-    throw NotImplemented('Instruction ' + funcName + ' is not implemented')
+    throw 'Instruction ' + funcName + ' is not implemented'
   }
   this[funcName].call(this)
   this.tStates += tStates
-  this.pc++
 }
 
 // Here comes all the CPU operations available

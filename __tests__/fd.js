@@ -22,11 +22,7 @@ test('Test fd09', () => {
   mem.write8(0x0001, 0x09)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x4649)
@@ -65,11 +61,7 @@ test('Test fd19', () => {
   mem.write8(0x0001, 0x19)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xB3EC)
@@ -110,11 +102,7 @@ test('Test fd21', () => {
   mem.write8(0x0003, 0x47)
 
   while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xC924)
@@ -155,11 +143,7 @@ test('Test fd22', () => {
   mem.write8(0x0003, 0xE2)
 
   while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x1235)
@@ -198,11 +182,7 @@ test('Test fd23', () => {
   mem.write8(0x0001, 0x23)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x69F2)
@@ -241,11 +221,7 @@ test('Test fd24', () => {
   mem.write8(0x0001, 0x24)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x5520)
@@ -284,11 +260,7 @@ test('Test fd25', () => {
   mem.write8(0x0001, 0x25)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xCD03)
@@ -328,11 +300,7 @@ test('Test fd26', () => {
   mem.write8(0x0002, 0x77)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2452)
@@ -371,11 +339,7 @@ test('Test fd29', () => {
   mem.write8(0x0001, 0x29)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x5830)
@@ -418,11 +382,7 @@ test('Test fd2a', () => {
   mem.write8(0xF992, 0xBF)
 
   while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x0F82)
@@ -461,11 +421,7 @@ test('Test fd2b', () => {
   mem.write8(0x0001, 0x2B)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xAB27)
@@ -504,11 +460,7 @@ test('Test fd2c', () => {
   mem.write8(0x0001, 0x2C)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x66A9)
@@ -547,11 +499,7 @@ test('Test fd2d', () => {
   mem.write8(0x0001, 0x2D)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x320B)
@@ -591,11 +539,7 @@ test('Test fd2e', () => {
   mem.write8(0x0002, 0x49)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2114)
@@ -636,11 +580,7 @@ test('Test fd34', () => {
   mem.write8(0xEF7C, 0xE0)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xD5A0)
@@ -681,11 +621,7 @@ test('Test fd35', () => {
   mem.write8(0xAE71, 0xA6)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x8CA2)
@@ -726,11 +662,7 @@ test('Test fd36', () => {
   mem.write8(0x0003, 0xC5)
 
   while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xE0F9)
@@ -769,11 +701,7 @@ test('Test fd39', () => {
   mem.write8(0x0001, 0x39)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2631)
@@ -812,11 +740,7 @@ test('Test fd44', () => {
   mem.write8(0x0001, 0x44)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x0E58)
@@ -855,11 +779,7 @@ test('Test fd45', () => {
   mem.write8(0x0001, 0x45)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x6555)
@@ -900,11 +820,7 @@ test('Test fd46', () => {
   mem.write8(0x3B49, 0xC9)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x87F3)
@@ -943,11 +859,7 @@ test('Test fd4c', () => {
   mem.write8(0x0001, 0x4C)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x7E6B)
@@ -986,11 +898,7 @@ test('Test fd4d', () => {
   mem.write8(0x0001, 0x4D)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x50CF)
@@ -1031,11 +939,7 @@ test('Test fd4e', () => {
   mem.write8(0xBC01, 0x9D)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2C0F)
@@ -1074,11 +978,7 @@ test('Test fd54', () => {
   mem.write8(0x0001, 0x54)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xD7F9)
@@ -1117,11 +1017,7 @@ test('Test fd55', () => {
   mem.write8(0x0001, 0x55)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xAB98)
@@ -1162,11 +1058,7 @@ test('Test fd56', () => {
   mem.write8(0xFD70, 0x78)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xD3E8)
@@ -1205,11 +1097,7 @@ test('Test fd5c', () => {
   mem.write8(0x0001, 0x5C)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x11D5)
@@ -1248,11 +1136,7 @@ test('Test fd5d', () => {
   mem.write8(0x0001, 0x5D)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xE945)
@@ -1293,11 +1177,7 @@ test('Test fd5e', () => {
   mem.write8(0x8A70, 0x8C)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x6F3B)
@@ -1336,11 +1216,7 @@ test('Test fd60', () => {
   mem.write8(0x0001, 0x60)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x8579)
@@ -1379,11 +1255,7 @@ test('Test fd61', () => {
   mem.write8(0x0001, 0x61)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x5682)
@@ -1422,11 +1294,7 @@ test('Test fd62', () => {
   mem.write8(0x0001, 0x62)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x906B)
@@ -1465,11 +1333,7 @@ test('Test fd63', () => {
   mem.write8(0x0001, 0x63)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x9D59)
@@ -1508,11 +1372,7 @@ test('Test fd64', () => {
   mem.write8(0x0001, 0x64)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x7B0E)
@@ -1551,11 +1411,7 @@ test('Test fd65', () => {
   mem.write8(0x0001, 0x65)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xB827)
@@ -1596,11 +1452,7 @@ test('Test fd66', () => {
   mem.write8(0x5AA4, 0x77)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x9129)
@@ -1639,11 +1491,7 @@ test('Test fd67', () => {
   mem.write8(0x0001, 0x67)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xDB7A)
@@ -1682,11 +1530,7 @@ test('Test fd68', () => {
   mem.write8(0x0001, 0x68)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x4D1D)
@@ -1725,11 +1569,7 @@ test('Test fd69', () => {
   mem.write8(0x0001, 0x69)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x1589)
@@ -1768,11 +1608,7 @@ test('Test fd6a', () => {
   mem.write8(0x0001, 0x6A)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x607A)
@@ -1811,11 +1647,7 @@ test('Test fd6b', () => {
   mem.write8(0x0001, 0x6B)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xDB2A)
@@ -1854,11 +1686,7 @@ test('Test fd6c', () => {
   mem.write8(0x0001, 0x6C)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xA0BE)
@@ -1897,11 +1725,7 @@ test('Test fd6d', () => {
   mem.write8(0x0001, 0x6D)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xFDFC)
@@ -1942,11 +1766,7 @@ test('Test fd6e', () => {
   mem.write8(0xB11B, 0xF8)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xCFD4)
@@ -1985,11 +1805,7 @@ test('Test fd6f', () => {
   mem.write8(0x0001, 0x6F)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x8E1D)
@@ -2029,11 +1845,7 @@ test('Test fd70', () => {
   mem.write8(0x0002, 0x53)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2677)
@@ -2073,11 +1885,7 @@ test('Test fd71', () => {
   mem.write8(0x0002, 0xB4)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x892E)
@@ -2117,11 +1925,7 @@ test('Test fd72', () => {
   mem.write8(0x0002, 0xE3)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xD2DC)
@@ -2161,11 +1965,7 @@ test('Test fd73', () => {
   mem.write8(0x0002, 0x17)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x49EF)
@@ -2205,11 +2005,7 @@ test('Test fd74', () => {
   mem.write8(0x0002, 0xF6)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x9479)
@@ -2249,11 +2045,7 @@ test('Test fd75', () => {
   mem.write8(0x0002, 0xAB)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xC8D6)
@@ -2293,11 +2085,7 @@ test('Test fd77', () => {
   mem.write8(0x0002, 0xF7)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x6F9E)
@@ -2336,11 +2124,7 @@ test('Test fd7c', () => {
   mem.write8(0x0001, 0x7C)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xC628)
@@ -2379,11 +2163,7 @@ test('Test fd7d', () => {
   mem.write8(0x0001, 0x7D)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xB9E5)
@@ -2424,11 +2204,7 @@ test('Test fd7e', () => {
   mem.write8(0xD443, 0xAA)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xAA96)
@@ -2467,11 +2243,7 @@ test('Test fd84', () => {
   mem.write8(0x0001, 0x84)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x7F2D)
@@ -2510,11 +2282,7 @@ test('Test fd85', () => {
   mem.write8(0x0001, 0x85)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xEBA8)
@@ -2555,11 +2323,7 @@ test('Test fd86', () => {
   mem.write8(0x8B01, 0xE1)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xDD89)
@@ -2598,11 +2362,7 @@ test('Test fd8c', () => {
   mem.write8(0x0001, 0x8C)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x3839)
@@ -2641,11 +2401,7 @@ test('Test fd8d', () => {
   mem.write8(0x0001, 0x8D)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x8F89)
@@ -2686,11 +2442,7 @@ test('Test fd8e', () => {
   mem.write8(0x1B1A, 0xC0)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x0101)
@@ -2729,11 +2481,7 @@ test('Test fd94', () => {
   mem.write8(0x0001, 0x94)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2F3B)
@@ -2772,11 +2520,7 @@ test('Test fd95', () => {
   mem.write8(0x0001, 0x95)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xF4A3)
@@ -2817,11 +2561,7 @@ test('Test fd96', () => {
   mem.write8(0xC0E0, 0x7B)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2536)
@@ -2860,11 +2600,7 @@ test('Test fd9c', () => {
   mem.write8(0x0001, 0x9C)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xF3A3)
@@ -2903,11 +2639,7 @@ test('Test fd9d', () => {
   mem.write8(0x0001, 0x9D)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xFDBB)
@@ -2948,11 +2680,7 @@ test('Test fd9e', () => {
   mem.write8(0xF665, 0xF3)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xC583)
@@ -2991,11 +2719,7 @@ test('Test fda4', () => {
   mem.write8(0x0001, 0xA4)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x0054)
@@ -3034,11 +2758,7 @@ test('Test fda5', () => {
   mem.write8(0x0001, 0xA5)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x0054)
@@ -3079,11 +2799,7 @@ test('Test fda6', () => {
   mem.write8(0x65EE, 0x95)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x9594)
@@ -3122,11 +2838,7 @@ test('Test fdac', () => {
   mem.write8(0x0001, 0xAC)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x2724)
@@ -3165,11 +2877,7 @@ test('Test fdad', () => {
   mem.write8(0x0001, 0xAD)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xECA8)
@@ -3210,11 +2918,7 @@ test('Test fdae', () => {
   mem.write8(0x8201, 0xCB)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x6B28)
@@ -3253,11 +2957,7 @@ test('Test fdb4', () => {
   mem.write8(0x0001, 0xB4)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xCF8C)
@@ -3296,11 +2996,7 @@ test('Test fdb5', () => {
   mem.write8(0x0001, 0xB5)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x3720)
@@ -3341,11 +3037,7 @@ test('Test fdb6', () => {
   mem.write8(0xDFB8, 0x64)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xFFAC)
@@ -3384,11 +3076,7 @@ test('Test fdbc', () => {
   mem.write8(0x0001, 0xBC)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xB49A)
@@ -3427,11 +3115,7 @@ test('Test fdbd', () => {
   mem.write8(0x0001, 0xBD)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x391A)
@@ -3472,11 +3156,7 @@ test('Test fdbe', () => {
   mem.write8(0xA9D6, 0xC0)
 
   while (cpu.pc !== 0x3) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x0903)
@@ -3517,11 +3197,7 @@ test('Test fde1', () => {
   mem.write8(0x716F, 0x92)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x828E)
@@ -3562,11 +3238,7 @@ test('Test fde3', () => {
   mem.write8(0x1A39, 0x0F)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0x4298)
@@ -3605,11 +3277,7 @@ test('Test fde5', () => {
   mem.write8(0x0001, 0xE5)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xD139)
@@ -3648,11 +3316,7 @@ test('Test fde9', () => {
   mem.write8(0x0001, 0xE9)
 
   while (cpu.pc !== 0x41636) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xC14F)
@@ -3691,11 +3355,7 @@ test('Test fdf9', () => {
   mem.write8(0x0001, 0xF9)
 
   while (cpu.pc !== 0x2) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
+    cpu.execInstruction()
   }
   
   expect(cpu.r1.af).toEqual(0xC260)
