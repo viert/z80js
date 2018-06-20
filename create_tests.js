@@ -174,8 +174,8 @@ for (let desc in tests) {
 }
 
 for (let key in testRenders) {
-  let fileName = path.resolve(__dirname, `test_${key}.js`)
-  let lines = [ 'const Memory = require("./src/memory")', 'const Z80 = require("./src/z80")', '' ].concat(
+  let fileName = path.resolve(__dirname, `__tests__/${key}.js`)
+  let lines = [ 'const Memory = require("../src/memory")', 'const Z80 = require("../src/z80")', '' ].concat(
     testRenders[key]
   )
   fs.writeFileSync(fileName, lines.join('\n'))

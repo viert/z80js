@@ -1,5 +1,5 @@
-const Memory = require("./src/memory")
-const Z80 = require("./src/z80")
+const Memory = require("../src/memory")
+const Z80 = require("../src/z80")
 
 test('Test ed40', () => {
   let mem = new Memory()

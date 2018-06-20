@@ -1,28 +1,28 @@
-const Memory = require("./src/memory")
-const Z80 = require("./src/z80")
+const Memory = require("../src/memory")
+const Z80 = require("../src/z80")
 
-test('Test fdcb00', () => {
+test('Test ddcb00', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x85AC
-  cpu.r1.bc = 0x46D0
-  cpu.r1.de = 0xA135
-  cpu.r1.hl = 0x20C5
+  cpu.r1.af = 0x3C65
+  cpu.r1.bc = 0xF0E4
+  cpu.r1.de = 0x09D1
+  cpu.r1.hl = 0x646B
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB8DE
-  cpu.r1.iy = 0x2776
+  cpu.r1.ix = 0x1DA1
+  cpu.r1.iy = 0xF08F
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0B)
+  mem.write8(0x0002, 0x0D)
   mem.write8(0x0003, 0x00)
-  mem.write8(0x2781, 0x50)
+  mem.write8(0x1DAE, 0xA1)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -32,43 +32,43 @@ test('Test fdcb00', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x85A4)
-  expect(cpu.r1.bc).toEqual(0xA0D0)
-  expect(cpu.r1.de).toEqual(0xA135)
-  expect(cpu.r1.hl).toEqual(0x20C5)
+  expect(cpu.r1.af).toEqual(0x3C01)
+  expect(cpu.r1.bc).toEqual(0x43E4)
+  expect(cpu.r1.de).toEqual(0x09D1)
+  expect(cpu.r1.hl).toEqual(0x646B)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB8DE)
-  expect(cpu.r1.iy).toEqual(0x2776)
+  expect(cpu.r1.ix).toEqual(0x1DA1)
+  expect(cpu.r1.iy).toEqual(0xF08F)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb01', () => {
+test('Test ddcb01', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x577C
-  cpu.r1.bc = 0x2B76
-  cpu.r1.de = 0x3576
-  cpu.r1.hl = 0x280A
+  cpu.r1.af = 0xF68F
+  cpu.r1.bc = 0xE33B
+  cpu.r1.de = 0x2D4A
+  cpu.r1.hl = 0x7725
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAE22
-  cpu.r1.iy = 0x5C35
+  cpu.r1.ix = 0x28FD
+  cpu.r1.iy = 0xF31B
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC8)
+  mem.write8(0x0002, 0xB7)
   mem.write8(0x0003, 0x01)
-  mem.write8(0x5BFD, 0xCB)
+  mem.write8(0x28B4, 0xE3)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -78,43 +78,43 @@ test('Test fdcb01', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5781)
-  expect(cpu.r1.bc).toEqual(0x2B97)
-  expect(cpu.r1.de).toEqual(0x3576)
-  expect(cpu.r1.hl).toEqual(0x280A)
+  expect(cpu.r1.af).toEqual(0xF681)
+  expect(cpu.r1.bc).toEqual(0xE3C7)
+  expect(cpu.r1.de).toEqual(0x2D4A)
+  expect(cpu.r1.hl).toEqual(0x7725)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAE22)
-  expect(cpu.r1.iy).toEqual(0x5C35)
+  expect(cpu.r1.ix).toEqual(0x28FD)
+  expect(cpu.r1.iy).toEqual(0xF31B)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb02', () => {
+test('Test ddcb02', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xDC23
-  cpu.r1.bc = 0x2B37
-  cpu.r1.de = 0x83C8
-  cpu.r1.hl = 0x5DD9
+  cpu.r1.af = 0xE20C
+  cpu.r1.bc = 0x836E
+  cpu.r1.de = 0x513A
+  cpu.r1.hl = 0xF840
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB2D2
-  cpu.r1.iy = 0x3DF2
+  cpu.r1.ix = 0xC796
+  cpu.r1.iy = 0xAE9B
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x14)
+  mem.write8(0x0002, 0x91)
   mem.write8(0x0003, 0x02)
-  mem.write8(0x3E06, 0x58)
+  mem.write8(0xC727, 0x8D)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -124,43 +124,43 @@ test('Test fdcb02', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xDCA0)
-  expect(cpu.r1.bc).toEqual(0x2B37)
-  expect(cpu.r1.de).toEqual(0xB0C8)
-  expect(cpu.r1.hl).toEqual(0x5DD9)
+  expect(cpu.r1.af).toEqual(0xE20D)
+  expect(cpu.r1.bc).toEqual(0x836E)
+  expect(cpu.r1.de).toEqual(0x1B3A)
+  expect(cpu.r1.hl).toEqual(0xF840)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB2D2)
-  expect(cpu.r1.iy).toEqual(0x3DF2)
+  expect(cpu.r1.ix).toEqual(0xC796)
+  expect(cpu.r1.iy).toEqual(0xAE9B)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb03', () => {
+test('Test ddcb03', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x57EE
-  cpu.r1.bc = 0xC179
-  cpu.r1.de = 0xB2B6
-  cpu.r1.hl = 0x7058
+  cpu.r1.af = 0x6224
+  cpu.r1.bc = 0x3571
+  cpu.r1.de = 0xC519
+  cpu.r1.hl = 0x48DC
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3F2E
-  cpu.r1.iy = 0x57E7
+  cpu.r1.ix = 0x041E
+  cpu.r1.iy = 0xC07B
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x3A)
+  mem.write8(0x0002, 0x48)
   mem.write8(0x0003, 0x03)
-  mem.write8(0x5821, 0x1A)
+  mem.write8(0x0466, 0x78)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -170,43 +170,43 @@ test('Test fdcb03', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5720)
-  expect(cpu.r1.bc).toEqual(0xC179)
-  expect(cpu.r1.de).toEqual(0xB234)
-  expect(cpu.r1.hl).toEqual(0x7058)
+  expect(cpu.r1.af).toEqual(0x62A4)
+  expect(cpu.r1.bc).toEqual(0x3571)
+  expect(cpu.r1.de).toEqual(0xC5F0)
+  expect(cpu.r1.hl).toEqual(0x48DC)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3F2E)
-  expect(cpu.r1.iy).toEqual(0x57E7)
+  expect(cpu.r1.ix).toEqual(0x041E)
+  expect(cpu.r1.iy).toEqual(0xC07B)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb04', () => {
+test('Test ddcb04', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xED18
-  cpu.r1.bc = 0x3F03
-  cpu.r1.de = 0x3327
-  cpu.r1.hl = 0xF35A
+  cpu.r1.af = 0xB310
+  cpu.r1.bc = 0xBFC4
+  cpu.r1.de = 0x64AF
+  cpu.r1.hl = 0xD622
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xCBF2
-  cpu.r1.iy = 0x5071
+  cpu.r1.ix = 0x5949
+  cpu.r1.iy = 0xA989
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x67)
+  mem.write8(0x0002, 0x48)
   mem.write8(0x0003, 0x04)
-  mem.write8(0x50D8, 0x92)
+  mem.write8(0x5991, 0x68)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -216,43 +216,43 @@ test('Test fdcb04', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xED21)
-  expect(cpu.r1.bc).toEqual(0x3F03)
-  expect(cpu.r1.de).toEqual(0x3327)
-  expect(cpu.r1.hl).toEqual(0x255A)
+  expect(cpu.r1.af).toEqual(0xB380)
+  expect(cpu.r1.bc).toEqual(0xBFC4)
+  expect(cpu.r1.de).toEqual(0x64AF)
+  expect(cpu.r1.hl).toEqual(0xD022)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xCBF2)
-  expect(cpu.r1.iy).toEqual(0x5071)
+  expect(cpu.r1.ix).toEqual(0x5949)
+  expect(cpu.r1.iy).toEqual(0xA989)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb05', () => {
+test('Test ddcb05', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x7A39
-  cpu.r1.bc = 0x0858
-  cpu.r1.de = 0xDB6C
-  cpu.r1.hl = 0xDBE0
+  cpu.r1.af = 0x4954
+  cpu.r1.bc = 0xBB04
+  cpu.r1.de = 0x56EC
+  cpu.r1.hl = 0x9D58
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x157A
-  cpu.r1.iy = 0xB25B
+  cpu.r1.ix = 0x0077
+  cpu.r1.iy = 0x1349
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x1E)
+  mem.write8(0x0002, 0xFF)
   mem.write8(0x0003, 0x05)
-  mem.write8(0xB279, 0x66)
+  mem.write8(0x0076, 0x95)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -262,43 +262,43 @@ test('Test fdcb05', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x7A8C)
-  expect(cpu.r1.bc).toEqual(0x0858)
-  expect(cpu.r1.de).toEqual(0xDB6C)
-  expect(cpu.r1.hl).toEqual(0xDBCC)
+  expect(cpu.r1.af).toEqual(0x492D)
+  expect(cpu.r1.bc).toEqual(0xBB04)
+  expect(cpu.r1.de).toEqual(0x56EC)
+  expect(cpu.r1.hl).toEqual(0x9D2B)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x157A)
-  expect(cpu.r1.iy).toEqual(0xB25B)
+  expect(cpu.r1.ix).toEqual(0x0077)
+  expect(cpu.r1.iy).toEqual(0x1349)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb06', () => {
+test('Test ddcb06', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xF285
-  cpu.r1.bc = 0x89A2
-  cpu.r1.de = 0xE78F
-  cpu.r1.hl = 0xEF74
+  cpu.r1.af = 0x0CF4
+  cpu.r1.bc = 0xF636
+  cpu.r1.de = 0x90A6
+  cpu.r1.hl = 0x6117
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x140D
-  cpu.r1.iy = 0xFF27
+  cpu.r1.ix = 0x5421
+  cpu.r1.iy = 0x90EE
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x72)
+  mem.write8(0x0002, 0x07)
   mem.write8(0x0003, 0x06)
-  mem.write8(0xFF99, 0xF1)
+  mem.write8(0x5428, 0x97)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -308,43 +308,43 @@ test('Test fdcb06', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xF2A1)
-  expect(cpu.r1.bc).toEqual(0x89A2)
-  expect(cpu.r1.de).toEqual(0xE78F)
-  expect(cpu.r1.hl).toEqual(0xEF74)
+  expect(cpu.r1.af).toEqual(0x0C29)
+  expect(cpu.r1.bc).toEqual(0xF636)
+  expect(cpu.r1.de).toEqual(0x90A6)
+  expect(cpu.r1.hl).toEqual(0x6117)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x140D)
-  expect(cpu.r1.iy).toEqual(0xFF27)
+  expect(cpu.r1.ix).toEqual(0x5421)
+  expect(cpu.r1.iy).toEqual(0x90EE)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb07', () => {
+test('Test ddcb07', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8CCE
-  cpu.r1.bc = 0xF3A7
-  cpu.r1.de = 0x3A6E
-  cpu.r1.hl = 0x8F0A
+  cpu.r1.af = 0x6F4D
+  cpu.r1.bc = 0x9CA3
+  cpu.r1.de = 0xBDF6
+  cpu.r1.hl = 0xED50
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8423
-  cpu.r1.iy = 0x07EB
+  cpu.r1.ix = 0x9803
+  cpu.r1.iy = 0x55F9
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x24)
+  mem.write8(0x0002, 0x42)
   mem.write8(0x0003, 0x07)
-  mem.write8(0x080F, 0xAE)
+  mem.write8(0x9845, 0xAE)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -355,42 +355,42 @@ test('Test fdcb07', () => {
   }
   
   expect(cpu.r1.af).toEqual(0x5D09)
-  expect(cpu.r1.bc).toEqual(0xF3A7)
-  expect(cpu.r1.de).toEqual(0x3A6E)
-  expect(cpu.r1.hl).toEqual(0x8F0A)
+  expect(cpu.r1.bc).toEqual(0x9CA3)
+  expect(cpu.r1.de).toEqual(0xBDF6)
+  expect(cpu.r1.hl).toEqual(0xED50)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8423)
-  expect(cpu.r1.iy).toEqual(0x07EB)
+  expect(cpu.r1.ix).toEqual(0x9803)
+  expect(cpu.r1.iy).toEqual(0x55F9)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb08', () => {
+test('Test ddcb08', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xA611
-  cpu.r1.bc = 0xE8EC
-  cpu.r1.de = 0xC958
-  cpu.r1.hl = 0x7BDA
+  cpu.r1.af = 0x02F4
+  cpu.r1.bc = 0x1C66
+  cpu.r1.de = 0x6023
+  cpu.r1.hl = 0xAE06
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x194D
-  cpu.r1.iy = 0x6137
+  cpu.r1.ix = 0xEF40
+  cpu.r1.iy = 0xB006
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x25)
+  mem.write8(0x0002, 0x0A)
   mem.write8(0x0003, 0x08)
-  mem.write8(0x615C, 0x83)
+  mem.write8(0xEF4A, 0xDA)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -400,43 +400,43 @@ test('Test fdcb08', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xA681)
-  expect(cpu.r1.bc).toEqual(0xC1EC)
-  expect(cpu.r1.de).toEqual(0xC958)
-  expect(cpu.r1.hl).toEqual(0x7BDA)
+  expect(cpu.r1.af).toEqual(0x0228)
+  expect(cpu.r1.bc).toEqual(0x6D66)
+  expect(cpu.r1.de).toEqual(0x6023)
+  expect(cpu.r1.hl).toEqual(0xAE06)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x194D)
-  expect(cpu.r1.iy).toEqual(0x6137)
+  expect(cpu.r1.ix).toEqual(0xEF40)
+  expect(cpu.r1.iy).toEqual(0xB006)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb09', () => {
+test('Test ddcb09', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x54B1
-  cpu.r1.bc = 0xFA1A
-  cpu.r1.de = 0x84E8
-  cpu.r1.hl = 0x4FA5
+  cpu.r1.af = 0x9825
+  cpu.r1.bc = 0x9258
+  cpu.r1.de = 0x54D5
+  cpu.r1.hl = 0x5E1E
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1AD3
-  cpu.r1.iy = 0x19DA
+  cpu.r1.ix = 0x9D0B
+  cpu.r1.iy = 0x6E58
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA0)
+  mem.write8(0x0002, 0x3B)
   mem.write8(0x0003, 0x09)
-  mem.write8(0x197A, 0x27)
+  mem.write8(0x9D46, 0x6F)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -446,1423 +446,1423 @@ test('Test fdcb09', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5485)
-  expect(cpu.r1.bc).toEqual(0xFA93)
-  expect(cpu.r1.de).toEqual(0x84E8)
-  expect(cpu.r1.hl).toEqual(0x4FA5)
+  expect(cpu.r1.af).toEqual(0x98A5)
+  expect(cpu.r1.bc).toEqual(0x92B7)
+  expect(cpu.r1.de).toEqual(0x54D5)
+  expect(cpu.r1.hl).toEqual(0x5E1E)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1AD3)
-  expect(cpu.r1.iy).toEqual(0x19DA)
+  expect(cpu.r1.ix).toEqual(0x9D0B)
+  expect(cpu.r1.iy).toEqual(0x6E58)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb0a', () => {
+test('Test ddcb0a', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xB3EF
-  cpu.r1.bc = 0xA2BB
-  cpu.r1.de = 0xE5D6
-  cpu.r1.hl = 0x9617
+  cpu.r1.af = 0xD2DD
+  cpu.r1.bc = 0x6AAC
+  cpu.r1.de = 0xE789
+  cpu.r1.hl = 0x9293
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF946
-  cpu.r1.iy = 0xEEF6
+  cpu.r1.ix = 0x1FB4
+  cpu.r1.iy = 0x2498
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE1)
-  mem.write8(0x0003, 0x0A)
-  mem.write8(0xEED7, 0x19)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xB389)
-  expect(cpu.r1.bc).toEqual(0xA2BB)
-  expect(cpu.r1.de).toEqual(0x8CD6)
-  expect(cpu.r1.hl).toEqual(0x9617)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF946)
-  expect(cpu.r1.iy).toEqual(0xEEF6)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb0b', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xAE10
-  cpu.r1.bc = 0x8C4E
-  cpu.r1.de = 0xE159
-  cpu.r1.hl = 0x1C54
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE108
-  cpu.r1.iy = 0xC68F
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0C)
-  mem.write8(0x0003, 0x0B)
-  mem.write8(0xC69B, 0xF2)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xAE28)
-  expect(cpu.r1.bc).toEqual(0x8C4E)
-  expect(cpu.r1.de).toEqual(0xE179)
-  expect(cpu.r1.hl).toEqual(0x1C54)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE108)
-  expect(cpu.r1.iy).toEqual(0xC68F)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb0c', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x8719
-  cpu.r1.bc = 0x6B16
-  cpu.r1.de = 0x4C3B
-  cpu.r1.hl = 0x180A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x175A
-  cpu.r1.iy = 0x8C9D
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD7)
-  mem.write8(0x0003, 0x0C)
-  mem.write8(0x8C74, 0xAE)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8700)
-  expect(cpu.r1.bc).toEqual(0x6B16)
-  expect(cpu.r1.de).toEqual(0x4C3B)
-  expect(cpu.r1.hl).toEqual(0x570A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x175A)
-  expect(cpu.r1.iy).toEqual(0x8C9D)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb0d', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1204
-  cpu.r1.bc = 0xE0CB
-  cpu.r1.de = 0x3AB1
-  cpu.r1.hl = 0x2416
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1DE4
-  cpu.r1.iy = 0xFE2D
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x11)
-  mem.write8(0x0003, 0x0D)
-  mem.write8(0xFE3E, 0x1B)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x128D)
-  expect(cpu.r1.bc).toEqual(0xE0CB)
-  expect(cpu.r1.de).toEqual(0x3AB1)
-  expect(cpu.r1.hl).toEqual(0x248D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1DE4)
-  expect(cpu.r1.iy).toEqual(0xFE2D)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb0e', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x8DA4
-  cpu.r1.bc = 0x8F91
-  cpu.r1.de = 0xFC5A
-  cpu.r1.hl = 0x5E2C
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB2F2
-  cpu.r1.iy = 0xF223
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0C)
-  mem.write8(0x0003, 0x0E)
-  mem.write8(0xF22F, 0xF7)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8DA9)
-  expect(cpu.r1.bc).toEqual(0x8F91)
-  expect(cpu.r1.de).toEqual(0xFC5A)
-  expect(cpu.r1.hl).toEqual(0x5E2C)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB2F2)
-  expect(cpu.r1.iy).toEqual(0xF223)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb0f', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xFBB0
-  cpu.r1.bc = 0x2AC9
-  cpu.r1.de = 0xEC6B
-  cpu.r1.hl = 0x6511
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC93A
-  cpu.r1.iy = 0xCE38
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x15)
-  mem.write8(0x0003, 0x0F)
-  mem.write8(0xCE4D, 0x44)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x2224)
-  expect(cpu.r1.bc).toEqual(0x2AC9)
-  expect(cpu.r1.de).toEqual(0xEC6B)
-  expect(cpu.r1.hl).toEqual(0x6511)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC93A)
-  expect(cpu.r1.iy).toEqual(0xCE38)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb10', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x259D
-  cpu.r1.bc = 0x3852
-  cpu.r1.de = 0x590D
-  cpu.r1.hl = 0xAC66
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x144F
-  cpu.r1.iy = 0x42A2
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7A)
-  mem.write8(0x0003, 0x10)
-  mem.write8(0x431C, 0x1C)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x252C)
-  expect(cpu.r1.bc).toEqual(0x3952)
-  expect(cpu.r1.de).toEqual(0x590D)
-  expect(cpu.r1.hl).toEqual(0xAC66)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x144F)
-  expect(cpu.r1.iy).toEqual(0x42A2)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb11', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xBC60
-  cpu.r1.bc = 0x61C1
-  cpu.r1.de = 0xF5F8
-  cpu.r1.hl = 0xAF24
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4019
-  cpu.r1.iy = 0x9C90
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7B)
-  mem.write8(0x0003, 0x11)
-  mem.write8(0x9D0B, 0x5E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xBCA8)
-  expect(cpu.r1.bc).toEqual(0x61BC)
-  expect(cpu.r1.de).toEqual(0xF5F8)
-  expect(cpu.r1.hl).toEqual(0xAF24)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4019)
-  expect(cpu.r1.iy).toEqual(0x9C90)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb12', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x4E45
-  cpu.r1.bc = 0x3A25
-  cpu.r1.de = 0x3417
-  cpu.r1.hl = 0xBCC7
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0D7E
-  cpu.r1.iy = 0x8537
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x61)
-  mem.write8(0x0003, 0x12)
-  mem.write8(0x8598, 0xA7)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x4E09)
-  expect(cpu.r1.bc).toEqual(0x3A25)
-  expect(cpu.r1.de).toEqual(0x4F17)
-  expect(cpu.r1.hl).toEqual(0xBCC7)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0D7E)
-  expect(cpu.r1.iy).toEqual(0x8537)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb13', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xB224
-  cpu.r1.bc = 0xB79B
-  cpu.r1.de = 0x84F1
-  cpu.r1.hl = 0xFF7D
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x414C
-  cpu.r1.iy = 0xE798
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xB3)
-  mem.write8(0x0003, 0x13)
-  mem.write8(0xE74B, 0xB3)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xB225)
-  expect(cpu.r1.bc).toEqual(0xB79B)
-  expect(cpu.r1.de).toEqual(0x8466)
-  expect(cpu.r1.hl).toEqual(0xFF7D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x414C)
-  expect(cpu.r1.iy).toEqual(0xE798)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb14', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xABBB
-  cpu.r1.bc = 0x451A
-  cpu.r1.de = 0xFC65
-  cpu.r1.hl = 0x14A1
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0F4D
-  cpu.r1.iy = 0xD93C
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC4)
-  mem.write8(0x0003, 0x14)
-  mem.write8(0xD900, 0x06)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xAB08)
-  expect(cpu.r1.bc).toEqual(0x451A)
-  expect(cpu.r1.de).toEqual(0xFC65)
-  expect(cpu.r1.hl).toEqual(0x0DA1)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0F4D)
-  expect(cpu.r1.iy).toEqual(0xD93C)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb15', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x2864
-  cpu.r1.bc = 0x9532
-  cpu.r1.de = 0x8631
-  cpu.r1.hl = 0x751C
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE327
-  cpu.r1.iy = 0x2D7B
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x17)
-  mem.write8(0x0003, 0x15)
-  mem.write8(0x2D92, 0x12)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x2824)
-  expect(cpu.r1.bc).toEqual(0x9532)
-  expect(cpu.r1.de).toEqual(0x8631)
-  expect(cpu.r1.hl).toEqual(0x7524)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE327)
-  expect(cpu.r1.iy).toEqual(0x2D7B)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb16', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x0C3C
-  cpu.r1.bc = 0xDCD7
-  cpu.r1.de = 0xADCC
-  cpu.r1.hl = 0x196D
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x87E2
-  cpu.r1.iy = 0xF0B4
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x23)
-  mem.write8(0x0003, 0x16)
-  mem.write8(0xF0D7, 0x89)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x0C05)
-  expect(cpu.r1.bc).toEqual(0xDCD7)
-  expect(cpu.r1.de).toEqual(0xADCC)
-  expect(cpu.r1.hl).toEqual(0x196D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x87E2)
-  expect(cpu.r1.iy).toEqual(0xF0B4)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb17', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xAF5B
-  cpu.r1.bc = 0xD016
-  cpu.r1.de = 0x066E
-  cpu.r1.hl = 0x6638
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5E92
-  cpu.r1.iy = 0x2013
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x8A)
-  mem.write8(0x0003, 0x17)
-  mem.write8(0x1F9D, 0xB8)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7125)
-  expect(cpu.r1.bc).toEqual(0xD016)
-  expect(cpu.r1.de).toEqual(0x066E)
-  expect(cpu.r1.hl).toEqual(0x6638)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5E92)
-  expect(cpu.r1.iy).toEqual(0x2013)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb18', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x23F3
-  cpu.r1.bc = 0x4517
-  cpu.r1.de = 0x16E0
-  cpu.r1.hl = 0x6894
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB908
-  cpu.r1.iy = 0x3216
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC0)
-  mem.write8(0x0003, 0x18)
-  mem.write8(0x31D6, 0xFA)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x23A8)
-  expect(cpu.r1.bc).toEqual(0xFD17)
-  expect(cpu.r1.de).toEqual(0x16E0)
-  expect(cpu.r1.hl).toEqual(0x6894)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB908)
-  expect(cpu.r1.iy).toEqual(0x3216)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb19', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x11ED
-  cpu.r1.bc = 0xC2B8
-  cpu.r1.de = 0xA9F3
-  cpu.r1.hl = 0x2014
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6DB0
-  cpu.r1.iy = 0x4D2E
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA2)
-  mem.write8(0x0003, 0x19)
-  mem.write8(0x4CD0, 0x4B)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x11A5)
-  expect(cpu.r1.bc).toEqual(0xC2A5)
-  expect(cpu.r1.de).toEqual(0xA9F3)
-  expect(cpu.r1.hl).toEqual(0x2014)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6DB0)
-  expect(cpu.r1.iy).toEqual(0x4D2E)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb1a', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xBC5C
-  cpu.r1.bc = 0x6168
-  cpu.r1.de = 0xE541
-  cpu.r1.hl = 0xB630
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0207
-  cpu.r1.iy = 0x40D3
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x78)
-  mem.write8(0x0003, 0x1A)
-  mem.write8(0x414B, 0x44)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xBC24)
-  expect(cpu.r1.bc).toEqual(0x6168)
-  expect(cpu.r1.de).toEqual(0x2241)
-  expect(cpu.r1.hl).toEqual(0xB630)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0207)
-  expect(cpu.r1.iy).toEqual(0x40D3)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb1b', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x7A28
-  cpu.r1.bc = 0x1286
-  cpu.r1.de = 0xFE50
-  cpu.r1.hl = 0xC42D
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE290
-  cpu.r1.iy = 0x71B0
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x16)
-  mem.write8(0x0003, 0x1B)
-  mem.write8(0x71C6, 0xB8)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7A0C)
-  expect(cpu.r1.bc).toEqual(0x1286)
-  expect(cpu.r1.de).toEqual(0xFE5C)
-  expect(cpu.r1.hl).toEqual(0xC42D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE290)
-  expect(cpu.r1.iy).toEqual(0x71B0)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb1c', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x932B
-  cpu.r1.bc = 0x097B
-  cpu.r1.de = 0x6928
-  cpu.r1.hl = 0x83A3
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFF2D
-  cpu.r1.iy = 0xDF62
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x86)
-  mem.write8(0x0003, 0x1C)
-  mem.write8(0xDEE8, 0x8F)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x9381)
-  expect(cpu.r1.bc).toEqual(0x097B)
-  expect(cpu.r1.de).toEqual(0x6928)
-  expect(cpu.r1.hl).toEqual(0xC7A3)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFF2D)
-  expect(cpu.r1.iy).toEqual(0xDF62)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb1d', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x97B1
-  cpu.r1.bc = 0x2B30
-  cpu.r1.de = 0x2645
-  cpu.r1.hl = 0x04EF
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x186A
-  cpu.r1.iy = 0xD667
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x27)
-  mem.write8(0x0003, 0x1D)
-  mem.write8(0xD68E, 0xB7)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x978D)
-  expect(cpu.r1.bc).toEqual(0x2B30)
-  expect(cpu.r1.de).toEqual(0x2645)
-  expect(cpu.r1.hl).toEqual(0x04DB)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x186A)
-  expect(cpu.r1.iy).toEqual(0xD667)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb1e', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x2F39
-  cpu.r1.bc = 0x2470
-  cpu.r1.de = 0xB521
-  cpu.r1.hl = 0x6CA3
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1066
-  cpu.r1.iy = 0xDA38
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x3A)
-  mem.write8(0x0003, 0x1E)
-  mem.write8(0xDA72, 0x25)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x2F81)
-  expect(cpu.r1.bc).toEqual(0x2470)
-  expect(cpu.r1.de).toEqual(0xB521)
-  expect(cpu.r1.hl).toEqual(0x6CA3)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1066)
-  expect(cpu.r1.iy).toEqual(0xDA38)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb1f', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x4CDD
-  cpu.r1.bc = 0x49A3
-  cpu.r1.de = 0xDA18
-  cpu.r1.hl = 0x3AFD
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xA4F1
-  cpu.r1.iy = 0x2095
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7B)
-  mem.write8(0x0003, 0x1F)
-  mem.write8(0x2110, 0x04)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8284)
-  expect(cpu.r1.bc).toEqual(0x49A3)
-  expect(cpu.r1.de).toEqual(0xDA18)
-  expect(cpu.r1.hl).toEqual(0x3AFD)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xA4F1)
-  expect(cpu.r1.iy).toEqual(0x2095)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb20', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x3D74
-  cpu.r1.bc = 0x3A8F
-  cpu.r1.de = 0x206F
-  cpu.r1.hl = 0x8894
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xDDAB
-  cpu.r1.iy = 0xDA25
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7A)
-  mem.write8(0x0003, 0x20)
-  mem.write8(0xDA9F, 0x89)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3D05)
-  expect(cpu.r1.bc).toEqual(0x128F)
-  expect(cpu.r1.de).toEqual(0x206F)
-  expect(cpu.r1.hl).toEqual(0x8894)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xDDAB)
-  expect(cpu.r1.iy).toEqual(0xDA25)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb21', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1674
-  cpu.r1.bc = 0x6025
-  cpu.r1.de = 0x641A
-  cpu.r1.hl = 0x6598
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x473B
-  cpu.r1.iy = 0xDE36
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7B)
-  mem.write8(0x0003, 0x21)
-  mem.write8(0xDEB1, 0x23)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1600)
-  expect(cpu.r1.bc).toEqual(0x6046)
-  expect(cpu.r1.de).toEqual(0x641A)
-  expect(cpu.r1.hl).toEqual(0x6598)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x473B)
-  expect(cpu.r1.iy).toEqual(0xDE36)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb22', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xADA9
-  cpu.r1.bc = 0xEFB2
-  cpu.r1.de = 0x6F03
-  cpu.r1.hl = 0xE732
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC11D
-  cpu.r1.iy = 0x8926
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9A)
-  mem.write8(0x0003, 0x22)
-  mem.write8(0x88C0, 0xD4)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xADA9)
-  expect(cpu.r1.bc).toEqual(0xEFB2)
-  expect(cpu.r1.de).toEqual(0xA803)
-  expect(cpu.r1.hl).toEqual(0xE732)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC11D)
-  expect(cpu.r1.iy).toEqual(0x8926)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb23', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x21E9
-  cpu.r1.bc = 0xD678
-  cpu.r1.de = 0xA71B
-  cpu.r1.hl = 0x25D7
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4CA8
-  cpu.r1.iy = 0x5255
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF5)
-  mem.write8(0x0003, 0x23)
-  mem.write8(0x524A, 0x65)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x218C)
-  expect(cpu.r1.bc).toEqual(0xD678)
-  expect(cpu.r1.de).toEqual(0xA7CA)
-  expect(cpu.r1.hl).toEqual(0x25D7)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4CA8)
-  expect(cpu.r1.iy).toEqual(0x5255)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb24', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1C51
-  cpu.r1.bc = 0xDA3E
-  cpu.r1.de = 0xCC7C
-  cpu.r1.hl = 0xCB19
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x572C
-  cpu.r1.iy = 0xAFFE
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xB4)
-  mem.write8(0x0003, 0x24)
-  mem.write8(0xAFB2, 0x7E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1CAC)
-  expect(cpu.r1.bc).toEqual(0xDA3E)
-  expect(cpu.r1.de).toEqual(0xCC7C)
-  expect(cpu.r1.hl).toEqual(0xFC19)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x572C)
-  expect(cpu.r1.iy).toEqual(0xAFFE)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb25', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x954E
-  cpu.r1.bc = 0x097C
-  cpu.r1.de = 0xA341
-  cpu.r1.hl = 0x89E0
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x435D
-  cpu.r1.iy = 0x23E9
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA6)
-  mem.write8(0x0003, 0x25)
-  mem.write8(0x238F, 0x26)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x9508)
-  expect(cpu.r1.bc).toEqual(0x097C)
-  expect(cpu.r1.de).toEqual(0xA341)
-  expect(cpu.r1.hl).toEqual(0x894C)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x435D)
-  expect(cpu.r1.iy).toEqual(0x23E9)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb26', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5844
-  cpu.r1.bc = 0x0E19
-  cpu.r1.de = 0xD277
-  cpu.r1.hl = 0xBF7F
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6504
-  cpu.r1.iy = 0xD4E4
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xBD)
-  mem.write8(0x0003, 0x26)
-  mem.write8(0xD4A1, 0xBF)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x582D)
-  expect(cpu.r1.bc).toEqual(0x0E19)
-  expect(cpu.r1.de).toEqual(0xD277)
-  expect(cpu.r1.hl).toEqual(0xBF7F)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6504)
-  expect(cpu.r1.iy).toEqual(0xD4E4)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb27', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x8E0D
-  cpu.r1.bc = 0x8C06
-  cpu.r1.de = 0x2C4C
-  cpu.r1.hl = 0xD7C8
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9239
-  cpu.r1.iy = 0x8D42
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x59)
-  mem.write8(0x0003, 0x27)
-  mem.write8(0x8D9B, 0xA7)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x4E0D)
-  expect(cpu.r1.bc).toEqual(0x8C06)
-  expect(cpu.r1.de).toEqual(0x2C4C)
-  expect(cpu.r1.hl).toEqual(0xD7C8)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9239)
-  expect(cpu.r1.iy).toEqual(0x8D42)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb28', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x4122
-  cpu.r1.bc = 0xAF9B
-  cpu.r1.de = 0x7745
-  cpu.r1.hl = 0x76F5
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xA1BB
-  cpu.r1.iy = 0xAB43
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x83)
+  mem.write8(0x0003, 0x0A)
+  mem.write8(0x1F37, 0x78)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xD22C)
+  expect(cpu.r1.bc).toEqual(0x6AAC)
+  expect(cpu.r1.de).toEqual(0x3C89)
+  expect(cpu.r1.hl).toEqual(0x9293)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1FB4)
+  expect(cpu.r1.iy).toEqual(0x2498)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb0b', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xB82C
+  cpu.r1.bc = 0xB284
+  cpu.r1.de = 0x23F8
+  cpu.r1.hl = 0x7E7D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xCD09
+  cpu.r1.iy = 0x6A03
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xFA)
+  mem.write8(0x0003, 0x0B)
+  mem.write8(0xCD03, 0x92)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xB808)
+  expect(cpu.r1.bc).toEqual(0xB284)
+  expect(cpu.r1.de).toEqual(0x2349)
+  expect(cpu.r1.hl).toEqual(0x7E7D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xCD09)
+  expect(cpu.r1.iy).toEqual(0x6A03)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb0c', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xDF8B
+  cpu.r1.bc = 0xB6CC
+  cpu.r1.de = 0xEE8D
+  cpu.r1.hl = 0x855A
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xBF6B
+  cpu.r1.iy = 0x9B7D
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x79)
+  mem.write8(0x0003, 0x0C)
+  mem.write8(0xBFE4, 0x0D)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xDF81)
+  expect(cpu.r1.bc).toEqual(0xB6CC)
+  expect(cpu.r1.de).toEqual(0xEE8D)
+  expect(cpu.r1.hl).toEqual(0x865A)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xBF6B)
+  expect(cpu.r1.iy).toEqual(0x9B7D)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb0d', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xBAE3
+  cpu.r1.bc = 0xCEEC
+  cpu.r1.de = 0xBBAA
+  cpu.r1.hl = 0xB65E
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x88BD
+  cpu.r1.iy = 0x503E
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE4)
+  mem.write8(0x0003, 0x0D)
+  mem.write8(0x88A1, 0x1F)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xBA89)
+  expect(cpu.r1.bc).toEqual(0xCEEC)
+  expect(cpu.r1.de).toEqual(0xBBAA)
+  expect(cpu.r1.hl).toEqual(0xB68F)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x88BD)
+  expect(cpu.r1.iy).toEqual(0x503E)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb0e', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x1C36
+  cpu.r1.bc = 0x890B
+  cpu.r1.de = 0x7830
+  cpu.r1.hl = 0x060C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xFD49
+  cpu.r1.iy = 0x5D07
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xC6)
+  mem.write8(0x0003, 0x0E)
+  mem.write8(0xFD0F, 0xAD)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x1C81)
+  expect(cpu.r1.bc).toEqual(0x890B)
+  expect(cpu.r1.de).toEqual(0x7830)
+  expect(cpu.r1.hl).toEqual(0x060C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xFD49)
+  expect(cpu.r1.iy).toEqual(0x5D07)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb0f', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xF5A7
+  cpu.r1.bc = 0xFAD4
+  cpu.r1.de = 0xFA4B
+  cpu.r1.hl = 0x9C53
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x7447
+  cpu.r1.iy = 0x2267
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x57)
+  mem.write8(0x0003, 0x0F)
+  mem.write8(0x749E, 0xF8)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7C28)
+  expect(cpu.r1.bc).toEqual(0xFAD4)
+  expect(cpu.r1.de).toEqual(0xFA4B)
+  expect(cpu.r1.hl).toEqual(0x9C53)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x7447)
+  expect(cpu.r1.iy).toEqual(0x2267)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb10', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xF3AF
+  cpu.r1.bc = 0xBA1F
+  cpu.r1.de = 0x5387
+  cpu.r1.hl = 0x926E
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xBBA2
+  cpu.r1.iy = 0xCA47
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x4F)
+  mem.write8(0x0003, 0x10)
+  mem.write8(0xBBF1, 0x45)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xF38C)
+  expect(cpu.r1.bc).toEqual(0x8B1F)
+  expect(cpu.r1.de).toEqual(0x5387)
+  expect(cpu.r1.hl).toEqual(0x926E)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xBBA2)
+  expect(cpu.r1.iy).toEqual(0xCA47)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb11', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x2A69
+  cpu.r1.bc = 0xD604
+  cpu.r1.de = 0xA9AA
+  cpu.r1.hl = 0x5B52
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1809
+  cpu.r1.iy = 0xD275
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xEB)
+  mem.write8(0x0003, 0x11)
+  mem.write8(0x17F4, 0xD9)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x2AA1)
+  expect(cpu.r1.bc).toEqual(0xD6B3)
+  expect(cpu.r1.de).toEqual(0xA9AA)
+  expect(cpu.r1.hl).toEqual(0x5B52)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1809)
+  expect(cpu.r1.iy).toEqual(0xD275)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb12', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x9287
+  cpu.r1.bc = 0xC479
+  cpu.r1.de = 0x26D1
+  cpu.r1.hl = 0x10CE
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xC0FB
+  cpu.r1.iy = 0x2777
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xA6)
+  mem.write8(0x0003, 0x12)
+  mem.write8(0xC0A1, 0xE2)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x9285)
+  expect(cpu.r1.bc).toEqual(0xC479)
+  expect(cpu.r1.de).toEqual(0xC5D1)
+  expect(cpu.r1.hl).toEqual(0x10CE)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xC0FB)
+  expect(cpu.r1.iy).toEqual(0x2777)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb13', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xA507
+  cpu.r1.bc = 0x580A
+  cpu.r1.de = 0xA48F
+  cpu.r1.hl = 0x11CD
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5AC4
+  cpu.r1.iy = 0xCCC7
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xFF)
+  mem.write8(0x0003, 0x13)
+  mem.write8(0x5AC3, 0xA7)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xA509)
+  expect(cpu.r1.bc).toEqual(0x580A)
+  expect(cpu.r1.de).toEqual(0xA44F)
+  expect(cpu.r1.hl).toEqual(0x11CD)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5AC4)
+  expect(cpu.r1.iy).toEqual(0xCCC7)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb14', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x294B
+  cpu.r1.bc = 0x5B89
+  cpu.r1.de = 0x8467
+  cpu.r1.hl = 0x0430
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x0977
+  cpu.r1.iy = 0xC4E8
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xDD)
+  mem.write8(0x0003, 0x14)
+  mem.write8(0x0954, 0x85)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x2909)
+  expect(cpu.r1.bc).toEqual(0x5B89)
+  expect(cpu.r1.de).toEqual(0x8467)
+  expect(cpu.r1.hl).toEqual(0x0B30)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x0977)
+  expect(cpu.r1.iy).toEqual(0xC4E8)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb15', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x1FD1
+  cpu.r1.bc = 0x6D53
+  cpu.r1.de = 0x5B7C
+  cpu.r1.hl = 0xA134
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xEDE9
+  cpu.r1.iy = 0xA85C
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x07)
+  mem.write8(0x0003, 0x15)
+  mem.write8(0xEDF0, 0x0E)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x1F0C)
+  expect(cpu.r1.bc).toEqual(0x6D53)
+  expect(cpu.r1.de).toEqual(0x5B7C)
+  expect(cpu.r1.hl).toEqual(0xA11D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xEDE9)
+  expect(cpu.r1.iy).toEqual(0xA85C)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb16', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xDA70
+  cpu.r1.bc = 0xA1E4
+  cpu.r1.de = 0x00B0
+  cpu.r1.hl = 0x92C8
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x16BE
+  cpu.r1.iy = 0x2C95
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x45)
+  mem.write8(0x0003, 0x16)
+  mem.write8(0x1703, 0x5B)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xDAA0)
+  expect(cpu.r1.bc).toEqual(0xA1E4)
+  expect(cpu.r1.de).toEqual(0x00B0)
+  expect(cpu.r1.hl).toEqual(0x92C8)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x16BE)
+  expect(cpu.r1.iy).toEqual(0x2C95)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb17', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x3300
+  cpu.r1.bc = 0xCBD1
+  cpu.r1.de = 0x4E1A
+  cpu.r1.hl = 0xCD27
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xB8C9
+  cpu.r1.iy = 0xE6D4
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x1C)
+  mem.write8(0x0003, 0x17)
+  mem.write8(0xB8E5, 0x7E)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xFCAC)
+  expect(cpu.r1.bc).toEqual(0xCBD1)
+  expect(cpu.r1.de).toEqual(0x4E1A)
+  expect(cpu.r1.hl).toEqual(0xCD27)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xB8C9)
+  expect(cpu.r1.iy).toEqual(0xE6D4)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb18', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xD980
+  cpu.r1.bc = 0x4EB5
+  cpu.r1.de = 0x9CF9
+  cpu.r1.hl = 0xB9F1
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xA189
+  cpu.r1.iy = 0xBD7C
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x0E)
+  mem.write8(0x0003, 0x18)
+  mem.write8(0xA197, 0x90)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xD90C)
+  expect(cpu.r1.bc).toEqual(0x48B5)
+  expect(cpu.r1.de).toEqual(0x9CF9)
+  expect(cpu.r1.hl).toEqual(0xB9F1)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xA189)
+  expect(cpu.r1.iy).toEqual(0xBD7C)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb19', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x23B7
+  cpu.r1.bc = 0x595A
+  cpu.r1.de = 0xA756
+  cpu.r1.hl = 0xCF2E
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xF0E7
+  cpu.r1.iy = 0x26E4
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xA3)
+  mem.write8(0x0003, 0x19)
+  mem.write8(0xF08A, 0x37)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x2389)
+  expect(cpu.r1.bc).toEqual(0x599B)
+  expect(cpu.r1.de).toEqual(0xA756)
+  expect(cpu.r1.hl).toEqual(0xCF2E)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xF0E7)
+  expect(cpu.r1.iy).toEqual(0x26E4)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb1a', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x8B52
+  cpu.r1.bc = 0x7E45
+  cpu.r1.de = 0xBD0F
+  cpu.r1.hl = 0x37A6
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDE61
+  cpu.r1.iy = 0x9CD9
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xAC)
+  mem.write8(0x0003, 0x1A)
+  mem.write8(0xDE0D, 0xCC)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x8B24)
+  expect(cpu.r1.bc).toEqual(0x7E45)
+  expect(cpu.r1.de).toEqual(0x660F)
+  expect(cpu.r1.hl).toEqual(0x37A6)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xDE61)
+  expect(cpu.r1.iy).toEqual(0x9CD9)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb1b', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x5C79
+  cpu.r1.bc = 0x1414
+  cpu.r1.de = 0x811C
+  cpu.r1.hl = 0x5881
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xB7C3
+  cpu.r1.iy = 0xD14F
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x05)
+  mem.write8(0x0003, 0x1B)
+  mem.write8(0xB7C8, 0x91)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x5C89)
+  expect(cpu.r1.bc).toEqual(0x1414)
+  expect(cpu.r1.de).toEqual(0x81C8)
+  expect(cpu.r1.hl).toEqual(0x5881)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xB7C3)
+  expect(cpu.r1.iy).toEqual(0xD14F)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb1c', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xFAFC
+  cpu.r1.bc = 0x6277
+  cpu.r1.de = 0x8B67
+  cpu.r1.hl = 0xD423
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xFEF9
+  cpu.r1.iy = 0x4A66
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xFF)
+  mem.write8(0x0003, 0x1C)
+  mem.write8(0xFEF8, 0x61)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xFA25)
+  expect(cpu.r1.bc).toEqual(0x6277)
+  expect(cpu.r1.de).toEqual(0x8B67)
+  expect(cpu.r1.hl).toEqual(0x3023)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xFEF9)
+  expect(cpu.r1.iy).toEqual(0x4A66)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb1d', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x76A5
+  cpu.r1.bc = 0x324E
+  cpu.r1.de = 0xE641
+  cpu.r1.hl = 0x58F9
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5B63
+  cpu.r1.iy = 0xE18B
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x3A)
+  mem.write8(0x0003, 0x1D)
+  mem.write8(0x5B9D, 0xF3)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x76AD)
+  expect(cpu.r1.bc).toEqual(0x324E)
+  expect(cpu.r1.de).toEqual(0xE641)
+  expect(cpu.r1.hl).toEqual(0x58F9)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5B63)
+  expect(cpu.r1.iy).toEqual(0xE18B)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb1e', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC5D9
+  cpu.r1.bc = 0xCD58
+  cpu.r1.de = 0x8967
+  cpu.r1.hl = 0xF074
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x75B4
+  cpu.r1.iy = 0x693A
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xCE)
+  mem.write8(0x0003, 0x1E)
+  mem.write8(0x7582, 0x91)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC589)
+  expect(cpu.r1.bc).toEqual(0xCD58)
+  expect(cpu.r1.de).toEqual(0x8967)
+  expect(cpu.r1.hl).toEqual(0xF074)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x75B4)
+  expect(cpu.r1.iy).toEqual(0x693A)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb1f', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xD28F
+  cpu.r1.bc = 0x7F6D
+  cpu.r1.de = 0x2058
+  cpu.r1.hl = 0x63E3
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1D9B
+  cpu.r1.iy = 0xBABA
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xA8)
+  mem.write8(0x0003, 0x1F)
+  mem.write8(0x1D43, 0xB4)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xDA88)
+  expect(cpu.r1.bc).toEqual(0x7F6D)
+  expect(cpu.r1.de).toEqual(0x2058)
+  expect(cpu.r1.hl).toEqual(0x63E3)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1D9B)
+  expect(cpu.r1.iy).toEqual(0xBABA)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb20', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4CE5
+  cpu.r1.bc = 0x739E
+  cpu.r1.de = 0xDC6C
+  cpu.r1.hl = 0x18F4
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDC39
+  cpu.r1.iy = 0x8B0C
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE8)
+  mem.write8(0x0003, 0x20)
+  mem.write8(0xDC21, 0x0E)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4C08)
+  expect(cpu.r1.bc).toEqual(0x1C9E)
+  expect(cpu.r1.de).toEqual(0xDC6C)
+  expect(cpu.r1.hl).toEqual(0x18F4)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xDC39)
+  expect(cpu.r1.iy).toEqual(0x8B0C)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb21', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xD29D
+  cpu.r1.bc = 0x66DD
+  cpu.r1.de = 0x23EF
+  cpu.r1.hl = 0x9096
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x3494
+  cpu.r1.iy = 0xB6C3
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x9E)
+  mem.write8(0x0003, 0x21)
+  mem.write8(0x3432, 0xF7)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xD2AD)
+  expect(cpu.r1.bc).toEqual(0x66EE)
+  expect(cpu.r1.de).toEqual(0x23EF)
+  expect(cpu.r1.hl).toEqual(0x9096)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x3494)
+  expect(cpu.r1.iy).toEqual(0xB6C3)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb22', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xFB5D
+  cpu.r1.bc = 0xE0D0
+  cpu.r1.de = 0x7C02
+  cpu.r1.hl = 0xB4B7
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xBD3F
+  cpu.r1.iy = 0x385B
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x43)
+  mem.write8(0x0003, 0x22)
+  mem.write8(0xBD82, 0x9F)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xFB29)
+  expect(cpu.r1.bc).toEqual(0xE0D0)
+  expect(cpu.r1.de).toEqual(0x3E02)
+  expect(cpu.r1.hl).toEqual(0xB4B7)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xBD3F)
+  expect(cpu.r1.iy).toEqual(0x385B)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb23', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC359
+  cpu.r1.bc = 0x68B6
+  cpu.r1.de = 0xDA84
+  cpu.r1.hl = 0xB990
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x22DD
+  cpu.r1.iy = 0xBD27
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xC1)
+  mem.write8(0x0003, 0x23)
+  mem.write8(0x229E, 0xE0)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC385)
+  expect(cpu.r1.bc).toEqual(0x68B6)
+  expect(cpu.r1.de).toEqual(0xDAC0)
+  expect(cpu.r1.hl).toEqual(0xB990)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x22DD)
+  expect(cpu.r1.iy).toEqual(0xBD27)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb24', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xBAF5
+  cpu.r1.bc = 0x7B0B
+  cpu.r1.de = 0x560B
+  cpu.r1.hl = 0x7C33
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x31F1
+  cpu.r1.iy = 0xDDBD
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE8)
+  mem.write8(0x0003, 0x24)
+  mem.write8(0x31D9, 0xC3)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xBA81)
+  expect(cpu.r1.bc).toEqual(0x7B0B)
+  expect(cpu.r1.de).toEqual(0x560B)
+  expect(cpu.r1.hl).toEqual(0x8633)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x31F1)
+  expect(cpu.r1.iy).toEqual(0xDDBD)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb25', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x43BB
+  cpu.r1.bc = 0xA21B
+  cpu.r1.de = 0x2347
+  cpu.r1.hl = 0xAE4A
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xCC63
+  cpu.r1.iy = 0xFC94
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xC1)
+  mem.write8(0x0003, 0x25)
+  mem.write8(0xCC24, 0xEB)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4381)
+  expect(cpu.r1.bc).toEqual(0xA21B)
+  expect(cpu.r1.de).toEqual(0x2347)
+  expect(cpu.r1.hl).toEqual(0xAED6)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xCC63)
+  expect(cpu.r1.iy).toEqual(0xFC94)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb26', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x2065
+  cpu.r1.bc = 0xFF37
+  cpu.r1.de = 0xE41F
+  cpu.r1.hl = 0x70E7
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6528
+  cpu.r1.iy = 0xA0D5
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xF7)
+  mem.write8(0x0003, 0x26)
+  mem.write8(0x651F, 0x89)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x2005)
+  expect(cpu.r1.bc).toEqual(0xFF37)
+  expect(cpu.r1.de).toEqual(0xE41F)
+  expect(cpu.r1.hl).toEqual(0x70E7)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6528)
+  expect(cpu.r1.iy).toEqual(0xA0D5)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb27', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xA806
+  cpu.r1.bc = 0x5669
+  cpu.r1.de = 0x1BEE
+  cpu.r1.hl = 0xF62C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1F69
+  cpu.r1.iy = 0x3418
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xC3)
+  mem.write8(0x0003, 0x27)
+  mem.write8(0x1F2C, 0xAC)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x5809)
+  expect(cpu.r1.bc).toEqual(0x5669)
+  expect(cpu.r1.de).toEqual(0x1BEE)
+  expect(cpu.r1.hl).toEqual(0xF62C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1F69)
+  expect(cpu.r1.iy).toEqual(0x3418)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb28', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7AFD
+  cpu.r1.bc = 0x64B8
+  cpu.r1.de = 0x51F7
+  cpu.r1.hl = 0x7164
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x999B
+  cpu.r1.iy = 0x8857
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xB6)
   mem.write8(0x0003, 0x28)
-  mem.write8(0xAAC6, 0x5D)
+  mem.write8(0x9951, 0x24)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -1872,43 +1872,43 @@ test('Test fdcb28', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x412D)
-  expect(cpu.r1.bc).toEqual(0x2E9B)
-  expect(cpu.r1.de).toEqual(0x7745)
-  expect(cpu.r1.hl).toEqual(0x76F5)
+  expect(cpu.r1.af).toEqual(0x7A04)
+  expect(cpu.r1.bc).toEqual(0x12B8)
+  expect(cpu.r1.de).toEqual(0x51F7)
+  expect(cpu.r1.hl).toEqual(0x7164)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xA1BB)
-  expect(cpu.r1.iy).toEqual(0xAB43)
+  expect(cpu.r1.ix).toEqual(0x999B)
+  expect(cpu.r1.iy).toEqual(0x8857)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb29', () => {
+test('Test ddcb29', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x0B21
-  cpu.r1.bc = 0xAFFD
-  cpu.r1.de = 0xFEA6
-  cpu.r1.hl = 0x9478
+  cpu.r1.af = 0x0404
+  cpu.r1.bc = 0xB794
+  cpu.r1.de = 0x323F
+  cpu.r1.hl = 0xFD34
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x32BB
-  cpu.r1.iy = 0x0343
+  cpu.r1.ix = 0x20E7
+  cpu.r1.iy = 0xC753
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7D)
+  mem.write8(0x0002, 0x9C)
   mem.write8(0x0003, 0x29)
-  mem.write8(0x03C0, 0x84)
+  mem.write8(0x2083, 0x82)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -1918,43 +1918,43 @@ test('Test fdcb29', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x0B80)
-  expect(cpu.r1.bc).toEqual(0xAFC2)
-  expect(cpu.r1.de).toEqual(0xFEA6)
-  expect(cpu.r1.hl).toEqual(0x9478)
+  expect(cpu.r1.af).toEqual(0x0480)
+  expect(cpu.r1.bc).toEqual(0xB7C1)
+  expect(cpu.r1.de).toEqual(0x323F)
+  expect(cpu.r1.hl).toEqual(0xFD34)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x32BB)
-  expect(cpu.r1.iy).toEqual(0x0343)
+  expect(cpu.r1.ix).toEqual(0x20E7)
+  expect(cpu.r1.iy).toEqual(0xC753)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb2a', () => {
+test('Test ddcb2a', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xF236
-  cpu.r1.bc = 0x8C31
-  cpu.r1.de = 0x5932
-  cpu.r1.hl = 0x7FEB
+  cpu.r1.af = 0x4524
+  cpu.r1.bc = 0xAFDE
+  cpu.r1.de = 0x0C08
+  cpu.r1.hl = 0x75D7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7DB7
-  cpu.r1.iy = 0xABE7
+  cpu.r1.ix = 0x9505
+  cpu.r1.iy = 0xB624
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF9)
+  mem.write8(0x0002, 0xD8)
   mem.write8(0x0003, 0x2A)
-  mem.write8(0xABE0, 0xDD)
+  mem.write8(0x94DD, 0x7C)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -1964,43 +1964,43 @@ test('Test fdcb2a', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xF2AD)
-  expect(cpu.r1.bc).toEqual(0x8C31)
-  expect(cpu.r1.de).toEqual(0xEE32)
-  expect(cpu.r1.hl).toEqual(0x7FEB)
+  expect(cpu.r1.af).toEqual(0x4528)
+  expect(cpu.r1.bc).toEqual(0xAFDE)
+  expect(cpu.r1.de).toEqual(0x3E08)
+  expect(cpu.r1.hl).toEqual(0x75D7)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7DB7)
-  expect(cpu.r1.iy).toEqual(0xABE7)
+  expect(cpu.r1.ix).toEqual(0x9505)
+  expect(cpu.r1.iy).toEqual(0xB624)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb2b', () => {
+test('Test ddcb2b', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x2450
-  cpu.r1.bc = 0x6945
-  cpu.r1.de = 0xDCFC
-  cpu.r1.hl = 0xD643
+  cpu.r1.af = 0x8324
+  cpu.r1.bc = 0xE290
+  cpu.r1.de = 0x26BE
+  cpu.r1.hl = 0x7DDD
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5BE1
-  cpu.r1.iy = 0x4A94
+  cpu.r1.ix = 0xB484
+  cpu.r1.iy = 0x571C
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x4B)
+  mem.write8(0x0002, 0xBD)
   mem.write8(0x0003, 0x2B)
-  mem.write8(0x4ADF, 0x49)
+  mem.write8(0xB441, 0x44)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2010,43 +2010,43 @@ test('Test fdcb2b', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x2425)
-  expect(cpu.r1.bc).toEqual(0x6945)
-  expect(cpu.r1.de).toEqual(0xDC24)
-  expect(cpu.r1.hl).toEqual(0xD643)
+  expect(cpu.r1.af).toEqual(0x8324)
+  expect(cpu.r1.bc).toEqual(0xE290)
+  expect(cpu.r1.de).toEqual(0x2622)
+  expect(cpu.r1.hl).toEqual(0x7DDD)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5BE1)
-  expect(cpu.r1.iy).toEqual(0x4A94)
+  expect(cpu.r1.ix).toEqual(0xB484)
+  expect(cpu.r1.iy).toEqual(0x571C)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb2c', () => {
+test('Test ddcb2c', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x117F
-  cpu.r1.bc = 0xB32B
-  cpu.r1.de = 0xE530
-  cpu.r1.hl = 0x255A
+  cpu.r1.af = 0xC688
+  cpu.r1.bc = 0x0C94
+  cpu.r1.de = 0x6E4B
+  cpu.r1.hl = 0x7DC7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2416
-  cpu.r1.iy = 0xCCD1
+  cpu.r1.ix = 0xFE28
+  cpu.r1.iy = 0xDC80
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE6)
+  mem.write8(0x0002, 0x2C)
   mem.write8(0x0003, 0x2C)
-  mem.write8(0xCCB7, 0x3C)
+  mem.write8(0xFE54, 0x81)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2056,43 +2056,43 @@ test('Test fdcb2c', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x110C)
-  expect(cpu.r1.bc).toEqual(0xB32B)
-  expect(cpu.r1.de).toEqual(0xE530)
-  expect(cpu.r1.hl).toEqual(0x1E5A)
+  expect(cpu.r1.af).toEqual(0xC685)
+  expect(cpu.r1.bc).toEqual(0x0C94)
+  expect(cpu.r1.de).toEqual(0x6E4B)
+  expect(cpu.r1.hl).toEqual(0xC0C7)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2416)
-  expect(cpu.r1.iy).toEqual(0xCCD1)
+  expect(cpu.r1.ix).toEqual(0xFE28)
+  expect(cpu.r1.iy).toEqual(0xDC80)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb2d', () => {
+test('Test ddcb2d', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xD0C3
-  cpu.r1.bc = 0x344B
-  cpu.r1.de = 0x1BB0
-  cpu.r1.hl = 0x3EAB
+  cpu.r1.af = 0xCE28
+  cpu.r1.bc = 0xD2AE
+  cpu.r1.de = 0xC9BE
+  cpu.r1.hl = 0x4236
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFE11
-  cpu.r1.iy = 0xE4E6
+  cpu.r1.ix = 0xB4ED
+  cpu.r1.iy = 0x6DE3
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x5F)
+  mem.write8(0x0002, 0x9B)
   mem.write8(0x0003, 0x2D)
-  mem.write8(0xE545, 0x78)
+  mem.write8(0xB488, 0x44)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2102,43 +2102,43 @@ test('Test fdcb2d', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xD02C)
-  expect(cpu.r1.bc).toEqual(0x344B)
-  expect(cpu.r1.de).toEqual(0x1BB0)
-  expect(cpu.r1.hl).toEqual(0x3E3C)
+  expect(cpu.r1.af).toEqual(0xCE24)
+  expect(cpu.r1.bc).toEqual(0xD2AE)
+  expect(cpu.r1.de).toEqual(0xC9BE)
+  expect(cpu.r1.hl).toEqual(0x4222)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFE11)
-  expect(cpu.r1.iy).toEqual(0xE4E6)
+  expect(cpu.r1.ix).toEqual(0xB4ED)
+  expect(cpu.r1.iy).toEqual(0x6DE3)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb2e', () => {
+test('Test ddcb2e', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xF4EE
-  cpu.r1.bc = 0xB832
-  cpu.r1.de = 0x4B7F
-  cpu.r1.hl = 0xE2B7
+  cpu.r1.af = 0x50B0
+  cpu.r1.bc = 0xDE74
+  cpu.r1.de = 0xECA8
+  cpu.r1.hl = 0x83FF
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9386
-  cpu.r1.iy = 0x42FD
+  cpu.r1.ix = 0x69D8
+  cpu.r1.iy = 0x75C7
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x06)
+  mem.write8(0x0002, 0x3D)
   mem.write8(0x0003, 0x2E)
-  mem.write8(0x4303, 0xAD)
+  mem.write8(0x6A15, 0x05)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2148,43 +2148,43 @@ test('Test fdcb2e', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xF481)
-  expect(cpu.r1.bc).toEqual(0xB832)
-  expect(cpu.r1.de).toEqual(0x4B7F)
-  expect(cpu.r1.hl).toEqual(0xE2B7)
+  expect(cpu.r1.af).toEqual(0x5001)
+  expect(cpu.r1.bc).toEqual(0xDE74)
+  expect(cpu.r1.de).toEqual(0xECA8)
+  expect(cpu.r1.hl).toEqual(0x83FF)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9386)
-  expect(cpu.r1.iy).toEqual(0x42FD)
+  expect(cpu.r1.ix).toEqual(0x69D8)
+  expect(cpu.r1.iy).toEqual(0x75C7)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb2f', () => {
+test('Test ddcb2f', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xFF86
-  cpu.r1.bc = 0xF2C2
-  cpu.r1.de = 0x9F2F
-  cpu.r1.hl = 0xC946
+  cpu.r1.af = 0xAEC6
+  cpu.r1.bc = 0x759B
+  cpu.r1.de = 0x3059
+  cpu.r1.hl = 0x01B9
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5FE0
-  cpu.r1.iy = 0x16B8
+  cpu.r1.ix = 0x7A30
+  cpu.r1.iy = 0xDD56
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x29)
+  mem.write8(0x0002, 0xD3)
   mem.write8(0x0003, 0x2F)
-  mem.write8(0x16E1, 0x18)
+  mem.write8(0x7A03, 0xF2)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2194,43 +2194,43 @@ test('Test fdcb2f', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x0C0C)
-  expect(cpu.r1.bc).toEqual(0xF2C2)
-  expect(cpu.r1.de).toEqual(0x9F2F)
-  expect(cpu.r1.hl).toEqual(0xC946)
+  expect(cpu.r1.af).toEqual(0xF9AC)
+  expect(cpu.r1.bc).toEqual(0x759B)
+  expect(cpu.r1.de).toEqual(0x3059)
+  expect(cpu.r1.hl).toEqual(0x01B9)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5FE0)
-  expect(cpu.r1.iy).toEqual(0x16B8)
+  expect(cpu.r1.ix).toEqual(0x7A30)
+  expect(cpu.r1.iy).toEqual(0xDD56)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb30', () => {
+test('Test ddcb30', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xACF6
-  cpu.r1.bc = 0xE832
-  cpu.r1.de = 0xF9ED
-  cpu.r1.hl = 0xCABC
+  cpu.r1.af = 0x3C89
+  cpu.r1.bc = 0x96AD
+  cpu.r1.de = 0x9CC7
+  cpu.r1.hl = 0xA68C
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFABD
-  cpu.r1.iy = 0xD646
+  cpu.r1.ix = 0xEEE8
+  cpu.r1.iy = 0x5A80
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x1B)
+  mem.write8(0x0002, 0xDF)
   mem.write8(0x0003, 0x30)
-  mem.write8(0xD661, 0xA5)
+  mem.write8(0xEEC7, 0x32)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2240,43 +2240,43 @@ test('Test fdcb30', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xAC0D)
-  expect(cpu.r1.bc).toEqual(0x4B32)
-  expect(cpu.r1.de).toEqual(0xF9ED)
-  expect(cpu.r1.hl).toEqual(0xCABC)
+  expect(cpu.r1.af).toEqual(0x3C24)
+  expect(cpu.r1.bc).toEqual(0x65AD)
+  expect(cpu.r1.de).toEqual(0x9CC7)
+  expect(cpu.r1.hl).toEqual(0xA68C)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFABD)
-  expect(cpu.r1.iy).toEqual(0xD646)
+  expect(cpu.r1.ix).toEqual(0xEEE8)
+  expect(cpu.r1.iy).toEqual(0x5A80)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb31', () => {
+test('Test ddcb31', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x2B96
-  cpu.r1.bc = 0x5134
-  cpu.r1.de = 0x83A7
-  cpu.r1.hl = 0x7EEE
+  cpu.r1.af = 0xEBF5
+  cpu.r1.bc = 0x41E9
+  cpu.r1.de = 0x929B
+  cpu.r1.hl = 0x7D47
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7750
-  cpu.r1.iy = 0xBFE0
+  cpu.r1.ix = 0xF22D
+  cpu.r1.iy = 0x8943
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF0)
+  mem.write8(0x0002, 0x49)
   mem.write8(0x0003, 0x31)
-  mem.write8(0xBFD0, 0xF1)
+  mem.write8(0xF276, 0xCD)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2286,43 +2286,43 @@ test('Test fdcb31', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x2BA1)
-  expect(cpu.r1.bc).toEqual(0x51E3)
-  expect(cpu.r1.de).toEqual(0x83A7)
-  expect(cpu.r1.hl).toEqual(0x7EEE)
+  expect(cpu.r1.af).toEqual(0xEB89)
+  expect(cpu.r1.bc).toEqual(0x419B)
+  expect(cpu.r1.de).toEqual(0x929B)
+  expect(cpu.r1.hl).toEqual(0x7D47)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7750)
-  expect(cpu.r1.iy).toEqual(0xBFE0)
+  expect(cpu.r1.ix).toEqual(0xF22D)
+  expect(cpu.r1.iy).toEqual(0x8943)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb32', () => {
+test('Test ddcb32', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xB2BC
-  cpu.r1.bc = 0xA4B1
-  cpu.r1.de = 0xB685
-  cpu.r1.hl = 0xF66E
+  cpu.r1.af = 0x9A1B
+  cpu.r1.bc = 0xAA64
+  cpu.r1.de = 0x4209
+  cpu.r1.hl = 0x01AD
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xA9A1
-  cpu.r1.iy = 0x5ADE
+  cpu.r1.ix = 0x579F
+  cpu.r1.iy = 0xEC4C
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC5)
+  mem.write8(0x0002, 0xE0)
   mem.write8(0x0003, 0x32)
-  mem.write8(0x5AA3, 0x59)
+  mem.write8(0x577F, 0xE2)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2332,43 +2332,43 @@ test('Test fdcb32', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xB2A0)
-  expect(cpu.r1.bc).toEqual(0xA4B1)
-  expect(cpu.r1.de).toEqual(0xB385)
-  expect(cpu.r1.hl).toEqual(0xF66E)
+  expect(cpu.r1.af).toEqual(0x9A85)
+  expect(cpu.r1.bc).toEqual(0xAA64)
+  expect(cpu.r1.de).toEqual(0xC509)
+  expect(cpu.r1.hl).toEqual(0x01AD)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xA9A1)
-  expect(cpu.r1.iy).toEqual(0x5ADE)
+  expect(cpu.r1.ix).toEqual(0x579F)
+  expect(cpu.r1.iy).toEqual(0xEC4C)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb33', () => {
+test('Test ddcb33', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x9C6D
-  cpu.r1.bc = 0x2C90
-  cpu.r1.de = 0xD0A9
-  cpu.r1.hl = 0x2BE3
+  cpu.r1.af = 0xB8B1
+  cpu.r1.bc = 0xB854
+  cpu.r1.de = 0x524F
+  cpu.r1.hl = 0x9599
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2691
-  cpu.r1.iy = 0x1964
+  cpu.r1.ix = 0xEFAC
+  cpu.r1.iy = 0xD9EC
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7F)
+  mem.write8(0x0002, 0xC9)
   mem.write8(0x0003, 0x33)
-  mem.write8(0x19E3, 0xDA)
+  mem.write8(0xEF75, 0x0B)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2378,43 +2378,43 @@ test('Test fdcb33', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x9CA1)
-  expect(cpu.r1.bc).toEqual(0x2C90)
-  expect(cpu.r1.de).toEqual(0xD0B5)
-  expect(cpu.r1.hl).toEqual(0x2BE3)
+  expect(cpu.r1.af).toEqual(0xB804)
+  expect(cpu.r1.bc).toEqual(0xB854)
+  expect(cpu.r1.de).toEqual(0x5217)
+  expect(cpu.r1.hl).toEqual(0x9599)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2691)
-  expect(cpu.r1.iy).toEqual(0x1964)
+  expect(cpu.r1.ix).toEqual(0xEFAC)
+  expect(cpu.r1.iy).toEqual(0xD9EC)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb34', () => {
+test('Test ddcb34', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x6029
-  cpu.r1.bc = 0xFBCD
-  cpu.r1.de = 0x5348
-  cpu.r1.hl = 0xF947
+  cpu.r1.af = 0xCD3C
+  cpu.r1.bc = 0x4432
+  cpu.r1.de = 0x20D4
+  cpu.r1.hl = 0x0B3E
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5338
-  cpu.r1.iy = 0x5696
+  cpu.r1.ix = 0xAB48
+  cpu.r1.iy = 0xC95F
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD2)
+  mem.write8(0x0002, 0x49)
   mem.write8(0x0003, 0x34)
-  mem.write8(0x5668, 0xD4)
+  mem.write8(0xAB91, 0xEF)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2424,43 +2424,43 @@ test('Test fdcb34', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x60AD)
-  expect(cpu.r1.bc).toEqual(0xFBCD)
-  expect(cpu.r1.de).toEqual(0x5348)
-  expect(cpu.r1.hl).toEqual(0xA947)
+  expect(cpu.r1.af).toEqual(0xCD89)
+  expect(cpu.r1.bc).toEqual(0x4432)
+  expect(cpu.r1.de).toEqual(0x20D4)
+  expect(cpu.r1.hl).toEqual(0xDF3E)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5338)
-  expect(cpu.r1.iy).toEqual(0x5696)
+  expect(cpu.r1.ix).toEqual(0xAB48)
+  expect(cpu.r1.iy).toEqual(0xC95F)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb35', () => {
+test('Test ddcb35', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x96A9
-  cpu.r1.bc = 0x21C6
-  cpu.r1.de = 0x4CB6
-  cpu.r1.hl = 0xB40B
+  cpu.r1.af = 0xDEB1
+  cpu.r1.bc = 0xC6FC
+  cpu.r1.de = 0x696D
+  cpu.r1.hl = 0x150D
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x673A
-  cpu.r1.iy = 0x00F8
+  cpu.r1.ix = 0xEB1A
+  cpu.r1.iy = 0x4A12
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x71)
+  mem.write8(0x0002, 0xB9)
   mem.write8(0x0003, 0x35)
-  mem.write8(0x0169, 0x0B)
+  mem.write8(0xEAD3, 0x8F)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2470,43 +2470,43 @@ test('Test fdcb35', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x9604)
-  expect(cpu.r1.bc).toEqual(0x21C6)
-  expect(cpu.r1.de).toEqual(0x4CB6)
-  expect(cpu.r1.hl).toEqual(0xB417)
+  expect(cpu.r1.af).toEqual(0xDE09)
+  expect(cpu.r1.bc).toEqual(0xC6FC)
+  expect(cpu.r1.de).toEqual(0x696D)
+  expect(cpu.r1.hl).toEqual(0x151F)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x673A)
-  expect(cpu.r1.iy).toEqual(0x00F8)
+  expect(cpu.r1.ix).toEqual(0xEB1A)
+  expect(cpu.r1.iy).toEqual(0x4A12)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb36', () => {
+test('Test ddcb36', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xDC6F
-  cpu.r1.bc = 0x0892
-  cpu.r1.de = 0x3CC7
-  cpu.r1.hl = 0x1494
+  cpu.r1.af = 0x3D81
+  cpu.r1.bc = 0x443B
+  cpu.r1.de = 0xFF21
+  cpu.r1.hl = 0x63E3
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8598
-  cpu.r1.iy = 0x1ADE
+  cpu.r1.ix = 0x132E
+  cpu.r1.iy = 0xFB39
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xDA)
+  mem.write8(0x0002, 0xB4)
   mem.write8(0x0003, 0x36)
-  mem.write8(0x1AB8, 0x3C)
+  mem.write8(0x12E2, 0x02)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2516,43 +2516,43 @@ test('Test fdcb36', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xDC28)
-  expect(cpu.r1.bc).toEqual(0x0892)
-  expect(cpu.r1.de).toEqual(0x3CC7)
-  expect(cpu.r1.hl).toEqual(0x1494)
+  expect(cpu.r1.af).toEqual(0x3D04)
+  expect(cpu.r1.bc).toEqual(0x443B)
+  expect(cpu.r1.de).toEqual(0xFF21)
+  expect(cpu.r1.hl).toEqual(0x63E3)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8598)
-  expect(cpu.r1.iy).toEqual(0x1ADE)
+  expect(cpu.r1.ix).toEqual(0x132E)
+  expect(cpu.r1.iy).toEqual(0xFB39)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb37', () => {
+test('Test ddcb37', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xD2B3
-  cpu.r1.bc = 0x4524
-  cpu.r1.de = 0x208F
-  cpu.r1.hl = 0x076F
+  cpu.r1.af = 0x72D9
+  cpu.r1.bc = 0xBFC9
+  cpu.r1.de = 0xA69A
+  cpu.r1.hl = 0xEC0B
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAD10
-  cpu.r1.iy = 0xE7EC
+  cpu.r1.ix = 0x5077
+  cpu.r1.iy = 0x4E3E
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xCB)
+  mem.write8(0x0002, 0xC6)
   mem.write8(0x0003, 0x37)
-  mem.write8(0xE7B7, 0x9F)
+  mem.write8(0x503D, 0x3D)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2562,43 +2562,43 @@ test('Test fdcb37', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3F2D)
-  expect(cpu.r1.bc).toEqual(0x4524)
-  expect(cpu.r1.de).toEqual(0x208F)
-  expect(cpu.r1.hl).toEqual(0x076F)
+  expect(cpu.r1.af).toEqual(0x7B2C)
+  expect(cpu.r1.bc).toEqual(0xBFC9)
+  expect(cpu.r1.de).toEqual(0xA69A)
+  expect(cpu.r1.hl).toEqual(0xEC0B)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAD10)
-  expect(cpu.r1.iy).toEqual(0xE7EC)
+  expect(cpu.r1.ix).toEqual(0x5077)
+  expect(cpu.r1.iy).toEqual(0x4E3E)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb38', () => {
+test('Test ddcb38', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x4F07
-  cpu.r1.bc = 0x0050
-  cpu.r1.de = 0x40C6
-  cpu.r1.hl = 0x4FB7
+  cpu.r1.af = 0x3C64
+  cpu.r1.bc = 0xB1EE
+  cpu.r1.de = 0x38E1
+  cpu.r1.hl = 0xAE9F
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF37E
-  cpu.r1.iy = 0xD096
+  cpu.r1.ix = 0xF695
+  cpu.r1.iy = 0x44B3
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x8E)
   mem.write8(0x0003, 0x38)
-  mem.write8(0xD024, 0x0D)
+  mem.write8(0xF623, 0x5E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2608,43 +2608,43 @@ test('Test fdcb38', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x4F05)
-  expect(cpu.r1.bc).toEqual(0x0650)
-  expect(cpu.r1.de).toEqual(0x40C6)
-  expect(cpu.r1.hl).toEqual(0x4FB7)
+  expect(cpu.r1.af).toEqual(0x3C28)
+  expect(cpu.r1.bc).toEqual(0x2FEE)
+  expect(cpu.r1.de).toEqual(0x38E1)
+  expect(cpu.r1.hl).toEqual(0xAE9F)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF37E)
-  expect(cpu.r1.iy).toEqual(0xD096)
+  expect(cpu.r1.ix).toEqual(0xF695)
+  expect(cpu.r1.iy).toEqual(0x44B3)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb39', () => {
+test('Test ddcb39', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xBCC2
-  cpu.r1.bc = 0xF5B5
-  cpu.r1.de = 0x8DEE
-  cpu.r1.hl = 0xE514
+  cpu.r1.af = 0x05D6
+  cpu.r1.bc = 0x9AAD
+  cpu.r1.de = 0xA2DB
+  cpu.r1.hl = 0xDF75
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x48BC
-  cpu.r1.iy = 0xF433
+  cpu.r1.ix = 0xA895
+  cpu.r1.iy = 0xE243
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7F)
+  mem.write8(0x0002, 0xDC)
   mem.write8(0x0003, 0x39)
-  mem.write8(0xF4B2, 0xF5)
+  mem.write8(0xA871, 0x83)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2654,43 +2654,43 @@ test('Test fdcb39', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xBC29)
-  expect(cpu.r1.bc).toEqual(0xF57A)
-  expect(cpu.r1.de).toEqual(0x8DEE)
-  expect(cpu.r1.hl).toEqual(0xE514)
+  expect(cpu.r1.af).toEqual(0x0505)
+  expect(cpu.r1.bc).toEqual(0x9A41)
+  expect(cpu.r1.de).toEqual(0xA2DB)
+  expect(cpu.r1.hl).toEqual(0xDF75)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x48BC)
-  expect(cpu.r1.iy).toEqual(0xF433)
+  expect(cpu.r1.ix).toEqual(0xA895)
+  expect(cpu.r1.iy).toEqual(0xE243)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb3a', () => {
+test('Test ddcb3a', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xD012
-  cpu.r1.bc = 0x2EF5
-  cpu.r1.de = 0x2910
-  cpu.r1.hl = 0x9CA5
+  cpu.r1.af = 0x0E22
+  cpu.r1.bc = 0x0B9F
+  cpu.r1.de = 0x873B
+  cpu.r1.hl = 0xC01D
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB155
-  cpu.r1.iy = 0xCB03
+  cpu.r1.ix = 0x2591
+  cpu.r1.iy = 0x49C3
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x1D)
+  mem.write8(0x0002, 0x0D)
   mem.write8(0x0003, 0x3A)
-  mem.write8(0xCB20, 0xA8)
+  mem.write8(0x259E, 0x89)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2700,43 +2700,43 @@ test('Test fdcb3a', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xD000)
-  expect(cpu.r1.bc).toEqual(0x2EF5)
-  expect(cpu.r1.de).toEqual(0x5410)
-  expect(cpu.r1.hl).toEqual(0x9CA5)
+  expect(cpu.r1.af).toEqual(0x0E05)
+  expect(cpu.r1.bc).toEqual(0x0B9F)
+  expect(cpu.r1.de).toEqual(0x443B)
+  expect(cpu.r1.hl).toEqual(0xC01D)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB155)
-  expect(cpu.r1.iy).toEqual(0xCB03)
+  expect(cpu.r1.ix).toEqual(0x2591)
+  expect(cpu.r1.iy).toEqual(0x49C3)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb3b', () => {
+test('Test ddcb3b', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x503D
-  cpu.r1.bc = 0xA85B
-  cpu.r1.de = 0xCFBB
-  cpu.r1.hl = 0xDE8C
+  cpu.r1.af = 0x1BD9
+  cpu.r1.bc = 0xC795
+  cpu.r1.de = 0xD8AE
+  cpu.r1.hl = 0x7CCF
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9C5B
-  cpu.r1.iy = 0xD263
+  cpu.r1.ix = 0x6FED
+  cpu.r1.iy = 0x09DC
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x05)
+  mem.write8(0x0002, 0x20)
   mem.write8(0x0003, 0x3B)
-  mem.write8(0xD268, 0xB2)
+  mem.write8(0x700D, 0xA9)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2746,43 +2746,43 @@ test('Test fdcb3b', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x500C)
-  expect(cpu.r1.bc).toEqual(0xA85B)
-  expect(cpu.r1.de).toEqual(0xCF59)
-  expect(cpu.r1.hl).toEqual(0xDE8C)
+  expect(cpu.r1.af).toEqual(0x1B01)
+  expect(cpu.r1.bc).toEqual(0xC795)
+  expect(cpu.r1.de).toEqual(0xD854)
+  expect(cpu.r1.hl).toEqual(0x7CCF)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9C5B)
-  expect(cpu.r1.iy).toEqual(0xD263)
+  expect(cpu.r1.ix).toEqual(0x6FED)
+  expect(cpu.r1.iy).toEqual(0x09DC)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb3c', () => {
+test('Test ddcb3c', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x97F0
-  cpu.r1.bc = 0x4456
-  cpu.r1.de = 0x0B52
-  cpu.r1.hl = 0xFDAD
+  cpu.r1.af = 0xB651
+  cpu.r1.bc = 0xBDF7
+  cpu.r1.de = 0xFCA3
+  cpu.r1.hl = 0x7529
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6D2A
-  cpu.r1.iy = 0xA80F
+  cpu.r1.ix = 0xF53B
+  cpu.r1.iy = 0x018B
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xAE)
+  mem.write8(0x0002, 0xE1)
   mem.write8(0x0003, 0x3C)
-  mem.write8(0xA7BD, 0x96)
+  mem.write8(0xF51C, 0xD0)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2792,43 +2792,43 @@ test('Test fdcb3c', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x970C)
-  expect(cpu.r1.bc).toEqual(0x4456)
-  expect(cpu.r1.de).toEqual(0x0B52)
-  expect(cpu.r1.hl).toEqual(0x4BAD)
+  expect(cpu.r1.af).toEqual(0xB628)
+  expect(cpu.r1.bc).toEqual(0xBDF7)
+  expect(cpu.r1.de).toEqual(0xFCA3)
+  expect(cpu.r1.hl).toEqual(0x6829)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6D2A)
-  expect(cpu.r1.iy).toEqual(0xA80F)
+  expect(cpu.r1.ix).toEqual(0xF53B)
+  expect(cpu.r1.iy).toEqual(0x018B)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb3d', () => {
+test('Test ddcb3d', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x7D44
-  cpu.r1.bc = 0x9303
-  cpu.r1.de = 0xE12B
-  cpu.r1.hl = 0xBFF6
+  cpu.r1.af = 0x2A2D
+  cpu.r1.bc = 0x6E6E
+  cpu.r1.de = 0xCFBD
+  cpu.r1.hl = 0x1DB5
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4C0F
-  cpu.r1.iy = 0xE52A
+  cpu.r1.ix = 0x0320
+  cpu.r1.iy = 0x6AB0
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x13)
+  mem.write8(0x0002, 0xBE)
   mem.write8(0x0003, 0x3D)
-  mem.write8(0xE53D, 0xFB)
+  mem.write8(0x02DE, 0x58)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2838,43 +2838,43 @@ test('Test fdcb3d', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x7D2D)
-  expect(cpu.r1.bc).toEqual(0x9303)
-  expect(cpu.r1.de).toEqual(0xE12B)
-  expect(cpu.r1.hl).toEqual(0xBF7D)
+  expect(cpu.r1.af).toEqual(0x2A28)
+  expect(cpu.r1.bc).toEqual(0x6E6E)
+  expect(cpu.r1.de).toEqual(0xCFBD)
+  expect(cpu.r1.hl).toEqual(0x1D2C)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4C0F)
-  expect(cpu.r1.iy).toEqual(0xE52A)
+  expect(cpu.r1.ix).toEqual(0x0320)
+  expect(cpu.r1.iy).toEqual(0x6AB0)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb3e', () => {
+test('Test ddcb3e', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x0D95
-  cpu.r1.bc = 0x3E02
-  cpu.r1.de = 0x8F74
-  cpu.r1.hl = 0x0F82
+  cpu.r1.af = 0x39B8
+  cpu.r1.bc = 0xB26E
+  cpu.r1.de = 0xB670
+  cpu.r1.hl = 0xB8A2
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x85DF
-  cpu.r1.iy = 0xB2D1
+  cpu.r1.ix = 0x784A
+  cpu.r1.iy = 0x7840
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x2E)
+  mem.write8(0x0002, 0x0A)
   mem.write8(0x0003, 0x3E)
-  mem.write8(0xB2FF, 0x50)
+  mem.write8(0x7854, 0x5D)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2884,43 +2884,43 @@ test('Test fdcb3e', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x0D2C)
-  expect(cpu.r1.bc).toEqual(0x3E02)
-  expect(cpu.r1.de).toEqual(0x8F74)
-  expect(cpu.r1.hl).toEqual(0x0F82)
+  expect(cpu.r1.af).toEqual(0x392D)
+  expect(cpu.r1.bc).toEqual(0xB26E)
+  expect(cpu.r1.de).toEqual(0xB670)
+  expect(cpu.r1.hl).toEqual(0xB8A2)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x85DF)
-  expect(cpu.r1.iy).toEqual(0xB2D1)
+  expect(cpu.r1.ix).toEqual(0x784A)
+  expect(cpu.r1.iy).toEqual(0x7840)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb3f', () => {
+test('Test ddcb3f', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x89E3
-  cpu.r1.bc = 0x12F6
-  cpu.r1.de = 0x426C
-  cpu.r1.hl = 0x52D4
+  cpu.r1.af = 0x2A17
+  cpu.r1.bc = 0x429D
+  cpu.r1.de = 0xD8C0
+  cpu.r1.hl = 0xE069
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD9F7
-  cpu.r1.iy = 0xC1AC
+  cpu.r1.ix = 0x3488
+  cpu.r1.iy = 0x7150
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x21)
+  mem.write8(0x0002, 0x31)
   mem.write8(0x0003, 0x3F)
-  mem.write8(0xC1CD, 0x78)
+  mem.write8(0x34B9, 0x04)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2930,43 +2930,43 @@ test('Test fdcb3f', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3C2C)
-  expect(cpu.r1.bc).toEqual(0x12F6)
-  expect(cpu.r1.de).toEqual(0x426C)
-  expect(cpu.r1.hl).toEqual(0x52D4)
+  expect(cpu.r1.af).toEqual(0x0200)
+  expect(cpu.r1.bc).toEqual(0x429D)
+  expect(cpu.r1.de).toEqual(0xD8C0)
+  expect(cpu.r1.hl).toEqual(0xE069)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD9F7)
-  expect(cpu.r1.iy).toEqual(0xC1AC)
+  expect(cpu.r1.ix).toEqual(0x3488)
+  expect(cpu.r1.iy).toEqual(0x7150)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb40', () => {
+test('Test ddcb40', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x5408
-  cpu.r1.bc = 0x2C34
-  cpu.r1.de = 0x6784
-  cpu.r1.hl = 0xB376
+  cpu.r1.af = 0x119B
+  cpu.r1.bc = 0xF6BA
+  cpu.r1.de = 0x079E
+  cpu.r1.hl = 0x0E41
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8FF9
-  cpu.r1.iy = 0x4195
+  cpu.r1.ix = 0x8C01
+  cpu.r1.iy = 0xCD21
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x3B)
+  mem.write8(0x0002, 0xBD)
   mem.write8(0x0003, 0x40)
-  mem.write8(0x41D0, 0x0D)
+  mem.write8(0x8BBE, 0xE7)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -2976,457 +2976,43 @@ test('Test fdcb40', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5410)
-  expect(cpu.r1.bc).toEqual(0x2C34)
-  expect(cpu.r1.de).toEqual(0x6784)
-  expect(cpu.r1.hl).toEqual(0xB376)
+  expect(cpu.r1.af).toEqual(0x1119)
+  expect(cpu.r1.bc).toEqual(0xF6BA)
+  expect(cpu.r1.de).toEqual(0x079E)
+  expect(cpu.r1.hl).toEqual(0x0E41)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8FF9)
-  expect(cpu.r1.iy).toEqual(0x4195)
+  expect(cpu.r1.ix).toEqual(0x8C01)
+  expect(cpu.r1.iy).toEqual(0xCD21)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb41', () => {
+test('Test ddcb41', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8C35
-  cpu.r1.bc = 0x5A58
-  cpu.r1.de = 0xB71C
-  cpu.r1.hl = 0x6777
+  cpu.r1.af = 0x22B3
+  cpu.r1.bc = 0xC4B0
+  cpu.r1.de = 0x575B
+  cpu.r1.hl = 0x66B4
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xDECA
-  cpu.r1.iy = 0x03CB
+  cpu.r1.ix = 0xCDCF
+  cpu.r1.iy = 0xA25C
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xCC)
-  mem.write8(0x0003, 0x41)
-  mem.write8(0x0397, 0xE9)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8C11)
-  expect(cpu.r1.bc).toEqual(0x5A58)
-  expect(cpu.r1.de).toEqual(0xB71C)
-  expect(cpu.r1.hl).toEqual(0x6777)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xDECA)
-  expect(cpu.r1.iy).toEqual(0x03CB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb42', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5535
-  cpu.r1.bc = 0x9C29
-  cpu.r1.de = 0x2FEB
-  cpu.r1.hl = 0x97FF
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7F17
-  cpu.r1.iy = 0x9F56
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x01)
-  mem.write8(0x0003, 0x42)
-  mem.write8(0x9F57, 0xA8)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x555D)
-  expect(cpu.r1.bc).toEqual(0x9C29)
-  expect(cpu.r1.de).toEqual(0x2FEB)
-  expect(cpu.r1.hl).toEqual(0x97FF)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7F17)
-  expect(cpu.r1.iy).toEqual(0x9F56)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb43', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xB404
-  cpu.r1.bc = 0xE58C
-  cpu.r1.de = 0xE62E
-  cpu.r1.hl = 0x2A32
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7130
-  cpu.r1.iy = 0x1FD1
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x08)
-  mem.write8(0x0003, 0x43)
-  mem.write8(0x1FD9, 0xAA)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xB45C)
-  expect(cpu.r1.bc).toEqual(0xE58C)
-  expect(cpu.r1.de).toEqual(0xE62E)
-  expect(cpu.r1.hl).toEqual(0x2A32)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7130)
-  expect(cpu.r1.iy).toEqual(0x1FD1)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb44', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xA954
-  cpu.r1.bc = 0x68F4
-  cpu.r1.de = 0x9FA4
-  cpu.r1.hl = 0x7F66
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0209
-  cpu.r1.iy = 0xF4F3
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x03)
-  mem.write8(0x0003, 0x44)
-  mem.write8(0xF4F6, 0x89)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xA930)
-  expect(cpu.r1.bc).toEqual(0x68F4)
-  expect(cpu.r1.de).toEqual(0x9FA4)
-  expect(cpu.r1.hl).toEqual(0x7F66)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0209)
-  expect(cpu.r1.iy).toEqual(0xF4F3)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb45', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x73E5
-  cpu.r1.bc = 0x8DDE
-  cpu.r1.de = 0x5E4F
-  cpu.r1.hl = 0x84A7
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4E24
-  cpu.r1.iy = 0x93ED
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x8D)
-  mem.write8(0x0003, 0x45)
-  mem.write8(0x937A, 0x8D)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7311)
-  expect(cpu.r1.bc).toEqual(0x8DDE)
-  expect(cpu.r1.de).toEqual(0x5E4F)
-  expect(cpu.r1.hl).toEqual(0x84A7)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4E24)
-  expect(cpu.r1.iy).toEqual(0x93ED)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb46', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x0E5A
-  cpu.r1.bc = 0xB1F9
-  cpu.r1.de = 0x475F
-  cpu.r1.hl = 0xEBFC
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7765
-  cpu.r1.iy = 0x63B1
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x8C)
-  mem.write8(0x0003, 0x46)
-  mem.write8(0x633D, 0xFE)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x0E74)
-  expect(cpu.r1.bc).toEqual(0xB1F9)
-  expect(cpu.r1.de).toEqual(0x475F)
-  expect(cpu.r1.hl).toEqual(0xEBFC)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7765)
-  expect(cpu.r1.iy).toEqual(0x63B1)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb47', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x9B3D
-  cpu.r1.bc = 0x7F38
-  cpu.r1.de = 0x0753
-  cpu.r1.hl = 0xD5E7
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB9C3
-  cpu.r1.iy = 0x6E0E
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x96)
-  mem.write8(0x0003, 0x47)
-  mem.write8(0x6DA4, 0xD6)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x9B7D)
-  expect(cpu.r1.bc).toEqual(0x7F38)
-  expect(cpu.r1.de).toEqual(0x0753)
-  expect(cpu.r1.hl).toEqual(0xD5E7)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB9C3)
-  expect(cpu.r1.iy).toEqual(0x6E0E)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb48', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x7D94
-  cpu.r1.bc = 0x50A9
-  cpu.r1.de = 0x2511
-  cpu.r1.hl = 0x8F9F
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB612
-  cpu.r1.iy = 0xABA9
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x44)
-  mem.write8(0x0003, 0x48)
-  mem.write8(0xABED, 0xB0)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7D7C)
-  expect(cpu.r1.bc).toEqual(0x50A9)
-  expect(cpu.r1.de).toEqual(0x2511)
-  expect(cpu.r1.hl).toEqual(0x8F9F)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB612)
-  expect(cpu.r1.iy).toEqual(0xABA9)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb49', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x691E
-  cpu.r1.bc = 0x3A39
-  cpu.r1.de = 0xB834
-  cpu.r1.hl = 0x74B6
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0EB7
-  cpu.r1.iy = 0x3E21
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x4E)
-  mem.write8(0x0003, 0x49)
-  mem.write8(0x3E6F, 0xA9)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x697C)
-  expect(cpu.r1.bc).toEqual(0x3A39)
-  expect(cpu.r1.de).toEqual(0xB834)
-  expect(cpu.r1.hl).toEqual(0x74B6)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0EB7)
-  expect(cpu.r1.iy).toEqual(0x3E21)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb4a', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x31E3
-  cpu.r1.bc = 0x68E0
-  cpu.r1.de = 0xFE2F
-  cpu.r1.hl = 0xA2C4
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAC96
-  cpu.r1.iy = 0xE7DB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x52)
-  mem.write8(0x0003, 0x4A)
-  mem.write8(0xE82D, 0xDA)
+  mem.write8(0x0003, 0x41)
+  mem.write8(0xCE21, 0x75)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3436,43 +3022,1377 @@ test('Test fdcb4a', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3139)
-  expect(cpu.r1.bc).toEqual(0x68E0)
-  expect(cpu.r1.de).toEqual(0xFE2F)
-  expect(cpu.r1.hl).toEqual(0xA2C4)
+  expect(cpu.r1.af).toEqual(0x2219)
+  expect(cpu.r1.bc).toEqual(0xC4B0)
+  expect(cpu.r1.de).toEqual(0x575B)
+  expect(cpu.r1.hl).toEqual(0x66B4)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAC96)
-  expect(cpu.r1.iy).toEqual(0xE7DB)
+  expect(cpu.r1.ix).toEqual(0xCDCF)
+  expect(cpu.r1.iy).toEqual(0xA25C)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb4b', () => {
+test('Test ddcb42', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x09A1
-  cpu.r1.bc = 0x2453
-  cpu.r1.de = 0x9186
-  cpu.r1.hl = 0xA32A
+  cpu.r1.af = 0xAF5E
+  cpu.r1.bc = 0x7720
+  cpu.r1.de = 0xAA95
+  cpu.r1.hl = 0x3B0A
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x71AF
-  cpu.r1.iy = 0x883F
+  cpu.r1.ix = 0xF03A
+  cpu.r1.iy = 0x856A
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xEA)
+  mem.write8(0x0002, 0x1E)
+  mem.write8(0x0003, 0x42)
+  mem.write8(0xF058, 0x90)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xAF74)
+  expect(cpu.r1.bc).toEqual(0x7720)
+  expect(cpu.r1.de).toEqual(0xAA95)
+  expect(cpu.r1.hl).toEqual(0x3B0A)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xF03A)
+  expect(cpu.r1.iy).toEqual(0x856A)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb43', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7FA6
+  cpu.r1.bc = 0xB699
+  cpu.r1.de = 0x5E71
+  cpu.r1.hl = 0x1827
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xE8B6
+  cpu.r1.iy = 0x96A8
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xBC)
+  mem.write8(0x0003, 0x43)
+  mem.write8(0xE872, 0x6B)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7F38)
+  expect(cpu.r1.bc).toEqual(0xB699)
+  expect(cpu.r1.de).toEqual(0x5E71)
+  expect(cpu.r1.hl).toEqual(0x1827)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xE8B6)
+  expect(cpu.r1.iy).toEqual(0x96A8)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb44', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x5FAA
+  cpu.r1.bc = 0xDE05
+  cpu.r1.de = 0x12FD
+  cpu.r1.hl = 0xF73B
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xEE0A
+  cpu.r1.iy = 0x6634
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE8)
+  mem.write8(0x0003, 0x44)
+  mem.write8(0xEDF2, 0x62)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x5F7C)
+  expect(cpu.r1.bc).toEqual(0xDE05)
+  expect(cpu.r1.de).toEqual(0x12FD)
+  expect(cpu.r1.hl).toEqual(0xF73B)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xEE0A)
+  expect(cpu.r1.iy).toEqual(0x6634)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb45', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xEAC7
+  cpu.r1.bc = 0x699C
+  cpu.r1.de = 0x47D3
+  cpu.r1.hl = 0x89C3
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xA2BE
+  cpu.r1.iy = 0xD81E
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x02)
+  mem.write8(0x0003, 0x45)
+  mem.write8(0xA2C0, 0x55)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xEA31)
+  expect(cpu.r1.bc).toEqual(0x699C)
+  expect(cpu.r1.de).toEqual(0x47D3)
+  expect(cpu.r1.hl).toEqual(0x89C3)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xA2BE)
+  expect(cpu.r1.iy).toEqual(0xD81E)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb46', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x60DE
+  cpu.r1.bc = 0xAC1D
+  cpu.r1.de = 0x4173
+  cpu.r1.hl = 0xF92A
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xA39F
+  cpu.r1.iy = 0x12E5
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE2)
+  mem.write8(0x0003, 0x46)
+  mem.write8(0xA381, 0xD5)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x6030)
+  expect(cpu.r1.bc).toEqual(0xAC1D)
+  expect(cpu.r1.de).toEqual(0x4173)
+  expect(cpu.r1.hl).toEqual(0xF92A)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xA39F)
+  expect(cpu.r1.iy).toEqual(0x12E5)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb47', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x1B1A
+  cpu.r1.bc = 0xF7C0
+  cpu.r1.de = 0x22F6
+  cpu.r1.hl = 0x5253
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5227
+  cpu.r1.iy = 0x919D
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x7A)
+  mem.write8(0x0003, 0x47)
+  mem.write8(0x52A1, 0x6A)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x1B54)
+  expect(cpu.r1.bc).toEqual(0xF7C0)
+  expect(cpu.r1.de).toEqual(0x22F6)
+  expect(cpu.r1.hl).toEqual(0x5253)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5227)
+  expect(cpu.r1.iy).toEqual(0x919D)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb48', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x721A
+  cpu.r1.bc = 0x4509
+  cpu.r1.de = 0xD68F
+  cpu.r1.hl = 0x3B3D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x2746
+  cpu.r1.iy = 0x7F97
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x13)
+  mem.write8(0x0003, 0x48)
+  mem.write8(0x2759, 0xA8)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7274)
+  expect(cpu.r1.bc).toEqual(0x4509)
+  expect(cpu.r1.de).toEqual(0xD68F)
+  expect(cpu.r1.hl).toEqual(0x3B3D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x2746)
+  expect(cpu.r1.iy).toEqual(0x7F97)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb49', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7FE9
+  cpu.r1.bc = 0xDA22
+  cpu.r1.de = 0xEA9C
+  cpu.r1.hl = 0xF480
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x41C6
+  cpu.r1.iy = 0x75A9
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x94)
+  mem.write8(0x0003, 0x49)
+  mem.write8(0x415A, 0x26)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7F11)
+  expect(cpu.r1.bc).toEqual(0xDA22)
+  expect(cpu.r1.de).toEqual(0xEA9C)
+  expect(cpu.r1.hl).toEqual(0xF480)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x41C6)
+  expect(cpu.r1.iy).toEqual(0x75A9)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb4a', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xF16D
+  cpu.r1.bc = 0xE6C3
+  cpu.r1.de = 0x5A42
+  cpu.r1.hl = 0x8B21
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xBFEB
+  cpu.r1.iy = 0xE383
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x3B)
+  mem.write8(0x0003, 0x4A)
+  mem.write8(0xC026, 0xB5)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xF155)
+  expect(cpu.r1.bc).toEqual(0xE6C3)
+  expect(cpu.r1.de).toEqual(0x5A42)
+  expect(cpu.r1.hl).toEqual(0x8B21)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xBFEB)
+  expect(cpu.r1.iy).toEqual(0xE383)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb4b', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x1050
+  cpu.r1.bc = 0x880A
+  cpu.r1.de = 0x52B2
+  cpu.r1.hl = 0xFB1B
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xC239
+  cpu.r1.iy = 0x6B40
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xB0)
   mem.write8(0x0003, 0x4B)
-  mem.write8(0x8829, 0x4E)
+  mem.write8(0xC1E9, 0x18)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x1054)
+  expect(cpu.r1.bc).toEqual(0x880A)
+  expect(cpu.r1.de).toEqual(0x52B2)
+  expect(cpu.r1.hl).toEqual(0xFB1B)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xC239)
+  expect(cpu.r1.iy).toEqual(0x6B40)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb4c', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x0538
+  cpu.r1.bc = 0xBC63
+  cpu.r1.de = 0xF081
+  cpu.r1.hl = 0x0A55
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x874C
+  cpu.r1.iy = 0x80A3
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x97)
+  mem.write8(0x0003, 0x4C)
+  mem.write8(0x86E3, 0x63)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x0510)
+  expect(cpu.r1.bc).toEqual(0xBC63)
+  expect(cpu.r1.de).toEqual(0xF081)
+  expect(cpu.r1.hl).toEqual(0x0A55)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x874C)
+  expect(cpu.r1.iy).toEqual(0x80A3)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb4d', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7F8C
+  cpu.r1.bc = 0x32B4
+  cpu.r1.de = 0x03D5
+  cpu.r1.hl = 0xEF66
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x7D2A
+  cpu.r1.iy = 0x03BC
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x15)
+  mem.write8(0x0003, 0x4D)
+  mem.write8(0x7D3F, 0x60)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7F7C)
+  expect(cpu.r1.bc).toEqual(0x32B4)
+  expect(cpu.r1.de).toEqual(0x03D5)
+  expect(cpu.r1.hl).toEqual(0xEF66)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x7D2A)
+  expect(cpu.r1.iy).toEqual(0x03BC)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb4e', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7C67
+  cpu.r1.bc = 0xFA92
+  cpu.r1.de = 0xB4D0
+  cpu.r1.hl = 0x9F23
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xEADE
+  cpu.r1.iy = 0x1785
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xB0)
+  mem.write8(0x0003, 0x4E)
+  mem.write8(0xEA8E, 0x3B)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7C39)
+  expect(cpu.r1.bc).toEqual(0xFA92)
+  expect(cpu.r1.de).toEqual(0xB4D0)
+  expect(cpu.r1.hl).toEqual(0x9F23)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xEADE)
+  expect(cpu.r1.iy).toEqual(0x1785)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb4f', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x725C
+  cpu.r1.bc = 0x257B
+  cpu.r1.de = 0xDB73
+  cpu.r1.hl = 0x2478
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x88C0
+  cpu.r1.iy = 0xF151
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x8B)
+  mem.write8(0x0003, 0x4F)
+  mem.write8(0x884B, 0x4C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x725C)
+  expect(cpu.r1.bc).toEqual(0x257B)
+  expect(cpu.r1.de).toEqual(0xDB73)
+  expect(cpu.r1.hl).toEqual(0x2478)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x88C0)
+  expect(cpu.r1.iy).toEqual(0xF151)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb50', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x35F4
+  cpu.r1.bc = 0x8E51
+  cpu.r1.de = 0x406C
+  cpu.r1.hl = 0x2E3C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDAF2
+  cpu.r1.iy = 0x413C
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x12)
+  mem.write8(0x0003, 0x50)
+  mem.write8(0xDB04, 0x00)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x355C)
+  expect(cpu.r1.bc).toEqual(0x8E51)
+  expect(cpu.r1.de).toEqual(0x406C)
+  expect(cpu.r1.hl).toEqual(0x2E3C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xDAF2)
+  expect(cpu.r1.iy).toEqual(0x413C)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb51', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xA630
+  cpu.r1.bc = 0xBA85
+  cpu.r1.de = 0xC88C
+  cpu.r1.hl = 0xE86C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x84B2
+  cpu.r1.iy = 0xCD8E
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x18)
+  mem.write8(0x0003, 0x51)
+  mem.write8(0x84CA, 0x1C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xA610)
+  expect(cpu.r1.bc).toEqual(0xBA85)
+  expect(cpu.r1.de).toEqual(0xC88C)
+  expect(cpu.r1.hl).toEqual(0xE86C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x84B2)
+  expect(cpu.r1.iy).toEqual(0xCD8E)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb52', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xCB88
+  cpu.r1.bc = 0x1220
+  cpu.r1.de = 0x1103
+  cpu.r1.hl = 0xA868
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6156
+  cpu.r1.iy = 0xCFAC
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x42)
+  mem.write8(0x0003, 0x52)
+  mem.write8(0x6198, 0x53)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xCB74)
+  expect(cpu.r1.bc).toEqual(0x1220)
+  expect(cpu.r1.de).toEqual(0x1103)
+  expect(cpu.r1.hl).toEqual(0xA868)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6156)
+  expect(cpu.r1.iy).toEqual(0xCFAC)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb53', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x5EB3
+  cpu.r1.bc = 0x569E
+  cpu.r1.de = 0xF76D
+  cpu.r1.hl = 0x88C6
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xAE45
+  cpu.r1.iy = 0x623E
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE3)
+  mem.write8(0x0003, 0x53)
+  mem.write8(0xAE28, 0xD6)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x5E39)
+  expect(cpu.r1.bc).toEqual(0x569E)
+  expect(cpu.r1.de).toEqual(0xF76D)
+  expect(cpu.r1.hl).toEqual(0x88C6)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xAE45)
+  expect(cpu.r1.iy).toEqual(0x623E)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb54', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC3C9
+  cpu.r1.bc = 0x76FE
+  cpu.r1.de = 0xF1FF
+  cpu.r1.hl = 0x416E
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xEFD5
+  cpu.r1.iy = 0x7576
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x7D)
+  mem.write8(0x0003, 0x54)
+  mem.write8(0xF052, 0x5D)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC331)
+  expect(cpu.r1.bc).toEqual(0x76FE)
+  expect(cpu.r1.de).toEqual(0xF1FF)
+  expect(cpu.r1.hl).toEqual(0x416E)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xEFD5)
+  expect(cpu.r1.iy).toEqual(0x7576)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb55', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7068
+  cpu.r1.bc = 0xDCD0
+  cpu.r1.de = 0x8345
+  cpu.r1.hl = 0xD498
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xF352
+  cpu.r1.iy = 0xA88B
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x88)
+  mem.write8(0x0003, 0x55)
+  mem.write8(0xF2DA, 0x03)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7074)
+  expect(cpu.r1.bc).toEqual(0xDCD0)
+  expect(cpu.r1.de).toEqual(0x8345)
+  expect(cpu.r1.hl).toEqual(0xD498)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xF352)
+  expect(cpu.r1.iy).toEqual(0xA88B)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb56', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x9128
+  cpu.r1.bc = 0x2CB8
+  cpu.r1.de = 0x571C
+  cpu.r1.hl = 0xF4FD
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6D30
+  cpu.r1.iy = 0xAEC2
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x57)
+  mem.write8(0x0003, 0x56)
+  mem.write8(0x6D87, 0x61)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x917C)
+  expect(cpu.r1.bc).toEqual(0x2CB8)
+  expect(cpu.r1.de).toEqual(0x571C)
+  expect(cpu.r1.hl).toEqual(0xF4FD)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6D30)
+  expect(cpu.r1.iy).toEqual(0xAEC2)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb57', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x3CA7
+  cpu.r1.bc = 0x541A
+  cpu.r1.de = 0x027C
+  cpu.r1.hl = 0xC0B4
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5833
+  cpu.r1.iy = 0x160A
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x06)
+  mem.write8(0x0003, 0x57)
+  mem.write8(0x5839, 0x1D)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x3C19)
+  expect(cpu.r1.bc).toEqual(0x541A)
+  expect(cpu.r1.de).toEqual(0x027C)
+  expect(cpu.r1.hl).toEqual(0xC0B4)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5833)
+  expect(cpu.r1.iy).toEqual(0x160A)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb58', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC650
+  cpu.r1.bc = 0xE1A8
+  cpu.r1.de = 0x9D6C
+  cpu.r1.hl = 0xBEC3
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6A46
+  cpu.r1.iy = 0xB66C
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x83)
+  mem.write8(0x0003, 0x58)
+  mem.write8(0x69C9, 0x0F)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC638)
+  expect(cpu.r1.bc).toEqual(0xE1A8)
+  expect(cpu.r1.de).toEqual(0x9D6C)
+  expect(cpu.r1.hl).toEqual(0xBEC3)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6A46)
+  expect(cpu.r1.iy).toEqual(0xB66C)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb59', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xAD07
+  cpu.r1.bc = 0x9BDA
+  cpu.r1.de = 0xB7EE
+  cpu.r1.hl = 0x63C4
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x9195
+  cpu.r1.iy = 0x9703
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xDB)
+  mem.write8(0x0003, 0x59)
+  mem.write8(0x9170, 0x10)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xAD55)
+  expect(cpu.r1.bc).toEqual(0x9BDA)
+  expect(cpu.r1.de).toEqual(0xB7EE)
+  expect(cpu.r1.hl).toEqual(0x63C4)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x9195)
+  expect(cpu.r1.iy).toEqual(0x9703)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb5a', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x80C0
+  cpu.r1.bc = 0x5105
+  cpu.r1.de = 0x36B0
+  cpu.r1.hl = 0xA37C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x0DE0
+  cpu.r1.iy = 0xCE7F
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xD1)
+  mem.write8(0x0003, 0x5A)
+  mem.write8(0x0DB1, 0xBE)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x8018)
+  expect(cpu.r1.bc).toEqual(0x5105)
+  expect(cpu.r1.de).toEqual(0x36B0)
+  expect(cpu.r1.hl).toEqual(0xA37C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x0DE0)
+  expect(cpu.r1.iy).toEqual(0xCE7F)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb5b', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x2A8D
+  cpu.r1.bc = 0x083D
+  cpu.r1.de = 0x1409
+  cpu.r1.hl = 0x06BA
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x62AD
+  cpu.r1.iy = 0xBAFF
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xD5)
+  mem.write8(0x0003, 0x5B)
+  mem.write8(0x6282, 0x67)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x2A75)
+  expect(cpu.r1.bc).toEqual(0x083D)
+  expect(cpu.r1.de).toEqual(0x1409)
+  expect(cpu.r1.hl).toEqual(0x06BA)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x62AD)
+  expect(cpu.r1.iy).toEqual(0xBAFF)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb5c', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4CA4
+  cpu.r1.bc = 0xE502
+  cpu.r1.de = 0xD23C
+  cpu.r1.hl = 0x6DA8
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x9DC6
+  cpu.r1.iy = 0x6F04
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x5C)
+  mem.write8(0x0003, 0x5C)
+  mem.write8(0x9E22, 0xC9)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4C18)
+  expect(cpu.r1.bc).toEqual(0xE502)
+  expect(cpu.r1.de).toEqual(0xD23C)
+  expect(cpu.r1.hl).toEqual(0x6DA8)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x9DC6)
+  expect(cpu.r1.iy).toEqual(0x6F04)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb5d', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7E39
+  cpu.r1.bc = 0x511B
+  cpu.r1.de = 0x3CFA
+  cpu.r1.hl = 0x60D3
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xD193
+  cpu.r1.iy = 0x3FE9
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xFF)
+  mem.write8(0x0003, 0x5D)
+  mem.write8(0xD192, 0x0D)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7E11)
+  expect(cpu.r1.bc).toEqual(0x511B)
+  expect(cpu.r1.de).toEqual(0x3CFA)
+  expect(cpu.r1.hl).toEqual(0x60D3)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xD193)
+  expect(cpu.r1.iy).toEqual(0x3FE9)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb5e', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xCEF1
+  cpu.r1.bc = 0x0235
+  cpu.r1.de = 0xE2B1
+  cpu.r1.hl = 0x7A4C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xED14
+  cpu.r1.iy = 0xD0D6
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x62)
+  mem.write8(0x0003, 0x5E)
+  mem.write8(0xED76, 0xA7)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xCE7D)
+  expect(cpu.r1.bc).toEqual(0x0235)
+  expect(cpu.r1.de).toEqual(0xE2B1)
+  expect(cpu.r1.hl).toEqual(0x7A4C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xED14)
+  expect(cpu.r1.iy).toEqual(0xD0D6)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb5f', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x094F
+  cpu.r1.bc = 0x20A8
+  cpu.r1.de = 0x52E1
+  cpu.r1.hl = 0xD783
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDF46
+  cpu.r1.iy = 0xDA41
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x3F)
+  mem.write8(0x0003, 0x5F)
+  mem.write8(0xDF85, 0x9E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3483,42 +4403,42 @@ test('Test fdcb4b', () => {
   }
   
   expect(cpu.r1.af).toEqual(0x0919)
-  expect(cpu.r1.bc).toEqual(0x2453)
-  expect(cpu.r1.de).toEqual(0x9186)
-  expect(cpu.r1.hl).toEqual(0xA32A)
+  expect(cpu.r1.bc).toEqual(0x20A8)
+  expect(cpu.r1.de).toEqual(0x52E1)
+  expect(cpu.r1.hl).toEqual(0xD783)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x71AF)
-  expect(cpu.r1.iy).toEqual(0x883F)
+  expect(cpu.r1.ix).toEqual(0xDF46)
+  expect(cpu.r1.iy).toEqual(0xDA41)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb4c', () => {
+test('Test ddcb60', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x4A52
-  cpu.r1.bc = 0x1E5B
-  cpu.r1.de = 0xBE2E
-  cpu.r1.hl = 0x3EE4
+  cpu.r1.af = 0x42CE
+  cpu.r1.bc = 0x0713
+  cpu.r1.de = 0xDC90
+  cpu.r1.hl = 0x2C89
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAF79
-  cpu.r1.iy = 0x7F22
+  cpu.r1.ix = 0x32A2
+  cpu.r1.iy = 0xC4D4
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xEE)
-  mem.write8(0x0003, 0x4C)
-  mem.write8(0x7F10, 0x70)
+  mem.write8(0x0002, 0x65)
+  mem.write8(0x0003, 0x60)
+  mem.write8(0x3307, 0x2E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3528,43 +4448,43 @@ test('Test fdcb4c', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x4A7C)
-  expect(cpu.r1.bc).toEqual(0x1E5B)
-  expect(cpu.r1.de).toEqual(0xBE2E)
-  expect(cpu.r1.hl).toEqual(0x3EE4)
+  expect(cpu.r1.af).toEqual(0x4274)
+  expect(cpu.r1.bc).toEqual(0x0713)
+  expect(cpu.r1.de).toEqual(0xDC90)
+  expect(cpu.r1.hl).toEqual(0x2C89)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAF79)
-  expect(cpu.r1.iy).toEqual(0x7F22)
+  expect(cpu.r1.ix).toEqual(0x32A2)
+  expect(cpu.r1.iy).toEqual(0xC4D4)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb4d', () => {
+test('Test ddcb61', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x9F87
-  cpu.r1.bc = 0x6C8F
-  cpu.r1.de = 0x34F4
-  cpu.r1.hl = 0x5A79
+  cpu.r1.af = 0x1B36
+  cpu.r1.bc = 0x1403
+  cpu.r1.de = 0x8B9B
+  cpu.r1.hl = 0xC221
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD3CC
-  cpu.r1.iy = 0xA770
+  cpu.r1.ix = 0x36CB
+  cpu.r1.iy = 0x93D4
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x29)
-  mem.write8(0x0003, 0x4D)
-  mem.write8(0xA799, 0x78)
+  mem.write8(0x0002, 0xA8)
+  mem.write8(0x0003, 0x61)
+  mem.write8(0x3673, 0xBC)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3574,43 +4494,43 @@ test('Test fdcb4d', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x9F75)
-  expect(cpu.r1.bc).toEqual(0x6C8F)
-  expect(cpu.r1.de).toEqual(0x34F4)
-  expect(cpu.r1.hl).toEqual(0x5A79)
+  expect(cpu.r1.af).toEqual(0x1B30)
+  expect(cpu.r1.bc).toEqual(0x1403)
+  expect(cpu.r1.de).toEqual(0x8B9B)
+  expect(cpu.r1.hl).toEqual(0xC221)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD3CC)
-  expect(cpu.r1.iy).toEqual(0xA770)
+  expect(cpu.r1.ix).toEqual(0x36CB)
+  expect(cpu.r1.iy).toEqual(0x93D4)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb4e', () => {
+test('Test ddcb62', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x30CB
-  cpu.r1.bc = 0x5626
-  cpu.r1.de = 0x52BC
-  cpu.r1.hl = 0x5503
+  cpu.r1.af = 0x361B
+  cpu.r1.bc = 0x4055
+  cpu.r1.de = 0x650A
+  cpu.r1.hl = 0x3F98
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x303B
-  cpu.r1.iy = 0xE1C8
+  cpu.r1.ix = 0x0ACC
+  cpu.r1.iy = 0xA102
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x20)
-  mem.write8(0x0003, 0x4E)
-  mem.write8(0xE1E8, 0xAA)
+  mem.write8(0x0002, 0xD9)
+  mem.write8(0x0003, 0x62)
+  mem.write8(0x0AA5, 0xEA)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3620,43 +4540,43 @@ test('Test fdcb4e', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3031)
-  expect(cpu.r1.bc).toEqual(0x5626)
-  expect(cpu.r1.de).toEqual(0x52BC)
-  expect(cpu.r1.hl).toEqual(0x5503)
+  expect(cpu.r1.af).toEqual(0x365D)
+  expect(cpu.r1.bc).toEqual(0x4055)
+  expect(cpu.r1.de).toEqual(0x650A)
+  expect(cpu.r1.hl).toEqual(0x3F98)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x303B)
-  expect(cpu.r1.iy).toEqual(0xE1C8)
+  expect(cpu.r1.ix).toEqual(0x0ACC)
+  expect(cpu.r1.iy).toEqual(0xA102)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb4f', () => {
+test('Test ddcb63', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x6088
-  cpu.r1.bc = 0xE079
-  cpu.r1.de = 0x7152
-  cpu.r1.hl = 0x671F
+  cpu.r1.af = 0x6548
+  cpu.r1.bc = 0x08DF
+  cpu.r1.de = 0x3CEB
+  cpu.r1.hl = 0x6D24
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8C22
-  cpu.r1.iy = 0x1CF8
+  cpu.r1.ix = 0xE679
+  cpu.r1.iy = 0xF98E
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9D)
-  mem.write8(0x0003, 0x4F)
-  mem.write8(0x1C95, 0x18)
+  mem.write8(0x0002, 0x79)
+  mem.write8(0x0003, 0x63)
+  mem.write8(0xE6F2, 0x83)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3666,43 +4586,43 @@ test('Test fdcb4f', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x605C)
-  expect(cpu.r1.bc).toEqual(0xE079)
-  expect(cpu.r1.de).toEqual(0x7152)
-  expect(cpu.r1.hl).toEqual(0x671F)
+  expect(cpu.r1.af).toEqual(0x6574)
+  expect(cpu.r1.bc).toEqual(0x08DF)
+  expect(cpu.r1.de).toEqual(0x3CEB)
+  expect(cpu.r1.hl).toEqual(0x6D24)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8C22)
-  expect(cpu.r1.iy).toEqual(0x1CF8)
+  expect(cpu.r1.ix).toEqual(0xE679)
+  expect(cpu.r1.iy).toEqual(0xF98E)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb50', () => {
+test('Test ddcb64', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8CDE
-  cpu.r1.bc = 0x1409
-  cpu.r1.de = 0x6D69
-  cpu.r1.hl = 0xE5B2
+  cpu.r1.af = 0x3C22
+  cpu.r1.bc = 0xE2A7
+  cpu.r1.de = 0x6DA9
+  cpu.r1.hl = 0xC346
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4A0C
-  cpu.r1.iy = 0xC75F
+  cpu.r1.ix = 0xECFB
+  cpu.r1.iy = 0x85B6
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x6B)
-  mem.write8(0x0003, 0x50)
-  mem.write8(0xC7CA, 0xFE)
+  mem.write8(0x0002, 0x71)
+  mem.write8(0x0003, 0x64)
+  mem.write8(0xED6C, 0x52)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3712,43 +4632,43 @@ test('Test fdcb50', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x8C10)
-  expect(cpu.r1.bc).toEqual(0x1409)
-  expect(cpu.r1.de).toEqual(0x6D69)
-  expect(cpu.r1.hl).toEqual(0xE5B2)
+  expect(cpu.r1.af).toEqual(0x3C38)
+  expect(cpu.r1.bc).toEqual(0xE2A7)
+  expect(cpu.r1.de).toEqual(0x6DA9)
+  expect(cpu.r1.hl).toEqual(0xC346)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4A0C)
-  expect(cpu.r1.iy).toEqual(0xC75F)
+  expect(cpu.r1.ix).toEqual(0xECFB)
+  expect(cpu.r1.iy).toEqual(0x85B6)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb51', () => {
+test('Test ddcb65', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8F59
-  cpu.r1.bc = 0x40CB
-  cpu.r1.de = 0x9543
-  cpu.r1.hl = 0x9B3A
+  cpu.r1.af = 0x09BD
+  cpu.r1.bc = 0x0ABB
+  cpu.r1.de = 0x3AFA
+  cpu.r1.hl = 0x91F5
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1942
-  cpu.r1.iy = 0x3495
+  cpu.r1.ix = 0x7779
+  cpu.r1.iy = 0xAEF5
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x86)
-  mem.write8(0x0003, 0x51)
-  mem.write8(0x341B, 0x13)
+  mem.write8(0x0002, 0x67)
+  mem.write8(0x0003, 0x65)
+  mem.write8(0x77E0, 0xF5)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -3758,411 +4678,43 @@ test('Test fdcb51', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x8F75)
-  expect(cpu.r1.bc).toEqual(0x40CB)
-  expect(cpu.r1.de).toEqual(0x9543)
-  expect(cpu.r1.hl).toEqual(0x9B3A)
+  expect(cpu.r1.af).toEqual(0x0931)
+  expect(cpu.r1.bc).toEqual(0x0ABB)
+  expect(cpu.r1.de).toEqual(0x3AFA)
+  expect(cpu.r1.hl).toEqual(0x91F5)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1942)
-  expect(cpu.r1.iy).toEqual(0x3495)
+  expect(cpu.r1.ix).toEqual(0x7779)
+  expect(cpu.r1.iy).toEqual(0xAEF5)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb52', () => {
+test('Test ddcb66', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8905
-  cpu.r1.bc = 0x3E41
-  cpu.r1.de = 0x7AB4
-  cpu.r1.hl = 0x37F6
+  cpu.r1.af = 0xCCBC
+  cpu.r1.bc = 0xD301
+  cpu.r1.de = 0x9B66
+  cpu.r1.hl = 0x40FB
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF82D
-  cpu.r1.iy = 0x8B0D
+  cpu.r1.ix = 0xEE15
+  cpu.r1.iy = 0x0D23
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE6)
-  mem.write8(0x0003, 0x52)
-  mem.write8(0x8AF3, 0x87)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8919)
-  expect(cpu.r1.bc).toEqual(0x3E41)
-  expect(cpu.r1.de).toEqual(0x7AB4)
-  expect(cpu.r1.hl).toEqual(0x37F6)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF82D)
-  expect(cpu.r1.iy).toEqual(0x8B0D)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb53', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xEFDE
-  cpu.r1.bc = 0xE345
-  cpu.r1.de = 0x09A3
-  cpu.r1.hl = 0xF0B2
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC378
-  cpu.r1.iy = 0x7EE1
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD1)
-  mem.write8(0x0003, 0x53)
-  mem.write8(0x7EB2, 0xE4)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xEF38)
-  expect(cpu.r1.bc).toEqual(0xE345)
-  expect(cpu.r1.de).toEqual(0x09A3)
-  expect(cpu.r1.hl).toEqual(0xF0B2)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC378)
-  expect(cpu.r1.iy).toEqual(0x7EE1)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb54', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x72A6
-  cpu.r1.bc = 0xCB82
-  cpu.r1.de = 0xD966
-  cpu.r1.hl = 0x2FC6
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3C00
-  cpu.r1.iy = 0x5B6B
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x08)
-  mem.write8(0x0003, 0x54)
-  mem.write8(0x5B73, 0x07)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7218)
-  expect(cpu.r1.bc).toEqual(0xCB82)
-  expect(cpu.r1.de).toEqual(0xD966)
-  expect(cpu.r1.hl).toEqual(0x2FC6)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3C00)
-  expect(cpu.r1.iy).toEqual(0x5B6B)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb55', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x855C
-  cpu.r1.bc = 0xC23B
-  cpu.r1.de = 0x6AAB
-  cpu.r1.hl = 0x9B00
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFE93
-  cpu.r1.iy = 0xB4B2
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x54)
-  mem.write8(0x0003, 0x55)
-  mem.write8(0xB506, 0x46)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8530)
-  expect(cpu.r1.bc).toEqual(0xC23B)
-  expect(cpu.r1.de).toEqual(0x6AAB)
-  expect(cpu.r1.hl).toEqual(0x9B00)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFE93)
-  expect(cpu.r1.iy).toEqual(0xB4B2)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb56', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xF5AD
-  cpu.r1.bc = 0xF9F6
-  cpu.r1.de = 0x1E8C
-  cpu.r1.hl = 0x9E08
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x716A
-  cpu.r1.iy = 0x6932
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x6F)
-  mem.write8(0x0003, 0x56)
-  mem.write8(0x69A1, 0xDF)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xF539)
-  expect(cpu.r1.bc).toEqual(0xF9F6)
-  expect(cpu.r1.de).toEqual(0x1E8C)
-  expect(cpu.r1.hl).toEqual(0x9E08)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x716A)
-  expect(cpu.r1.iy).toEqual(0x6932)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb57', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x37D7
-  cpu.r1.bc = 0xB7DC
-  cpu.r1.de = 0xBE1C
-  cpu.r1.hl = 0x38EA
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5E82
-  cpu.r1.iy = 0xA3BB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x3C)
-  mem.write8(0x0003, 0x57)
-  mem.write8(0xA3F7, 0x6C)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3731)
-  expect(cpu.r1.bc).toEqual(0xB7DC)
-  expect(cpu.r1.de).toEqual(0xBE1C)
-  expect(cpu.r1.hl).toEqual(0x38EA)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5E82)
-  expect(cpu.r1.iy).toEqual(0xA3BB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb58', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x752C
-  cpu.r1.bc = 0x7296
-  cpu.r1.de = 0x3EA5
-  cpu.r1.hl = 0x1143
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD7CC
-  cpu.r1.iy = 0x1E94
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x4E)
-  mem.write8(0x0003, 0x58)
-  mem.write8(0x1EE2, 0xF6)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x755C)
-  expect(cpu.r1.bc).toEqual(0x7296)
-  expect(cpu.r1.de).toEqual(0x3EA5)
-  expect(cpu.r1.hl).toEqual(0x1143)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD7CC)
-  expect(cpu.r1.iy).toEqual(0x1E94)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb59', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x8056
-  cpu.r1.bc = 0xBF2A
-  cpu.r1.de = 0x1809
-  cpu.r1.hl = 0xED31
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFE2B
-  cpu.r1.iy = 0xFAD3
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x2E)
-  mem.write8(0x0003, 0x59)
-  mem.write8(0xFB01, 0x6F)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8038)
-  expect(cpu.r1.bc).toEqual(0xBF2A)
-  expect(cpu.r1.de).toEqual(0x1809)
-  expect(cpu.r1.hl).toEqual(0xED31)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFE2B)
-  expect(cpu.r1.iy).toEqual(0xFAD3)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb5a', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xCC74
-  cpu.r1.bc = 0xA108
-  cpu.r1.de = 0x65D4
-  cpu.r1.hl = 0x6F66
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0008
-  cpu.r1.iy = 0x7BB8
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x88)
-  mem.write8(0x0003, 0x5A)
-  mem.write8(0x7B40, 0x6E)
+  mem.write8(0x0002, 0x63)
+  mem.write8(0x0003, 0x66)
+  mem.write8(0xEE78, 0x70)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4173,42 +4725,42 @@ test('Test fdcb5a', () => {
   }
   
   expect(cpu.r1.af).toEqual(0xCC38)
-  expect(cpu.r1.bc).toEqual(0xA108)
-  expect(cpu.r1.de).toEqual(0x65D4)
-  expect(cpu.r1.hl).toEqual(0x6F66)
+  expect(cpu.r1.bc).toEqual(0xD301)
+  expect(cpu.r1.de).toEqual(0x9B66)
+  expect(cpu.r1.hl).toEqual(0x40FB)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0008)
-  expect(cpu.r1.iy).toEqual(0x7BB8)
+  expect(cpu.r1.ix).toEqual(0xEE15)
+  expect(cpu.r1.iy).toEqual(0x0D23)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb5b', () => {
+test('Test ddcb67', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x5CF1
-  cpu.r1.bc = 0xB3BD
-  cpu.r1.de = 0x25BD
-  cpu.r1.hl = 0x98CF
+  cpu.r1.af = 0xECCB
+  cpu.r1.bc = 0x342F
+  cpu.r1.de = 0xBE3E
+  cpu.r1.hl = 0xA79B
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2BA1
-  cpu.r1.iy = 0x315C
+  cpu.r1.ix = 0xEEA1
+  cpu.r1.iy = 0xDFAE
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE7)
-  mem.write8(0x0003, 0x5B)
-  mem.write8(0x3143, 0xB1)
+  mem.write8(0x0002, 0xD7)
+  mem.write8(0x0003, 0x67)
+  mem.write8(0xEE78, 0x06)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4218,43 +4770,43 @@ test('Test fdcb5b', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5C75)
-  expect(cpu.r1.bc).toEqual(0xB3BD)
-  expect(cpu.r1.de).toEqual(0x25BD)
-  expect(cpu.r1.hl).toEqual(0x98CF)
+  expect(cpu.r1.af).toEqual(0xEC7D)
+  expect(cpu.r1.bc).toEqual(0x342F)
+  expect(cpu.r1.de).toEqual(0xBE3E)
+  expect(cpu.r1.hl).toEqual(0xA79B)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2BA1)
-  expect(cpu.r1.iy).toEqual(0x315C)
+  expect(cpu.r1.ix).toEqual(0xEEA1)
+  expect(cpu.r1.iy).toEqual(0xDFAE)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb5c', () => {
+test('Test ddcb68', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xB3E0
-  cpu.r1.bc = 0xD43D
-  cpu.r1.de = 0xD9C0
-  cpu.r1.hl = 0xB04D
+  cpu.r1.af = 0x8E51
+  cpu.r1.bc = 0x0063
+  cpu.r1.de = 0x49AD
+  cpu.r1.hl = 0xB7D4
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x21A9
-  cpu.r1.iy = 0x543E
+  cpu.r1.ix = 0xE968
+  cpu.r1.iy = 0x864E
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x74)
-  mem.write8(0x0003, 0x5C)
-  mem.write8(0x54B2, 0xE3)
+  mem.write8(0x0002, 0xB1)
+  mem.write8(0x0003, 0x68)
+  mem.write8(0xE919, 0x20)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4264,43 +4816,43 @@ test('Test fdcb5c', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xB354)
-  expect(cpu.r1.bc).toEqual(0xD43D)
-  expect(cpu.r1.de).toEqual(0xD9C0)
-  expect(cpu.r1.hl).toEqual(0xB04D)
+  expect(cpu.r1.af).toEqual(0x8E39)
+  expect(cpu.r1.bc).toEqual(0x0063)
+  expect(cpu.r1.de).toEqual(0x49AD)
+  expect(cpu.r1.hl).toEqual(0xB7D4)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x21A9)
-  expect(cpu.r1.iy).toEqual(0x543E)
+  expect(cpu.r1.ix).toEqual(0xE968)
+  expect(cpu.r1.iy).toEqual(0x864E)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb5d', () => {
+test('Test ddcb69', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x9F49
-  cpu.r1.bc = 0x43DD
-  cpu.r1.de = 0xCCB3
-  cpu.r1.hl = 0x085A
+  cpu.r1.af = 0x9F11
+  cpu.r1.bc = 0x42B5
+  cpu.r1.de = 0x74FE
+  cpu.r1.hl = 0x1116
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF130
-  cpu.r1.iy = 0x3B84
+  cpu.r1.ix = 0x33F4
+  cpu.r1.iy = 0x46C2
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xDC)
-  mem.write8(0x0003, 0x5D)
-  mem.write8(0x3B60, 0xEF)
+  mem.write8(0x0002, 0xE8)
+  mem.write8(0x0003, 0x69)
+  mem.write8(0x33DC, 0x4F)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4310,43 +4862,43 @@ test('Test fdcb5d', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x9F39)
-  expect(cpu.r1.bc).toEqual(0x43DD)
-  expect(cpu.r1.de).toEqual(0xCCB3)
-  expect(cpu.r1.hl).toEqual(0x085A)
+  expect(cpu.r1.af).toEqual(0x9F75)
+  expect(cpu.r1.bc).toEqual(0x42B5)
+  expect(cpu.r1.de).toEqual(0x74FE)
+  expect(cpu.r1.hl).toEqual(0x1116)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF130)
-  expect(cpu.r1.iy).toEqual(0x3B84)
+  expect(cpu.r1.ix).toEqual(0x33F4)
+  expect(cpu.r1.iy).toEqual(0x46C2)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb5e', () => {
+test('Test ddcb6a', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x6F89
-  cpu.r1.bc = 0xEFF5
-  cpu.r1.de = 0x993B
-  cpu.r1.hl = 0x22B5
+  cpu.r1.af = 0x4632
+  cpu.r1.bc = 0x0BD8
+  cpu.r1.de = 0x0018
+  cpu.r1.hl = 0x1AC3
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0F30
-  cpu.r1.iy = 0xE165
+  cpu.r1.ix = 0x86B6
+  cpu.r1.iy = 0x1DD2
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE2)
-  mem.write8(0x0003, 0x5E)
-  mem.write8(0xE147, 0x17)
+  mem.write8(0x0002, 0x33)
+  mem.write8(0x0003, 0x6A)
+  mem.write8(0x86E9, 0x1C)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4356,43 +4908,43 @@ test('Test fdcb5e', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x6F75)
-  expect(cpu.r1.bc).toEqual(0xEFF5)
-  expect(cpu.r1.de).toEqual(0x993B)
-  expect(cpu.r1.hl).toEqual(0x22B5)
+  expect(cpu.r1.af).toEqual(0x4654)
+  expect(cpu.r1.bc).toEqual(0x0BD8)
+  expect(cpu.r1.de).toEqual(0x0018)
+  expect(cpu.r1.hl).toEqual(0x1AC3)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0F30)
-  expect(cpu.r1.iy).toEqual(0xE165)
+  expect(cpu.r1.ix).toEqual(0x86B6)
+  expect(cpu.r1.iy).toEqual(0x1DD2)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb5f', () => {
+test('Test ddcb6b', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xD72A
-  cpu.r1.bc = 0xA57A
-  cpu.r1.de = 0xACA6
-  cpu.r1.hl = 0x667E
+  cpu.r1.af = 0x7A76
+  cpu.r1.bc = 0xF79F
+  cpu.r1.de = 0xA78E
+  cpu.r1.hl = 0xF867
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5C33
-  cpu.r1.iy = 0xF81B
+  cpu.r1.ix = 0x187B
+  cpu.r1.iy = 0x0023
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xAB)
-  mem.write8(0x0003, 0x5F)
-  mem.write8(0xF7C6, 0xE2)
+  mem.write8(0x0002, 0x11)
+  mem.write8(0x0003, 0x6B)
+  mem.write8(0x188C, 0xBC)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4402,43 +4954,43 @@ test('Test fdcb5f', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xD774)
-  expect(cpu.r1.bc).toEqual(0xA57A)
-  expect(cpu.r1.de).toEqual(0xACA6)
-  expect(cpu.r1.hl).toEqual(0x667E)
+  expect(cpu.r1.af).toEqual(0x7A18)
+  expect(cpu.r1.bc).toEqual(0xF79F)
+  expect(cpu.r1.de).toEqual(0xA78E)
+  expect(cpu.r1.hl).toEqual(0xF867)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5C33)
-  expect(cpu.r1.iy).toEqual(0xF81B)
+  expect(cpu.r1.ix).toEqual(0x187B)
+  expect(cpu.r1.iy).toEqual(0x0023)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb60', () => {
+test('Test ddcb6c', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x15E9
-  cpu.r1.bc = 0x8D30
-  cpu.r1.de = 0x43F4
-  cpu.r1.hl = 0xC65E
+  cpu.r1.af = 0xDD91
+  cpu.r1.bc = 0x1F1E
+  cpu.r1.de = 0xC1E1
+  cpu.r1.hl = 0x0EA7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1E34
-  cpu.r1.iy = 0x8C44
+  cpu.r1.ix = 0x3E21
+  cpu.r1.iy = 0xF544
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x85)
-  mem.write8(0x0003, 0x60)
-  mem.write8(0x8BC9, 0xB9)
+  mem.write8(0x0002, 0x5E)
+  mem.write8(0x0003, 0x6C)
+  mem.write8(0x3E7F, 0x2A)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4448,43 +5000,135 @@ test('Test fdcb60', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x1519)
-  expect(cpu.r1.bc).toEqual(0x8D30)
-  expect(cpu.r1.de).toEqual(0x43F4)
-  expect(cpu.r1.hl).toEqual(0xC65E)
+  expect(cpu.r1.af).toEqual(0xDD39)
+  expect(cpu.r1.bc).toEqual(0x1F1E)
+  expect(cpu.r1.de).toEqual(0xC1E1)
+  expect(cpu.r1.hl).toEqual(0x0EA7)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1E34)
-  expect(cpu.r1.iy).toEqual(0x8C44)
+  expect(cpu.r1.ix).toEqual(0x3E21)
+  expect(cpu.r1.iy).toEqual(0xF544)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb61', () => {
+test('Test ddcb6d', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x7BD1
-  cpu.r1.bc = 0xD421
-  cpu.r1.de = 0x5570
-  cpu.r1.hl = 0xCB85
+  cpu.r1.af = 0xDEBF
+  cpu.r1.bc = 0x9AE4
+  cpu.r1.de = 0xFD24
+  cpu.r1.hl = 0xB3C2
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x32EC
-  cpu.r1.iy = 0x92E4
+  cpu.r1.ix = 0xE314
+  cpu.r1.iy = 0xAD84
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xDD)
+  mem.write8(0x0003, 0x6D)
+  mem.write8(0xE2F1, 0x41)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xDE75)
+  expect(cpu.r1.bc).toEqual(0x9AE4)
+  expect(cpu.r1.de).toEqual(0xFD24)
+  expect(cpu.r1.hl).toEqual(0xB3C2)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xE314)
+  expect(cpu.r1.iy).toEqual(0xAD84)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb6e', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xCA75
+  cpu.r1.bc = 0x9F16
+  cpu.r1.de = 0xC700
+  cpu.r1.hl = 0x1DCE
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x3086
+  cpu.r1.iy = 0xD68E
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xB2)
+  mem.write8(0x0003, 0x6E)
+  mem.write8(0x3038, 0x3F)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xCA31)
+  expect(cpu.r1.bc).toEqual(0x9F16)
+  expect(cpu.r1.de).toEqual(0xC700)
+  expect(cpu.r1.hl).toEqual(0x1DCE)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x3086)
+  expect(cpu.r1.iy).toEqual(0xD68E)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb6f', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xD4CD
+  cpu.r1.bc = 0x0B39
+  cpu.r1.de = 0x3E2E
+  cpu.r1.hl = 0xC06E
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xFC1B
+  cpu.r1.iy = 0xD592
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0xBE)
-  mem.write8(0x0003, 0x61)
-  mem.write8(0x92A2, 0x28)
+  mem.write8(0x0003, 0x6F)
+  mem.write8(0xFBD9, 0x56)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4494,43 +5138,43 @@ test('Test fdcb61', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x7B55)
-  expect(cpu.r1.bc).toEqual(0xD421)
-  expect(cpu.r1.de).toEqual(0x5570)
-  expect(cpu.r1.hl).toEqual(0xCB85)
+  expect(cpu.r1.af).toEqual(0xD47D)
+  expect(cpu.r1.bc).toEqual(0x0B39)
+  expect(cpu.r1.de).toEqual(0x3E2E)
+  expect(cpu.r1.hl).toEqual(0xC06E)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x32EC)
-  expect(cpu.r1.iy).toEqual(0x92E4)
+  expect(cpu.r1.ix).toEqual(0xFC1B)
+  expect(cpu.r1.iy).toEqual(0xD592)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb62', () => {
+test('Test ddcb70', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xBA2F
-  cpu.r1.bc = 0x4FBB
-  cpu.r1.de = 0x67A7
-  cpu.r1.hl = 0xC5DB
+  cpu.r1.af = 0xF901
+  cpu.r1.bc = 0x09B8
+  cpu.r1.de = 0x43F8
+  cpu.r1.hl = 0x2A76
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x470B
-  cpu.r1.iy = 0x7EB1
+  cpu.r1.ix = 0x042C
+  cpu.r1.iy = 0x7F2D
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9D)
-  mem.write8(0x0003, 0x62)
-  mem.write8(0x7E4E, 0x1A)
+  mem.write8(0x0002, 0xB5)
+  mem.write8(0x0003, 0x70)
+  mem.write8(0x03E1, 0x74)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4540,43 +5184,43 @@ test('Test fdcb62', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xBA39)
-  expect(cpu.r1.bc).toEqual(0x4FBB)
-  expect(cpu.r1.de).toEqual(0x67A7)
-  expect(cpu.r1.hl).toEqual(0xC5DB)
+  expect(cpu.r1.af).toEqual(0xF911)
+  expect(cpu.r1.bc).toEqual(0x09B8)
+  expect(cpu.r1.de).toEqual(0x43F8)
+  expect(cpu.r1.hl).toEqual(0x2A76)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x470B)
-  expect(cpu.r1.iy).toEqual(0x7EB1)
+  expect(cpu.r1.ix).toEqual(0x042C)
+  expect(cpu.r1.iy).toEqual(0x7F2D)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb63', () => {
+test('Test ddcb71', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xC0A1
-  cpu.r1.bc = 0x2CC2
-  cpu.r1.de = 0xCE12
-  cpu.r1.hl = 0xE77C
+  cpu.r1.af = 0xAC78
+  cpu.r1.bc = 0x36AD
+  cpu.r1.de = 0x34CB
+  cpu.r1.hl = 0xF950
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x71C5
-  cpu.r1.iy = 0x1713
+  cpu.r1.ix = 0x1B33
+  cpu.r1.iy = 0xAA23
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF4)
-  mem.write8(0x0003, 0x63)
-  mem.write8(0x1707, 0x3B)
+  mem.write8(0x0002, 0xF7)
+  mem.write8(0x0003, 0x71)
+  mem.write8(0x1B2A, 0x08)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4586,43 +5230,43 @@ test('Test fdcb63', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xC011)
-  expect(cpu.r1.bc).toEqual(0x2CC2)
-  expect(cpu.r1.de).toEqual(0xCE12)
-  expect(cpu.r1.hl).toEqual(0xE77C)
+  expect(cpu.r1.af).toEqual(0xAC5C)
+  expect(cpu.r1.bc).toEqual(0x36AD)
+  expect(cpu.r1.de).toEqual(0x34CB)
+  expect(cpu.r1.hl).toEqual(0xF950)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x71C5)
-  expect(cpu.r1.iy).toEqual(0x1713)
+  expect(cpu.r1.ix).toEqual(0x1B33)
+  expect(cpu.r1.iy).toEqual(0xAA23)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb64', () => {
+test('Test ddcb72', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x0C1F
-  cpu.r1.bc = 0x7847
-  cpu.r1.de = 0x2494
-  cpu.r1.hl = 0x71EB
+  cpu.r1.af = 0xB1B3
+  cpu.r1.bc = 0xF1E4
+  cpu.r1.de = 0x9984
+  cpu.r1.hl = 0xC7FB
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x315C
-  cpu.r1.iy = 0xB336
+  cpu.r1.ix = 0xCE25
+  cpu.r1.iy = 0xC5B6
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x35)
-  mem.write8(0x0003, 0x64)
-  mem.write8(0xB36B, 0x8C)
+  mem.write8(0x0002, 0x22)
+  mem.write8(0x0003, 0x72)
+  mem.write8(0xCE47, 0x08)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4632,43 +5276,43 @@ test('Test fdcb64', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x0C75)
-  expect(cpu.r1.bc).toEqual(0x7847)
-  expect(cpu.r1.de).toEqual(0x2494)
-  expect(cpu.r1.hl).toEqual(0x71EB)
+  expect(cpu.r1.af).toEqual(0xB15D)
+  expect(cpu.r1.bc).toEqual(0xF1E4)
+  expect(cpu.r1.de).toEqual(0x9984)
+  expect(cpu.r1.hl).toEqual(0xC7FB)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x315C)
-  expect(cpu.r1.iy).toEqual(0xB336)
+  expect(cpu.r1.ix).toEqual(0xCE25)
+  expect(cpu.r1.iy).toEqual(0xC5B6)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb65', () => {
+test('Test ddcb73', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x5245
-  cpu.r1.bc = 0xA82D
-  cpu.r1.de = 0x1112
-  cpu.r1.hl = 0x8F09
+  cpu.r1.af = 0x21BA
+  cpu.r1.bc = 0x592D
+  cpu.r1.de = 0xF406
+  cpu.r1.hl = 0xE21F
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x672A
-  cpu.r1.iy = 0x89F4
+  cpu.r1.ix = 0x6442
+  cpu.r1.iy = 0xCF58
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x37)
-  mem.write8(0x0003, 0x65)
-  mem.write8(0x8A2B, 0x08)
+  mem.write8(0x0002, 0x12)
+  mem.write8(0x0003, 0x73)
+  mem.write8(0x6454, 0x3C)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4678,43 +5322,43 @@ test('Test fdcb65', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x525D)
-  expect(cpu.r1.bc).toEqual(0xA82D)
-  expect(cpu.r1.de).toEqual(0x1112)
-  expect(cpu.r1.hl).toEqual(0x8F09)
+  expect(cpu.r1.af).toEqual(0x2174)
+  expect(cpu.r1.bc).toEqual(0x592D)
+  expect(cpu.r1.de).toEqual(0xF406)
+  expect(cpu.r1.hl).toEqual(0xE21F)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x672A)
-  expect(cpu.r1.iy).toEqual(0x89F4)
+  expect(cpu.r1.ix).toEqual(0x6442)
+  expect(cpu.r1.iy).toEqual(0xCF58)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb66', () => {
+test('Test ddcb74', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x583F
-  cpu.r1.bc = 0xC13E
-  cpu.r1.de = 0xB136
-  cpu.r1.hl = 0x6BC5
+  cpu.r1.af = 0x6642
+  cpu.r1.bc = 0x64C1
+  cpu.r1.de = 0xDBE5
+  cpu.r1.hl = 0xEB48
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3EF9
-  cpu.r1.iy = 0x6948
+  cpu.r1.ix = 0x7DC1
+  cpu.r1.iy = 0xC1FB
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9D)
-  mem.write8(0x0003, 0x66)
-  mem.write8(0x68E5, 0x90)
+  mem.write8(0x0002, 0x08)
+  mem.write8(0x0003, 0x74)
+  mem.write8(0x7DC9, 0xBE)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4724,43 +5368,43 @@ test('Test fdcb66', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5839)
-  expect(cpu.r1.bc).toEqual(0xC13E)
-  expect(cpu.r1.de).toEqual(0xB136)
-  expect(cpu.r1.hl).toEqual(0x6BC5)
+  expect(cpu.r1.af).toEqual(0x667C)
+  expect(cpu.r1.bc).toEqual(0x64C1)
+  expect(cpu.r1.de).toEqual(0xDBE5)
+  expect(cpu.r1.hl).toEqual(0xEB48)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3EF9)
-  expect(cpu.r1.iy).toEqual(0x6948)
+  expect(cpu.r1.ix).toEqual(0x7DC1)
+  expect(cpu.r1.iy).toEqual(0xC1FB)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb67', () => {
+test('Test ddcb75', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x31B6
-  cpu.r1.bc = 0x0F7D
-  cpu.r1.de = 0x48B5
-  cpu.r1.hl = 0xCC5F
+  cpu.r1.af = 0x8778
+  cpu.r1.bc = 0x580E
+  cpu.r1.de = 0x00DD
+  cpu.r1.hl = 0xF4C6
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2103
-  cpu.r1.iy = 0x6572
+  cpu.r1.ix = 0x60AD
+  cpu.r1.iy = 0x9B60
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xCB)
-  mem.write8(0x0003, 0x67)
-  mem.write8(0x653D, 0x15)
+  mem.write8(0x0002, 0x5B)
+  mem.write8(0x0003, 0x75)
+  mem.write8(0x6108, 0xCF)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4770,43 +5414,89 @@ test('Test fdcb67', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3130)
-  expect(cpu.r1.bc).toEqual(0x0F7D)
-  expect(cpu.r1.de).toEqual(0x48B5)
-  expect(cpu.r1.hl).toEqual(0xCC5F)
+  expect(cpu.r1.af).toEqual(0x8730)
+  expect(cpu.r1.bc).toEqual(0x580E)
+  expect(cpu.r1.de).toEqual(0x00DD)
+  expect(cpu.r1.hl).toEqual(0xF4C6)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2103)
-  expect(cpu.r1.iy).toEqual(0x6572)
+  expect(cpu.r1.ix).toEqual(0x60AD)
+  expect(cpu.r1.iy).toEqual(0x9B60)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb68', () => {
+test('Test ddcb76', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xE330
-  cpu.r1.bc = 0x39FB
-  cpu.r1.de = 0xA03A
-  cpu.r1.hl = 0x59BC
+  cpu.r1.af = 0x65B8
+  cpu.r1.bc = 0x5CC2
+  cpu.r1.de = 0x3058
+  cpu.r1.hl = 0xE258
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE04A
-  cpu.r1.iy = 0x03BE
+  cpu.r1.ix = 0x7E8A
+  cpu.r1.iy = 0xB296
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xCA)
-  mem.write8(0x0003, 0x68)
-  mem.write8(0x0388, 0x83)
+  mem.write8(0x0002, 0x73)
+  mem.write8(0x0003, 0x76)
+  mem.write8(0x7EFD, 0x1E)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x657C)
+  expect(cpu.r1.bc).toEqual(0x5CC2)
+  expect(cpu.r1.de).toEqual(0x3058)
+  expect(cpu.r1.hl).toEqual(0xE258)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x7E8A)
+  expect(cpu.r1.iy).toEqual(0xB296)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb77', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xE3A8
+  cpu.r1.bc = 0x47A0
+  cpu.r1.de = 0xC510
+  cpu.r1.hl = 0xCF0A
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x0537
+  cpu.r1.iy = 0xB242
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x7F)
+  mem.write8(0x0003, 0x77)
+  mem.write8(0x05B6, 0x97)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -4817,732 +5507,42 @@ test('Test fdcb68', () => {
   }
   
   expect(cpu.r1.af).toEqual(0xE354)
-  expect(cpu.r1.bc).toEqual(0x39FB)
-  expect(cpu.r1.de).toEqual(0xA03A)
-  expect(cpu.r1.hl).toEqual(0x59BC)
+  expect(cpu.r1.bc).toEqual(0x47A0)
+  expect(cpu.r1.de).toEqual(0xC510)
+  expect(cpu.r1.hl).toEqual(0xCF0A)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE04A)
-  expect(cpu.r1.iy).toEqual(0x03BE)
+  expect(cpu.r1.ix).toEqual(0x0537)
+  expect(cpu.r1.iy).toEqual(0xB242)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb69', () => {
+test('Test ddcb78', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x1896
-  cpu.r1.bc = 0x5BC2
-  cpu.r1.de = 0xD4D9
-  cpu.r1.hl = 0x4E8A
+  cpu.r1.af = 0x424F
+  cpu.r1.bc = 0x24F6
+  cpu.r1.de = 0x1632
+  cpu.r1.hl = 0x8A4F
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3716
-  cpu.r1.iy = 0xA603
+  cpu.r1.ix = 0x9397
+  cpu.r1.iy = 0x846C
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE2)
-  mem.write8(0x0003, 0x69)
-  mem.write8(0xA5E5, 0x01)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1874)
-  expect(cpu.r1.bc).toEqual(0x5BC2)
-  expect(cpu.r1.de).toEqual(0xD4D9)
-  expect(cpu.r1.hl).toEqual(0x4E8A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3716)
-  expect(cpu.r1.iy).toEqual(0xA603)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb6a', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5BC9
-  cpu.r1.bc = 0x0099
-  cpu.r1.de = 0x34F8
-  cpu.r1.hl = 0x3E96
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF251
-  cpu.r1.iy = 0x93BE
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xAE)
-  mem.write8(0x0003, 0x6A)
-  mem.write8(0x936C, 0x33)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x5B11)
-  expect(cpu.r1.bc).toEqual(0x0099)
-  expect(cpu.r1.de).toEqual(0x34F8)
-  expect(cpu.r1.hl).toEqual(0x3E96)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF251)
-  expect(cpu.r1.iy).toEqual(0x93BE)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb6b', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xBBE5
-  cpu.r1.bc = 0x9E6C
-  cpu.r1.de = 0xABD1
-  cpu.r1.hl = 0x515F
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x73DB
-  cpu.r1.iy = 0xAA2F
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x1F)
-  mem.write8(0x0003, 0x6B)
-  mem.write8(0xAA4E, 0x7C)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xBB39)
-  expect(cpu.r1.bc).toEqual(0x9E6C)
-  expect(cpu.r1.de).toEqual(0xABD1)
-  expect(cpu.r1.hl).toEqual(0x515F)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x73DB)
-  expect(cpu.r1.iy).toEqual(0xAA2F)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb6c', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x144B
-  cpu.r1.bc = 0x3AF2
-  cpu.r1.de = 0x8F80
-  cpu.r1.hl = 0x7BE5
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC379
-  cpu.r1.iy = 0x86BA
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0D)
-  mem.write8(0x0003, 0x6C)
-  mem.write8(0x86C7, 0x25)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1411)
-  expect(cpu.r1.bc).toEqual(0x3AF2)
-  expect(cpu.r1.de).toEqual(0x8F80)
-  expect(cpu.r1.hl).toEqual(0x7BE5)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC379)
-  expect(cpu.r1.iy).toEqual(0x86BA)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb6d', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x6392
-  cpu.r1.bc = 0xD077
-  cpu.r1.de = 0x668D
-  cpu.r1.hl = 0x6E4A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB0A8
-  cpu.r1.iy = 0x62C8
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF0)
-  mem.write8(0x0003, 0x6D)
-  mem.write8(0x62B8, 0xE3)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x6330)
-  expect(cpu.r1.bc).toEqual(0xD077)
-  expect(cpu.r1.de).toEqual(0x668D)
-  expect(cpu.r1.hl).toEqual(0x6E4A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB0A8)
-  expect(cpu.r1.iy).toEqual(0x62C8)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb6e', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x2DA0
-  cpu.r1.bc = 0xF872
-  cpu.r1.de = 0x692D
-  cpu.r1.hl = 0x92C4
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x36B5
-  cpu.r1.iy = 0x4210
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x93)
-  mem.write8(0x0003, 0x6E)
-  mem.write8(0x41A3, 0x1E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x2D54)
-  expect(cpu.r1.bc).toEqual(0xF872)
-  expect(cpu.r1.de).toEqual(0x692D)
-  expect(cpu.r1.hl).toEqual(0x92C4)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x36B5)
-  expect(cpu.r1.iy).toEqual(0x4210)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb6f', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xDF7B
-  cpu.r1.bc = 0xC7AA
-  cpu.r1.de = 0x9002
-  cpu.r1.hl = 0x86B8
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1347
-  cpu.r1.iy = 0x004E
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x20)
-  mem.write8(0x0003, 0x6F)
-  mem.write8(0x006E, 0x37)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xDF11)
-  expect(cpu.r1.bc).toEqual(0xC7AA)
-  expect(cpu.r1.de).toEqual(0x9002)
-  expect(cpu.r1.hl).toEqual(0x86B8)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1347)
-  expect(cpu.r1.iy).toEqual(0x004E)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb70', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x6EA9
-  cpu.r1.bc = 0x018D
-  cpu.r1.de = 0x5075
-  cpu.r1.hl = 0xCF4E
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xCD2B
-  cpu.r1.iy = 0x3E68
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD9)
-  mem.write8(0x0003, 0x70)
-  mem.write8(0x3E41, 0xC9)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x6E39)
-  expect(cpu.r1.bc).toEqual(0x018D)
-  expect(cpu.r1.de).toEqual(0x5075)
-  expect(cpu.r1.hl).toEqual(0xCF4E)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xCD2B)
-  expect(cpu.r1.iy).toEqual(0x3E68)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb71', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1B48
-  cpu.r1.bc = 0xE3AF
-  cpu.r1.de = 0x94D5
-  cpu.r1.hl = 0x0996
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xCAD5
-  cpu.r1.iy = 0x999A
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x27)
-  mem.write8(0x0003, 0x71)
-  mem.write8(0x99C1, 0x3E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1B5C)
-  expect(cpu.r1.bc).toEqual(0xE3AF)
-  expect(cpu.r1.de).toEqual(0x94D5)
-  expect(cpu.r1.hl).toEqual(0x0996)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xCAD5)
-  expect(cpu.r1.iy).toEqual(0x999A)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb72', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xE83B
-  cpu.r1.bc = 0x26B1
-  cpu.r1.de = 0x8608
-  cpu.r1.hl = 0xF3CB
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6323
-  cpu.r1.iy = 0xFD31
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x98)
-  mem.write8(0x0003, 0x72)
-  mem.write8(0xFCC9, 0x4F)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xE839)
-  expect(cpu.r1.bc).toEqual(0x26B1)
-  expect(cpu.r1.de).toEqual(0x8608)
-  expect(cpu.r1.hl).toEqual(0xF3CB)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6323)
-  expect(cpu.r1.iy).toEqual(0xFD31)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb73', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x101B
-  cpu.r1.bc = 0x446C
-  cpu.r1.de = 0xC2F9
-  cpu.r1.hl = 0xB9B1
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0820
-  cpu.r1.iy = 0xF5D8
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7A)
-  mem.write8(0x0003, 0x73)
-  mem.write8(0xF652, 0x31)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1075)
-  expect(cpu.r1.bc).toEqual(0x446C)
-  expect(cpu.r1.de).toEqual(0xC2F9)
-  expect(cpu.r1.hl).toEqual(0xB9B1)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0820)
-  expect(cpu.r1.iy).toEqual(0xF5D8)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb74', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x6847
-  cpu.r1.bc = 0x38C2
-  cpu.r1.de = 0x0EA4
-  cpu.r1.hl = 0x0825
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD255
-  cpu.r1.iy = 0x5E4A
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x4B)
-  mem.write8(0x0003, 0x74)
-  mem.write8(0x5E95, 0xFE)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x6819)
-  expect(cpu.r1.bc).toEqual(0x38C2)
-  expect(cpu.r1.de).toEqual(0x0EA4)
-  expect(cpu.r1.hl).toEqual(0x0825)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD255)
-  expect(cpu.r1.iy).toEqual(0x5E4A)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb75', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x56F2
-  cpu.r1.bc = 0xC034
-  cpu.r1.de = 0x6E11
-  cpu.r1.hl = 0xD35E
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE702
-  cpu.r1.iy = 0x60BE
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x57)
-  mem.write8(0x0003, 0x75)
-  mem.write8(0x6115, 0x21)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x5674)
-  expect(cpu.r1.bc).toEqual(0xC034)
-  expect(cpu.r1.de).toEqual(0x6E11)
-  expect(cpu.r1.hl).toEqual(0xD35E)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE702)
-  expect(cpu.r1.iy).toEqual(0x60BE)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb76', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x7375
-  cpu.r1.bc = 0xCAFF
-  cpu.r1.de = 0xDD80
-  cpu.r1.hl = 0xC8ED
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7E39
-  cpu.r1.iy = 0x6623
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x53)
-  mem.write8(0x0003, 0x76)
-  mem.write8(0x6676, 0x3A)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7375)
-  expect(cpu.r1.bc).toEqual(0xCAFF)
-  expect(cpu.r1.de).toEqual(0xDD80)
-  expect(cpu.r1.hl).toEqual(0xC8ED)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7E39)
-  expect(cpu.r1.iy).toEqual(0x6623)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb77', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xAB10
-  cpu.r1.bc = 0x983E
-  cpu.r1.de = 0x0BDC
-  cpu.r1.hl = 0x3B46
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAE51
-  cpu.r1.iy = 0x8841
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x02)
-  mem.write8(0x0003, 0x77)
-  mem.write8(0x8843, 0xD8)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xAB18)
-  expect(cpu.r1.bc).toEqual(0x983E)
-  expect(cpu.r1.de).toEqual(0x0BDC)
-  expect(cpu.r1.hl).toEqual(0x3B46)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAE51)
-  expect(cpu.r1.iy).toEqual(0x8841)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb78', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x2765
-  cpu.r1.bc = 0xCE2F
-  cpu.r1.de = 0x4824
-  cpu.r1.hl = 0x6930
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAE69
-  cpu.r1.iy = 0xFECB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7D)
+  mem.write8(0x0002, 0x70)
   mem.write8(0x0003, 0x78)
-  mem.write8(0xFF48, 0xEC)
+  mem.write8(0x9407, 0x76)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5552,43 +5552,43 @@ test('Test fdcb78', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x27B9)
-  expect(cpu.r1.bc).toEqual(0xCE2F)
-  expect(cpu.r1.de).toEqual(0x4824)
-  expect(cpu.r1.hl).toEqual(0x6930)
+  expect(cpu.r1.af).toEqual(0x4255)
+  expect(cpu.r1.bc).toEqual(0x24F6)
+  expect(cpu.r1.de).toEqual(0x1632)
+  expect(cpu.r1.hl).toEqual(0x8A4F)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAE69)
-  expect(cpu.r1.iy).toEqual(0xFECB)
+  expect(cpu.r1.ix).toEqual(0x9397)
+  expect(cpu.r1.iy).toEqual(0x846C)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb79', () => {
+test('Test ddcb79', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xB428
-  cpu.r1.bc = 0x6355
-  cpu.r1.de = 0x7896
-  cpu.r1.hl = 0x8A7C
+  cpu.r1.af = 0xE6A0
+  cpu.r1.bc = 0xEEAA
+  cpu.r1.de = 0x41F7
+  cpu.r1.hl = 0x5DA2
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9090
-  cpu.r1.iy = 0x1CAE
+  cpu.r1.ix = 0x41DE
+  cpu.r1.iy = 0x4189
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x23)
+  mem.write8(0x0002, 0xC3)
   mem.write8(0x0003, 0x79)
-  mem.write8(0x1CD1, 0x87)
+  mem.write8(0x41A1, 0xB8)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5598,43 +5598,43 @@ test('Test fdcb79', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xB498)
-  expect(cpu.r1.bc).toEqual(0x6355)
-  expect(cpu.r1.de).toEqual(0x7896)
-  expect(cpu.r1.hl).toEqual(0x8A7C)
+  expect(cpu.r1.af).toEqual(0xE690)
+  expect(cpu.r1.bc).toEqual(0xEEAA)
+  expect(cpu.r1.de).toEqual(0x41F7)
+  expect(cpu.r1.hl).toEqual(0x5DA2)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9090)
-  expect(cpu.r1.iy).toEqual(0x1CAE)
+  expect(cpu.r1.ix).toEqual(0x41DE)
+  expect(cpu.r1.iy).toEqual(0x4189)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb7a', () => {
+test('Test ddcb7a', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x59F4
-  cpu.r1.bc = 0xCA21
-  cpu.r1.de = 0x1482
-  cpu.r1.hl = 0x3FAE
+  cpu.r1.af = 0xCABF
+  cpu.r1.bc = 0x56AA
+  cpu.r1.de = 0x6A06
+  cpu.r1.hl = 0x6CD7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC6C9
-  cpu.r1.iy = 0xD923
+  cpu.r1.ix = 0x0AA9
+  cpu.r1.iy = 0x9812
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x42)
+  mem.write8(0x0002, 0x3F)
   mem.write8(0x0003, 0x7A)
-  mem.write8(0xD965, 0xB3)
+  mem.write8(0x0AE8, 0xEB)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5644,43 +5644,43 @@ test('Test fdcb7a', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5998)
-  expect(cpu.r1.bc).toEqual(0xCA21)
-  expect(cpu.r1.de).toEqual(0x1482)
-  expect(cpu.r1.hl).toEqual(0x3FAE)
+  expect(cpu.r1.af).toEqual(0xCA99)
+  expect(cpu.r1.bc).toEqual(0x56AA)
+  expect(cpu.r1.de).toEqual(0x6A06)
+  expect(cpu.r1.hl).toEqual(0x6CD7)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC6C9)
-  expect(cpu.r1.iy).toEqual(0xD923)
+  expect(cpu.r1.ix).toEqual(0x0AA9)
+  expect(cpu.r1.iy).toEqual(0x9812)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb7b', () => {
+test('Test ddcb7b', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x6314
-  cpu.r1.bc = 0x0240
-  cpu.r1.de = 0x5EFA
-  cpu.r1.hl = 0x5E7B
+  cpu.r1.af = 0xAE3F
+  cpu.r1.bc = 0x0227
+  cpu.r1.de = 0x721F
+  cpu.r1.hl = 0x52A1
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3E50
-  cpu.r1.iy = 0x0A83
+  cpu.r1.ix = 0x5040
+  cpu.r1.iy = 0xB98A
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x17)
+  mem.write8(0x0002, 0x88)
   mem.write8(0x0003, 0x7B)
-  mem.write8(0x0A9A, 0xBD)
+  mem.write8(0x4FC8, 0x22)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5690,43 +5690,43 @@ test('Test fdcb7b', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x6398)
-  expect(cpu.r1.bc).toEqual(0x0240)
-  expect(cpu.r1.de).toEqual(0x5EFA)
-  expect(cpu.r1.hl).toEqual(0x5E7B)
+  expect(cpu.r1.af).toEqual(0xAE5D)
+  expect(cpu.r1.bc).toEqual(0x0227)
+  expect(cpu.r1.de).toEqual(0x721F)
+  expect(cpu.r1.hl).toEqual(0x52A1)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3E50)
-  expect(cpu.r1.iy).toEqual(0x0A83)
+  expect(cpu.r1.ix).toEqual(0x5040)
+  expect(cpu.r1.iy).toEqual(0xB98A)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb7c', () => {
+test('Test ddcb7c', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x22A6
-  cpu.r1.bc = 0xAFF4
-  cpu.r1.de = 0xB89B
-  cpu.r1.hl = 0x4DCA
+  cpu.r1.af = 0x8A80
+  cpu.r1.bc = 0xA2F1
+  cpu.r1.de = 0x239A
+  cpu.r1.hl = 0xD5CC
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0AC2
-  cpu.r1.iy = 0xD371
+  cpu.r1.ix = 0x6883
+  cpu.r1.iy = 0xB050
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF1)
+  mem.write8(0x0002, 0x9E)
   mem.write8(0x0003, 0x7C)
-  mem.write8(0xD362, 0x1B)
+  mem.write8(0x6821, 0x3A)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5736,43 +5736,43 @@ test('Test fdcb7c', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x2254)
-  expect(cpu.r1.bc).toEqual(0xAFF4)
-  expect(cpu.r1.de).toEqual(0xB89B)
-  expect(cpu.r1.hl).toEqual(0x4DCA)
+  expect(cpu.r1.af).toEqual(0x8A7C)
+  expect(cpu.r1.bc).toEqual(0xA2F1)
+  expect(cpu.r1.de).toEqual(0x239A)
+  expect(cpu.r1.hl).toEqual(0xD5CC)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0AC2)
-  expect(cpu.r1.iy).toEqual(0xD371)
+  expect(cpu.r1.ix).toEqual(0x6883)
+  expect(cpu.r1.iy).toEqual(0xB050)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb7d', () => {
+test('Test ddcb7d', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x1C95
-  cpu.r1.bc = 0xD615
-  cpu.r1.de = 0x825A
-  cpu.r1.hl = 0x5E64
+  cpu.r1.af = 0xC37F
+  cpu.r1.bc = 0xCF33
+  cpu.r1.de = 0x1010
+  cpu.r1.hl = 0x98E6
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x32FB
-  cpu.r1.iy = 0xAC3B
+  cpu.r1.ix = 0xB021
+  cpu.r1.iy = 0x0356
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9F)
+  mem.write8(0x0002, 0x29)
   mem.write8(0x0003, 0x7D)
-  mem.write8(0xABDA, 0x8A)
+  mem.write8(0xB04A, 0x2C)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5782,43 +5782,43 @@ test('Test fdcb7d', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x1CB9)
-  expect(cpu.r1.bc).toEqual(0xD615)
-  expect(cpu.r1.de).toEqual(0x825A)
-  expect(cpu.r1.hl).toEqual(0x5E64)
+  expect(cpu.r1.af).toEqual(0xC375)
+  expect(cpu.r1.bc).toEqual(0xCF33)
+  expect(cpu.r1.de).toEqual(0x1010)
+  expect(cpu.r1.hl).toEqual(0x98E6)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x32FB)
-  expect(cpu.r1.iy).toEqual(0xAC3B)
+  expect(cpu.r1.ix).toEqual(0xB021)
+  expect(cpu.r1.iy).toEqual(0x0356)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb7e', () => {
+test('Test ddcb7e', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x503C
-  cpu.r1.bc = 0x8DFE
-  cpu.r1.de = 0x1019
-  cpu.r1.hl = 0x6778
+  cpu.r1.af = 0x9A25
+  cpu.r1.bc = 0x2F6E
+  cpu.r1.de = 0x0D0D
+  cpu.r1.hl = 0xA83F
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF7DF
-  cpu.r1.iy = 0x9484
+  cpu.r1.ix = 0xCEF0
+  cpu.r1.iy = 0x8C15
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x40)
+  mem.write8(0x0002, 0x4F)
   mem.write8(0x0003, 0x7E)
-  mem.write8(0x94C4, 0x9E)
+  mem.write8(0xCF3F, 0xF2)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5828,43 +5828,43 @@ test('Test fdcb7e', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5090)
-  expect(cpu.r1.bc).toEqual(0x8DFE)
-  expect(cpu.r1.de).toEqual(0x1019)
-  expect(cpu.r1.hl).toEqual(0x6778)
+  expect(cpu.r1.af).toEqual(0x9A99)
+  expect(cpu.r1.bc).toEqual(0x2F6E)
+  expect(cpu.r1.de).toEqual(0x0D0D)
+  expect(cpu.r1.hl).toEqual(0xA83F)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF7DF)
-  expect(cpu.r1.iy).toEqual(0x9484)
+  expect(cpu.r1.ix).toEqual(0xCEF0)
+  expect(cpu.r1.iy).toEqual(0x8C15)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb7f', () => {
+test('Test ddcb7f', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x1B07
-  cpu.r1.bc = 0x9EC3
-  cpu.r1.de = 0x14BE
-  cpu.r1.hl = 0x5EBE
+  cpu.r1.af = 0x53B9
+  cpu.r1.bc = 0x1F4E
+  cpu.r1.de = 0x4837
+  cpu.r1.hl = 0x21B6
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1178
-  cpu.r1.iy = 0xCE69
+  cpu.r1.ix = 0x5EC2
+  cpu.r1.iy = 0x80C3
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA2)
+  mem.write8(0x0002, 0x75)
   mem.write8(0x0003, 0x7F)
-  mem.write8(0xCE0B, 0x47)
+  mem.write8(0x5F37, 0xA2)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5874,43 +5874,43 @@ test('Test fdcb7f', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x1B5D)
-  expect(cpu.r1.bc).toEqual(0x9EC3)
-  expect(cpu.r1.de).toEqual(0x14BE)
-  expect(cpu.r1.hl).toEqual(0x5EBE)
+  expect(cpu.r1.af).toEqual(0x5399)
+  expect(cpu.r1.bc).toEqual(0x1F4E)
+  expect(cpu.r1.de).toEqual(0x4837)
+  expect(cpu.r1.hl).toEqual(0x21B6)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1178)
-  expect(cpu.r1.iy).toEqual(0xCE69)
+  expect(cpu.r1.ix).toEqual(0x5EC2)
+  expect(cpu.r1.iy).toEqual(0x80C3)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb80', () => {
+test('Test ddcb80', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xE196
-  cpu.r1.bc = 0x72EA
-  cpu.r1.de = 0x507E
-  cpu.r1.hl = 0x6457
+  cpu.r1.af = 0x6319
+  cpu.r1.bc = 0xBAF9
+  cpu.r1.de = 0xC84B
+  cpu.r1.hl = 0xBCF2
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAB75
-  cpu.r1.iy = 0x920D
+  cpu.r1.ix = 0xACC5
+  cpu.r1.iy = 0xA4ED
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x8B)
+  mem.write8(0x0002, 0x70)
   mem.write8(0x0003, 0x80)
-  mem.write8(0x9198, 0xA9)
+  mem.write8(0xAD35, 0x30)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5920,43 +5920,43 @@ test('Test fdcb80', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xE196)
-  expect(cpu.r1.bc).toEqual(0xA8EA)
-  expect(cpu.r1.de).toEqual(0x507E)
-  expect(cpu.r1.hl).toEqual(0x6457)
+  expect(cpu.r1.af).toEqual(0x6319)
+  expect(cpu.r1.bc).toEqual(0x30F9)
+  expect(cpu.r1.de).toEqual(0xC84B)
+  expect(cpu.r1.hl).toEqual(0xBCF2)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAB75)
-  expect(cpu.r1.iy).toEqual(0x920D)
+  expect(cpu.r1.ix).toEqual(0xACC5)
+  expect(cpu.r1.iy).toEqual(0xA4ED)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb81', () => {
+test('Test ddcb81', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x3D3D
-  cpu.r1.bc = 0xB255
-  cpu.r1.de = 0x8759
-  cpu.r1.hl = 0x0CB0
+  cpu.r1.af = 0xFAE1
+  cpu.r1.bc = 0x5AE5
+  cpu.r1.de = 0x9502
+  cpu.r1.hl = 0xDC9B
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE078
-  cpu.r1.iy = 0x82A5
+  cpu.r1.ix = 0xBDD3
+  cpu.r1.iy = 0x1A52
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x55)
+  mem.write8(0x0002, 0x2A)
   mem.write8(0x0003, 0x81)
-  mem.write8(0x82FA, 0xFA)
+  mem.write8(0xBDFD, 0x24)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -5966,43 +5966,43 @@ test('Test fdcb81', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3D3D)
-  expect(cpu.r1.bc).toEqual(0xB2FA)
-  expect(cpu.r1.de).toEqual(0x8759)
-  expect(cpu.r1.hl).toEqual(0x0CB0)
+  expect(cpu.r1.af).toEqual(0xFAE1)
+  expect(cpu.r1.bc).toEqual(0x5A24)
+  expect(cpu.r1.de).toEqual(0x9502)
+  expect(cpu.r1.hl).toEqual(0xDC9B)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE078)
-  expect(cpu.r1.iy).toEqual(0x82A5)
+  expect(cpu.r1.ix).toEqual(0xBDD3)
+  expect(cpu.r1.iy).toEqual(0x1A52)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb82', () => {
+test('Test ddcb82', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x4E10
-  cpu.r1.bc = 0x5D8D
-  cpu.r1.de = 0x27A0
-  cpu.r1.hl = 0xFFFF
+  cpu.r1.af = 0xDAF6
+  cpu.r1.bc = 0x3260
+  cpu.r1.de = 0xF1AC
+  cpu.r1.hl = 0x1D47
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xEE0A
-  cpu.r1.iy = 0x5DD8
+  cpu.r1.ix = 0x5E74
+  cpu.r1.iy = 0x35E2
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9C)
+  mem.write8(0x0002, 0x9A)
   mem.write8(0x0003, 0x82)
-  mem.write8(0x5D74, 0x9D)
+  mem.write8(0x5E0E, 0x51)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6012,43 +6012,43 @@ test('Test fdcb82', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x4E10)
-  expect(cpu.r1.bc).toEqual(0x5D8D)
-  expect(cpu.r1.de).toEqual(0x9CA0)
-  expect(cpu.r1.hl).toEqual(0xFFFF)
+  expect(cpu.r1.af).toEqual(0xDAF6)
+  expect(cpu.r1.bc).toEqual(0x3260)
+  expect(cpu.r1.de).toEqual(0x50AC)
+  expect(cpu.r1.hl).toEqual(0x1D47)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xEE0A)
-  expect(cpu.r1.iy).toEqual(0x5DD8)
+  expect(cpu.r1.ix).toEqual(0x5E74)
+  expect(cpu.r1.iy).toEqual(0x35E2)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb83', () => {
+test('Test ddcb83', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x3C7F
-  cpu.r1.bc = 0xFD81
-  cpu.r1.de = 0x47FB
-  cpu.r1.hl = 0x9F12
+  cpu.r1.af = 0x8E7C
+  cpu.r1.bc = 0x5586
+  cpu.r1.de = 0x8C92
+  cpu.r1.hl = 0xFB00
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xCBF9
-  cpu.r1.iy = 0x374A
+  cpu.r1.ix = 0x3441
+  cpu.r1.iy = 0xD365
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x28)
+  mem.write8(0x0002, 0x0E)
   mem.write8(0x0003, 0x83)
-  mem.write8(0x3772, 0xD5)
+  mem.write8(0x344F, 0x01)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6058,43 +6058,43 @@ test('Test fdcb83', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3C7F)
-  expect(cpu.r1.bc).toEqual(0xFD81)
-  expect(cpu.r1.de).toEqual(0x47D4)
-  expect(cpu.r1.hl).toEqual(0x9F12)
+  expect(cpu.r1.af).toEqual(0x8E7C)
+  expect(cpu.r1.bc).toEqual(0x5586)
+  expect(cpu.r1.de).toEqual(0x8C00)
+  expect(cpu.r1.hl).toEqual(0xFB00)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xCBF9)
-  expect(cpu.r1.iy).toEqual(0x374A)
+  expect(cpu.r1.ix).toEqual(0x3441)
+  expect(cpu.r1.iy).toEqual(0xD365)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb84', () => {
+test('Test ddcb84', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x6872
-  cpu.r1.bc = 0x81B1
-  cpu.r1.de = 0x1E7A
-  cpu.r1.hl = 0xE37E
+  cpu.r1.af = 0xC1B3
+  cpu.r1.bc = 0x4874
+  cpu.r1.de = 0xC535
+  cpu.r1.hl = 0x0E1C
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9B4C
-  cpu.r1.iy = 0xF1C3
+  cpu.r1.ix = 0x0123
+  cpu.r1.iy = 0xDD28
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xAA)
+  mem.write8(0x0002, 0x47)
   mem.write8(0x0003, 0x84)
-  mem.write8(0xF16D, 0xEA)
+  mem.write8(0x016A, 0xB0)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6104,43 +6104,43 @@ test('Test fdcb84', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x6872)
-  expect(cpu.r1.bc).toEqual(0x81B1)
-  expect(cpu.r1.de).toEqual(0x1E7A)
-  expect(cpu.r1.hl).toEqual(0xEA7E)
+  expect(cpu.r1.af).toEqual(0xC1B3)
+  expect(cpu.r1.bc).toEqual(0x4874)
+  expect(cpu.r1.de).toEqual(0xC535)
+  expect(cpu.r1.hl).toEqual(0xB01C)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9B4C)
-  expect(cpu.r1.iy).toEqual(0xF1C3)
+  expect(cpu.r1.ix).toEqual(0x0123)
+  expect(cpu.r1.iy).toEqual(0xDD28)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb85', () => {
+test('Test ddcb85', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x25B3
-  cpu.r1.bc = 0x5694
-  cpu.r1.de = 0x57CD
-  cpu.r1.hl = 0xF34D
+  cpu.r1.af = 0x0928
+  cpu.r1.bc = 0xB0DB
+  cpu.r1.de = 0x4E07
+  cpu.r1.hl = 0xA7B7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8ED2
-  cpu.r1.iy = 0x0433
+  cpu.r1.ix = 0x0BA3
+  cpu.r1.iy = 0xC61C
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x6C)
   mem.write8(0x0003, 0x85)
-  mem.write8(0x049F, 0xE0)
+  mem.write8(0x0C0F, 0xDE)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6150,43 +6150,43 @@ test('Test fdcb85', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x25B3)
-  expect(cpu.r1.bc).toEqual(0x5694)
-  expect(cpu.r1.de).toEqual(0x57CD)
-  expect(cpu.r1.hl).toEqual(0xF3E0)
+  expect(cpu.r1.af).toEqual(0x0928)
+  expect(cpu.r1.bc).toEqual(0xB0DB)
+  expect(cpu.r1.de).toEqual(0x4E07)
+  expect(cpu.r1.hl).toEqual(0xA7DE)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8ED2)
-  expect(cpu.r1.iy).toEqual(0x0433)
+  expect(cpu.r1.ix).toEqual(0x0BA3)
+  expect(cpu.r1.iy).toEqual(0xC61C)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb86', () => {
+test('Test ddcb86', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x152B
-  cpu.r1.bc = 0x8CE1
-  cpu.r1.de = 0x818D
-  cpu.r1.hl = 0x40F2
+  cpu.r1.af = 0x4515
+  cpu.r1.bc = 0xDE09
+  cpu.r1.de = 0x3CE7
+  cpu.r1.hl = 0x1FDE
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9B7A
-  cpu.r1.iy = 0x2A50
+  cpu.r1.ix = 0x10C5
+  cpu.r1.iy = 0x33ED
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7E)
+  mem.write8(0x0002, 0x5C)
   mem.write8(0x0003, 0x86)
-  mem.write8(0x2ACE, 0x36)
+  mem.write8(0x1121, 0x7C)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6196,43 +6196,43 @@ test('Test fdcb86', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x152B)
-  expect(cpu.r1.bc).toEqual(0x8CE1)
-  expect(cpu.r1.de).toEqual(0x818D)
-  expect(cpu.r1.hl).toEqual(0x40F2)
+  expect(cpu.r1.af).toEqual(0x4515)
+  expect(cpu.r1.bc).toEqual(0xDE09)
+  expect(cpu.r1.de).toEqual(0x3CE7)
+  expect(cpu.r1.hl).toEqual(0x1FDE)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9B7A)
-  expect(cpu.r1.iy).toEqual(0x2A50)
+  expect(cpu.r1.ix).toEqual(0x10C5)
+  expect(cpu.r1.iy).toEqual(0x33ED)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb87', () => {
+test('Test ddcb87', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xFE1D
-  cpu.r1.bc = 0x5353
-  cpu.r1.de = 0x618D
-  cpu.r1.hl = 0x3266
+  cpu.r1.af = 0xD05E
+  cpu.r1.bc = 0xA733
+  cpu.r1.de = 0xD1DD
+  cpu.r1.hl = 0x1603
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1A53
-  cpu.r1.iy = 0x246A
+  cpu.r1.ix = 0xEDE6
+  cpu.r1.iy = 0xE5FB
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x59)
+  mem.write8(0x0002, 0x02)
   mem.write8(0x0003, 0x87)
-  mem.write8(0x24C3, 0x65)
+  mem.write8(0xEDE8, 0xC4)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6242,43 +6242,43 @@ test('Test fdcb87', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x641D)
-  expect(cpu.r1.bc).toEqual(0x5353)
-  expect(cpu.r1.de).toEqual(0x618D)
-  expect(cpu.r1.hl).toEqual(0x3266)
+  expect(cpu.r1.af).toEqual(0xC45E)
+  expect(cpu.r1.bc).toEqual(0xA733)
+  expect(cpu.r1.de).toEqual(0xD1DD)
+  expect(cpu.r1.hl).toEqual(0x1603)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1A53)
-  expect(cpu.r1.iy).toEqual(0x246A)
+  expect(cpu.r1.ix).toEqual(0xEDE6)
+  expect(cpu.r1.iy).toEqual(0xE5FB)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb88', () => {
+test('Test ddcb88', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x7D14
-  cpu.r1.bc = 0xA0EC
-  cpu.r1.de = 0x1E47
-  cpu.r1.hl = 0x76E1
+  cpu.r1.af = 0xE4FA
+  cpu.r1.bc = 0x3325
+  cpu.r1.de = 0xC266
+  cpu.r1.hl = 0x1B13
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3871
-  cpu.r1.iy = 0xC60D
+  cpu.r1.ix = 0x878E
+  cpu.r1.iy = 0xE695
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD4)
+  mem.write8(0x0002, 0x9B)
   mem.write8(0x0003, 0x88)
-  mem.write8(0xC5E1, 0xD6)
+  mem.write8(0x8729, 0x7C)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6288,43 +6288,43 @@ test('Test fdcb88', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x7D14)
-  expect(cpu.r1.bc).toEqual(0xD4EC)
-  expect(cpu.r1.de).toEqual(0x1E47)
-  expect(cpu.r1.hl).toEqual(0x76E1)
+  expect(cpu.r1.af).toEqual(0xE4FA)
+  expect(cpu.r1.bc).toEqual(0x7C25)
+  expect(cpu.r1.de).toEqual(0xC266)
+  expect(cpu.r1.hl).toEqual(0x1B13)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3871)
-  expect(cpu.r1.iy).toEqual(0xC60D)
+  expect(cpu.r1.ix).toEqual(0x878E)
+  expect(cpu.r1.iy).toEqual(0xE695)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb89', () => {
+test('Test ddcb89', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x86C3
-  cpu.r1.bc = 0x50A6
-  cpu.r1.de = 0x8592
-  cpu.r1.hl = 0xD6CA
+  cpu.r1.af = 0x933B
+  cpu.r1.bc = 0x6FDD
+  cpu.r1.de = 0xA3A8
+  cpu.r1.hl = 0x2634
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x947B
-  cpu.r1.iy = 0x0A01
+  cpu.r1.ix = 0x8F3E
+  cpu.r1.iy = 0x7727
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC3)
+  mem.write8(0x0002, 0x2B)
   mem.write8(0x0003, 0x89)
-  mem.write8(0x09C4, 0xB0)
+  mem.write8(0x8F69, 0xCF)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6334,43 +6334,43 @@ test('Test fdcb89', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x86C3)
-  expect(cpu.r1.bc).toEqual(0x50B0)
-  expect(cpu.r1.de).toEqual(0x8592)
-  expect(cpu.r1.hl).toEqual(0xD6CA)
+  expect(cpu.r1.af).toEqual(0x933B)
+  expect(cpu.r1.bc).toEqual(0x6FCD)
+  expect(cpu.r1.de).toEqual(0xA3A8)
+  expect(cpu.r1.hl).toEqual(0x2634)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x947B)
-  expect(cpu.r1.iy).toEqual(0x0A01)
+  expect(cpu.r1.ix).toEqual(0x8F3E)
+  expect(cpu.r1.iy).toEqual(0x7727)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb8a', () => {
+test('Test ddcb8a', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x599C
-  cpu.r1.bc = 0x961A
-  cpu.r1.de = 0x55F9
-  cpu.r1.hl = 0x8470
+  cpu.r1.af = 0x6759
+  cpu.r1.bc = 0xAD1E
+  cpu.r1.de = 0x5D71
+  cpu.r1.hl = 0xCE52
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD2A5
-  cpu.r1.iy = 0xD4D2
+  cpu.r1.ix = 0x39A9
+  cpu.r1.iy = 0x38A0
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF9)
+  mem.write8(0x0002, 0x0A)
   mem.write8(0x0003, 0x8A)
-  mem.write8(0xD4CB, 0xD8)
+  mem.write8(0x39B3, 0xEA)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6380,43 +6380,43 @@ test('Test fdcb8a', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x599C)
-  expect(cpu.r1.bc).toEqual(0x961A)
-  expect(cpu.r1.de).toEqual(0xD8F9)
-  expect(cpu.r1.hl).toEqual(0x8470)
+  expect(cpu.r1.af).toEqual(0x6759)
+  expect(cpu.r1.bc).toEqual(0xAD1E)
+  expect(cpu.r1.de).toEqual(0xE871)
+  expect(cpu.r1.hl).toEqual(0xCE52)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD2A5)
-  expect(cpu.r1.iy).toEqual(0xD4D2)
+  expect(cpu.r1.ix).toEqual(0x39A9)
+  expect(cpu.r1.iy).toEqual(0x38A0)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb8b', () => {
+test('Test ddcb8b', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x2715
-  cpu.r1.bc = 0xA209
-  cpu.r1.de = 0xAB47
-  cpu.r1.hl = 0x3EAC
+  cpu.r1.af = 0x3DA2
+  cpu.r1.bc = 0x1833
+  cpu.r1.de = 0x03C1
+  cpu.r1.hl = 0x07E9
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF352
-  cpu.r1.iy = 0xC71E
+  cpu.r1.ix = 0x1685
+  cpu.r1.iy = 0xD790
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xED)
+  mem.write8(0x0002, 0x62)
   mem.write8(0x0003, 0x8B)
-  mem.write8(0xC70B, 0xDC)
+  mem.write8(0x16E7, 0x8A)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6426,43 +6426,43 @@ test('Test fdcb8b', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x2715)
-  expect(cpu.r1.bc).toEqual(0xA209)
-  expect(cpu.r1.de).toEqual(0xABDC)
-  expect(cpu.r1.hl).toEqual(0x3EAC)
+  expect(cpu.r1.af).toEqual(0x3DA2)
+  expect(cpu.r1.bc).toEqual(0x1833)
+  expect(cpu.r1.de).toEqual(0x0388)
+  expect(cpu.r1.hl).toEqual(0x07E9)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF352)
-  expect(cpu.r1.iy).toEqual(0xC71E)
+  expect(cpu.r1.ix).toEqual(0x1685)
+  expect(cpu.r1.iy).toEqual(0xD790)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb8c', () => {
+test('Test ddcb8c', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x2818
-  cpu.r1.bc = 0x4259
-  cpu.r1.de = 0xA9B0
-  cpu.r1.hl = 0xE7A0
+  cpu.r1.af = 0xA625
+  cpu.r1.bc = 0xED31
+  cpu.r1.de = 0x3946
+  cpu.r1.hl = 0x32DC
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6471
-  cpu.r1.iy = 0xA202
+  cpu.r1.ix = 0xC6A2
+  cpu.r1.iy = 0x7AD6
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x97)
+  mem.write8(0x0002, 0xE8)
   mem.write8(0x0003, 0x8C)
-  mem.write8(0xA199, 0x67)
+  mem.write8(0xC68A, 0x3E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6472,43 +6472,43 @@ test('Test fdcb8c', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x2818)
-  expect(cpu.r1.bc).toEqual(0x4259)
-  expect(cpu.r1.de).toEqual(0xA9B0)
-  expect(cpu.r1.hl).toEqual(0x65A0)
+  expect(cpu.r1.af).toEqual(0xA625)
+  expect(cpu.r1.bc).toEqual(0xED31)
+  expect(cpu.r1.de).toEqual(0x3946)
+  expect(cpu.r1.hl).toEqual(0x3CDC)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6471)
-  expect(cpu.r1.iy).toEqual(0xA202)
+  expect(cpu.r1.ix).toEqual(0xC6A2)
+  expect(cpu.r1.iy).toEqual(0x7AD6)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb8d', () => {
+test('Test ddcb8d', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x14E3
-  cpu.r1.bc = 0xC330
-  cpu.r1.de = 0x9AA2
-  cpu.r1.hl = 0x8418
+  cpu.r1.af = 0x016B
+  cpu.r1.bc = 0x5802
+  cpu.r1.de = 0xA683
+  cpu.r1.hl = 0x2549
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0D4F
-  cpu.r1.iy = 0x5669
+  cpu.r1.ix = 0x22E6
+  cpu.r1.iy = 0x33BB
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC9)
+  mem.write8(0x0002, 0xCC)
   mem.write8(0x0003, 0x8D)
-  mem.write8(0x5632, 0x9A)
+  mem.write8(0x22B2, 0x9E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6518,43 +6518,43 @@ test('Test fdcb8d', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x14E3)
-  expect(cpu.r1.bc).toEqual(0xC330)
-  expect(cpu.r1.de).toEqual(0x9AA2)
-  expect(cpu.r1.hl).toEqual(0x8498)
+  expect(cpu.r1.af).toEqual(0x016B)
+  expect(cpu.r1.bc).toEqual(0x5802)
+  expect(cpu.r1.de).toEqual(0xA683)
+  expect(cpu.r1.hl).toEqual(0x259C)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0D4F)
-  expect(cpu.r1.iy).toEqual(0x5669)
+  expect(cpu.r1.ix).toEqual(0x22E6)
+  expect(cpu.r1.iy).toEqual(0x33BB)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb8e', () => {
+test('Test ddcb8e', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xCB79
-  cpu.r1.bc = 0x0FFF
-  cpu.r1.de = 0xB244
-  cpu.r1.hl = 0xC902
+  cpu.r1.af = 0xF4F4
+  cpu.r1.bc = 0xF3A8
+  cpu.r1.de = 0x2843
+  cpu.r1.hl = 0x82CB
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6246
-  cpu.r1.iy = 0x4C81
+  cpu.r1.ix = 0xD2E8
+  cpu.r1.iy = 0xD367
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC2)
+  mem.write8(0x0002, 0x0A)
   mem.write8(0x0003, 0x8E)
-  mem.write8(0x4C43, 0x7F)
+  mem.write8(0xD2F2, 0x03)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6564,43 +6564,43 @@ test('Test fdcb8e', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xCB79)
-  expect(cpu.r1.bc).toEqual(0x0FFF)
-  expect(cpu.r1.de).toEqual(0xB244)
-  expect(cpu.r1.hl).toEqual(0xC902)
+  expect(cpu.r1.af).toEqual(0xF4F4)
+  expect(cpu.r1.bc).toEqual(0xF3A8)
+  expect(cpu.r1.de).toEqual(0x2843)
+  expect(cpu.r1.hl).toEqual(0x82CB)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6246)
-  expect(cpu.r1.iy).toEqual(0x4C81)
+  expect(cpu.r1.ix).toEqual(0xD2E8)
+  expect(cpu.r1.iy).toEqual(0xD367)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb8f', () => {
+test('Test ddcb8f', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x66B4
-  cpu.r1.bc = 0x5FBB
-  cpu.r1.de = 0x6C9B
-  cpu.r1.hl = 0xD0E3
+  cpu.r1.af = 0x6B1A
+  cpu.r1.bc = 0x8AE2
+  cpu.r1.de = 0x269B
+  cpu.r1.hl = 0xCB2F
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAC5A
-  cpu.r1.iy = 0x6B51
+  cpu.r1.ix = 0x3FFE
+  cpu.r1.iy = 0x75DD
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD4)
+  mem.write8(0x0002, 0x7B)
   mem.write8(0x0003, 0x8F)
-  mem.write8(0x6B25, 0x59)
+  mem.write8(0x4079, 0x96)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6610,43 +6610,43 @@ test('Test fdcb8f', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x59B4)
-  expect(cpu.r1.bc).toEqual(0x5FBB)
-  expect(cpu.r1.de).toEqual(0x6C9B)
-  expect(cpu.r1.hl).toEqual(0xD0E3)
+  expect(cpu.r1.af).toEqual(0x941A)
+  expect(cpu.r1.bc).toEqual(0x8AE2)
+  expect(cpu.r1.de).toEqual(0x269B)
+  expect(cpu.r1.hl).toEqual(0xCB2F)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAC5A)
-  expect(cpu.r1.iy).toEqual(0x6B51)
+  expect(cpu.r1.ix).toEqual(0x3FFE)
+  expect(cpu.r1.iy).toEqual(0x75DD)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb90', () => {
+test('Test ddcb90', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x1305
-  cpu.r1.bc = 0x1CE1
-  cpu.r1.de = 0xD627
-  cpu.r1.hl = 0x7402
+  cpu.r1.af = 0xC167
+  cpu.r1.bc = 0x3DFC
+  cpu.r1.de = 0x42E7
+  cpu.r1.hl = 0x9E14
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB470
-  cpu.r1.iy = 0xD7F5
+  cpu.r1.ix = 0xB501
+  cpu.r1.iy = 0x84FE
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xFD)
+  mem.write8(0x0002, 0x04)
   mem.write8(0x0003, 0x90)
-  mem.write8(0xD7F2, 0x70)
+  mem.write8(0xB505, 0x46)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6656,43 +6656,43 @@ test('Test fdcb90', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x1305)
-  expect(cpu.r1.bc).toEqual(0x70E1)
-  expect(cpu.r1.de).toEqual(0xD627)
-  expect(cpu.r1.hl).toEqual(0x7402)
+  expect(cpu.r1.af).toEqual(0xC167)
+  expect(cpu.r1.bc).toEqual(0x42FC)
+  expect(cpu.r1.de).toEqual(0x42E7)
+  expect(cpu.r1.hl).toEqual(0x9E14)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB470)
-  expect(cpu.r1.iy).toEqual(0xD7F5)
+  expect(cpu.r1.ix).toEqual(0xB501)
+  expect(cpu.r1.iy).toEqual(0x84FE)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb91', () => {
+test('Test ddcb91', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x10DF
-  cpu.r1.bc = 0xC48F
-  cpu.r1.de = 0x0213
-  cpu.r1.hl = 0xFC7E
+  cpu.r1.af = 0xE85E
+  cpu.r1.bc = 0xCC89
+  cpu.r1.de = 0xD249
+  cpu.r1.hl = 0xEA3B
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xBFAB
-  cpu.r1.iy = 0x47D2
+  cpu.r1.ix = 0xC987
+  cpu.r1.iy = 0xC4D1
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xBF)
+  mem.write8(0x0002, 0x11)
   mem.write8(0x0003, 0x91)
-  mem.write8(0x4791, 0x0E)
+  mem.write8(0xC998, 0x83)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6702,43 +6702,43 @@ test('Test fdcb91', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x10DF)
-  expect(cpu.r1.bc).toEqual(0xC40A)
-  expect(cpu.r1.de).toEqual(0x0213)
-  expect(cpu.r1.hl).toEqual(0xFC7E)
+  expect(cpu.r1.af).toEqual(0xE85E)
+  expect(cpu.r1.bc).toEqual(0xCC83)
+  expect(cpu.r1.de).toEqual(0xD249)
+  expect(cpu.r1.hl).toEqual(0xEA3B)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xBFAB)
-  expect(cpu.r1.iy).toEqual(0x47D2)
+  expect(cpu.r1.ix).toEqual(0xC987)
+  expect(cpu.r1.iy).toEqual(0xC4D1)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb92', () => {
+test('Test ddcb92', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x6A11
-  cpu.r1.bc = 0xF89E
-  cpu.r1.de = 0xF49D
-  cpu.r1.hl = 0xC115
+  cpu.r1.af = 0x28A3
+  cpu.r1.bc = 0x85FF
+  cpu.r1.de = 0xAB28
+  cpu.r1.hl = 0x47A5
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xBC5D
-  cpu.r1.iy = 0x313A
+  cpu.r1.ix = 0x9166
+  cpu.r1.iy = 0xE755
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0B)
+  mem.write8(0x0002, 0x4B)
   mem.write8(0x0003, 0x92)
-  mem.write8(0x3145, 0xF6)
+  mem.write8(0x91B1, 0xAA)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6748,43 +6748,43 @@ test('Test fdcb92', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x6A11)
-  expect(cpu.r1.bc).toEqual(0xF89E)
-  expect(cpu.r1.de).toEqual(0xF29D)
-  expect(cpu.r1.hl).toEqual(0xC115)
+  expect(cpu.r1.af).toEqual(0x28A3)
+  expect(cpu.r1.bc).toEqual(0x85FF)
+  expect(cpu.r1.de).toEqual(0xAA28)
+  expect(cpu.r1.hl).toEqual(0x47A5)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xBC5D)
-  expect(cpu.r1.iy).toEqual(0x313A)
+  expect(cpu.r1.ix).toEqual(0x9166)
+  expect(cpu.r1.iy).toEqual(0xE755)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb93', () => {
+test('Test ddcb93', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x61E5
-  cpu.r1.bc = 0xCC2C
-  cpu.r1.de = 0x959A
-  cpu.r1.hl = 0xB52B
+  cpu.r1.af = 0x58AC
+  cpu.r1.bc = 0xC88B
+  cpu.r1.de = 0x6D24
+  cpu.r1.hl = 0xDBDD
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFA64
-  cpu.r1.iy = 0x2940
+  cpu.r1.ix = 0xAC2E
+  cpu.r1.iy = 0x5199
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x52)
+  mem.write8(0x0002, 0x03)
   mem.write8(0x0003, 0x93)
-  mem.write8(0x2992, 0x38)
+  mem.write8(0xAC31, 0x93)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6794,43 +6794,43 @@ test('Test fdcb93', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x61E5)
-  expect(cpu.r1.bc).toEqual(0xCC2C)
-  expect(cpu.r1.de).toEqual(0x9538)
-  expect(cpu.r1.hl).toEqual(0xB52B)
+  expect(cpu.r1.af).toEqual(0x58AC)
+  expect(cpu.r1.bc).toEqual(0xC88B)
+  expect(cpu.r1.de).toEqual(0x6D93)
+  expect(cpu.r1.hl).toEqual(0xDBDD)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFA64)
-  expect(cpu.r1.iy).toEqual(0x2940)
+  expect(cpu.r1.ix).toEqual(0xAC2E)
+  expect(cpu.r1.iy).toEqual(0x5199)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb94', () => {
+test('Test ddcb94', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x31B4
-  cpu.r1.bc = 0x3E5A
-  cpu.r1.de = 0xFB3D
-  cpu.r1.hl = 0xAB83
+  cpu.r1.af = 0xE38D
+  cpu.r1.bc = 0x35A5
+  cpu.r1.de = 0x8D07
+  cpu.r1.hl = 0xBFB8
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xA801
-  cpu.r1.iy = 0xFE1C
+  cpu.r1.ix = 0x5E84
+  cpu.r1.iy = 0x5F24
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x95)
+  mem.write8(0x0002, 0x11)
   mem.write8(0x0003, 0x94)
-  mem.write8(0xFDB1, 0x48)
+  mem.write8(0x5E95, 0xB7)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -6840,411 +6840,411 @@ test('Test fdcb94', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x31B4)
-  expect(cpu.r1.bc).toEqual(0x3E5A)
-  expect(cpu.r1.de).toEqual(0xFB3D)
-  expect(cpu.r1.hl).toEqual(0x4883)
+  expect(cpu.r1.af).toEqual(0xE38D)
+  expect(cpu.r1.bc).toEqual(0x35A5)
+  expect(cpu.r1.de).toEqual(0x8D07)
+  expect(cpu.r1.hl).toEqual(0xB3B8)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xA801)
-  expect(cpu.r1.iy).toEqual(0xFE1C)
+  expect(cpu.r1.ix).toEqual(0x5E84)
+  expect(cpu.r1.iy).toEqual(0x5F24)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb95', () => {
+test('Test ddcb95', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x337E
-  cpu.r1.bc = 0x63A7
-  cpu.r1.de = 0x2918
-  cpu.r1.hl = 0xED6B
+  cpu.r1.af = 0x41F4
+  cpu.r1.bc = 0x9536
+  cpu.r1.de = 0xDD7D
+  cpu.r1.hl = 0x4948
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB12C
-  cpu.r1.iy = 0xE776
+  cpu.r1.ix = 0xFB74
+  cpu.r1.iy = 0xF17D
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x90)
-  mem.write8(0x0003, 0x95)
-  mem.write8(0xE706, 0xEB)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x337E)
-  expect(cpu.r1.bc).toEqual(0x63A7)
-  expect(cpu.r1.de).toEqual(0x2918)
-  expect(cpu.r1.hl).toEqual(0xEDEB)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB12C)
-  expect(cpu.r1.iy).toEqual(0xE776)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb96', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5D99
-  cpu.r1.bc = 0xD9EC
-  cpu.r1.de = 0xB6D0
-  cpu.r1.hl = 0x5ED5
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5D9D
-  cpu.r1.iy = 0xE6CF
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9E)
-  mem.write8(0x0003, 0x96)
-  mem.write8(0xE66D, 0xFC)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x5D99)
-  expect(cpu.r1.bc).toEqual(0xD9EC)
-  expect(cpu.r1.de).toEqual(0xB6D0)
-  expect(cpu.r1.hl).toEqual(0x5ED5)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5D9D)
-  expect(cpu.r1.iy).toEqual(0xE6CF)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb97', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xCCB6
-  cpu.r1.bc = 0x8406
-  cpu.r1.de = 0x72C6
-  cpu.r1.hl = 0x1BA7
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6DCA
-  cpu.r1.iy = 0x187F
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x64)
-  mem.write8(0x0003, 0x97)
-  mem.write8(0x18E3, 0x9D)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x99B6)
-  expect(cpu.r1.bc).toEqual(0x8406)
-  expect(cpu.r1.de).toEqual(0x72C6)
-  expect(cpu.r1.hl).toEqual(0x1BA7)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6DCA)
-  expect(cpu.r1.iy).toEqual(0x187F)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb98', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x0495
-  cpu.r1.bc = 0x312F
-  cpu.r1.de = 0x8000
-  cpu.r1.hl = 0xB749
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE9CB
-  cpu.r1.iy = 0x43B8
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xDA)
-  mem.write8(0x0003, 0x98)
-  mem.write8(0x4392, 0x15)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x0495)
-  expect(cpu.r1.bc).toEqual(0x152F)
-  expect(cpu.r1.de).toEqual(0x8000)
-  expect(cpu.r1.hl).toEqual(0xB749)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE9CB)
-  expect(cpu.r1.iy).toEqual(0x43B8)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb99', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x2824
-  cpu.r1.bc = 0xA485
-  cpu.r1.de = 0xA30B
-  cpu.r1.hl = 0xB286
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x10B0
-  cpu.r1.iy = 0xD86C
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x78)
-  mem.write8(0x0003, 0x99)
-  mem.write8(0xD8E4, 0xB5)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x2824)
-  expect(cpu.r1.bc).toEqual(0xA4B5)
-  expect(cpu.r1.de).toEqual(0xA30B)
-  expect(cpu.r1.hl).toEqual(0xB286)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x10B0)
-  expect(cpu.r1.iy).toEqual(0xD86C)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb9a', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xB0CC
-  cpu.r1.bc = 0xC40C
-  cpu.r1.de = 0xDC1A
-  cpu.r1.hl = 0x014A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2FF9
-  cpu.r1.iy = 0xD717
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9C)
-  mem.write8(0x0003, 0x9A)
-  mem.write8(0xD6B3, 0x9D)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xB0CC)
-  expect(cpu.r1.bc).toEqual(0xC40C)
-  expect(cpu.r1.de).toEqual(0x951A)
-  expect(cpu.r1.hl).toEqual(0x014A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2FF9)
-  expect(cpu.r1.iy).toEqual(0xD717)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb9b', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xD092
-  cpu.r1.bc = 0xA6C2
-  cpu.r1.de = 0x7900
-  cpu.r1.hl = 0x5448
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFAB0
-  cpu.r1.iy = 0xCB1E
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x83)
-  mem.write8(0x0003, 0x9B)
-  mem.write8(0xCAA1, 0x95)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xD092)
-  expect(cpu.r1.bc).toEqual(0xA6C2)
-  expect(cpu.r1.de).toEqual(0x7995)
-  expect(cpu.r1.hl).toEqual(0x5448)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFAB0)
-  expect(cpu.r1.iy).toEqual(0xCB1E)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb9c', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xB58D
-  cpu.r1.bc = 0x1ED1
-  cpu.r1.de = 0xE93B
-  cpu.r1.hl = 0x9E0C
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5605
-  cpu.r1.iy = 0x03B3
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x1E)
-  mem.write8(0x0003, 0x9C)
-  mem.write8(0x03D1, 0x78)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xB58D)
-  expect(cpu.r1.bc).toEqual(0x1ED1)
-  expect(cpu.r1.de).toEqual(0xE93B)
-  expect(cpu.r1.hl).toEqual(0x700C)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5605)
-  expect(cpu.r1.iy).toEqual(0x03B3)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcb9d', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xC7E9
-  cpu.r1.bc = 0x18D3
-  cpu.r1.de = 0x8EED
-  cpu.r1.hl = 0xBD7D
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9A7F
-  cpu.r1.iy = 0xC087
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0xE6)
+  mem.write8(0x0003, 0x95)
+  mem.write8(0xFB5A, 0xC6)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x41F4)
+  expect(cpu.r1.bc).toEqual(0x9536)
+  expect(cpu.r1.de).toEqual(0xDD7D)
+  expect(cpu.r1.hl).toEqual(0x49C2)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xFB74)
+  expect(cpu.r1.iy).toEqual(0xF17D)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb96', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4A9E
+  cpu.r1.bc = 0x42EF
+  cpu.r1.de = 0x32D7
+  cpu.r1.hl = 0x18CF
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x7A81
+  cpu.r1.iy = 0xBB1D
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xD5)
+  mem.write8(0x0003, 0x96)
+  mem.write8(0x7A56, 0xAE)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4A9E)
+  expect(cpu.r1.bc).toEqual(0x42EF)
+  expect(cpu.r1.de).toEqual(0x32D7)
+  expect(cpu.r1.hl).toEqual(0x18CF)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x7A81)
+  expect(cpu.r1.iy).toEqual(0xBB1D)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb97', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x9AD3
+  cpu.r1.bc = 0x89F0
+  cpu.r1.de = 0x73C7
+  cpu.r1.hl = 0x0B1A
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x847C
+  cpu.r1.iy = 0x4B86
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x92)
+  mem.write8(0x0003, 0x97)
+  mem.write8(0x840E, 0x23)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x23D3)
+  expect(cpu.r1.bc).toEqual(0x89F0)
+  expect(cpu.r1.de).toEqual(0x73C7)
+  expect(cpu.r1.hl).toEqual(0x0B1A)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x847C)
+  expect(cpu.r1.iy).toEqual(0x4B86)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb98', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x6E22
+  cpu.r1.bc = 0xB9FD
+  cpu.r1.de = 0x9FDC
+  cpu.r1.hl = 0x3AED
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x041E
+  cpu.r1.iy = 0xFD79
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xDC)
+  mem.write8(0x0003, 0x98)
+  mem.write8(0x03FA, 0x58)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x6E22)
+  expect(cpu.r1.bc).toEqual(0x50FD)
+  expect(cpu.r1.de).toEqual(0x9FDC)
+  expect(cpu.r1.hl).toEqual(0x3AED)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x041E)
+  expect(cpu.r1.iy).toEqual(0xFD79)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb99', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xA132
+  cpu.r1.bc = 0x3891
+  cpu.r1.de = 0x1515
+  cpu.r1.hl = 0x2830
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x09FD
+  cpu.r1.iy = 0x0473
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x6D)
+  mem.write8(0x0003, 0x99)
+  mem.write8(0x0A6A, 0xCE)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xA132)
+  expect(cpu.r1.bc).toEqual(0x38C6)
+  expect(cpu.r1.de).toEqual(0x1515)
+  expect(cpu.r1.hl).toEqual(0x2830)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x09FD)
+  expect(cpu.r1.iy).toEqual(0x0473)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb9a', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x783D
+  cpu.r1.bc = 0x8F69
+  cpu.r1.de = 0x91C4
+  cpu.r1.hl = 0xE38F
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x68A8
+  cpu.r1.iy = 0x391D
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x8A)
+  mem.write8(0x0003, 0x9A)
+  mem.write8(0x6832, 0xA8)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x783D)
+  expect(cpu.r1.bc).toEqual(0x8F69)
+  expect(cpu.r1.de).toEqual(0xA0C4)
+  expect(cpu.r1.hl).toEqual(0xE38F)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x68A8)
+  expect(cpu.r1.iy).toEqual(0x391D)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb9b', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x955A
+  cpu.r1.bc = 0xC7B0
+  cpu.r1.de = 0x53B3
+  cpu.r1.hl = 0xAEC6
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x06EF
+  cpu.r1.iy = 0xE991
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x97)
+  mem.write8(0x0003, 0x9B)
+  mem.write8(0x0686, 0x62)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x955A)
+  expect(cpu.r1.bc).toEqual(0xC7B0)
+  expect(cpu.r1.de).toEqual(0x5362)
+  expect(cpu.r1.hl).toEqual(0xAEC6)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x06EF)
+  expect(cpu.r1.iy).toEqual(0xE991)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb9c', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xAF69
+  cpu.r1.bc = 0xF896
+  cpu.r1.de = 0xE791
+  cpu.r1.hl = 0xA2EE
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x847B
+  cpu.r1.iy = 0x59ED
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x54)
+  mem.write8(0x0003, 0x9C)
+  mem.write8(0x84CF, 0x1B)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xAF69)
+  expect(cpu.r1.bc).toEqual(0xF896)
+  expect(cpu.r1.de).toEqual(0xE791)
+  expect(cpu.r1.hl).toEqual(0x13EE)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x847B)
+  expect(cpu.r1.iy).toEqual(0x59ED)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcb9d', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7D1E
+  cpu.r1.bc = 0x5009
+  cpu.r1.de = 0x1248
+  cpu.r1.hl = 0x380C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xE920
+  cpu.r1.iy = 0x4FE6
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x0F)
   mem.write8(0x0003, 0x9D)
-  mem.write8(0xC06D, 0x53)
+  mem.write8(0xE92F, 0xE8)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7254,43 +7254,43 @@ test('Test fdcb9d', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xC7E9)
-  expect(cpu.r1.bc).toEqual(0x18D3)
-  expect(cpu.r1.de).toEqual(0x8EED)
-  expect(cpu.r1.hl).toEqual(0xBD53)
+  expect(cpu.r1.af).toEqual(0x7D1E)
+  expect(cpu.r1.bc).toEqual(0x5009)
+  expect(cpu.r1.de).toEqual(0x1248)
+  expect(cpu.r1.hl).toEqual(0x38E0)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9A7F)
-  expect(cpu.r1.iy).toEqual(0xC087)
+  expect(cpu.r1.ix).toEqual(0xE920)
+  expect(cpu.r1.iy).toEqual(0x4FE6)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb9e', () => {
+test('Test ddcb9e', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x81C7
-  cpu.r1.bc = 0x71DF
-  cpu.r1.de = 0x45D5
-  cpu.r1.hl = 0x0CA7
+  cpu.r1.af = 0xC207
+  cpu.r1.bc = 0xB47C
+  cpu.r1.de = 0x0E16
+  cpu.r1.hl = 0xE17F
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x648F
-  cpu.r1.iy = 0x41BD
+  cpu.r1.ix = 0xD8BB
+  cpu.r1.iy = 0xBB99
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xEB)
+  mem.write8(0x0002, 0xB5)
   mem.write8(0x0003, 0x9E)
-  mem.write8(0x41A8, 0x61)
+  mem.write8(0xD870, 0xEE)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7300,43 +7300,43 @@ test('Test fdcb9e', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x81C7)
-  expect(cpu.r1.bc).toEqual(0x71DF)
-  expect(cpu.r1.de).toEqual(0x45D5)
-  expect(cpu.r1.hl).toEqual(0x0CA7)
+  expect(cpu.r1.af).toEqual(0xC207)
+  expect(cpu.r1.bc).toEqual(0xB47C)
+  expect(cpu.r1.de).toEqual(0x0E16)
+  expect(cpu.r1.hl).toEqual(0xE17F)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x648F)
-  expect(cpu.r1.iy).toEqual(0x41BD)
+  expect(cpu.r1.ix).toEqual(0xD8BB)
+  expect(cpu.r1.iy).toEqual(0xBB99)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcb9f', () => {
+test('Test ddcb9f', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xEBF5
-  cpu.r1.bc = 0xDC9F
-  cpu.r1.de = 0xD490
-  cpu.r1.hl = 0x15BE
+  cpu.r1.af = 0xC26B
+  cpu.r1.bc = 0x7537
+  cpu.r1.de = 0x46BB
+  cpu.r1.hl = 0x13C0
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0E12
-  cpu.r1.iy = 0x9D49
+  cpu.r1.ix = 0xE63C
+  cpu.r1.iy = 0x1D98
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x50)
+  mem.write8(0x0002, 0xB8)
   mem.write8(0x0003, 0x9F)
-  mem.write8(0x9D99, 0x89)
+  mem.write8(0xE5F4, 0xA6)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7346,43 +7346,43 @@ test('Test fdcb9f', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x81F5)
-  expect(cpu.r1.bc).toEqual(0xDC9F)
-  expect(cpu.r1.de).toEqual(0xD490)
-  expect(cpu.r1.hl).toEqual(0x15BE)
+  expect(cpu.r1.af).toEqual(0xA66B)
+  expect(cpu.r1.bc).toEqual(0x7537)
+  expect(cpu.r1.de).toEqual(0x46BB)
+  expect(cpu.r1.hl).toEqual(0x13C0)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0E12)
-  expect(cpu.r1.iy).toEqual(0x9D49)
+  expect(cpu.r1.ix).toEqual(0xE63C)
+  expect(cpu.r1.iy).toEqual(0x1D98)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba0', () => {
+test('Test ddcba0', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8CCB
-  cpu.r1.bc = 0x0057
-  cpu.r1.de = 0xBC19
-  cpu.r1.hl = 0xE543
+  cpu.r1.af = 0x0BBE
+  cpu.r1.bc = 0x8500
+  cpu.r1.de = 0x8609
+  cpu.r1.hl = 0x5352
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8C5D
-  cpu.r1.iy = 0xD68D
+  cpu.r1.ix = 0xA2F0
+  cpu.r1.iy = 0xDA02
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x76)
+  mem.write8(0x0002, 0x02)
   mem.write8(0x0003, 0xA0)
-  mem.write8(0xD703, 0xD4)
+  mem.write8(0xA2F2, 0x39)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7392,43 +7392,43 @@ test('Test fdcba0', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x8CCB)
-  expect(cpu.r1.bc).toEqual(0xC457)
-  expect(cpu.r1.de).toEqual(0xBC19)
-  expect(cpu.r1.hl).toEqual(0xE543)
+  expect(cpu.r1.af).toEqual(0x0BBE)
+  expect(cpu.r1.bc).toEqual(0x2900)
+  expect(cpu.r1.de).toEqual(0x8609)
+  expect(cpu.r1.hl).toEqual(0x5352)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8C5D)
-  expect(cpu.r1.iy).toEqual(0xD68D)
+  expect(cpu.r1.ix).toEqual(0xA2F0)
+  expect(cpu.r1.iy).toEqual(0xDA02)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba1', () => {
+test('Test ddcba1', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xEEE6
-  cpu.r1.bc = 0x6DA4
-  cpu.r1.de = 0x3A20
-  cpu.r1.hl = 0x8BBA
+  cpu.r1.af = 0xAD0A
+  cpu.r1.bc = 0xAA76
+  cpu.r1.de = 0x0F2D
+  cpu.r1.hl = 0x832C
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1DE7
-  cpu.r1.iy = 0x66C8
+  cpu.r1.ix = 0x45BB
+  cpu.r1.iy = 0xA22D
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x31)
+  mem.write8(0x0002, 0xF5)
   mem.write8(0x0003, 0xA1)
-  mem.write8(0x66F9, 0xEC)
+  mem.write8(0x45B0, 0xD2)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7438,43 +7438,43 @@ test('Test fdcba1', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xEEE6)
-  expect(cpu.r1.bc).toEqual(0x6DEC)
-  expect(cpu.r1.de).toEqual(0x3A20)
-  expect(cpu.r1.hl).toEqual(0x8BBA)
+  expect(cpu.r1.af).toEqual(0xAD0A)
+  expect(cpu.r1.bc).toEqual(0xAAC2)
+  expect(cpu.r1.de).toEqual(0x0F2D)
+  expect(cpu.r1.hl).toEqual(0x832C)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1DE7)
-  expect(cpu.r1.iy).toEqual(0x66C8)
+  expect(cpu.r1.ix).toEqual(0x45BB)
+  expect(cpu.r1.iy).toEqual(0xA22D)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba2', () => {
+test('Test ddcba2', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x3F89
-  cpu.r1.bc = 0x5120
-  cpu.r1.de = 0x0BD1
-  cpu.r1.hl = 0xE669
+  cpu.r1.af = 0xF586
+  cpu.r1.bc = 0x4A7D
+  cpu.r1.de = 0xA5AB
+  cpu.r1.hl = 0x26FC
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2993
-  cpu.r1.iy = 0x04BF
+  cpu.r1.ix = 0x628B
+  cpu.r1.iy = 0x6C4D
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x0E)
   mem.write8(0x0003, 0xA2)
-  mem.write8(0x04CD, 0x47)
+  mem.write8(0x6299, 0xA1)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7484,43 +7484,43 @@ test('Test fdcba2', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3F89)
-  expect(cpu.r1.bc).toEqual(0x5120)
-  expect(cpu.r1.de).toEqual(0x47D1)
-  expect(cpu.r1.hl).toEqual(0xE669)
+  expect(cpu.r1.af).toEqual(0xF586)
+  expect(cpu.r1.bc).toEqual(0x4A7D)
+  expect(cpu.r1.de).toEqual(0xA1AB)
+  expect(cpu.r1.hl).toEqual(0x26FC)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2993)
-  expect(cpu.r1.iy).toEqual(0x04BF)
+  expect(cpu.r1.ix).toEqual(0x628B)
+  expect(cpu.r1.iy).toEqual(0x6C4D)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba3', () => {
+test('Test ddcba3', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x4439
-  cpu.r1.bc = 0x6B8B
-  cpu.r1.de = 0x6178
-  cpu.r1.hl = 0x1246
+  cpu.r1.af = 0xDE5B
+  cpu.r1.bc = 0xA284
+  cpu.r1.de = 0xD40E
+  cpu.r1.hl = 0xC92D
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4CDB
-  cpu.r1.iy = 0xAD77
+  cpu.r1.ix = 0x040D
+  cpu.r1.iy = 0x12C0
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x05)
+  mem.write8(0x0002, 0x2E)
   mem.write8(0x0003, 0xA3)
-  mem.write8(0xAD7C, 0x59)
+  mem.write8(0x043B, 0x04)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7530,43 +7530,43 @@ test('Test fdcba3', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x4439)
-  expect(cpu.r1.bc).toEqual(0x6B8B)
-  expect(cpu.r1.de).toEqual(0x6149)
-  expect(cpu.r1.hl).toEqual(0x1246)
+  expect(cpu.r1.af).toEqual(0xDE5B)
+  expect(cpu.r1.bc).toEqual(0xA284)
+  expect(cpu.r1.de).toEqual(0xD404)
+  expect(cpu.r1.hl).toEqual(0xC92D)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4CDB)
-  expect(cpu.r1.iy).toEqual(0xAD77)
+  expect(cpu.r1.ix).toEqual(0x040D)
+  expect(cpu.r1.iy).toEqual(0x12C0)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba4', () => {
+test('Test ddcba4', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x3385
-  cpu.r1.bc = 0x261E
-  cpu.r1.de = 0xA487
-  cpu.r1.hl = 0xB3BD
+  cpu.r1.af = 0xDFAA
+  cpu.r1.bc = 0xAE40
+  cpu.r1.de = 0x02C3
+  cpu.r1.hl = 0xE0B5
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4B8F
-  cpu.r1.iy = 0xC0CD
+  cpu.r1.ix = 0xFE4D
+  cpu.r1.iy = 0xFAA3
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x66)
+  mem.write8(0x0002, 0x03)
   mem.write8(0x0003, 0xA4)
-  mem.write8(0xC133, 0xC5)
+  mem.write8(0xFE50, 0x27)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7576,43 +7576,43 @@ test('Test fdcba4', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3385)
-  expect(cpu.r1.bc).toEqual(0x261E)
-  expect(cpu.r1.de).toEqual(0xA487)
-  expect(cpu.r1.hl).toEqual(0xC5BD)
+  expect(cpu.r1.af).toEqual(0xDFAA)
+  expect(cpu.r1.bc).toEqual(0xAE40)
+  expect(cpu.r1.de).toEqual(0x02C3)
+  expect(cpu.r1.hl).toEqual(0x27B5)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4B8F)
-  expect(cpu.r1.iy).toEqual(0xC0CD)
+  expect(cpu.r1.ix).toEqual(0xFE4D)
+  expect(cpu.r1.iy).toEqual(0xFAA3)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba5', () => {
+test('Test ddcba5', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x6E70
-  cpu.r1.bc = 0xB7ED
-  cpu.r1.de = 0x22CD
-  cpu.r1.hl = 0xAEDC
+  cpu.r1.af = 0x1A15
+  cpu.r1.bc = 0x04CB
+  cpu.r1.de = 0x4352
+  cpu.r1.hl = 0xEE39
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x46DE
-  cpu.r1.iy = 0xF1A1
+  cpu.r1.ix = 0x7B27
+  cpu.r1.iy = 0x38A0
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA0)
+  mem.write8(0x0002, 0xF6)
   mem.write8(0x0003, 0xA5)
-  mem.write8(0xF141, 0x44)
+  mem.write8(0x7B1D, 0x6B)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7622,43 +7622,43 @@ test('Test fdcba5', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x6E70)
-  expect(cpu.r1.bc).toEqual(0xB7ED)
-  expect(cpu.r1.de).toEqual(0x22CD)
-  expect(cpu.r1.hl).toEqual(0xAE44)
+  expect(cpu.r1.af).toEqual(0x1A15)
+  expect(cpu.r1.bc).toEqual(0x04CB)
+  expect(cpu.r1.de).toEqual(0x4352)
+  expect(cpu.r1.hl).toEqual(0xEE6B)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x46DE)
-  expect(cpu.r1.iy).toEqual(0xF1A1)
+  expect(cpu.r1.ix).toEqual(0x7B27)
+  expect(cpu.r1.iy).toEqual(0x38A0)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba6', () => {
+test('Test ddcba6', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x814B
-  cpu.r1.bc = 0x6408
-  cpu.r1.de = 0x3DCB
-  cpu.r1.hl = 0x971F
+  cpu.r1.af = 0x5E46
+  cpu.r1.bc = 0xB98A
+  cpu.r1.de = 0xB822
+  cpu.r1.hl = 0x04CA
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5716
-  cpu.r1.iy = 0x93F3
+  cpu.r1.ix = 0xAE1B
+  cpu.r1.iy = 0x8730
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x76)
+  mem.write8(0x0002, 0x27)
   mem.write8(0x0003, 0xA6)
-  mem.write8(0x9469, 0xBC)
+  mem.write8(0xAE42, 0x8F)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7668,43 +7668,43 @@ test('Test fdcba6', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x814B)
-  expect(cpu.r1.bc).toEqual(0x6408)
-  expect(cpu.r1.de).toEqual(0x3DCB)
-  expect(cpu.r1.hl).toEqual(0x971F)
+  expect(cpu.r1.af).toEqual(0x5E46)
+  expect(cpu.r1.bc).toEqual(0xB98A)
+  expect(cpu.r1.de).toEqual(0xB822)
+  expect(cpu.r1.hl).toEqual(0x04CA)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5716)
-  expect(cpu.r1.iy).toEqual(0x93F3)
+  expect(cpu.r1.ix).toEqual(0xAE1B)
+  expect(cpu.r1.iy).toEqual(0x8730)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba7', () => {
+test('Test ddcba7', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xA4C2
-  cpu.r1.bc = 0x679E
-  cpu.r1.de = 0xC313
-  cpu.r1.hl = 0x61DF
+  cpu.r1.af = 0x0EED
+  cpu.r1.bc = 0x7B11
+  cpu.r1.de = 0x8CB0
+  cpu.r1.hl = 0xEB3D
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x67E6
-  cpu.r1.iy = 0x79C4
+  cpu.r1.ix = 0x5EC8
+  cpu.r1.iy = 0x97CF
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x66)
+  mem.write8(0x0002, 0xF2)
   mem.write8(0x0003, 0xA7)
-  mem.write8(0x7A2A, 0x2E)
+  mem.write8(0x5EBA, 0x87)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7714,43 +7714,43 @@ test('Test fdcba7', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x2EC2)
-  expect(cpu.r1.bc).toEqual(0x679E)
-  expect(cpu.r1.de).toEqual(0xC313)
-  expect(cpu.r1.hl).toEqual(0x61DF)
+  expect(cpu.r1.af).toEqual(0x87ED)
+  expect(cpu.r1.bc).toEqual(0x7B11)
+  expect(cpu.r1.de).toEqual(0x8CB0)
+  expect(cpu.r1.hl).toEqual(0xEB3D)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x67E6)
-  expect(cpu.r1.iy).toEqual(0x79C4)
+  expect(cpu.r1.ix).toEqual(0x5EC8)
+  expect(cpu.r1.iy).toEqual(0x97CF)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba8', () => {
+test('Test ddcba8', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x537C
-  cpu.r1.bc = 0x1FED
-  cpu.r1.de = 0x6CBB
-  cpu.r1.hl = 0xBD26
+  cpu.r1.af = 0x5173
+  cpu.r1.bc = 0x3089
+  cpu.r1.de = 0x070D
+  cpu.r1.hl = 0xE8F9
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC638
-  cpu.r1.iy = 0x0D46
+  cpu.r1.ix = 0xE84F
+  cpu.r1.iy = 0x55F0
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA9)
+  mem.write8(0x0002, 0xD0)
   mem.write8(0x0003, 0xA8)
-  mem.write8(0x0CEF, 0xB7)
+  mem.write8(0xE81F, 0x7E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7760,43 +7760,43 @@ test('Test fdcba8', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x537C)
-  expect(cpu.r1.bc).toEqual(0x97ED)
-  expect(cpu.r1.de).toEqual(0x6CBB)
-  expect(cpu.r1.hl).toEqual(0xBD26)
+  expect(cpu.r1.af).toEqual(0x5173)
+  expect(cpu.r1.bc).toEqual(0x5E89)
+  expect(cpu.r1.de).toEqual(0x070D)
+  expect(cpu.r1.hl).toEqual(0xE8F9)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC638)
-  expect(cpu.r1.iy).toEqual(0x0D46)
+  expect(cpu.r1.ix).toEqual(0xE84F)
+  expect(cpu.r1.iy).toEqual(0x55F0)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcba9', () => {
+test('Test ddcba9', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xBA5A
-  cpu.r1.bc = 0x3076
-  cpu.r1.de = 0xCDD7
-  cpu.r1.hl = 0x298D
+  cpu.r1.af = 0x4FB8
+  cpu.r1.bc = 0xCCB5
+  cpu.r1.de = 0x3E9A
+  cpu.r1.hl = 0x2673
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x59AB
-  cpu.r1.iy = 0x0F54
+  cpu.r1.ix = 0x0FDD
+  cpu.r1.iy = 0xAEF2
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x2B)
+  mem.write8(0x0002, 0x9D)
   mem.write8(0x0003, 0xA9)
-  mem.write8(0x0F7F, 0x8F)
+  mem.write8(0x0F7A, 0x1F)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7806,43 +7806,43 @@ test('Test fdcba9', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xBA5A)
-  expect(cpu.r1.bc).toEqual(0x308F)
-  expect(cpu.r1.de).toEqual(0xCDD7)
-  expect(cpu.r1.hl).toEqual(0x298D)
+  expect(cpu.r1.af).toEqual(0x4FB8)
+  expect(cpu.r1.bc).toEqual(0xCC1F)
+  expect(cpu.r1.de).toEqual(0x3E9A)
+  expect(cpu.r1.hl).toEqual(0x2673)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x59AB)
-  expect(cpu.r1.iy).toEqual(0x0F54)
+  expect(cpu.r1.ix).toEqual(0x0FDD)
+  expect(cpu.r1.iy).toEqual(0xAEF2)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbaa', () => {
+test('Test ddcbaa', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x406A
-  cpu.r1.bc = 0x2ED6
-  cpu.r1.de = 0xFA8C
-  cpu.r1.hl = 0xC633
+  cpu.r1.af = 0xFE76
+  cpu.r1.bc = 0x6F96
+  cpu.r1.de = 0x3FEB
+  cpu.r1.hl = 0x0B21
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x87CB
-  cpu.r1.iy = 0xB3D1
+  cpu.r1.ix = 0x6747
+  cpu.r1.iy = 0x07BA
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0B)
+  mem.write8(0x0002, 0x9F)
   mem.write8(0x0003, 0xAA)
-  mem.write8(0xB3DC, 0x3A)
+  mem.write8(0x66E6, 0x50)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -7852,2159 +7852,43 @@ test('Test fdcbaa', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x406A)
-  expect(cpu.r1.bc).toEqual(0x2ED6)
-  expect(cpu.r1.de).toEqual(0x1A8C)
-  expect(cpu.r1.hl).toEqual(0xC633)
+  expect(cpu.r1.af).toEqual(0xFE76)
+  expect(cpu.r1.bc).toEqual(0x6F96)
+  expect(cpu.r1.de).toEqual(0x50EB)
+  expect(cpu.r1.hl).toEqual(0x0B21)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x87CB)
-  expect(cpu.r1.iy).toEqual(0xB3D1)
+  expect(cpu.r1.ix).toEqual(0x6747)
+  expect(cpu.r1.iy).toEqual(0x07BA)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbab', () => {
+test('Test ddcbab', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xDA61
-  cpu.r1.bc = 0x0521
-  cpu.r1.de = 0xA123
-  cpu.r1.hl = 0xC7FA
+  cpu.r1.af = 0x2EB4
+  cpu.r1.bc = 0x36F1
+  cpu.r1.de = 0x8F44
+  cpu.r1.hl = 0x36AF
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB71A
-  cpu.r1.iy = 0x8ECE
+  cpu.r1.ix = 0x6682
+  cpu.r1.iy = 0x9D60
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA9)
-  mem.write8(0x0003, 0xAB)
-  mem.write8(0x8E77, 0x1F)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xDA61)
-  expect(cpu.r1.bc).toEqual(0x0521)
-  expect(cpu.r1.de).toEqual(0xA11F)
-  expect(cpu.r1.hl).toEqual(0xC7FA)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB71A)
-  expect(cpu.r1.iy).toEqual(0x8ECE)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbac', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x34A3
-  cpu.r1.bc = 0x81CE
-  cpu.r1.de = 0x07D6
-  cpu.r1.hl = 0xF3A4
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x430B
-  cpu.r1.iy = 0x0525
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x23)
-  mem.write8(0x0003, 0xAC)
-  mem.write8(0x0548, 0x9C)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x34A3)
-  expect(cpu.r1.bc).toEqual(0x81CE)
-  expect(cpu.r1.de).toEqual(0x07D6)
-  expect(cpu.r1.hl).toEqual(0x9CA4)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x430B)
-  expect(cpu.r1.iy).toEqual(0x0525)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbad', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5010
-  cpu.r1.bc = 0x918E
-  cpu.r1.de = 0xDDBC
-  cpu.r1.hl = 0x4F89
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x88C5
-  cpu.r1.iy = 0x948F
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x4E)
-  mem.write8(0x0003, 0xAD)
-  mem.write8(0x94DD, 0x37)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x5010)
-  expect(cpu.r1.bc).toEqual(0x918E)
-  expect(cpu.r1.de).toEqual(0xDDBC)
-  expect(cpu.r1.hl).toEqual(0x4F17)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x88C5)
-  expect(cpu.r1.iy).toEqual(0x948F)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbae', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xEC0D
-  cpu.r1.bc = 0xB57E
-  cpu.r1.de = 0x18C6
-  cpu.r1.hl = 0x7B01
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xBAC6
-  cpu.r1.iy = 0x0C1D
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0C)
-  mem.write8(0x0003, 0xAE)
-  mem.write8(0x0C29, 0xA9)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xEC0D)
-  expect(cpu.r1.bc).toEqual(0xB57E)
-  expect(cpu.r1.de).toEqual(0x18C6)
-  expect(cpu.r1.hl).toEqual(0x7B01)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xBAC6)
-  expect(cpu.r1.iy).toEqual(0x0C1D)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbaf', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xB322
-  cpu.r1.bc = 0x6731
-  cpu.r1.de = 0xDAAD
-  cpu.r1.hl = 0x8D38
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xDD8F
-  cpu.r1.iy = 0x26EB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0D)
-  mem.write8(0x0003, 0xAF)
-  mem.write8(0x26F8, 0x44)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x4422)
-  expect(cpu.r1.bc).toEqual(0x6731)
-  expect(cpu.r1.de).toEqual(0xDAAD)
-  expect(cpu.r1.hl).toEqual(0x8D38)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xDD8F)
-  expect(cpu.r1.iy).toEqual(0x26EB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb0', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xB984
-  cpu.r1.bc = 0x796C
-  cpu.r1.de = 0x44B1
-  cpu.r1.hl = 0xFEF9
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4069
-  cpu.r1.iy = 0xA0CB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x5A)
-  mem.write8(0x0003, 0xB0)
-  mem.write8(0xA125, 0x76)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xB984)
-  expect(cpu.r1.bc).toEqual(0x366C)
-  expect(cpu.r1.de).toEqual(0x44B1)
-  expect(cpu.r1.hl).toEqual(0xFEF9)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4069)
-  expect(cpu.r1.iy).toEqual(0xA0CB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb1', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x59C3
-  cpu.r1.bc = 0xAB13
-  cpu.r1.de = 0x42EE
-  cpu.r1.hl = 0xB764
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8F7F
-  cpu.r1.iy = 0xF398
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x82)
-  mem.write8(0x0003, 0xB1)
-  mem.write8(0xF31A, 0x79)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x59C3)
-  expect(cpu.r1.bc).toEqual(0xAB39)
-  expect(cpu.r1.de).toEqual(0x42EE)
-  expect(cpu.r1.hl).toEqual(0xB764)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8F7F)
-  expect(cpu.r1.iy).toEqual(0xF398)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb2', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xF310
-  cpu.r1.bc = 0xCEEC
-  cpu.r1.de = 0xBBFB
-  cpu.r1.hl = 0x3569
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4A6F
-  cpu.r1.iy = 0x33F9
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x23)
-  mem.write8(0x0003, 0xB2)
-  mem.write8(0x341C, 0x7B)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xF310)
-  expect(cpu.r1.bc).toEqual(0xCEEC)
-  expect(cpu.r1.de).toEqual(0x3BFB)
-  expect(cpu.r1.hl).toEqual(0x3569)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4A6F)
-  expect(cpu.r1.iy).toEqual(0x33F9)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb3', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x9C05
-  cpu.r1.bc = 0x0F92
-  cpu.r1.de = 0xBD3B
-  cpu.r1.hl = 0x553D
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC75E
-  cpu.r1.iy = 0x51D2
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x6C)
-  mem.write8(0x0003, 0xB3)
-  mem.write8(0x523E, 0x37)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x9C05)
-  expect(cpu.r1.bc).toEqual(0x0F92)
-  expect(cpu.r1.de).toEqual(0xBD37)
-  expect(cpu.r1.hl).toEqual(0x553D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC75E)
-  expect(cpu.r1.iy).toEqual(0x51D2)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb4', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x3E55
-  cpu.r1.bc = 0x1338
-  cpu.r1.de = 0x638D
-  cpu.r1.hl = 0x353C
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x44AD
-  cpu.r1.iy = 0x4D17
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC5)
-  mem.write8(0x0003, 0xB4)
-  mem.write8(0x4CDC, 0xE9)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3E55)
-  expect(cpu.r1.bc).toEqual(0x1338)
-  expect(cpu.r1.de).toEqual(0x638D)
-  expect(cpu.r1.hl).toEqual(0xA93C)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x44AD)
-  expect(cpu.r1.iy).toEqual(0x4D17)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb5', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x2F3A
-  cpu.r1.bc = 0xB709
-  cpu.r1.de = 0x4167
-  cpu.r1.hl = 0x57BE
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB543
-  cpu.r1.iy = 0x8EDD
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x50)
-  mem.write8(0x0003, 0xB5)
-  mem.write8(0x8F2D, 0x0F)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x2F3A)
-  expect(cpu.r1.bc).toEqual(0xB709)
-  expect(cpu.r1.de).toEqual(0x4167)
-  expect(cpu.r1.hl).toEqual(0x570F)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB543)
-  expect(cpu.r1.iy).toEqual(0x8EDD)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb6', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xA887
-  cpu.r1.bc = 0x519B
-  cpu.r1.de = 0xC91B
-  cpu.r1.hl = 0xCC91
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xA416
-  cpu.r1.iy = 0x1E16
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x3A)
-  mem.write8(0x0003, 0xB6)
-  mem.write8(0x1E50, 0x13)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xA887)
-  expect(cpu.r1.bc).toEqual(0x519B)
-  expect(cpu.r1.de).toEqual(0xC91B)
-  expect(cpu.r1.hl).toEqual(0xCC91)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xA416)
-  expect(cpu.r1.iy).toEqual(0x1E16)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb7', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1335
-  cpu.r1.bc = 0xA599
-  cpu.r1.de = 0x9FBF
-  cpu.r1.hl = 0xC111
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8BC5
-  cpu.r1.iy = 0x00A9
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC0)
-  mem.write8(0x0003, 0xB7)
-  mem.write8(0x0069, 0x38)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3835)
-  expect(cpu.r1.bc).toEqual(0xA599)
-  expect(cpu.r1.de).toEqual(0x9FBF)
-  expect(cpu.r1.hl).toEqual(0xC111)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8BC5)
-  expect(cpu.r1.iy).toEqual(0x00A9)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb8', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xD146
-  cpu.r1.bc = 0x1138
-  cpu.r1.de = 0x1A45
-  cpu.r1.hl = 0x8259
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6A03
-  cpu.r1.iy = 0xD087
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x31)
-  mem.write8(0x0003, 0xB8)
-  mem.write8(0xD0B8, 0x17)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xD146)
-  expect(cpu.r1.bc).toEqual(0x1738)
-  expect(cpu.r1.de).toEqual(0x1A45)
-  expect(cpu.r1.hl).toEqual(0x8259)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6A03)
-  expect(cpu.r1.iy).toEqual(0xD087)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbb9', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x757B
-  cpu.r1.bc = 0x0B9E
-  cpu.r1.de = 0x767B
-  cpu.r1.hl = 0x2AD1
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1498
-  cpu.r1.iy = 0xB84E
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x3B)
-  mem.write8(0x0003, 0xB9)
-  mem.write8(0xB889, 0xB4)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x757B)
-  expect(cpu.r1.bc).toEqual(0x0B34)
-  expect(cpu.r1.de).toEqual(0x767B)
-  expect(cpu.r1.hl).toEqual(0x2AD1)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1498)
-  expect(cpu.r1.iy).toEqual(0xB84E)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbba', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x43EF
-  cpu.r1.bc = 0x1C58
-  cpu.r1.de = 0xDDA3
-  cpu.r1.hl = 0x4519
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xB67B
-  cpu.r1.iy = 0x383F
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x38)
-  mem.write8(0x0003, 0xBA)
-  mem.write8(0x3877, 0xD6)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x43EF)
-  expect(cpu.r1.bc).toEqual(0x1C58)
-  expect(cpu.r1.de).toEqual(0x56A3)
-  expect(cpu.r1.hl).toEqual(0x4519)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xB67B)
-  expect(cpu.r1.iy).toEqual(0x383F)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbbb', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xDCCB
-  cpu.r1.bc = 0x7AB3
-  cpu.r1.de = 0x7615
-  cpu.r1.hl = 0x4161
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2942
-  cpu.r1.iy = 0xE2FE
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x07)
-  mem.write8(0x0003, 0xBB)
-  mem.write8(0xE305, 0x6E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xDCCB)
-  expect(cpu.r1.bc).toEqual(0x7AB3)
-  expect(cpu.r1.de).toEqual(0x766E)
-  expect(cpu.r1.hl).toEqual(0x4161)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2942)
-  expect(cpu.r1.iy).toEqual(0xE2FE)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbbc', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x0E07
-  cpu.r1.bc = 0x34F5
-  cpu.r1.de = 0x0995
-  cpu.r1.hl = 0xCC42
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9D42
-  cpu.r1.iy = 0xAF0C
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF8)
-  mem.write8(0x0003, 0xBC)
-  mem.write8(0xAF04, 0xCF)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x0E07)
-  expect(cpu.r1.bc).toEqual(0x34F5)
-  expect(cpu.r1.de).toEqual(0x0995)
-  expect(cpu.r1.hl).toEqual(0x4F42)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9D42)
-  expect(cpu.r1.iy).toEqual(0xAF0C)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbbd', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x30EF
-  cpu.r1.bc = 0xE60C
-  cpu.r1.de = 0x9BF0
-  cpu.r1.hl = 0xA1BF
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xBD1C
-  cpu.r1.iy = 0xDF0D
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xAA)
-  mem.write8(0x0003, 0xBD)
-  mem.write8(0xDEB7, 0x8D)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x30EF)
-  expect(cpu.r1.bc).toEqual(0xE60C)
-  expect(cpu.r1.de).toEqual(0x9BF0)
-  expect(cpu.r1.hl).toEqual(0xA10D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xBD1C)
-  expect(cpu.r1.iy).toEqual(0xDF0D)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbbe', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1133
-  cpu.r1.bc = 0xBEF6
-  cpu.r1.de = 0x5059
-  cpu.r1.hl = 0x1089
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD558
-  cpu.r1.iy = 0x3D0F
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC8)
-  mem.write8(0x0003, 0xBE)
-  mem.write8(0x3CD7, 0xA1)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1133)
-  expect(cpu.r1.bc).toEqual(0xBEF6)
-  expect(cpu.r1.de).toEqual(0x5059)
-  expect(cpu.r1.hl).toEqual(0x1089)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD558)
-  expect(cpu.r1.iy).toEqual(0x3D0F)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbbf', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x83D6
-  cpu.r1.bc = 0xC893
-  cpu.r1.de = 0x8DB8
-  cpu.r1.hl = 0x716B
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0956
-  cpu.r1.iy = 0xBDE7
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xFD)
-  mem.write8(0x0003, 0xBF)
-  mem.write8(0xBDE4, 0xAC)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x2CD6)
-  expect(cpu.r1.bc).toEqual(0xC893)
-  expect(cpu.r1.de).toEqual(0x8DB8)
-  expect(cpu.r1.hl).toEqual(0x716B)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0956)
-  expect(cpu.r1.iy).toEqual(0xBDE7)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc0', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x3666
-  cpu.r1.bc = 0x676C
-  cpu.r1.de = 0x35E5
-  cpu.r1.hl = 0xDB0A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xEA93
-  cpu.r1.iy = 0x2B31
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x0A)
-  mem.write8(0x0003, 0xC0)
-  mem.write8(0x2B3B, 0xEC)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3666)
-  expect(cpu.r1.bc).toEqual(0xED6C)
-  expect(cpu.r1.de).toEqual(0x35E5)
-  expect(cpu.r1.hl).toEqual(0xDB0A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xEA93)
-  expect(cpu.r1.iy).toEqual(0x2B31)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc1', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x3902
-  cpu.r1.bc = 0xD498
-  cpu.r1.de = 0xAF62
-  cpu.r1.hl = 0x9821
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x48B8
-  cpu.r1.iy = 0xBD67
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x87)
-  mem.write8(0x0003, 0xC1)
-  mem.write8(0xBCEE, 0xEE)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3902)
-  expect(cpu.r1.bc).toEqual(0xD4EF)
-  expect(cpu.r1.de).toEqual(0xAF62)
-  expect(cpu.r1.hl).toEqual(0x9821)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x48B8)
-  expect(cpu.r1.iy).toEqual(0xBD67)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc2', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xAD26
-  cpu.r1.bc = 0x5A6D
-  cpu.r1.de = 0x6762
-  cpu.r1.hl = 0x16C9
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x495A
-  cpu.r1.iy = 0x5B2C
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x8D)
-  mem.write8(0x0003, 0xC2)
-  mem.write8(0x5AB9, 0xC2)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xAD26)
-  expect(cpu.r1.bc).toEqual(0x5A6D)
-  expect(cpu.r1.de).toEqual(0xC362)
-  expect(cpu.r1.hl).toEqual(0x16C9)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x495A)
-  expect(cpu.r1.iy).toEqual(0x5B2C)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc3', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x3E6C
-  cpu.r1.bc = 0x9A74
-  cpu.r1.de = 0xA2EE
-  cpu.r1.hl = 0x9838
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xEAFA
-  cpu.r1.iy = 0xE666
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x5A)
-  mem.write8(0x0003, 0xC3)
-  mem.write8(0xE6C0, 0x4F)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3E6C)
-  expect(cpu.r1.bc).toEqual(0x9A74)
-  expect(cpu.r1.de).toEqual(0xA24F)
-  expect(cpu.r1.hl).toEqual(0x9838)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xEAFA)
-  expect(cpu.r1.iy).toEqual(0xE666)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc4', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xBF68
-  cpu.r1.bc = 0xD00B
-  cpu.r1.de = 0x5283
-  cpu.r1.hl = 0x51C2
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x517C
-  cpu.r1.iy = 0x5D10
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x89)
-  mem.write8(0x0003, 0xC4)
-  mem.write8(0x5C99, 0x61)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xBF68)
-  expect(cpu.r1.bc).toEqual(0xD00B)
-  expect(cpu.r1.de).toEqual(0x5283)
-  expect(cpu.r1.hl).toEqual(0x61C2)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x517C)
-  expect(cpu.r1.iy).toEqual(0x5D10)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc5', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x127B
-  cpu.r1.bc = 0xDB6A
-  cpu.r1.de = 0x00B9
-  cpu.r1.hl = 0x5138
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x98F6
-  cpu.r1.iy = 0x02BB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA9)
-  mem.write8(0x0003, 0xC5)
-  mem.write8(0x0264, 0xCD)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x127B)
-  expect(cpu.r1.bc).toEqual(0xDB6A)
-  expect(cpu.r1.de).toEqual(0x00B9)
-  expect(cpu.r1.hl).toEqual(0x51CD)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x98F6)
-  expect(cpu.r1.iy).toEqual(0x02BB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc6', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x35DA
-  cpu.r1.bc = 0x98C2
-  cpu.r1.de = 0x3F57
-  cpu.r1.hl = 0x44A4
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2771
-  cpu.r1.iy = 0x76C4
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xEE)
-  mem.write8(0x0003, 0xC6)
-  mem.write8(0x76B2, 0x82)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x35DA)
-  expect(cpu.r1.bc).toEqual(0x98C2)
-  expect(cpu.r1.de).toEqual(0x3F57)
-  expect(cpu.r1.hl).toEqual(0x44A4)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2771)
-  expect(cpu.r1.iy).toEqual(0x76C4)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc7', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x763F
-  cpu.r1.bc = 0xB86F
-  cpu.r1.de = 0x12D3
-  cpu.r1.hl = 0x7E2D
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD870
-  cpu.r1.iy = 0xF30B
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9E)
-  mem.write8(0x0003, 0xC7)
-  mem.write8(0xF2A9, 0xD7)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xD73F)
-  expect(cpu.r1.bc).toEqual(0xB86F)
-  expect(cpu.r1.de).toEqual(0x12D3)
-  expect(cpu.r1.hl).toEqual(0x7E2D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD870)
-  expect(cpu.r1.iy).toEqual(0xF30B)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc8', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1F81
-  cpu.r1.bc = 0xC7C0
-  cpu.r1.de = 0x85DA
-  cpu.r1.hl = 0x3CDD
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD854
-  cpu.r1.iy = 0xC412
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x10)
-  mem.write8(0x0003, 0xC8)
-  mem.write8(0xC422, 0xE9)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1F81)
-  expect(cpu.r1.bc).toEqual(0xEBC0)
-  expect(cpu.r1.de).toEqual(0x85DA)
-  expect(cpu.r1.hl).toEqual(0x3CDD)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD854)
-  expect(cpu.r1.iy).toEqual(0xC412)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbc9', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xED19
-  cpu.r1.bc = 0x3F88
-  cpu.r1.de = 0x1370
-  cpu.r1.hl = 0xE084
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4FDD
-  cpu.r1.iy = 0x8B42
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x61)
-  mem.write8(0x0003, 0xC9)
-  mem.write8(0x8BA3, 0xB7)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xED19)
-  expect(cpu.r1.bc).toEqual(0x3FB7)
-  expect(cpu.r1.de).toEqual(0x1370)
-  expect(cpu.r1.hl).toEqual(0xE084)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4FDD)
-  expect(cpu.r1.iy).toEqual(0x8B42)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbca', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xC7E5
-  cpu.r1.bc = 0x233B
-  cpu.r1.de = 0x2312
-  cpu.r1.hl = 0xF7F9
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE417
-  cpu.r1.iy = 0x5190
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x1A)
-  mem.write8(0x0003, 0xCA)
-  mem.write8(0x51AA, 0x90)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xC7E5)
-  expect(cpu.r1.bc).toEqual(0x233B)
-  expect(cpu.r1.de).toEqual(0x9212)
-  expect(cpu.r1.hl).toEqual(0xF7F9)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE417)
-  expect(cpu.r1.iy).toEqual(0x5190)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbcb', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xBDBA
-  cpu.r1.bc = 0xA964
-  cpu.r1.de = 0xEA38
-  cpu.r1.hl = 0x9422
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFCA3
-  cpu.r1.iy = 0x9A72
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x5E)
-  mem.write8(0x0003, 0xCB)
-  mem.write8(0x9AD0, 0x70)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xBDBA)
-  expect(cpu.r1.bc).toEqual(0xA964)
-  expect(cpu.r1.de).toEqual(0xEA72)
-  expect(cpu.r1.hl).toEqual(0x9422)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFCA3)
-  expect(cpu.r1.iy).toEqual(0x9A72)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbcc', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x0F4F
-  cpu.r1.bc = 0x0261
-  cpu.r1.de = 0x21B0
-  cpu.r1.hl = 0x2097
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x575D
-  cpu.r1.iy = 0x14F9
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x2D)
-  mem.write8(0x0003, 0xCC)
-  mem.write8(0x1526, 0x4E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x0F4F)
-  expect(cpu.r1.bc).toEqual(0x0261)
-  expect(cpu.r1.de).toEqual(0x21B0)
-  expect(cpu.r1.hl).toEqual(0x4E97)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x575D)
-  expect(cpu.r1.iy).toEqual(0x14F9)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbcd', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1B79
-  cpu.r1.bc = 0x8F9F
-  cpu.r1.de = 0x31BF
-  cpu.r1.hl = 0x9CA6
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7ECB
-  cpu.r1.iy = 0xBBE9
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xA1)
-  mem.write8(0x0003, 0xCD)
-  mem.write8(0xBB8A, 0x66)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1B79)
-  expect(cpu.r1.bc).toEqual(0x8F9F)
-  expect(cpu.r1.de).toEqual(0x31BF)
-  expect(cpu.r1.hl).toEqual(0x9C66)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7ECB)
-  expect(cpu.r1.iy).toEqual(0xBBE9)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbce', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x8E13
-  cpu.r1.bc = 0x968E
-  cpu.r1.de = 0x1784
-  cpu.r1.hl = 0x0A0A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1E87
-  cpu.r1.iy = 0xB8A2
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x36)
-  mem.write8(0x0003, 0xCE)
-  mem.write8(0xB8D8, 0x45)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8E13)
-  expect(cpu.r1.bc).toEqual(0x968E)
-  expect(cpu.r1.de).toEqual(0x1784)
-  expect(cpu.r1.hl).toEqual(0x0A0A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1E87)
-  expect(cpu.r1.iy).toEqual(0xB8A2)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbcf', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x8D0A
-  cpu.r1.bc = 0xA073
-  cpu.r1.de = 0xC4BA
-  cpu.r1.hl = 0x5B69
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3B47
-  cpu.r1.iy = 0xC29C
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x70)
-  mem.write8(0x0003, 0xCF)
-  mem.write8(0xC30C, 0x7A)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7A0A)
-  expect(cpu.r1.bc).toEqual(0xA073)
-  expect(cpu.r1.de).toEqual(0xC4BA)
-  expect(cpu.r1.hl).toEqual(0x5B69)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3B47)
-  expect(cpu.r1.iy).toEqual(0xC29C)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd0', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xE2BB
-  cpu.r1.bc = 0x8635
-  cpu.r1.de = 0x650C
-  cpu.r1.hl = 0x689A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1294
-  cpu.r1.iy = 0x3BEB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xBC)
-  mem.write8(0x0003, 0xD0)
-  mem.write8(0x3BA7, 0x20)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xE2BB)
-  expect(cpu.r1.bc).toEqual(0x2435)
-  expect(cpu.r1.de).toEqual(0x650C)
-  expect(cpu.r1.hl).toEqual(0x689A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1294)
-  expect(cpu.r1.iy).toEqual(0x3BEB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd1', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5DF8
-  cpu.r1.bc = 0xF701
-  cpu.r1.de = 0x9494
-  cpu.r1.hl = 0x4967
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xAD00
-  cpu.r1.iy = 0x8C65
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x11)
-  mem.write8(0x0003, 0xD1)
-  mem.write8(0x8C76, 0xB9)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x5DF8)
-  expect(cpu.r1.bc).toEqual(0xF7BD)
-  expect(cpu.r1.de).toEqual(0x9494)
-  expect(cpu.r1.hl).toEqual(0x4967)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xAD00)
-  expect(cpu.r1.iy).toEqual(0x8C65)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd2', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x9876
-  cpu.r1.bc = 0x4BD9
-  cpu.r1.de = 0x3148
-  cpu.r1.hl = 0x665A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7EAC
-  cpu.r1.iy = 0xC051
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xFB)
-  mem.write8(0x0003, 0xD2)
-  mem.write8(0xC04C, 0x51)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x9876)
-  expect(cpu.r1.bc).toEqual(0x4BD9)
-  expect(cpu.r1.de).toEqual(0x5548)
-  expect(cpu.r1.hl).toEqual(0x665A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7EAC)
-  expect(cpu.r1.iy).toEqual(0xC051)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd3', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x8F90
-  cpu.r1.bc = 0xBACD
-  cpu.r1.de = 0xE87A
-  cpu.r1.hl = 0x538F
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFE5A
-  cpu.r1.iy = 0x0A87
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x3E)
-  mem.write8(0x0003, 0xD3)
-  mem.write8(0x0AC5, 0xE0)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x8F90)
-  expect(cpu.r1.bc).toEqual(0xBACD)
-  expect(cpu.r1.de).toEqual(0xE8E4)
-  expect(cpu.r1.hl).toEqual(0x538F)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFE5A)
-  expect(cpu.r1.iy).toEqual(0x0A87)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd4', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x15E2
-  cpu.r1.bc = 0x1820
-  cpu.r1.de = 0x5588
-  cpu.r1.hl = 0xE67F
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x7193
-  cpu.r1.iy = 0x9478
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x36)
-  mem.write8(0x0003, 0xD4)
-  mem.write8(0x94AE, 0x7D)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x15E2)
-  expect(cpu.r1.bc).toEqual(0x1820)
-  expect(cpu.r1.de).toEqual(0x5588)
-  expect(cpu.r1.hl).toEqual(0x7D7F)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x7193)
-  expect(cpu.r1.iy).toEqual(0x9478)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd5', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1409
-  cpu.r1.bc = 0x6535
-  cpu.r1.de = 0xC371
-  cpu.r1.hl = 0xABE2
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2E10
-  cpu.r1.iy = 0x8608
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x48)
-  mem.write8(0x0003, 0xD5)
-  mem.write8(0x8650, 0x98)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1409)
-  expect(cpu.r1.bc).toEqual(0x6535)
-  expect(cpu.r1.de).toEqual(0xC371)
-  expect(cpu.r1.hl).toEqual(0xAB9C)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2E10)
-  expect(cpu.r1.iy).toEqual(0x8608)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd6', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x7801
-  cpu.r1.bc = 0x78B6
-  cpu.r1.de = 0xD191
-  cpu.r1.hl = 0x054A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2065
-  cpu.r1.iy = 0x6AA3
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xC9)
-  mem.write8(0x0003, 0xD6)
-  mem.write8(0x6A6C, 0x7C)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7801)
-  expect(cpu.r1.bc).toEqual(0x78B6)
-  expect(cpu.r1.de).toEqual(0xD191)
-  expect(cpu.r1.hl).toEqual(0x054A)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2065)
-  expect(cpu.r1.iy).toEqual(0x6AA3)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd7', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1B6A
-  cpu.r1.bc = 0x266E
-  cpu.r1.de = 0x387F
-  cpu.r1.hl = 0x7FCB
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1941
-  cpu.r1.iy = 0x36AB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xBE)
-  mem.write8(0x0003, 0xD7)
-  mem.write8(0x3669, 0x95)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x956A)
-  expect(cpu.r1.bc).toEqual(0x266E)
-  expect(cpu.r1.de).toEqual(0x387F)
-  expect(cpu.r1.hl).toEqual(0x7FCB)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1941)
-  expect(cpu.r1.iy).toEqual(0x36AB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd8', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x7B1B
-  cpu.r1.bc = 0xA191
-  cpu.r1.de = 0xEFEE
-  cpu.r1.hl = 0x55B9
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF789
-  cpu.r1.iy = 0x43F8
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xBC)
-  mem.write8(0x0003, 0xD8)
-  mem.write8(0x43B4, 0xD8)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7B1B)
-  expect(cpu.r1.bc).toEqual(0xD891)
-  expect(cpu.r1.de).toEqual(0xEFEE)
-  expect(cpu.r1.hl).toEqual(0x55B9)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF789)
-  expect(cpu.r1.iy).toEqual(0x43F8)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbd9', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x0FAF
-  cpu.r1.bc = 0x4EDA
-  cpu.r1.de = 0xC556
-  cpu.r1.hl = 0x6ED3
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x3FC3
-  cpu.r1.iy = 0x0A66
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x16)
-  mem.write8(0x0003, 0xD9)
-  mem.write8(0x0A7C, 0xF4)
+  mem.write8(0x0003, 0xAB)
+  mem.write8(0x6698, 0xEB)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10014,43 +7898,43 @@ test('Test fdcbd9', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x0FAF)
-  expect(cpu.r1.bc).toEqual(0x4EFC)
-  expect(cpu.r1.de).toEqual(0xC556)
-  expect(cpu.r1.hl).toEqual(0x6ED3)
+  expect(cpu.r1.af).toEqual(0x2EB4)
+  expect(cpu.r1.bc).toEqual(0x36F1)
+  expect(cpu.r1.de).toEqual(0x8FCB)
+  expect(cpu.r1.hl).toEqual(0x36AF)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x3FC3)
-  expect(cpu.r1.iy).toEqual(0x0A66)
+  expect(cpu.r1.ix).toEqual(0x6682)
+  expect(cpu.r1.iy).toEqual(0x9D60)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbda', () => {
+test('Test ddcbac', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x9EA1
-  cpu.r1.bc = 0x8186
-  cpu.r1.de = 0xC045
-  cpu.r1.hl = 0xD6E0
+  cpu.r1.af = 0xAF32
+  cpu.r1.bc = 0x8CA8
+  cpu.r1.de = 0x6558
+  cpu.r1.hl = 0x06D9
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x34D3
-  cpu.r1.iy = 0xD0F0
+  cpu.r1.ix = 0xA4DD
+  cpu.r1.iy = 0xCD1F
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE8)
-  mem.write8(0x0003, 0xDA)
-  mem.write8(0xD0D8, 0x6B)
+  mem.write8(0x0002, 0xC4)
+  mem.write8(0x0003, 0xAC)
+  mem.write8(0xA4A1, 0x44)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10060,43 +7944,43 @@ test('Test fdcbda', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x9EA1)
-  expect(cpu.r1.bc).toEqual(0x8186)
-  expect(cpu.r1.de).toEqual(0x6B45)
-  expect(cpu.r1.hl).toEqual(0xD6E0)
+  expect(cpu.r1.af).toEqual(0xAF32)
+  expect(cpu.r1.bc).toEqual(0x8CA8)
+  expect(cpu.r1.de).toEqual(0x6558)
+  expect(cpu.r1.hl).toEqual(0x44D9)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x34D3)
-  expect(cpu.r1.iy).toEqual(0xD0F0)
+  expect(cpu.r1.ix).toEqual(0xA4DD)
+  expect(cpu.r1.iy).toEqual(0xCD1F)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbdb', () => {
+test('Test ddcbad', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x5EE0
-  cpu.r1.bc = 0xBDEA
-  cpu.r1.de = 0xD00E
-  cpu.r1.hl = 0x513F
+  cpu.r1.af = 0xFCC9
+  cpu.r1.bc = 0x69A7
+  cpu.r1.de = 0x0EED
+  cpu.r1.hl = 0xEAB5
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x690A
-  cpu.r1.iy = 0x8C29
+  cpu.r1.ix = 0xEEF5
+  cpu.r1.iy = 0x3ED2
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x7A)
-  mem.write8(0x0003, 0xDB)
-  mem.write8(0x8CA3, 0x15)
+  mem.write8(0x0002, 0x49)
+  mem.write8(0x0003, 0xAD)
+  mem.write8(0xEF3E, 0x76)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10106,43 +7990,43 @@ test('Test fdcbdb', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5EE0)
-  expect(cpu.r1.bc).toEqual(0xBDEA)
-  expect(cpu.r1.de).toEqual(0xD01D)
-  expect(cpu.r1.hl).toEqual(0x513F)
+  expect(cpu.r1.af).toEqual(0xFCC9)
+  expect(cpu.r1.bc).toEqual(0x69A7)
+  expect(cpu.r1.de).toEqual(0x0EED)
+  expect(cpu.r1.hl).toEqual(0xEA56)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x690A)
-  expect(cpu.r1.iy).toEqual(0x8C29)
+  expect(cpu.r1.ix).toEqual(0xEEF5)
+  expect(cpu.r1.iy).toEqual(0x3ED2)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbdc', () => {
+test('Test ddcbae', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x5CFA
-  cpu.r1.bc = 0x2E2B
-  cpu.r1.de = 0x1D17
-  cpu.r1.hl = 0xDBF6
+  cpu.r1.af = 0x5F7A
+  cpu.r1.bc = 0x9C20
+  cpu.r1.de = 0xF013
+  cpu.r1.hl = 0xC4B7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xA4F2
-  cpu.r1.iy = 0x593A
+  cpu.r1.ix = 0xB306
+  cpu.r1.iy = 0x15DD
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x64)
-  mem.write8(0x0003, 0xDC)
-  mem.write8(0x599E, 0x15)
+  mem.write8(0x0002, 0x6E)
+  mem.write8(0x0003, 0xAE)
+  mem.write8(0xB374, 0x5A)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10152,43 +8036,43 @@ test('Test fdcbdc', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x5CFA)
-  expect(cpu.r1.bc).toEqual(0x2E2B)
-  expect(cpu.r1.de).toEqual(0x1D17)
-  expect(cpu.r1.hl).toEqual(0x1DF6)
+  expect(cpu.r1.af).toEqual(0x5F7A)
+  expect(cpu.r1.bc).toEqual(0x9C20)
+  expect(cpu.r1.de).toEqual(0xF013)
+  expect(cpu.r1.hl).toEqual(0xC4B7)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xA4F2)
-  expect(cpu.r1.iy).toEqual(0x593A)
+  expect(cpu.r1.ix).toEqual(0xB306)
+  expect(cpu.r1.iy).toEqual(0x15DD)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbdd', () => {
+test('Test ddcbaf', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8773
-  cpu.r1.bc = 0x70A6
-  cpu.r1.de = 0x83CE
-  cpu.r1.hl = 0x52B8
+  cpu.r1.af = 0xB11E
+  cpu.r1.bc = 0x2583
+  cpu.r1.de = 0x51FA
+  cpu.r1.hl = 0xD427
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x35DA
-  cpu.r1.iy = 0x1D94
+  cpu.r1.ix = 0x3619
+  cpu.r1.iy = 0x9CEF
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x75)
-  mem.write8(0x0003, 0xDD)
-  mem.write8(0x1E09, 0x28)
+  mem.write8(0x0002, 0xC2)
+  mem.write8(0x0003, 0xAF)
+  mem.write8(0x35DB, 0x15)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10198,43 +8082,43 @@ test('Test fdcbdd', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x8773)
-  expect(cpu.r1.bc).toEqual(0x70A6)
-  expect(cpu.r1.de).toEqual(0x83CE)
-  expect(cpu.r1.hl).toEqual(0x5228)
+  expect(cpu.r1.af).toEqual(0x151E)
+  expect(cpu.r1.bc).toEqual(0x2583)
+  expect(cpu.r1.de).toEqual(0x51FA)
+  expect(cpu.r1.hl).toEqual(0xD427)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x35DA)
-  expect(cpu.r1.iy).toEqual(0x1D94)
+  expect(cpu.r1.ix).toEqual(0x3619)
+  expect(cpu.r1.iy).toEqual(0x9CEF)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbde', () => {
+test('Test ddcbb0', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8310
-  cpu.r1.bc = 0xFA01
-  cpu.r1.de = 0x6C69
-  cpu.r1.hl = 0x252A
+  cpu.r1.af = 0xF43E
+  cpu.r1.bc = 0xCE57
+  cpu.r1.de = 0x3BF3
+  cpu.r1.hl = 0x0933
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x5291
-  cpu.r1.iy = 0xC9E0
+  cpu.r1.ix = 0x58D7
+  cpu.r1.iy = 0xD89F
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x17)
-  mem.write8(0x0003, 0xDE)
-  mem.write8(0xC9F7, 0x41)
+  mem.write8(0x0002, 0x47)
+  mem.write8(0x0003, 0xB0)
+  mem.write8(0x591E, 0x1E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10244,43 +8128,43 @@ test('Test fdcbde', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x8310)
-  expect(cpu.r1.bc).toEqual(0xFA01)
-  expect(cpu.r1.de).toEqual(0x6C69)
-  expect(cpu.r1.hl).toEqual(0x252A)
+  expect(cpu.r1.af).toEqual(0xF43E)
+  expect(cpu.r1.bc).toEqual(0x1E57)
+  expect(cpu.r1.de).toEqual(0x3BF3)
+  expect(cpu.r1.hl).toEqual(0x0933)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x5291)
-  expect(cpu.r1.iy).toEqual(0xC9E0)
+  expect(cpu.r1.ix).toEqual(0x58D7)
+  expect(cpu.r1.iy).toEqual(0xD89F)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbdf', () => {
+test('Test ddcbb1', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x780D
-  cpu.r1.bc = 0xA722
-  cpu.r1.de = 0xE78E
-  cpu.r1.hl = 0x50BA
+  cpu.r1.af = 0x35EF
+  cpu.r1.bc = 0xBBBC
+  cpu.r1.de = 0xDB46
+  cpu.r1.hl = 0x046C
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x9D67
-  cpu.r1.iy = 0xEAC3
+  cpu.r1.ix = 0xADD2
+  cpu.r1.iy = 0x2B6E
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x93)
-  mem.write8(0x0003, 0xDF)
-  mem.write8(0xEA56, 0xEF)
+  mem.write8(0x0002, 0x86)
+  mem.write8(0x0003, 0xB1)
+  mem.write8(0xAD58, 0x46)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10290,43 +8174,365 @@ test('Test fdcbdf', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xEF0D)
-  expect(cpu.r1.bc).toEqual(0xA722)
-  expect(cpu.r1.de).toEqual(0xE78E)
-  expect(cpu.r1.hl).toEqual(0x50BA)
+  expect(cpu.r1.af).toEqual(0x35EF)
+  expect(cpu.r1.bc).toEqual(0xBB06)
+  expect(cpu.r1.de).toEqual(0xDB46)
+  expect(cpu.r1.hl).toEqual(0x046C)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x9D67)
-  expect(cpu.r1.iy).toEqual(0xEAC3)
+  expect(cpu.r1.ix).toEqual(0xADD2)
+  expect(cpu.r1.iy).toEqual(0x2B6E)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbe0', () => {
+test('Test ddcbb2', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x10EF
-  cpu.r1.bc = 0x4101
-  cpu.r1.de = 0x2CA5
-  cpu.r1.hl = 0xF752
+  cpu.r1.af = 0xC26C
+  cpu.r1.bc = 0xFD32
+  cpu.r1.de = 0x9B7F
+  cpu.r1.hl = 0xAB6C
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4747
-  cpu.r1.iy = 0x1507
+  cpu.r1.ix = 0xE7D0
+  cpu.r1.iy = 0x501F
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x70)
+  mem.write8(0x0003, 0xB2)
+  mem.write8(0xE840, 0x48)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC26C)
+  expect(cpu.r1.bc).toEqual(0xFD32)
+  expect(cpu.r1.de).toEqual(0x087F)
+  expect(cpu.r1.hl).toEqual(0xAB6C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xE7D0)
+  expect(cpu.r1.iy).toEqual(0x501F)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbb3', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x36CA
+  cpu.r1.bc = 0xB434
+  cpu.r1.de = 0xE212
+  cpu.r1.hl = 0xF805
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x53FB
+  cpu.r1.iy = 0xB191
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xDE)
+  mem.write8(0x0003, 0xB3)
+  mem.write8(0x53D9, 0x06)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x36CA)
+  expect(cpu.r1.bc).toEqual(0xB434)
+  expect(cpu.r1.de).toEqual(0xE206)
+  expect(cpu.r1.hl).toEqual(0xF805)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x53FB)
+  expect(cpu.r1.iy).toEqual(0xB191)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbb4', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x0A1C
+  cpu.r1.bc = 0xAB67
+  cpu.r1.de = 0x9CA1
+  cpu.r1.hl = 0x2F98
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5066
+  cpu.r1.iy = 0x320C
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x6B)
+  mem.write8(0x0003, 0xB4)
+  mem.write8(0x50D1, 0xDD)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x0A1C)
+  expect(cpu.r1.bc).toEqual(0xAB67)
+  expect(cpu.r1.de).toEqual(0x9CA1)
+  expect(cpu.r1.hl).toEqual(0x9D98)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5066)
+  expect(cpu.r1.iy).toEqual(0x320C)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbb5', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xFD6D
+  cpu.r1.bc = 0x51C9
+  cpu.r1.de = 0x16D6
+  cpu.r1.hl = 0x1373
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x146E
+  cpu.r1.iy = 0x2148
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xEC)
+  mem.write8(0x0003, 0xB5)
+  mem.write8(0x145A, 0xD6)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xFD6D)
+  expect(cpu.r1.bc).toEqual(0x51C9)
+  expect(cpu.r1.de).toEqual(0x16D6)
+  expect(cpu.r1.hl).toEqual(0x1396)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x146E)
+  expect(cpu.r1.iy).toEqual(0x2148)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbb6', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x1D0B
+  cpu.r1.bc = 0x04E8
+  cpu.r1.de = 0x109E
+  cpu.r1.hl = 0x1DDE
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x8772
+  cpu.r1.iy = 0x8661
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x15)
+  mem.write8(0x0003, 0xB6)
+  mem.write8(0x8787, 0x8C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x1D0B)
+  expect(cpu.r1.bc).toEqual(0x04E8)
+  expect(cpu.r1.de).toEqual(0x109E)
+  expect(cpu.r1.hl).toEqual(0x1DDE)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x8772)
+  expect(cpu.r1.iy).toEqual(0x8661)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbb7', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xF012
+  cpu.r1.bc = 0xB87E
+  cpu.r1.de = 0x65BA
+  cpu.r1.hl = 0xA5C8
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6120
+  cpu.r1.iy = 0x789D
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xD3)
+  mem.write8(0x0003, 0xB7)
+  mem.write8(0x60F3, 0x54)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x1412)
+  expect(cpu.r1.bc).toEqual(0xB87E)
+  expect(cpu.r1.de).toEqual(0x65BA)
+  expect(cpu.r1.hl).toEqual(0xA5C8)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6120)
+  expect(cpu.r1.iy).toEqual(0x789D)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbb8', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x8EAE
+  cpu.r1.bc = 0x4A53
+  cpu.r1.de = 0xBFA1
+  cpu.r1.hl = 0x5E7E
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x0BF6
+  cpu.r1.iy = 0x1E35
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x13)
+  mem.write8(0x0003, 0xB8)
+  mem.write8(0x0C09, 0x87)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x8EAE)
+  expect(cpu.r1.bc).toEqual(0x0753)
+  expect(cpu.r1.de).toEqual(0xBFA1)
+  expect(cpu.r1.hl).toEqual(0x5E7E)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x0BF6)
+  expect(cpu.r1.iy).toEqual(0x1E35)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbb9', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x5FB7
+  cpu.r1.bc = 0xA81E
+  cpu.r1.de = 0xE2D2
+  cpu.r1.hl = 0x4117
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x0564
+  cpu.r1.iy = 0x48A1
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x56)
-  mem.write8(0x0003, 0xE0)
-  mem.write8(0x155D, 0xB9)
+  mem.write8(0x0003, 0xB9)
+  mem.write8(0x05BA, 0xC8)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10336,43 +8542,43 @@ test('Test fdcbe0', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x10EF)
-  expect(cpu.r1.bc).toEqual(0xB901)
-  expect(cpu.r1.de).toEqual(0x2CA5)
-  expect(cpu.r1.hl).toEqual(0xF752)
+  expect(cpu.r1.af).toEqual(0x5FB7)
+  expect(cpu.r1.bc).toEqual(0xA848)
+  expect(cpu.r1.de).toEqual(0xE2D2)
+  expect(cpu.r1.hl).toEqual(0x4117)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4747)
-  expect(cpu.r1.iy).toEqual(0x1507)
+  expect(cpu.r1.ix).toEqual(0x0564)
+  expect(cpu.r1.iy).toEqual(0x48A1)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbe1', () => {
+test('Test ddcbba', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xE4CB
-  cpu.r1.bc = 0x6F72
-  cpu.r1.de = 0x1C11
-  cpu.r1.hl = 0x1426
+  cpu.r1.af = 0x7F6A
+  cpu.r1.bc = 0x47FE
+  cpu.r1.de = 0xCE45
+  cpu.r1.hl = 0x75DE
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x189B
-  cpu.r1.iy = 0x0E0D
+  cpu.r1.ix = 0xF5E0
+  cpu.r1.iy = 0x032C
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD1)
-  mem.write8(0x0003, 0xE1)
-  mem.write8(0x0DDE, 0x16)
+  mem.write8(0x0002, 0x86)
+  mem.write8(0x0003, 0xBA)
+  mem.write8(0xF566, 0x30)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10382,43 +8588,43 @@ test('Test fdcbe1', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xE4CB)
-  expect(cpu.r1.bc).toEqual(0x6F16)
-  expect(cpu.r1.de).toEqual(0x1C11)
-  expect(cpu.r1.hl).toEqual(0x1426)
+  expect(cpu.r1.af).toEqual(0x7F6A)
+  expect(cpu.r1.bc).toEqual(0x47FE)
+  expect(cpu.r1.de).toEqual(0x3045)
+  expect(cpu.r1.hl).toEqual(0x75DE)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x189B)
-  expect(cpu.r1.iy).toEqual(0x0E0D)
+  expect(cpu.r1.ix).toEqual(0xF5E0)
+  expect(cpu.r1.iy).toEqual(0x032C)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbe2', () => {
+test('Test ddcbbb', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x11A9
-  cpu.r1.bc = 0xBAE8
-  cpu.r1.de = 0x938B
-  cpu.r1.hl = 0xBAC4
+  cpu.r1.af = 0xC7E3
+  cpu.r1.bc = 0xE49E
+  cpu.r1.de = 0x9EC5
+  cpu.r1.hl = 0x07E7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD8ED
-  cpu.r1.iy = 0xE49C
+  cpu.r1.ix = 0xBD31
+  cpu.r1.iy = 0x9D5F
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x50)
-  mem.write8(0x0003, 0xE2)
-  mem.write8(0xE4EC, 0xC2)
+  mem.write8(0x0002, 0xEF)
+  mem.write8(0x0003, 0xBB)
+  mem.write8(0xBD20, 0xC9)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10428,43 +8634,43 @@ test('Test fdcbe2', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x11A9)
-  expect(cpu.r1.bc).toEqual(0xBAE8)
-  expect(cpu.r1.de).toEqual(0xD28B)
-  expect(cpu.r1.hl).toEqual(0xBAC4)
+  expect(cpu.r1.af).toEqual(0xC7E3)
+  expect(cpu.r1.bc).toEqual(0xE49E)
+  expect(cpu.r1.de).toEqual(0x9E49)
+  expect(cpu.r1.hl).toEqual(0x07E7)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD8ED)
-  expect(cpu.r1.iy).toEqual(0xE49C)
+  expect(cpu.r1.ix).toEqual(0xBD31)
+  expect(cpu.r1.iy).toEqual(0x9D5F)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbe3', () => {
+test('Test ddcbbc', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x8832
-  cpu.r1.bc = 0x952B
-  cpu.r1.de = 0x02B2
-  cpu.r1.hl = 0x26EF
+  cpu.r1.af = 0xB430
+  cpu.r1.bc = 0x7AC7
+  cpu.r1.de = 0xB45F
+  cpu.r1.hl = 0xFBF7
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xFB55
-  cpu.r1.iy = 0xADA8
+  cpu.r1.ix = 0x638E
+  cpu.r1.iy = 0x3173
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xCA)
-  mem.write8(0x0003, 0xE3)
-  mem.write8(0xAD72, 0xBA)
+  mem.write8(0x0002, 0xC0)
+  mem.write8(0x0003, 0xBC)
+  mem.write8(0x634E, 0x28)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10474,43 +8680,1837 @@ test('Test fdcbe3', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x8832)
-  expect(cpu.r1.bc).toEqual(0x952B)
-  expect(cpu.r1.de).toEqual(0x02BA)
-  expect(cpu.r1.hl).toEqual(0x26EF)
+  expect(cpu.r1.af).toEqual(0xB430)
+  expect(cpu.r1.bc).toEqual(0x7AC7)
+  expect(cpu.r1.de).toEqual(0xB45F)
+  expect(cpu.r1.hl).toEqual(0x28F7)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xFB55)
-  expect(cpu.r1.iy).toEqual(0xADA8)
+  expect(cpu.r1.ix).toEqual(0x638E)
+  expect(cpu.r1.iy).toEqual(0x3173)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbe4', () => {
+test('Test ddcbbd', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0x3989
-  cpu.r1.bc = 0x4142
-  cpu.r1.de = 0x89E2
-  cpu.r1.hl = 0x785B
+  cpu.r1.af = 0x4E71
+  cpu.r1.bc = 0x6FFA
+  cpu.r1.de = 0xA3F9
+  cpu.r1.hl = 0xA2E5
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x0BF7
-  cpu.r1.iy = 0x5474
+  cpu.r1.ix = 0xE3C4
+  cpu.r1.iy = 0x02D4
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xB9)
+  mem.write8(0x0003, 0xBD)
+  mem.write8(0xE37D, 0xDD)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4E71)
+  expect(cpu.r1.bc).toEqual(0x6FFA)
+  expect(cpu.r1.de).toEqual(0xA3F9)
+  expect(cpu.r1.hl).toEqual(0xA25D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xE3C4)
+  expect(cpu.r1.iy).toEqual(0x02D4)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbbe', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4AF8
+  cpu.r1.bc = 0x99A5
+  cpu.r1.de = 0xD6FD
+  cpu.r1.hl = 0x7A16
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x58D3
+  cpu.r1.iy = 0xCE54
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x4D)
+  mem.write8(0x0003, 0xBE)
+  mem.write8(0x5920, 0xE8)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4AF8)
+  expect(cpu.r1.bc).toEqual(0x99A5)
+  expect(cpu.r1.de).toEqual(0xD6FD)
+  expect(cpu.r1.hl).toEqual(0x7A16)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x58D3)
+  expect(cpu.r1.iy).toEqual(0xCE54)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbbf', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x6E31
+  cpu.r1.bc = 0x0320
+  cpu.r1.de = 0x134B
+  cpu.r1.hl = 0x77C3
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1734
+  cpu.r1.iy = 0xBC2D
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x26)
+  mem.write8(0x0003, 0xBF)
+  mem.write8(0x175A, 0xE2)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x6231)
+  expect(cpu.r1.bc).toEqual(0x0320)
+  expect(cpu.r1.de).toEqual(0x134B)
+  expect(cpu.r1.hl).toEqual(0x77C3)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1734)
+  expect(cpu.r1.iy).toEqual(0xBC2D)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc0', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x75BE
+  cpu.r1.bc = 0x2B93
+  cpu.r1.de = 0x093D
+  cpu.r1.hl = 0x1128
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x792E
+  cpu.r1.iy = 0x31F7
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x00)
+  mem.write8(0x0003, 0xC0)
+  mem.write8(0x792E, 0x92)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x75BE)
+  expect(cpu.r1.bc).toEqual(0x9393)
+  expect(cpu.r1.de).toEqual(0x093D)
+  expect(cpu.r1.hl).toEqual(0x1128)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x792E)
+  expect(cpu.r1.iy).toEqual(0x31F7)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc1', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x313F
+  cpu.r1.bc = 0x8223
+  cpu.r1.de = 0x5FCC
+  cpu.r1.hl = 0x42C8
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDCCC
+  cpu.r1.iy = 0xD87B
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xF7)
+  mem.write8(0x0003, 0xC1)
+  mem.write8(0xDCC3, 0x1C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x313F)
+  expect(cpu.r1.bc).toEqual(0x821D)
+  expect(cpu.r1.de).toEqual(0x5FCC)
+  expect(cpu.r1.hl).toEqual(0x42C8)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xDCCC)
+  expect(cpu.r1.iy).toEqual(0xD87B)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc2', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xA7E3
+  cpu.r1.bc = 0xBF55
+  cpu.r1.de = 0xD27B
+  cpu.r1.hl = 0x0A9D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x0CFA
+  cpu.r1.iy = 0xEA4E
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x85)
+  mem.write8(0x0003, 0xC2)
+  mem.write8(0x0C7F, 0x30)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xA7E3)
+  expect(cpu.r1.bc).toEqual(0xBF55)
+  expect(cpu.r1.de).toEqual(0x317B)
+  expect(cpu.r1.hl).toEqual(0x0A9D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x0CFA)
+  expect(cpu.r1.iy).toEqual(0xEA4E)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc3', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xE076
+  cpu.r1.bc = 0x2760
+  cpu.r1.de = 0x1EEC
+  cpu.r1.hl = 0x9968
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5426
+  cpu.r1.iy = 0xA1A0
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x32)
+  mem.write8(0x0003, 0xC3)
+  mem.write8(0x5458, 0xDD)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xE076)
+  expect(cpu.r1.bc).toEqual(0x2760)
+  expect(cpu.r1.de).toEqual(0x1EDD)
+  expect(cpu.r1.hl).toEqual(0x9968)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5426)
+  expect(cpu.r1.iy).toEqual(0xA1A0)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc4', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xA679
+  cpu.r1.bc = 0xCC05
+  cpu.r1.de = 0x3F4D
+  cpu.r1.hl = 0xC899
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x7ACD
+  cpu.r1.iy = 0x48D7
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xAE)
+  mem.write8(0x0003, 0xC4)
+  mem.write8(0x7A7B, 0x27)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xA679)
+  expect(cpu.r1.bc).toEqual(0xCC05)
+  expect(cpu.r1.de).toEqual(0x3F4D)
+  expect(cpu.r1.hl).toEqual(0x2799)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x7ACD)
+  expect(cpu.r1.iy).toEqual(0x48D7)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc5', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xDDFD
+  cpu.r1.bc = 0x64D4
+  cpu.r1.de = 0x2671
+  cpu.r1.hl = 0x35E7
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xBA99
+  cpu.r1.iy = 0xBD98
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x9C)
+  mem.write8(0x0003, 0xC5)
+  mem.write8(0xBA35, 0x20)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xDDFD)
+  expect(cpu.r1.bc).toEqual(0x64D4)
+  expect(cpu.r1.de).toEqual(0x2671)
+  expect(cpu.r1.hl).toEqual(0x3521)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xBA99)
+  expect(cpu.r1.iy).toEqual(0xBD98)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc6', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xB324
+  cpu.r1.bc = 0xDC0C
+  cpu.r1.de = 0x1E35
+  cpu.r1.hl = 0x8CD5
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xAB2C
+  cpu.r1.iy = 0xB6F3
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xC4)
+  mem.write8(0x0003, 0xC6)
+  mem.write8(0xAAF0, 0xB8)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xB324)
+  expect(cpu.r1.bc).toEqual(0xDC0C)
+  expect(cpu.r1.de).toEqual(0x1E35)
+  expect(cpu.r1.hl).toEqual(0x8CD5)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xAB2C)
+  expect(cpu.r1.iy).toEqual(0xB6F3)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc7', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xA254
+  cpu.r1.bc = 0x9E56
+  cpu.r1.de = 0x6828
+  cpu.r1.hl = 0x3189
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x64CB
+  cpu.r1.iy = 0xDFAD
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xF8)
+  mem.write8(0x0003, 0xC7)
+  mem.write8(0x64C3, 0x94)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x9554)
+  expect(cpu.r1.bc).toEqual(0x9E56)
+  expect(cpu.r1.de).toEqual(0x6828)
+  expect(cpu.r1.hl).toEqual(0x3189)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x64CB)
+  expect(cpu.r1.iy).toEqual(0xDFAD)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc8', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x8ACA
+  cpu.r1.bc = 0x139E
+  cpu.r1.de = 0xE652
+  cpu.r1.hl = 0x248B
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6E7A
+  cpu.r1.iy = 0x189A
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x65)
+  mem.write8(0x0003, 0xC8)
+  mem.write8(0x6EDF, 0x8F)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x8ACA)
+  expect(cpu.r1.bc).toEqual(0x8F9E)
+  expect(cpu.r1.de).toEqual(0xE652)
+  expect(cpu.r1.hl).toEqual(0x248B)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6E7A)
+  expect(cpu.r1.iy).toEqual(0x189A)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbc9', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xF15F
+  cpu.r1.bc = 0x856E
+  cpu.r1.de = 0xA21F
+  cpu.r1.hl = 0x8A59
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xB670
+  cpu.r1.iy = 0x4F79
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xFB)
+  mem.write8(0x0003, 0xC9)
+  mem.write8(0xB66B, 0xB9)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xF15F)
+  expect(cpu.r1.bc).toEqual(0x85BB)
+  expect(cpu.r1.de).toEqual(0xA21F)
+  expect(cpu.r1.hl).toEqual(0x8A59)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xB670)
+  expect(cpu.r1.iy).toEqual(0x4F79)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbca', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xDFAB
+  cpu.r1.bc = 0xA031
+  cpu.r1.de = 0x1D78
+  cpu.r1.hl = 0xAD3A
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xA887
+  cpu.r1.iy = 0x7334
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x8A)
+  mem.write8(0x0003, 0xCA)
+  mem.write8(0xA811, 0x7E)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xDFAB)
+  expect(cpu.r1.bc).toEqual(0xA031)
+  expect(cpu.r1.de).toEqual(0x7E78)
+  expect(cpu.r1.hl).toEqual(0xAD3A)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xA887)
+  expect(cpu.r1.iy).toEqual(0x7334)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbcb', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xEBD6
+  cpu.r1.bc = 0x376E
+  cpu.r1.de = 0xC346
+  cpu.r1.hl = 0xB10C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xA447
+  cpu.r1.iy = 0x31D6
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xA4)
+  mem.write8(0x0003, 0xCB)
+  mem.write8(0xA3EB, 0x73)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xEBD6)
+  expect(cpu.r1.bc).toEqual(0x376E)
+  expect(cpu.r1.de).toEqual(0xC373)
+  expect(cpu.r1.hl).toEqual(0xB10C)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xA447)
+  expect(cpu.r1.iy).toEqual(0x31D6)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbcc', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x0212
+  cpu.r1.bc = 0xDC46
+  cpu.r1.de = 0x8F41
+  cpu.r1.hl = 0x854E
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1F5A
+  cpu.r1.iy = 0x07CA
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x65)
+  mem.write8(0x0003, 0xCC)
+  mem.write8(0x1FBF, 0x72)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x0212)
+  expect(cpu.r1.bc).toEqual(0xDC46)
+  expect(cpu.r1.de).toEqual(0x8F41)
+  expect(cpu.r1.hl).toEqual(0x724E)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1F5A)
+  expect(cpu.r1.iy).toEqual(0x07CA)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbcd', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x3344
+  cpu.r1.bc = 0xD73C
+  cpu.r1.de = 0xD6B8
+  cpu.r1.hl = 0x929D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5376
+  cpu.r1.iy = 0x6D3A
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE9)
+  mem.write8(0x0003, 0xCD)
+  mem.write8(0x535F, 0x1C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x3344)
+  expect(cpu.r1.bc).toEqual(0xD73C)
+  expect(cpu.r1.de).toEqual(0xD6B8)
+  expect(cpu.r1.hl).toEqual(0x921E)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5376)
+  expect(cpu.r1.iy).toEqual(0x6D3A)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbce', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x9E47
+  cpu.r1.bc = 0xFC93
+  cpu.r1.de = 0x9FFC
+  cpu.r1.hl = 0xAACE
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x0313
+  cpu.r1.iy = 0x7F66
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x85)
+  mem.write8(0x0003, 0xCE)
+  mem.write8(0x0298, 0x10)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x9E47)
+  expect(cpu.r1.bc).toEqual(0xFC93)
+  expect(cpu.r1.de).toEqual(0x9FFC)
+  expect(cpu.r1.hl).toEqual(0xAACE)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x0313)
+  expect(cpu.r1.iy).toEqual(0x7F66)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbcf', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x53E8
+  cpu.r1.bc = 0xD379
+  cpu.r1.de = 0x87D5
+  cpu.r1.hl = 0x10B0
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xC5D0
+  cpu.r1.iy = 0x4F7F
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xE2)
+  mem.write8(0x0003, 0xCF)
+  mem.write8(0xC5B2, 0xB5)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xB7E8)
+  expect(cpu.r1.bc).toEqual(0xD379)
+  expect(cpu.r1.de).toEqual(0x87D5)
+  expect(cpu.r1.hl).toEqual(0x10B0)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xC5D0)
+  expect(cpu.r1.iy).toEqual(0x4F7F)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd0', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x3278
+  cpu.r1.bc = 0x6114
+  cpu.r1.de = 0xD25D
+  cpu.r1.hl = 0x1CF8
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xAD43
+  cpu.r1.iy = 0x99FC
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x7F)
+  mem.write8(0x0003, 0xD0)
+  mem.write8(0xADC2, 0x51)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x3278)
+  expect(cpu.r1.bc).toEqual(0x5514)
+  expect(cpu.r1.de).toEqual(0xD25D)
+  expect(cpu.r1.hl).toEqual(0x1CF8)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xAD43)
+  expect(cpu.r1.iy).toEqual(0x99FC)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd1', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC0B8
+  cpu.r1.bc = 0x371A
+  cpu.r1.de = 0x6472
+  cpu.r1.hl = 0xD92D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x10B2
+  cpu.r1.iy = 0x3074
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xA6)
+  mem.write8(0x0003, 0xD1)
+  mem.write8(0x1058, 0x2C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC0B8)
+  expect(cpu.r1.bc).toEqual(0x372C)
+  expect(cpu.r1.de).toEqual(0x6472)
+  expect(cpu.r1.hl).toEqual(0xD92D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x10B2)
+  expect(cpu.r1.iy).toEqual(0x3074)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd2', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x5BB6
+  cpu.r1.bc = 0xCAA8
+  cpu.r1.de = 0xE0DB
+  cpu.r1.hl = 0xAF84
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xB9A1
+  cpu.r1.iy = 0x7B5F
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x9C)
+  mem.write8(0x0003, 0xD2)
+  mem.write8(0xB93D, 0x9C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x5BB6)
+  expect(cpu.r1.bc).toEqual(0xCAA8)
+  expect(cpu.r1.de).toEqual(0x9CDB)
+  expect(cpu.r1.hl).toEqual(0xAF84)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xB9A1)
+  expect(cpu.r1.iy).toEqual(0x7B5F)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd3', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xDB6A
+  cpu.r1.bc = 0x4FE2
+  cpu.r1.de = 0x9E52
+  cpu.r1.hl = 0xA034
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDA36
+  cpu.r1.iy = 0x88A0
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xBD)
+  mem.write8(0x0003, 0xD3)
+  mem.write8(0xD9F3, 0x60)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xDB6A)
+  expect(cpu.r1.bc).toEqual(0x4FE2)
+  expect(cpu.r1.de).toEqual(0x9E64)
+  expect(cpu.r1.hl).toEqual(0xA034)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xDA36)
+  expect(cpu.r1.iy).toEqual(0x88A0)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd4', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xCC1C
+  cpu.r1.bc = 0xB884
+  cpu.r1.de = 0x6AD2
+  cpu.r1.hl = 0x1621
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xEF26
+  cpu.r1.iy = 0x41DE
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x58)
+  mem.write8(0x0003, 0xD4)
+  mem.write8(0xEF7E, 0x5E)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xCC1C)
+  expect(cpu.r1.bc).toEqual(0xB884)
+  expect(cpu.r1.de).toEqual(0x6AD2)
+  expect(cpu.r1.hl).toEqual(0x5E21)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xEF26)
+  expect(cpu.r1.iy).toEqual(0x41DE)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd5', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC41D
+  cpu.r1.bc = 0xC8B0
+  cpu.r1.de = 0xCACB
+  cpu.r1.hl = 0x7687
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x8DBC
+  cpu.r1.iy = 0xCC25
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x41)
+  mem.write8(0x0003, 0xD5)
+  mem.write8(0x8DFD, 0x71)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC41D)
+  expect(cpu.r1.bc).toEqual(0xC8B0)
+  expect(cpu.r1.de).toEqual(0xCACB)
+  expect(cpu.r1.hl).toEqual(0x7675)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x8DBC)
+  expect(cpu.r1.iy).toEqual(0xCC25)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd6', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x09EB
+  cpu.r1.bc = 0x769D
+  cpu.r1.de = 0x7E07
+  cpu.r1.hl = 0x51F9
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x5F03
+  cpu.r1.iy = 0x6280
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xEA)
+  mem.write8(0x0003, 0xD6)
+  mem.write8(0x5EED, 0x73)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x09EB)
+  expect(cpu.r1.bc).toEqual(0x769D)
+  expect(cpu.r1.de).toEqual(0x7E07)
+  expect(cpu.r1.hl).toEqual(0x51F9)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x5F03)
+  expect(cpu.r1.iy).toEqual(0x6280)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd7', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x241B
+  cpu.r1.bc = 0xEE10
+  cpu.r1.de = 0xC152
+  cpu.r1.hl = 0x2F6D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xE725
+  cpu.r1.iy = 0xC0D7
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x80)
+  mem.write8(0x0003, 0xD7)
+  mem.write8(0xE6A5, 0x60)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x641B)
+  expect(cpu.r1.bc).toEqual(0xEE10)
+  expect(cpu.r1.de).toEqual(0xC152)
+  expect(cpu.r1.hl).toEqual(0x2F6D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xE725)
+  expect(cpu.r1.iy).toEqual(0xC0D7)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd8', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xE3DC
+  cpu.r1.bc = 0x1981
+  cpu.r1.de = 0xC97B
+  cpu.r1.hl = 0xCB42
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xB30F
+  cpu.r1.iy = 0xB32A
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x4C)
+  mem.write8(0x0003, 0xD8)
+  mem.write8(0xB35B, 0x96)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xE3DC)
+  expect(cpu.r1.bc).toEqual(0x9E81)
+  expect(cpu.r1.de).toEqual(0xC97B)
+  expect(cpu.r1.hl).toEqual(0xCB42)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xB30F)
+  expect(cpu.r1.iy).toEqual(0xB32A)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbd9', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xE9A0
+  cpu.r1.bc = 0xA7C7
+  cpu.r1.de = 0xA476
+  cpu.r1.hl = 0x6057
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x2642
+  cpu.r1.iy = 0x58A0
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x52)
+  mem.write8(0x0003, 0xD9)
+  mem.write8(0x2694, 0xEF)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xE9A0)
+  expect(cpu.r1.bc).toEqual(0xA7EF)
+  expect(cpu.r1.de).toEqual(0xA476)
+  expect(cpu.r1.hl).toEqual(0x6057)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x2642)
+  expect(cpu.r1.iy).toEqual(0x58A0)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbda', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x6787
+  cpu.r1.bc = 0x26A7
+  cpu.r1.de = 0xA194
+  cpu.r1.hl = 0x11D3
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x2D76
+  cpu.r1.iy = 0x7F80
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xEA)
+  mem.write8(0x0003, 0xDA)
+  mem.write8(0x2D60, 0x82)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x6787)
+  expect(cpu.r1.bc).toEqual(0x26A7)
+  expect(cpu.r1.de).toEqual(0x8A94)
+  expect(cpu.r1.hl).toEqual(0x11D3)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x2D76)
+  expect(cpu.r1.iy).toEqual(0x7F80)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbdb', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xF986
+  cpu.r1.bc = 0x6A4B
+  cpu.r1.de = 0x6588
+  cpu.r1.hl = 0xD2C8
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x2B7D
+  cpu.r1.iy = 0x5847
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x4D)
+  mem.write8(0x0003, 0xDB)
+  mem.write8(0x2BCA, 0x10)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xF986)
+  expect(cpu.r1.bc).toEqual(0x6A4B)
+  expect(cpu.r1.de).toEqual(0x6518)
+  expect(cpu.r1.hl).toEqual(0xD2C8)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x2B7D)
+  expect(cpu.r1.iy).toEqual(0x5847)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbdc', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4C9E
+  cpu.r1.bc = 0xD94D
+  cpu.r1.de = 0x9760
+  cpu.r1.hl = 0xB707
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x7ED4
+  cpu.r1.iy = 0x5CC5
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xD3)
+  mem.write8(0x0003, 0xDC)
+  mem.write8(0x7EA7, 0x45)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4C9E)
+  expect(cpu.r1.bc).toEqual(0xD94D)
+  expect(cpu.r1.de).toEqual(0x9760)
+  expect(cpu.r1.hl).toEqual(0x4D07)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x7ED4)
+  expect(cpu.r1.iy).toEqual(0x5CC5)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbdd', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4B3B
+  cpu.r1.bc = 0xD351
+  cpu.r1.de = 0x9BE9
+  cpu.r1.hl = 0x2310
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x58C1
+  cpu.r1.iy = 0xE430
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x6F)
+  mem.write8(0x0003, 0xDD)
+  mem.write8(0x5930, 0x20)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4B3B)
+  expect(cpu.r1.bc).toEqual(0xD351)
+  expect(cpu.r1.de).toEqual(0x9BE9)
+  expect(cpu.r1.hl).toEqual(0x2328)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x58C1)
+  expect(cpu.r1.iy).toEqual(0xE430)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbde', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x3B62
+  cpu.r1.bc = 0xCA1E
+  cpu.r1.de = 0xA41A
+  cpu.r1.hl = 0x227A
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x89D2
+  cpu.r1.iy = 0x7011
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x14)
+  mem.write8(0x0003, 0xDE)
+  mem.write8(0x89E6, 0x5E)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x3B62)
+  expect(cpu.r1.bc).toEqual(0xCA1E)
+  expect(cpu.r1.de).toEqual(0xA41A)
+  expect(cpu.r1.hl).toEqual(0x227A)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x89D2)
+  expect(cpu.r1.iy).toEqual(0x7011)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbdf', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4C8A
+  cpu.r1.bc = 0x5B42
+  cpu.r1.de = 0x50DD
+  cpu.r1.hl = 0x4BE0
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xD227
+  cpu.r1.iy = 0x4913
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xEF)
+  mem.write8(0x0003, 0xDF)
+  mem.write8(0xD216, 0x72)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7A8A)
+  expect(cpu.r1.bc).toEqual(0x5B42)
+  expect(cpu.r1.de).toEqual(0x50DD)
+  expect(cpu.r1.hl).toEqual(0x4BE0)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xD227)
+  expect(cpu.r1.iy).toEqual(0x4913)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe0', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x440A
+  cpu.r1.bc = 0x713D
+  cpu.r1.de = 0xACFC
+  cpu.r1.hl = 0xF762
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1C4B
+  cpu.r1.iy = 0xB6BA
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x62)
+  mem.write8(0x0003, 0xE0)
+  mem.write8(0x1CAD, 0x46)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x440A)
+  expect(cpu.r1.bc).toEqual(0x563D)
+  expect(cpu.r1.de).toEqual(0xACFC)
+  expect(cpu.r1.hl).toEqual(0xF762)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1C4B)
+  expect(cpu.r1.iy).toEqual(0xB6BA)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe1', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC219
+  cpu.r1.bc = 0xAA6B
+  cpu.r1.de = 0xDFBF
+  cpu.r1.hl = 0x6F10
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xB931
+  cpu.r1.iy = 0xD3D6
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x2E)
+  mem.write8(0x0003, 0xE1)
+  mem.write8(0xB95F, 0x75)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xC219)
+  expect(cpu.r1.bc).toEqual(0xAA75)
+  expect(cpu.r1.de).toEqual(0xDFBF)
+  expect(cpu.r1.hl).toEqual(0x6F10)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xB931)
+  expect(cpu.r1.iy).toEqual(0xD3D6)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe2', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x66D7
+  cpu.r1.bc = 0xABD0
+  cpu.r1.de = 0xCB48
+  cpu.r1.hl = 0x8054
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xEF50
+  cpu.r1.iy = 0x9997
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x85)
+  mem.write8(0x0003, 0xE2)
+  mem.write8(0xEED5, 0x72)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x66D7)
+  expect(cpu.r1.bc).toEqual(0xABD0)
+  expect(cpu.r1.de).toEqual(0x7248)
+  expect(cpu.r1.hl).toEqual(0x8054)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xEF50)
+  expect(cpu.r1.iy).toEqual(0x9997)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe3', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7013
+  cpu.r1.bc = 0xE7ED
+  cpu.r1.de = 0x7E1C
+  cpu.r1.hl = 0x57FB
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x7EC6
+  cpu.r1.iy = 0x75EB
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xF4)
+  mem.write8(0x0003, 0xE3)
+  mem.write8(0x7EBA, 0x34)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7013)
+  expect(cpu.r1.bc).toEqual(0xE7ED)
+  expect(cpu.r1.de).toEqual(0x7E34)
+  expect(cpu.r1.hl).toEqual(0x57FB)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x7EC6)
+  expect(cpu.r1.iy).toEqual(0x75EB)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe4', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x1108
+  cpu.r1.bc = 0x6E70
+  cpu.r1.de = 0xF0AF
+  cpu.r1.hl = 0x2F0C
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x95C7
+  cpu.r1.iy = 0x6501
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xBF)
   mem.write8(0x0003, 0xE4)
-  mem.write8(0x54D6, 0x7B)
+  mem.write8(0x9586, 0x34)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10520,43 +10520,43 @@ test('Test fdcbe4', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x3989)
-  expect(cpu.r1.bc).toEqual(0x4142)
-  expect(cpu.r1.de).toEqual(0x89E2)
-  expect(cpu.r1.hl).toEqual(0x7B5B)
+  expect(cpu.r1.af).toEqual(0x1108)
+  expect(cpu.r1.bc).toEqual(0x6E70)
+  expect(cpu.r1.de).toEqual(0xF0AF)
+  expect(cpu.r1.hl).toEqual(0x340C)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x0BF7)
-  expect(cpu.r1.iy).toEqual(0x5474)
+  expect(cpu.r1.ix).toEqual(0x95C7)
+  expect(cpu.r1.iy).toEqual(0x6501)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbe5', () => {
+test('Test ddcbe5', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xE5C5
-  cpu.r1.bc = 0xB86D
-  cpu.r1.de = 0x41BB
-  cpu.r1.hl = 0x315E
+  cpu.r1.af = 0x57CC
+  cpu.r1.bc = 0x5511
+  cpu.r1.de = 0x2696
+  cpu.r1.hl = 0xB83D
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x1A78
-  cpu.r1.iy = 0xA52D
+  cpu.r1.ix = 0x6AB0
+  cpu.r1.iy = 0x0E90
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xDA)
+  mem.write8(0x0002, 0xF2)
   mem.write8(0x0003, 0xE5)
-  mem.write8(0xA507, 0x4C)
+  mem.write8(0x6AA2, 0x2E)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -10566,1101 +10566,1101 @@ test('Test fdcbe5', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xE5C5)
-  expect(cpu.r1.bc).toEqual(0xB86D)
-  expect(cpu.r1.de).toEqual(0x41BB)
-  expect(cpu.r1.hl).toEqual(0x315C)
+  expect(cpu.r1.af).toEqual(0x57CC)
+  expect(cpu.r1.bc).toEqual(0x5511)
+  expect(cpu.r1.de).toEqual(0x2696)
+  expect(cpu.r1.hl).toEqual(0xB83E)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x1A78)
-  expect(cpu.r1.iy).toEqual(0xA52D)
+  expect(cpu.r1.ix).toEqual(0x6AB0)
+  expect(cpu.r1.iy).toEqual(0x0E90)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbe6', () => {
+test('Test ddcbe6', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xFD89
-  cpu.r1.bc = 0xD888
-  cpu.r1.de = 0x1E2F
-  cpu.r1.hl = 0xDDF5
+  cpu.r1.af = 0x207A
+  cpu.r1.bc = 0xA441
+  cpu.r1.de = 0x1E03
+  cpu.r1.hl = 0xAC60
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x42F5
-  cpu.r1.iy = 0x8B06
+  cpu.r1.ix = 0xD866
+  cpu.r1.iy = 0x5FDC
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x76)
-  mem.write8(0x0003, 0xE6)
-  mem.write8(0x8B7C, 0x45)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xFD89)
-  expect(cpu.r1.bc).toEqual(0xD888)
-  expect(cpu.r1.de).toEqual(0x1E2F)
-  expect(cpu.r1.hl).toEqual(0xDDF5)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x42F5)
-  expect(cpu.r1.iy).toEqual(0x8B06)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbe7', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x2025
-  cpu.r1.bc = 0xD3E9
-  cpu.r1.de = 0xD4B6
-  cpu.r1.hl = 0xAA30
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x88BD
-  cpu.r1.iy = 0xB597
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x11)
-  mem.write8(0x0003, 0xE7)
-  mem.write8(0xB5A8, 0xA6)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xB625)
-  expect(cpu.r1.bc).toEqual(0xD3E9)
-  expect(cpu.r1.de).toEqual(0xD4B6)
-  expect(cpu.r1.hl).toEqual(0xAA30)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x88BD)
-  expect(cpu.r1.iy).toEqual(0xB597)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbe8', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x514D
-  cpu.r1.bc = 0xC2AB
-  cpu.r1.de = 0x37B5
-  cpu.r1.hl = 0x57DE
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xA4EC
-  cpu.r1.iy = 0x0A77
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xED)
-  mem.write8(0x0003, 0xE8)
-  mem.write8(0x0A64, 0xD0)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x514D)
-  expect(cpu.r1.bc).toEqual(0xF0AB)
-  expect(cpu.r1.de).toEqual(0x37B5)
-  expect(cpu.r1.hl).toEqual(0x57DE)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xA4EC)
-  expect(cpu.r1.iy).toEqual(0x0A77)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbe9', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x974E
-  cpu.r1.bc = 0xD28E
-  cpu.r1.de = 0xD5CB
-  cpu.r1.hl = 0x6BD4
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x158A
-  cpu.r1.iy = 0xA84E
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x35)
-  mem.write8(0x0003, 0xE9)
-  mem.write8(0xA883, 0x2F)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x974E)
-  expect(cpu.r1.bc).toEqual(0xD22F)
-  expect(cpu.r1.de).toEqual(0xD5CB)
-  expect(cpu.r1.hl).toEqual(0x6BD4)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x158A)
-  expect(cpu.r1.iy).toEqual(0xA84E)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbea', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x3EF4
-  cpu.r1.bc = 0x3FC6
-  cpu.r1.de = 0x4A44
-  cpu.r1.hl = 0xE9A4
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC877
-  cpu.r1.iy = 0x7593
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x93)
-  mem.write8(0x0003, 0xEA)
-  mem.write8(0x7526, 0x1B)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x3EF4)
-  expect(cpu.r1.bc).toEqual(0x3FC6)
-  expect(cpu.r1.de).toEqual(0x3B44)
-  expect(cpu.r1.hl).toEqual(0xE9A4)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC877)
-  expect(cpu.r1.iy).toEqual(0x7593)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbeb', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x798F
-  cpu.r1.bc = 0x5E9B
-  cpu.r1.de = 0x940E
-  cpu.r1.hl = 0x2E52
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD6AD
-  cpu.r1.iy = 0x2411
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD0)
-  mem.write8(0x0003, 0xEB)
-  mem.write8(0x23E1, 0x47)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x798F)
-  expect(cpu.r1.bc).toEqual(0x5E9B)
-  expect(cpu.r1.de).toEqual(0x9467)
-  expect(cpu.r1.hl).toEqual(0x2E52)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD6AD)
-  expect(cpu.r1.iy).toEqual(0x2411)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbec', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x38A4
-  cpu.r1.bc = 0x07C0
-  cpu.r1.de = 0x6CEE
-  cpu.r1.hl = 0xE715
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF160
-  cpu.r1.iy = 0xD2EB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xF3)
-  mem.write8(0x0003, 0xEC)
-  mem.write8(0xD2DE, 0x49)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x38A4)
-  expect(cpu.r1.bc).toEqual(0x07C0)
-  expect(cpu.r1.de).toEqual(0x6CEE)
-  expect(cpu.r1.hl).toEqual(0x6915)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF160)
-  expect(cpu.r1.iy).toEqual(0xD2EB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbed', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xE0BC
-  cpu.r1.bc = 0x70C1
-  cpu.r1.de = 0xDE35
-  cpu.r1.hl = 0x81C5
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xD57F
-  cpu.r1.iy = 0x0EAB
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x58)
-  mem.write8(0x0003, 0xED)
-  mem.write8(0x0F03, 0x10)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xE0BC)
-  expect(cpu.r1.bc).toEqual(0x70C1)
-  expect(cpu.r1.de).toEqual(0xDE35)
-  expect(cpu.r1.hl).toEqual(0x8130)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xD57F)
-  expect(cpu.r1.iy).toEqual(0x0EAB)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbee', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5FCB
-  cpu.r1.bc = 0x9007
-  cpu.r1.de = 0x1736
-  cpu.r1.hl = 0xACA8
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x4BAB
-  cpu.r1.iy = 0x42BC
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x02)
-  mem.write8(0x0003, 0xEE)
-  mem.write8(0x42BE, 0xD0)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x5FCB)
-  expect(cpu.r1.bc).toEqual(0x9007)
-  expect(cpu.r1.de).toEqual(0x1736)
-  expect(cpu.r1.hl).toEqual(0xACA8)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x4BAB)
-  expect(cpu.r1.iy).toEqual(0x42BC)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbef', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x4EE3
-  cpu.r1.bc = 0xD344
-  cpu.r1.de = 0xCB5B
-  cpu.r1.hl = 0xAEB5
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xDE5F
-  cpu.r1.iy = 0x2272
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x58)
-  mem.write8(0x0003, 0xEF)
-  mem.write8(0x22CA, 0x09)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x29E3)
-  expect(cpu.r1.bc).toEqual(0xD344)
-  expect(cpu.r1.de).toEqual(0xCB5B)
-  expect(cpu.r1.hl).toEqual(0xAEB5)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xDE5F)
-  expect(cpu.r1.iy).toEqual(0x2272)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf0', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1080
-  cpu.r1.bc = 0xB270
-  cpu.r1.de = 0x1B5B
-  cpu.r1.hl = 0xA9B7
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE89D
-  cpu.r1.iy = 0xEE9E
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x45)
-  mem.write8(0x0003, 0xF0)
-  mem.write8(0xEEE3, 0x2C)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1080)
-  expect(cpu.r1.bc).toEqual(0x6C70)
-  expect(cpu.r1.de).toEqual(0x1B5B)
-  expect(cpu.r1.hl).toEqual(0xA9B7)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE89D)
-  expect(cpu.r1.iy).toEqual(0xEE9E)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf1', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1702
-  cpu.r1.bc = 0xC43B
-  cpu.r1.de = 0xD138
-  cpu.r1.hl = 0x316F
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8067
-  cpu.r1.iy = 0x4783
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x2F)
-  mem.write8(0x0003, 0xF1)
-  mem.write8(0x47B2, 0xDC)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1702)
-  expect(cpu.r1.bc).toEqual(0xC4DC)
-  expect(cpu.r1.de).toEqual(0xD138)
-  expect(cpu.r1.hl).toEqual(0x316F)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8067)
-  expect(cpu.r1.iy).toEqual(0x4783)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf2', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x732A
-  cpu.r1.bc = 0x4CD1
-  cpu.r1.de = 0x77FE
-  cpu.r1.hl = 0x4814
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x42F1
-  cpu.r1.iy = 0xEA97
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x2C)
-  mem.write8(0x0003, 0xF2)
-  mem.write8(0xEAC3, 0x5E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x732A)
-  expect(cpu.r1.bc).toEqual(0x4CD1)
-  expect(cpu.r1.de).toEqual(0x5EFE)
-  expect(cpu.r1.hl).toEqual(0x4814)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x42F1)
-  expect(cpu.r1.iy).toEqual(0xEA97)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf3', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x6B97
-  cpu.r1.bc = 0x59D3
-  cpu.r1.de = 0xF546
-  cpu.r1.hl = 0x7530
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x6670
-  cpu.r1.iy = 0x7D90
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x38)
-  mem.write8(0x0003, 0xF3)
-  mem.write8(0x7DC8, 0x0C)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x6B97)
-  expect(cpu.r1.bc).toEqual(0x59D3)
-  expect(cpu.r1.de).toEqual(0xF54C)
-  expect(cpu.r1.hl).toEqual(0x7530)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x6670)
-  expect(cpu.r1.iy).toEqual(0x7D90)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf4', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x7AF0
-  cpu.r1.bc = 0xA81F
-  cpu.r1.de = 0x5D3A
-  cpu.r1.hl = 0x799B
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE12B
-  cpu.r1.iy = 0x309C
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xD0)
-  mem.write8(0x0003, 0xF4)
-  mem.write8(0x306C, 0x0E)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7AF0)
-  expect(cpu.r1.bc).toEqual(0xA81F)
-  expect(cpu.r1.de).toEqual(0x5D3A)
-  expect(cpu.r1.hl).toEqual(0x4E9B)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE12B)
-  expect(cpu.r1.iy).toEqual(0x309C)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf5', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1370
-  cpu.r1.bc = 0xF6B2
-  cpu.r1.de = 0xAAA2
-  cpu.r1.hl = 0x7F0A
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC9F6
-  cpu.r1.iy = 0x6B1F
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x55)
-  mem.write8(0x0003, 0xF5)
-  mem.write8(0x6B74, 0xF8)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x1370)
-  expect(cpu.r1.bc).toEqual(0xF6B2)
-  expect(cpu.r1.de).toEqual(0xAAA2)
-  expect(cpu.r1.hl).toEqual(0x7FF8)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC9F6)
-  expect(cpu.r1.iy).toEqual(0x6B1F)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf6', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x7C43
-  cpu.r1.bc = 0xFCD1
-  cpu.r1.de = 0x34BD
-  cpu.r1.hl = 0xF4AB
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xEF33
-  cpu.r1.iy = 0xC61A
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x56)
-  mem.write8(0x0003, 0xF6)
-  mem.write8(0xC670, 0x5D)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x7C43)
-  expect(cpu.r1.bc).toEqual(0xFCD1)
-  expect(cpu.r1.de).toEqual(0x34BD)
-  expect(cpu.r1.hl).toEqual(0xF4AB)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xEF33)
-  expect(cpu.r1.iy).toEqual(0xC61A)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf7', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xE6DA
-  cpu.r1.bc = 0x231A
-  cpu.r1.de = 0x7BB1
-  cpu.r1.hl = 0x800D
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xE37E
-  cpu.r1.iy = 0x5789
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x9E)
-  mem.write8(0x0003, 0xF7)
-  mem.write8(0x5727, 0x66)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x66DA)
-  expect(cpu.r1.bc).toEqual(0x231A)
-  expect(cpu.r1.de).toEqual(0x7BB1)
-  expect(cpu.r1.hl).toEqual(0x800D)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xE37E)
-  expect(cpu.r1.iy).toEqual(0x5789)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf8', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0xFA29
-  cpu.r1.bc = 0xEE74
-  cpu.r1.de = 0xD7C4
-  cpu.r1.hl = 0xAFAF
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x512C
-  cpu.r1.iy = 0xDE7A
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x54)
-  mem.write8(0x0003, 0xF8)
-  mem.write8(0xDECE, 0x7A)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0xFA29)
-  expect(cpu.r1.bc).toEqual(0xFA74)
-  expect(cpu.r1.de).toEqual(0xD7C4)
-  expect(cpu.r1.hl).toEqual(0xAFAF)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x512C)
-  expect(cpu.r1.iy).toEqual(0xDE7A)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbf9', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x4662
-  cpu.r1.bc = 0xA71B
-  cpu.r1.de = 0x5065
-  cpu.r1.hl = 0xED06
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x279E
-  cpu.r1.iy = 0x99E3
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x30)
-  mem.write8(0x0003, 0xF9)
-  mem.write8(0x9A13, 0xC6)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x4662)
-  expect(cpu.r1.bc).toEqual(0xA7C6)
-  expect(cpu.r1.de).toEqual(0x5065)
-  expect(cpu.r1.hl).toEqual(0xED06)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x279E)
-  expect(cpu.r1.iy).toEqual(0x99E3)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbfa', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x9426
-  cpu.r1.bc = 0x53EC
-  cpu.r1.de = 0x5016
-  cpu.r1.hl = 0x6C99
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x8B99
-  cpu.r1.iy = 0xBD79
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x09)
-  mem.write8(0x0003, 0xFA)
-  mem.write8(0xBD82, 0xF4)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x9426)
-  expect(cpu.r1.bc).toEqual(0x53EC)
-  expect(cpu.r1.de).toEqual(0xF416)
-  expect(cpu.r1.hl).toEqual(0x6C99)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x8B99)
-  expect(cpu.r1.iy).toEqual(0xBD79)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbfb', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x5343
-  cpu.r1.bc = 0xB212
-  cpu.r1.de = 0x09CA
-  cpu.r1.hl = 0xE3C6
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xCD2B
-  cpu.r1.iy = 0xF875
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xBA)
-  mem.write8(0x0003, 0xFB)
-  mem.write8(0xF82F, 0xED)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x5343)
-  expect(cpu.r1.bc).toEqual(0xB212)
-  expect(cpu.r1.de).toEqual(0x09ED)
-  expect(cpu.r1.hl).toEqual(0xE3C6)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xCD2B)
-  expect(cpu.r1.iy).toEqual(0xF875)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbfc', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x0965
-  cpu.r1.bc = 0x4392
-  cpu.r1.de = 0xCA25
-  cpu.r1.hl = 0x2BAA
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xF023
-  cpu.r1.iy = 0x6623
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
-  mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x56)
-  mem.write8(0x0003, 0xFC)
-  mem.write8(0x6679, 0x65)
-
-  while (cpu.pc !== 0x4) {
-    try {
-      cpu.execInstruction()
-    } catch (e) {
-      return
-    }
-  }
-  
-  expect(cpu.r1.af).toEqual(0x0965)
-  expect(cpu.r1.bc).toEqual(0x4392)
-  expect(cpu.r1.de).toEqual(0xCA25)
-  expect(cpu.r1.hl).toEqual(0xE5AA)
-  expect(cpu.r2.af).toEqual(0x0000)
-  expect(cpu.r2.bc).toEqual(0x0000)
-  expect(cpu.r2.de).toEqual(0x0000)
-  expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xF023)
-  expect(cpu.r1.iy).toEqual(0x6623)
-  expect(cpu.sp).toEqual(0x0000)
-  expect(cpu.r).toEqual(0x02)
-  expect(cpu.i).toEqual(0x00)
-})
-
-test('Test fdcbfd', () => {
-  let mem = new Memory()
-  let cpu = new Z80(mem)
-  cpu.r1.af = 0x1751
-  cpu.r1.bc = 0x233C
-  cpu.r1.de = 0x6214
-  cpu.r1.hl = 0xD119
-  cpu.r2.af = 0x0000
-  cpu.r2.bc = 0x0000
-  cpu.r2.de = 0x0000
-  cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xC415
-  cpu.r1.iy = 0x5D2B
-  cpu.sp = 0x0000
-  cpu.pc = 0x0000
-  cpu.i = 0x00
-  cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
   mem.write8(0x0002, 0x25)
+  mem.write8(0x0003, 0xE6)
+  mem.write8(0xD88B, 0x4C)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x207A)
+  expect(cpu.r1.bc).toEqual(0xA441)
+  expect(cpu.r1.de).toEqual(0x1E03)
+  expect(cpu.r1.hl).toEqual(0xAC60)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xD866)
+  expect(cpu.r1.iy).toEqual(0x5FDC)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe7', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xC3C5
+  cpu.r1.bc = 0x7FA9
+  cpu.r1.de = 0x4E07
+  cpu.r1.hl = 0xE02D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x2A1B
+  cpu.r1.iy = 0x55B7
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xF3)
+  mem.write8(0x0003, 0xE7)
+  mem.write8(0x2A0E, 0xEB)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xFBC5)
+  expect(cpu.r1.bc).toEqual(0x7FA9)
+  expect(cpu.r1.de).toEqual(0x4E07)
+  expect(cpu.r1.hl).toEqual(0xE02D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x2A1B)
+  expect(cpu.r1.iy).toEqual(0x55B7)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe8', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x6D1C
+  cpu.r1.bc = 0xA0C4
+  cpu.r1.de = 0x93F0
+  cpu.r1.hl = 0xA0B4
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x4BDA
+  cpu.r1.iy = 0x7761
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xF2)
+  mem.write8(0x0003, 0xE8)
+  mem.write8(0x4BCC, 0xBA)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x6D1C)
+  expect(cpu.r1.bc).toEqual(0xBAC4)
+  expect(cpu.r1.de).toEqual(0x93F0)
+  expect(cpu.r1.hl).toEqual(0xA0B4)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x4BDA)
+  expect(cpu.r1.iy).toEqual(0x7761)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbe9', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xEBE5
+  cpu.r1.bc = 0x0C2C
+  cpu.r1.de = 0x1A2A
+  cpu.r1.hl = 0x2720
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x72DD
+  cpu.r1.iy = 0xA354
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x8A)
+  mem.write8(0x0003, 0xE9)
+  mem.write8(0x7267, 0x0A)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xEBE5)
+  expect(cpu.r1.bc).toEqual(0x0C2A)
+  expect(cpu.r1.de).toEqual(0x1A2A)
+  expect(cpu.r1.hl).toEqual(0x2720)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x72DD)
+  expect(cpu.r1.iy).toEqual(0xA354)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbea', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x42D2
+  cpu.r1.bc = 0xDA7A
+  cpu.r1.de = 0x757F
+  cpu.r1.hl = 0x6DA6
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xA7E9
+  cpu.r1.iy = 0xB933
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x04)
+  mem.write8(0x0003, 0xEA)
+  mem.write8(0xA7ED, 0x5F)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x42D2)
+  expect(cpu.r1.bc).toEqual(0xDA7A)
+  expect(cpu.r1.de).toEqual(0x7F7F)
+  expect(cpu.r1.hl).toEqual(0x6DA6)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xA7E9)
+  expect(cpu.r1.iy).toEqual(0xB933)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbeb', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xE945
+  cpu.r1.bc = 0x10AA
+  cpu.r1.de = 0xF5F8
+  cpu.r1.hl = 0x7647
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x16DF
+  cpu.r1.iy = 0x93FB
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x24)
+  mem.write8(0x0003, 0xEB)
+  mem.write8(0x1703, 0xF3)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xE945)
+  expect(cpu.r1.bc).toEqual(0x10AA)
+  expect(cpu.r1.de).toEqual(0xF5F3)
+  expect(cpu.r1.hl).toEqual(0x7647)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x16DF)
+  expect(cpu.r1.iy).toEqual(0x93FB)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbec', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x7180
+  cpu.r1.bc = 0xBC85
+  cpu.r1.de = 0x7DD3
+  cpu.r1.hl = 0xF467
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDD88
+  cpu.r1.iy = 0x6A41
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x60)
+  mem.write8(0x0003, 0xEC)
+  mem.write8(0xDDE8, 0x00)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x7180)
+  expect(cpu.r1.bc).toEqual(0xBC85)
+  expect(cpu.r1.de).toEqual(0x7DD3)
+  expect(cpu.r1.hl).toEqual(0x2067)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xDD88)
+  expect(cpu.r1.iy).toEqual(0x6A41)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbed', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x6B2F
+  cpu.r1.bc = 0x9762
+  cpu.r1.de = 0x1F0A
+  cpu.r1.hl = 0xDB61
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xF772
+  cpu.r1.iy = 0x33E3
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xBE)
+  mem.write8(0x0003, 0xED)
+  mem.write8(0xF730, 0x6B)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x6B2F)
+  expect(cpu.r1.bc).toEqual(0x9762)
+  expect(cpu.r1.de).toEqual(0x1F0A)
+  expect(cpu.r1.hl).toEqual(0xDB6B)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xF772)
+  expect(cpu.r1.iy).toEqual(0x33E3)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbee', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x79EA
+  cpu.r1.bc = 0xDC8A
+  cpu.r1.de = 0x7887
+  cpu.r1.hl = 0x3BAA
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6C28
+  cpu.r1.iy = 0xABBC
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xDE)
+  mem.write8(0x0003, 0xEE)
+  mem.write8(0x6C06, 0xBD)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x79EA)
+  expect(cpu.r1.bc).toEqual(0xDC8A)
+  expect(cpu.r1.de).toEqual(0x7887)
+  expect(cpu.r1.hl).toEqual(0x3BAA)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6C28)
+  expect(cpu.r1.iy).toEqual(0xABBC)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbef', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x46C3
+  cpu.r1.bc = 0x2FC2
+  cpu.r1.de = 0x8690
+  cpu.r1.hl = 0xA836
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xCC68
+  cpu.r1.iy = 0xA8CE
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x30)
+  mem.write8(0x0003, 0xEF)
+  mem.write8(0xCC98, 0x11)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x31C3)
+  expect(cpu.r1.bc).toEqual(0x2FC2)
+  expect(cpu.r1.de).toEqual(0x8690)
+  expect(cpu.r1.hl).toEqual(0xA836)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xCC68)
+  expect(cpu.r1.iy).toEqual(0xA8CE)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf0', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xB330
+  cpu.r1.bc = 0x4469
+  cpu.r1.de = 0x362B
+  cpu.r1.hl = 0xB515
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x13C0
+  cpu.r1.iy = 0x6479
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x2F)
+  mem.write8(0x0003, 0xF0)
+  mem.write8(0x13EF, 0xAD)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xB330)
+  expect(cpu.r1.bc).toEqual(0xED69)
+  expect(cpu.r1.de).toEqual(0x362B)
+  expect(cpu.r1.hl).toEqual(0xB515)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x13C0)
+  expect(cpu.r1.iy).toEqual(0x6479)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf1', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x94C0
+  cpu.r1.bc = 0x9AB0
+  cpu.r1.de = 0xA0FD
+  cpu.r1.hl = 0x7C1D
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x47BA
+  cpu.r1.iy = 0x8C81
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x40)
+  mem.write8(0x0003, 0xF1)
+  mem.write8(0x47FA, 0x78)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x94C0)
+  expect(cpu.r1.bc).toEqual(0x9A78)
+  expect(cpu.r1.de).toEqual(0xA0FD)
+  expect(cpu.r1.hl).toEqual(0x7C1D)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x47BA)
+  expect(cpu.r1.iy).toEqual(0x8C81)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf2', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x5302
+  cpu.r1.bc = 0x9204
+  cpu.r1.de = 0x20EC
+  cpu.r1.hl = 0xD640
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xC947
+  cpu.r1.iy = 0x4EF1
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x0F)
+  mem.write8(0x0003, 0xF2)
+  mem.write8(0xC956, 0x21)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x5302)
+  expect(cpu.r1.bc).toEqual(0x9204)
+  expect(cpu.r1.de).toEqual(0x61EC)
+  expect(cpu.r1.hl).toEqual(0xD640)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xC947)
+  expect(cpu.r1.iy).toEqual(0x4EF1)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf3', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x9950
+  cpu.r1.bc = 0xA3D2
+  cpu.r1.de = 0x5058
+  cpu.r1.hl = 0x5CCC
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1D96
+  cpu.r1.iy = 0x7C75
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x06)
+  mem.write8(0x0003, 0xF3)
+  mem.write8(0x1D9C, 0xE4)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x9950)
+  expect(cpu.r1.bc).toEqual(0xA3D2)
+  expect(cpu.r1.de).toEqual(0x50E4)
+  expect(cpu.r1.hl).toEqual(0x5CCC)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1D96)
+  expect(cpu.r1.iy).toEqual(0x7C75)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf4', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x3712
+  cpu.r1.bc = 0x1F99
+  cpu.r1.de = 0x4863
+  cpu.r1.hl = 0x47DE
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x1702
+  cpu.r1.iy = 0xC042
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x3B)
+  mem.write8(0x0003, 0xF4)
+  mem.write8(0x173D, 0xE1)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x3712)
+  expect(cpu.r1.bc).toEqual(0x1F99)
+  expect(cpu.r1.de).toEqual(0x4863)
+  expect(cpu.r1.hl).toEqual(0xE1DE)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x1702)
+  expect(cpu.r1.iy).toEqual(0xC042)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf5', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xD83F
+  cpu.r1.bc = 0x1EC9
+  cpu.r1.de = 0xD0DA
+  cpu.r1.hl = 0x4173
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xEB3F
+  cpu.r1.iy = 0x1EAD
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x64)
+  mem.write8(0x0003, 0xF5)
+  mem.write8(0xEBA3, 0xC5)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xD83F)
+  expect(cpu.r1.bc).toEqual(0x1EC9)
+  expect(cpu.r1.de).toEqual(0xD0DA)
+  expect(cpu.r1.hl).toEqual(0x41C5)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xEB3F)
+  expect(cpu.r1.iy).toEqual(0x1EAD)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf6', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x4D6C
+  cpu.r1.bc = 0x93AC
+  cpu.r1.de = 0x810D
+  cpu.r1.hl = 0xCFE1
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xDC5A
+  cpu.r1.iy = 0xC33C
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x7B)
+  mem.write8(0x0003, 0xF6)
+  mem.write8(0xDCD5, 0xA2)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x4D6C)
+  expect(cpu.r1.bc).toEqual(0x93AC)
+  expect(cpu.r1.de).toEqual(0x810D)
+  expect(cpu.r1.hl).toEqual(0xCFE1)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xDC5A)
+  expect(cpu.r1.iy).toEqual(0xC33C)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf7', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xFE40
+  cpu.r1.bc = 0x7887
+  cpu.r1.de = 0xB9DE
+  cpu.r1.hl = 0xC013
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x301E
+  cpu.r1.iy = 0x9710
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xC3)
+  mem.write8(0x0003, 0xF7)
+  mem.write8(0x2FE1, 0xA9)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xE940)
+  expect(cpu.r1.bc).toEqual(0x7887)
+  expect(cpu.r1.de).toEqual(0xB9DE)
+  expect(cpu.r1.hl).toEqual(0xC013)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x301E)
+  expect(cpu.r1.iy).toEqual(0x9710)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf8', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x8278
+  cpu.r1.bc = 0x21A4
+  cpu.r1.de = 0x1E5C
+  cpu.r1.hl = 0x4952
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x427F
+  cpu.r1.iy = 0x41E1
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x59)
+  mem.write8(0x0003, 0xF8)
+  mem.write8(0x42D8, 0x28)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x8278)
+  expect(cpu.r1.bc).toEqual(0xA8A4)
+  expect(cpu.r1.de).toEqual(0x1E5C)
+  expect(cpu.r1.hl).toEqual(0x4952)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x427F)
+  expect(cpu.r1.iy).toEqual(0x41E1)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbf9', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xB2DF
+  cpu.r1.bc = 0xE9B8
+  cpu.r1.de = 0x56C3
+  cpu.r1.hl = 0x16FF
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0xD88F
+  cpu.r1.iy = 0x0BAB
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x55)
+  mem.write8(0x0003, 0xF9)
+  mem.write8(0xD8E4, 0x14)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0xB2DF)
+  expect(cpu.r1.bc).toEqual(0xE994)
+  expect(cpu.r1.de).toEqual(0x56C3)
+  expect(cpu.r1.hl).toEqual(0x16FF)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0xD88F)
+  expect(cpu.r1.iy).toEqual(0x0BAB)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbfa', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x01F1
+  cpu.r1.bc = 0xBC0D
+  cpu.r1.de = 0xD476
+  cpu.r1.hl = 0x1510
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x9420
+  cpu.r1.iy = 0x93A3
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x74)
+  mem.write8(0x0003, 0xFA)
+  mem.write8(0x9494, 0xFE)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x01F1)
+  expect(cpu.r1.bc).toEqual(0xBC0D)
+  expect(cpu.r1.de).toEqual(0xFE76)
+  expect(cpu.r1.hl).toEqual(0x1510)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x9420)
+  expect(cpu.r1.iy).toEqual(0x93A3)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbfb', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x709B
+  cpu.r1.bc = 0x14EB
+  cpu.r1.de = 0xEC1C
+  cpu.r1.hl = 0xB844
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x3453
+  cpu.r1.iy = 0xF2B0
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xAF)
+  mem.write8(0x0003, 0xFB)
+  mem.write8(0x3402, 0x02)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x709B)
+  expect(cpu.r1.bc).toEqual(0x14EB)
+  expect(cpu.r1.de).toEqual(0xEC82)
+  expect(cpu.r1.hl).toEqual(0xB844)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x3453)
+  expect(cpu.r1.iy).toEqual(0xF2B0)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbfc', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0x6C89
+  cpu.r1.bc = 0xA96E
+  cpu.r1.de = 0xD27B
+  cpu.r1.hl = 0xD6A7
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x6139
+  cpu.r1.iy = 0xB4C1
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0xA1)
+  mem.write8(0x0003, 0xFC)
+  mem.write8(0x60DA, 0x10)
+
+  while (cpu.pc !== 0x4) {
+    try {
+      cpu.execInstruction()
+    } catch (e) {
+      return
+    }
+  }
+  
+  expect(cpu.r1.af).toEqual(0x6C89)
+  expect(cpu.r1.bc).toEqual(0xA96E)
+  expect(cpu.r1.de).toEqual(0xD27B)
+  expect(cpu.r1.hl).toEqual(0x90A7)
+  expect(cpu.r2.af).toEqual(0x0000)
+  expect(cpu.r2.bc).toEqual(0x0000)
+  expect(cpu.r2.de).toEqual(0x0000)
+  expect(cpu.r2.hl).toEqual(0x0000)
+  expect(cpu.r1.ix).toEqual(0x6139)
+  expect(cpu.r1.iy).toEqual(0xB4C1)
+  expect(cpu.sp).toEqual(0x0000)
+  expect(cpu.r).toEqual(0x02)
+  expect(cpu.i).toEqual(0x00)
+})
+
+test('Test ddcbfd', () => {
+  let mem = new Memory()
+  let cpu = new Z80(mem)
+  cpu.r1.af = 0xFB3F
+  cpu.r1.bc = 0x83F6
+  cpu.r1.de = 0x2094
+  cpu.r1.hl = 0x3349
+  cpu.r2.af = 0x0000
+  cpu.r2.bc = 0x0000
+  cpu.r2.de = 0x0000
+  cpu.r2.hl = 0x0000
+  cpu.r1.ix = 0x3ED0
+  cpu.r1.iy = 0x6F0E
+  cpu.sp = 0x0000
+  cpu.pc = 0x0000
+  cpu.i = 0x00
+  cpu.r = 0x00
+  mem.write8(0x0000, 0xDD)
+  mem.write8(0x0001, 0xCB)
+  mem.write8(0x0002, 0x28)
   mem.write8(0x0003, 0xFD)
-  mem.write8(0x5D50, 0x27)
+  mem.write8(0x3EF8, 0xC2)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -11670,43 +11670,43 @@ test('Test fdcbfd', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x1751)
-  expect(cpu.r1.bc).toEqual(0x233C)
-  expect(cpu.r1.de).toEqual(0x6214)
-  expect(cpu.r1.hl).toEqual(0xD1A7)
+  expect(cpu.r1.af).toEqual(0xFB3F)
+  expect(cpu.r1.bc).toEqual(0x83F6)
+  expect(cpu.r1.de).toEqual(0x2094)
+  expect(cpu.r1.hl).toEqual(0x33C2)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xC415)
-  expect(cpu.r1.iy).toEqual(0x5D2B)
+  expect(cpu.r1.ix).toEqual(0x3ED0)
+  expect(cpu.r1.iy).toEqual(0x6F0E)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbfe', () => {
+test('Test ddcbfe', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xB4CF
-  cpu.r1.bc = 0x5639
-  cpu.r1.de = 0x677B
-  cpu.r1.hl = 0x0CA2
+  cpu.r1.af = 0xFC42
+  cpu.r1.bc = 0x50B7
+  cpu.r1.de = 0xE98D
+  cpu.r1.hl = 0x3E45
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0xDDC5
-  cpu.r1.iy = 0x4E4F
+  cpu.r1.ix = 0x41B5
+  cpu.r1.iy = 0x3410
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0x88)
+  mem.write8(0x0002, 0xEC)
   mem.write8(0x0003, 0xFE)
-  mem.write8(0x4DD7, 0x4A)
+  mem.write8(0x41A1, 0xA1)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -11716,43 +11716,43 @@ test('Test fdcbfe', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0xB4CF)
-  expect(cpu.r1.bc).toEqual(0x5639)
-  expect(cpu.r1.de).toEqual(0x677B)
-  expect(cpu.r1.hl).toEqual(0x0CA2)
+  expect(cpu.r1.af).toEqual(0xFC42)
+  expect(cpu.r1.bc).toEqual(0x50B7)
+  expect(cpu.r1.de).toEqual(0xE98D)
+  expect(cpu.r1.hl).toEqual(0x3E45)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0xDDC5)
-  expect(cpu.r1.iy).toEqual(0x4E4F)
+  expect(cpu.r1.ix).toEqual(0x41B5)
+  expect(cpu.r1.iy).toEqual(0x3410)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
 })
 
-test('Test fdcbff', () => {
+test('Test ddcbff', () => {
   let mem = new Memory()
   let cpu = new Z80(mem)
-  cpu.r1.af = 0xF151
-  cpu.r1.bc = 0x13DA
-  cpu.r1.de = 0x7C56
-  cpu.r1.hl = 0xF025
+  cpu.r1.af = 0xE666
+  cpu.r1.bc = 0x94D2
+  cpu.r1.de = 0xAC90
+  cpu.r1.hl = 0x8F45
   cpu.r2.af = 0x0000
   cpu.r2.bc = 0x0000
   cpu.r2.de = 0x0000
   cpu.r2.hl = 0x0000
-  cpu.r1.ix = 0x2B36
-  cpu.r1.iy = 0x2AED
+  cpu.r1.ix = 0x0655
+  cpu.r1.iy = 0xBA29
   cpu.sp = 0x0000
   cpu.pc = 0x0000
   cpu.i = 0x00
   cpu.r = 0x00
-  mem.write8(0x0000, 0xFD)
+  mem.write8(0x0000, 0xDD)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xE4)
+  mem.write8(0x0002, 0xD3)
   mem.write8(0x0003, 0xFF)
-  mem.write8(0x2AD1, 0x97)
+  mem.write8(0x0628, 0x2B)
 
   while (cpu.pc !== 0x4) {
     try {
@@ -11762,16 +11762,16 @@ test('Test fdcbff', () => {
     }
   }
   
-  expect(cpu.r1.af).toEqual(0x9751)
-  expect(cpu.r1.bc).toEqual(0x13DA)
-  expect(cpu.r1.de).toEqual(0x7C56)
-  expect(cpu.r1.hl).toEqual(0xF025)
+  expect(cpu.r1.af).toEqual(0xAB66)
+  expect(cpu.r1.bc).toEqual(0x94D2)
+  expect(cpu.r1.de).toEqual(0xAC90)
+  expect(cpu.r1.hl).toEqual(0x8F45)
   expect(cpu.r2.af).toEqual(0x0000)
   expect(cpu.r2.bc).toEqual(0x0000)
   expect(cpu.r2.de).toEqual(0x0000)
   expect(cpu.r2.hl).toEqual(0x0000)
-  expect(cpu.r1.ix).toEqual(0x2B36)
-  expect(cpu.r1.iy).toEqual(0x2AED)
+  expect(cpu.r1.ix).toEqual(0x0655)
+  expect(cpu.r1.iy).toEqual(0xBA29)
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
