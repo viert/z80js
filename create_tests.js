@@ -94,9 +94,34 @@ let expected = fs.readFileSync(path.resolve(__dirname, 'tests.expected'))
 expected = expected.toString().split('\n')
 prepareTestsOutput(expected)
 
-let testLines = [ 'const Memory = require("./src/memory")', 'const Z80 = require("./src/z80")' ]
+// let testLines = [ 'const Memory = require("./src/memory")', 'const Z80 = require("./src/z80")' ]
+let testRenders = {
+  main: [],
+  cb: [],
+  ed: [],
+  dd: [],
+  fd: [],
+  ddcb: [],
+  fdcb: []
+}
+let testLines
 
 for (let desc in tests) {
+  if (desc.startsWith('ddcb')) {
+    testLines = testRenders['ddcb']
+  } else if (desc.startsWith('fdcb')) {
+    testLines = testRenders['fdcb']
+  } else if (desc.startsWith('fd')) {
+    testLines = testRenders['fd']
+  } else if (desc.startsWith('dd')) {
+    testLines = testRenders['dd']
+  } else if (desc.startsWith('ed')) {
+    testLines = testRenders['ed']
+  } else if (desc.startsWith('cb')) {
+    testLines = testRenders['cb']
+  } else {
+    testLines = testRenders['main']
+  }
   let description = 'Test ' + desc
   let data = tests[desc]
   testLines.push(`test('${description}', () => {`)
@@ -148,4 +173,10 @@ for (let desc in tests) {
   testLines.push('')
 }
 
-fs.writeFileSync(path.resolve(__dirname, 'test.js'), testLines.join('\n'))
+for (let key in testRenders) {
+  let fileName = path.resolve(__dirname, `test_${key}.js`)
+  let lines = [ 'const Memory = require("./src/memory")', 'const Z80 = require("./src/z80")', '' ].concat(
+    testRenders[key]
+  )
+  fs.writeFileSync(fileName, lines.join('\n'))
+}
