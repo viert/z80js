@@ -11,6 +11,13 @@ const RegisterMap = {
   0b101: 'l'
 }
 
+const Register16Map = {
+  0b00: 'bc',
+  0b01: 'de',
+  0b10: 'hl',
+  0b11: 'sp'
+}
+
 const RegisterMapHL = {
   0b100: 'h',
   0b101: 'l'
@@ -632,6 +639,39 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+// LD dd, nn
+for (let rCode in Register16Map) {
+  let opCode = 0b00000001 | (rCode << 4)
+  let opFuncName = `ld_${Register16Map[rCode]}_nn`
+  let disasmString = `ld ${Register16Map[rCode]}, {0}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    tStates: 10,
+    cycles: 2,
+    dasm: disasmString,
+    argLen: 2
+  }
+}
+
+for (let regName in Prefixes) {
+  let code = Prefixes[regName]
+  Z80.prototype.opcodeTable[code].nextTable[0b00100001] = {
+    funcName: `ld_${regName}_nn`,
+    tStates: 10,
+    cycles: 2,
+    dasm: `ld ${regName}, {0}`,
+    argLen: 2
+  }
+}
+
+// #BEGIN ld_[bc,de,hl,sp,ix,iy]_nn
+Z80.prototype.$0 = function() {
+  this.r1.$1 = this.read16(this.pc)
+  this.pc += 2
+}
+
+// #END
+
 // NOP
 Z80.prototype.opcodeTable[0x00] = {
   funcName: 'nop',
@@ -699,10 +739,10 @@ for (let p = 0; p < 8; p++) {
 }
 
 // #BEGIN rst_[00,08,10,18,20,28,30,38]h
-Z80.prototype.$0 = function() {
-  this.doPush(this.pc)
-  this.pc = 0x$1
-}
+// Z80.prototype.$0 = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x$1
+// }
 
 // #END
 module.exports = Z80

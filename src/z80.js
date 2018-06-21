@@ -11,6 +11,13 @@ const RegisterMap = {
   0b101: 'l'
 }
 
+const Register16Map = {
+  0b00: 'bc',
+  0b01: 'de',
+  0b10: 'hl',
+  0b11: 'sp'
+}
+
 const RegisterMapHL = {
   0b100: 'h',
   0b101: 'l'
@@ -1337,6 +1344,62 @@ Z80.prototype.ld__iy_d__n = function() {
 }
 
 
+// LD dd, nn
+for (let rCode in Register16Map) {
+  let opCode = 0b00000001 | (rCode << 4)
+  let opFuncName = `ld_${Register16Map[rCode]}_nn`
+  let disasmString = `ld ${Register16Map[rCode]}, {0}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    tStates: 10,
+    cycles: 2,
+    dasm: disasmString,
+    argLen: 2
+  }
+}
+
+for (let regName in Prefixes) {
+  let code = Prefixes[regName]
+  Z80.prototype.opcodeTable[code].nextTable[0b00100001] = {
+    funcName: `ld_${regName}_nn`,
+    tStates: 10,
+    cycles: 2,
+    dasm: `ld ${regName}, {0}`,
+    argLen: 2
+  }
+}
+
+Z80.prototype.ld_bc_nn = function() {
+  this.r1.bc = this.read16(this.pc)
+  this.pc += 2
+}
+
+Z80.prototype.ld_de_nn = function() {
+  this.r1.de = this.read16(this.pc)
+  this.pc += 2
+}
+
+Z80.prototype.ld_hl_nn = function() {
+  this.r1.hl = this.read16(this.pc)
+  this.pc += 2
+}
+
+Z80.prototype.ld_sp_nn = function() {
+  this.r1.sp = this.read16(this.pc)
+  this.pc += 2
+}
+
+Z80.prototype.ld_ix_nn = function() {
+  this.r1.ix = this.read16(this.pc)
+  this.pc += 2
+}
+
+Z80.prototype.ld_iy_nn = function() {
+  this.r1.iy = this.read16(this.pc)
+  this.pc += 2
+}
+
+
 // NOP
 Z80.prototype.opcodeTable[0x00] = {
   funcName: 'nop',
@@ -1457,44 +1520,44 @@ for (let p = 0; p < 8; p++) {
   }
 }
 
-Z80.prototype.rst_00h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x00
-}
+// Z80.prototype.rst_00h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x00
+// }
 
-Z80.prototype.rst_08h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x08
-}
+// Z80.prototype.rst_08h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x08
+// }
 
-Z80.prototype.rst_10h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x10
-}
+// Z80.prototype.rst_10h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x10
+// }
 
-Z80.prototype.rst_18h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x18
-}
+// Z80.prototype.rst_18h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x18
+// }
 
-Z80.prototype.rst_20h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x20
-}
+// Z80.prototype.rst_20h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x20
+// }
 
-Z80.prototype.rst_28h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x28
-}
+// Z80.prototype.rst_28h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x28
+// }
 
-Z80.prototype.rst_30h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x30
-}
+// Z80.prototype.rst_30h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x30
+// }
 
-Z80.prototype.rst_38h = function() {
-  this.doPush(this.pc)
-  this.pc = 0x38
-}
+// Z80.prototype.rst_38h = function() {
+//   this.doPush(this.pc)
+//   this.pc = 0x38
+// }
 
 module.exports = Z80
