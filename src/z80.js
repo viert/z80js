@@ -30,14 +30,25 @@ const f_5 = 32
 const f_z = 64
 const f_s = 128
 
-const c_z = 0
-const c_nz = 1
-const c_c = 2
-const c_nc = 3
-const c_m = 4
-const c_p = 5
-const c_pe = 6
-const c_po = 7
+const c_nz = 0b000
+const c_z = 0b001
+const c_nc = 0b010
+const c_c = 0b011
+const c_po = 0b100
+const c_pe = 0b101
+const c_p = 0b110
+const c_m = 0b111
+
+const Conditions = {
+  nz: c_nz,
+  z: c_z,
+  nc: c_nc,
+  c: c_c,
+  po: c_po,
+  pe: c_pe,
+  p: c_p,
+  m: c_m
+}
 
 const MemoryMethods = [ 'read8', 'read16', 'write8', 'write16' ]
 
@@ -336,6 +347,7 @@ Z80.prototype.execInstruction = function() {
     }
   }
 
+  this.pc++
   let { funcName, tStates, dasm } = instr
   if (this.debug) {
     console.log(dasm)
@@ -343,7 +355,6 @@ Z80.prototype.execInstruction = function() {
   if (!(funcName in this)) {
     throw 'Instruction ' + funcName + ' is not implemented'
   }
-  this.pc++
   this[funcName].call(this)
   this.tStates += tStates
 }
@@ -1322,6 +1333,97 @@ Z80.prototype.opcodeTable[0x00] = {
 
 Z80.prototype.nop = function() {
   // nop
+}
+
+// JP nn
+Z80.prototype.opcodeTable[0xc3] = {
+  funcName: 'jp_nn',
+  tStates: 10,
+  cycles: 3,
+  dasm: 'jp {0}',
+  argLen: 2
+}
+
+Z80.prototype.jp_nn = function() {
+  this.pc = this.read16(this.pc)
+}
+
+// JP cc, nn
+for (let cond in Conditions) {
+  let opCode = 0b11000010 | (Conditions[cond] << 3)
+  let opFuncName = `jp_${cond}_nn`
+  let disasmString = `jp_${cond}_{0}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    tStates: 10,
+    cycles: 3,
+    dasm: disasmString,
+    argLen: 2
+  }
+}
+
+Z80.prototype.jp_c_nn = function() {
+  if (this.condition(c_c)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
+}
+
+Z80.prototype.jp_nc_nn = function() {
+  if (this.condition(c_nc)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
+}
+
+Z80.prototype.jp_z_nn = function() {
+  if (this.condition(c_z)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
+}
+
+Z80.prototype.jp_nz_nn = function() {
+  if (this.condition(c_nz)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
+}
+
+Z80.prototype.jp_pe_nn = function() {
+  if (this.condition(c_pe)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
+}
+
+Z80.prototype.jp_po_nn = function() {
+  if (this.condition(c_po)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
+}
+
+Z80.prototype.jp_p_nn = function() {
+  if (this.condition(c_p)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
+}
+
+Z80.prototype.jp_m_nn = function() {
+  if (this.condition(c_m)) {
+    this.pc = this.read16(this.pc)
+  } else {
+    this.pc += 2
+  }
 }
 
 module.exports = Z80
