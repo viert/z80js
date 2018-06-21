@@ -148,7 +148,7 @@ for (let desc in tests) {
     })
   })
   testLines.push(`
-  while (cpu.pc !== 0x${data.output.regs.pc}) {
+  while (cpu.pc !== 0x${data.output.regs.pc} && cpu.tStates < ${data.output.regs.tStates}) {
     cpu.execInstruction()
   }
   `)

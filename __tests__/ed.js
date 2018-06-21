@@ -21,7 +21,7 @@ test('Test ed40', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x40)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -60,7 +60,7 @@ test('Test ed41', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x41)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -99,7 +99,7 @@ test('Test ed42', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x42)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -140,7 +140,7 @@ test('Test ed43', () => {
   mem.write8(0x0002, 0xC6)
   mem.write8(0x0003, 0x54)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -179,7 +179,7 @@ test('Test ed44', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x44)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -220,7 +220,7 @@ test('Test ed45', () => {
   mem.write8(0x3100, 0x1F)
   mem.write8(0x3101, 0x22)
 
-  while (cpu.pc !== 0x8735) {
+  while (cpu.pc !== 0x8735 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -259,7 +259,7 @@ test('Test ed46', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x46)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -298,7 +298,7 @@ test('Test ed47', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x47)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 9) {
     cpu.execInstruction()
   }
   
@@ -337,7 +337,7 @@ test('Test ed48', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x48)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -376,7 +376,7 @@ test('Test ed49', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x49)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -415,7 +415,7 @@ test('Test ed4a', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x4A)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -458,7 +458,7 @@ test('Test ed4b', () => {
   mem.write8(0xA41A, 0xF3)
   mem.write8(0xA41B, 0xD4)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -497,7 +497,7 @@ test('Test ed4c', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x4C)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -538,7 +538,7 @@ test('Test ed4d', () => {
   mem.write8(0x680E, 0x03)
   mem.write8(0x680F, 0x7C)
 
-  while (cpu.pc !== 0x31747) {
+  while (cpu.pc !== 0x31747 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -577,7 +577,7 @@ test('Test ed4e', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x4E)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -616,7 +616,7 @@ test('Test ed4f', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x4F)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 9) {
     cpu.execInstruction()
   }
   
@@ -655,7 +655,7 @@ test('Test ed50', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x50)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -694,7 +694,7 @@ test('Test ed51', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x51)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -733,7 +733,7 @@ test('Test ed52', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x52)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -774,7 +774,7 @@ test('Test ed53', () => {
   mem.write8(0x0002, 0xFF)
   mem.write8(0x0003, 0x21)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -813,7 +813,7 @@ test('Test ed54', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x54)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -854,7 +854,7 @@ test('Test ed55', () => {
   mem.write8(0xD4B4, 0xEA)
   mem.write8(0xD4B5, 0xC9)
 
-  while (cpu.pc !== 0x51690) {
+  while (cpu.pc !== 0x51690 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -893,7 +893,7 @@ test('Test ed56', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x56)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -932,7 +932,7 @@ test('Test ed57', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x57)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 9) {
     cpu.execInstruction()
   }
   
@@ -971,7 +971,7 @@ test('Test ed58', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x58)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -1010,7 +1010,7 @@ test('Test ed59', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x59)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -1049,7 +1049,7 @@ test('Test ed5a', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x5A)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -1092,7 +1092,7 @@ test('Test ed5b', () => {
   mem.write8(0x9F04, 0x84)
   mem.write8(0x9F05, 0x4D)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -1131,7 +1131,7 @@ test('Test ed5c', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x5C)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -1172,7 +1172,7 @@ test('Test ed5d', () => {
   mem.write8(0x5308, 0x26)
   mem.write8(0x5309, 0xE0)
 
-  while (cpu.pc !== 0x57382) {
+  while (cpu.pc !== 0x57382 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -1211,7 +1211,7 @@ test('Test ed5e', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x5E)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -1250,7 +1250,7 @@ test('Test ed5f', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x5F)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 9) {
     cpu.execInstruction()
   }
   
@@ -1289,7 +1289,7 @@ test('Test ed60', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x60)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -1328,7 +1328,7 @@ test('Test ed61', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x61)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -1367,7 +1367,7 @@ test('Test ed62', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x62)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -1408,7 +1408,7 @@ test('Test ed63', () => {
   mem.write8(0x0002, 0x67)
   mem.write8(0x0003, 0x65)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -1447,7 +1447,7 @@ test('Test ed64', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x64)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -1488,7 +1488,7 @@ test('Test ed65', () => {
   mem.write8(0xF207, 0xEB)
   mem.write8(0xF208, 0x0E)
 
-  while (cpu.pc !== 0x3819) {
+  while (cpu.pc !== 0x3819 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -1527,7 +1527,7 @@ test('Test ed66', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x66)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -1567,7 +1567,7 @@ test('Test ed67', () => {
   mem.write8(0x0001, 0x67)
   mem.write8(0xB9DE, 0x93)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 18) {
     cpu.execInstruction()
   }
   
@@ -1606,7 +1606,7 @@ test('Test ed68', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x68)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -1645,7 +1645,7 @@ test('Test ed69', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x69)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -1684,7 +1684,7 @@ test('Test ed6a', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x6A)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -1727,7 +1727,7 @@ test('Test ed6b', () => {
   mem.write8(0x6198, 0x3F)
   mem.write8(0x6199, 0xBE)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -1766,7 +1766,7 @@ test('Test ed6c', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x6C)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -1807,7 +1807,7 @@ test('Test ed6d', () => {
   mem.write8(0x5CD3, 0xA9)
   mem.write8(0x5CD4, 0x73)
 
-  while (cpu.pc !== 0x29609) {
+  while (cpu.pc !== 0x29609 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -1846,7 +1846,7 @@ test('Test ed6e', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x6E)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -1886,7 +1886,7 @@ test('Test ed6f', () => {
   mem.write8(0x0001, 0x6F)
   mem.write8(0x403C, 0xC4)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 18) {
     cpu.execInstruction()
   }
   
@@ -1925,7 +1925,7 @@ test('Test ed70', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x70)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -1964,7 +1964,7 @@ test('Test ed71', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x71)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -2003,7 +2003,7 @@ test('Test ed72', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x72)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -2044,7 +2044,7 @@ test('Test ed73', () => {
   mem.write8(0x0002, 0x2A)
   mem.write8(0x0003, 0x79)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -2083,7 +2083,7 @@ test('Test ed74', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x74)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -2124,7 +2124,7 @@ test('Test ed75', () => {
   mem.write8(0x7D00, 0xFD)
   mem.write8(0x7D01, 0x4F)
 
-  while (cpu.pc !== 0x20477) {
+  while (cpu.pc !== 0x20477 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -2163,7 +2163,7 @@ test('Test ed76', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x76)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -2202,7 +2202,7 @@ test('Test ed78', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x78)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -2241,7 +2241,7 @@ test('Test ed79', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x79)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 12) {
     cpu.execInstruction()
   }
   
@@ -2280,7 +2280,7 @@ test('Test ed7a', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x7A)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 15) {
     cpu.execInstruction()
   }
   
@@ -2323,7 +2323,7 @@ test('Test ed7b', () => {
   mem.write8(0x8C50, 0xD8)
   mem.write8(0x8C51, 0x48)
 
-  while (cpu.pc !== 0x4) {
+  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
     cpu.execInstruction()
   }
   
@@ -2362,7 +2362,7 @@ test('Test ed7c', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x7C)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -2403,7 +2403,7 @@ test('Test ed7d', () => {
   mem.write8(0x66F0, 0x4F)
   mem.write8(0x66F1, 0xFB)
 
-  while (cpu.pc !== 0x64335) {
+  while (cpu.pc !== 0x64335 && cpu.tStates < 14) {
     cpu.execInstruction()
   }
   
@@ -2442,7 +2442,7 @@ test('Test ed7e', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0x7E)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 8) {
     cpu.execInstruction()
   }
   
@@ -2482,7 +2482,7 @@ test('Test eda0', () => {
   mem.write8(0x0001, 0xA0)
   mem.write8(0xD097, 0xB7)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2522,7 +2522,7 @@ test('Test eda1', () => {
   mem.write8(0x0001, 0xA1)
   mem.write8(0x3BC3, 0xB4)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2561,7 +2561,7 @@ test('Test eda2', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xA2)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2600,7 +2600,7 @@ test('Test eda2_01', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xA2)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2639,7 +2639,7 @@ test('Test eda2_02', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xA2)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2678,7 +2678,7 @@ test('Test eda2_03', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xA2)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2718,7 +2718,7 @@ test('Test eda3', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x32FA, 0xB3)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2758,7 +2758,7 @@ test('Test eda3_01', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FF, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2798,7 +2798,7 @@ test('Test eda3_02', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x0100, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2838,7 +2838,7 @@ test('Test eda3_03', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x0107, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2878,7 +2878,7 @@ test('Test eda3_04', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FF, 0x80)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2918,7 +2918,7 @@ test('Test eda3_05', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FD, 0x12)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2958,7 +2958,7 @@ test('Test eda3_06', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FE, 0x12)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -2998,7 +2998,7 @@ test('Test eda3_07', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FF, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3038,7 +3038,7 @@ test('Test eda3_08', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FE, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3078,7 +3078,7 @@ test('Test eda3_09', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FF, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3118,7 +3118,7 @@ test('Test eda3_10', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FF, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3158,7 +3158,7 @@ test('Test eda3_11', () => {
   mem.write8(0x0001, 0xA3)
   mem.write8(0x01FF, 0x00)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3198,7 +3198,7 @@ test('Test eda8', () => {
   mem.write8(0x0001, 0xA8)
   mem.write8(0x12E8, 0xD8)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3238,7 +3238,7 @@ test('Test eda9', () => {
   mem.write8(0x0001, 0xA9)
   mem.write8(0x0DBE, 0x89)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3277,7 +3277,7 @@ test('Test edaa', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xAA)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3316,7 +3316,7 @@ test('Test edaa_01', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xAA)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3355,7 +3355,7 @@ test('Test edaa_02', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xAA)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3394,7 +3394,7 @@ test('Test edaa_03', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xAA)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3434,7 +3434,7 @@ test('Test edab', () => {
   mem.write8(0x0001, 0xAB)
   mem.write8(0x199F, 0x49)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3474,7 +3474,7 @@ test('Test edab_01', () => {
   mem.write8(0x0001, 0xAB)
   mem.write8(0x007A, 0x7F)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3514,7 +3514,7 @@ test('Test edab_02', () => {
   mem.write8(0x0001, 0xAB)
   mem.write8(0x00F1, 0xCD)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 16) {
     cpu.execInstruction()
   }
   
@@ -3569,7 +3569,7 @@ test('Test edb0', () => {
   mem.write8(0x559C, 0xFB)
   mem.write8(0x559D, 0x49)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 331) {
     cpu.execInstruction()
   }
   
@@ -3616,7 +3616,7 @@ test('Test edb1', () => {
   mem.write8(0x982B, 0x11)
   mem.write8(0x982C, 0x85)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 79) {
     cpu.execInstruction()
   }
   
@@ -3655,7 +3655,7 @@ test('Test edb2', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xB2)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 205) {
     cpu.execInstruction()
   }
   
@@ -3697,7 +3697,7 @@ test('Test edb3', () => {
   mem.write8(0x1D7D, 0x24)
   mem.write8(0x1D7E, 0xAA)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 58) {
     cpu.execInstruction()
   }
   
@@ -3744,7 +3744,7 @@ test('Test edb8', () => {
   mem.write8(0x4DCE, 0x23)
   mem.write8(0x4DCF, 0x0A)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 163) {
     cpu.execInstruction()
   }
   
@@ -3791,7 +3791,7 @@ test('Test edb9', () => {
   mem.write8(0xC748, 0x4E)
   mem.write8(0xC749, 0x6C)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 163) {
     cpu.execInstruction()
   }
   
@@ -3830,7 +3830,7 @@ test('Test edba', () => {
   mem.write8(0x0000, 0xED)
   mem.write8(0x0001, 0xBA)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 121) {
     cpu.execInstruction()
   }
   
@@ -3873,7 +3873,7 @@ test('Test edbb', () => {
   mem.write8(0x1DCF, 0xC5)
   mem.write8(0x1DD0, 0xB6)
 
-  while (cpu.pc !== 0x2) {
+  while (cpu.pc !== 0x2 && cpu.tStates < 79) {
     cpu.execInstruction()
   }
   
