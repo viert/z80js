@@ -53,6 +53,7 @@ const Conditions = {
 const MemoryMethods = [ 'read8', 'read16', 'write8', 'write16' ]
 
 // Z80 constructor
+
 const Z80 = function(memory, debug) {
   if (!(this instanceof Z80)) {
     throw 'Z80 is a constructor, use "new" keyword'
@@ -278,6 +279,20 @@ Z80.prototype.condition = function(cond) {
     default:
       return true
   }
+}
+
+Z80.prototype.doPush = function(value) {
+  this.sp -= 2
+  this.write16(this.sp, value)
+}
+
+Z80.prototype.doPop = function(operandName) {
+  if (operandName in this.r1) {
+    this.r1[operandName] = this.read16(this.sp)
+  } else {
+    this[operandName] = this.read16(this.sp)
+  }
+  this.sp += 2
 }
 
 // R register
@@ -1424,6 +1439,62 @@ Z80.prototype.jp_m_nn = function() {
   } else {
     this.pc += 2
   }
+}
+
+
+// RST p
+for (let p = 0; p < 8; p++) {
+  let vector = p << 3
+  let opCode = 0b11000111 | vector
+  let opFuncName = `rst_${hex8(vector)}h`
+  let disasmString = `rst ${hex8(vector)}h`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    tStates: 11,
+    cycles: 3,
+    dasm: disasmString,
+    argLen: 0
+  }
+}
+
+Z80.prototype.rst_00h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x00
+}
+
+Z80.prototype.rst_08h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x08
+}
+
+Z80.prototype.rst_10h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x10
+}
+
+Z80.prototype.rst_18h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x18
+}
+
+Z80.prototype.rst_20h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x20
+}
+
+Z80.prototype.rst_28h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x28
+}
+
+Z80.prototype.rst_30h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x30
+}
+
+Z80.prototype.rst_38h = function() {
+  this.doPush(this.pc)
+  this.pc = 0x38
 }
 
 module.exports = Z80
