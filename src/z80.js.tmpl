@@ -736,6 +736,7 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+// LD HL, (nn)
 Z80.prototype.opcodeTable[0x2a] = {
   funcName: 'ld_hl__nn_',
   tStates: 16,
@@ -744,6 +745,7 @@ Z80.prototype.opcodeTable[0x2a] = {
   args: [ ArgType.Word ]
 }
 
+// LD IX/IY, (nn)
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2a] = {
     funcName: `ld_${pref}__nn_`,
@@ -754,6 +756,7 @@ for (let pref in Prefixes) {
   }
 }
 
+// LD dd, (nn)
 for (let rCode in Register16Map) {
   let opCode = 0b01001011 | (rCode << 4)
   let opFuncName = `ld_${Register16Map[rCode]}__nn_`
@@ -771,6 +774,49 @@ for (let rCode in Register16Map) {
 Z80.prototype.$0 = function() {
   this.r1.$1 = this.read16(this.read16(this.pc))
   this.pc += 2
+}
+
+// #END
+
+// LD (nn), HL
+Z80.prototype.opcodeTable[0x22] = {
+  funcName: 'ld__nn__hl',
+  tStates: 16,
+  cycles: 5,
+  dasm: `ld ({0}), hl`,
+  args: [ ArgType.Word ]
+}
+
+// LD (nn), IX/IY
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x22] = {
+    funcName: `ld__nn__${pref}`,
+    tStates: 16,
+    cycles: 5,
+    dasm: `ld ({0}), ${pref}`,
+    args: [ ArgType.Word ]
+  }
+}
+
+// LD (nn), dd
+for (let rCode in Register16Map) {
+  let opCode = 0b01000011 | (rCode << 4)
+  let opFuncName = `ld__nn__${Register16Map[rCode]}`
+  let disasmString = `ld ({0}), ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    tStates: 20,
+    cycles: 6,
+    dasm: disasmString,
+    args: [ ArgType.Word ]
+  }
+}
+
+// #BEGIN ld__nn__[ix,iy,bc,de,hl,sp]
+Z80.prototype.$0 = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.write16(addr, this.r1.$1)
 }
 
 // #END

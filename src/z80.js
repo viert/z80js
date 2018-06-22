@@ -85,7 +85,7 @@ const Z80 = function(memory, debug) {
   })
 
   this.tStates = 0
-  this.debug = !!debug
+  this.debugMode = !!debug
 
   // Creating registers
   this.r1 = {}
@@ -394,26 +394,26 @@ Z80.prototype.disassemble = function(addr) {
   return dasm
 }
 
+Z80.prototype.debug = function(message) {
+  if (this.debugMode) {
+    console.log(message)
+  }
+}
+
 Z80.prototype.execInstruction = function() {
   this.incr()
   let opCode = this.read8(this.pc)
-  if (this.debug) {
-    console.log('read opCode ' + hex8(opCode))
-  }
+  this.debug('read opCode ' + hex8(opCode))
   let codesString = opCode.toString(16)
   let instr = this.opcodeTable[opCode]
-  if (this.debug) {
-    console.log('instruction is ' + instr)
-  }
+  this.debug('instruction is ' + instr)
   if (!instr) {
     throw 'Unknown instruction (opcode ' + codesString + ')'
   }
 
   while ('nextTable' in instr) {
     let nextTable = instr.nextTable
-    if (this.debug) {
-      console.log('Next table reached')
-    }
+    this.debug('Next table reached')
     if (nextTable.opcodeOffset) {
       this.decr()
     }
@@ -421,14 +421,10 @@ Z80.prototype.execInstruction = function() {
     this.pc++
     this.incr()
     opCode = this.read8(this.pc)
-    if (this.debug) {
-      console.log('read opCode ' + hex8(opCode))
-    }
+    this.debug('read opCode ' + hex8(opCode))
     codesString += ' ' + opCode.toString(16)
     instr = nextTable[opCode]
-    if (this.debug) {
-      console.log('instruction is ' + JSON.stringify(instr))
-    }
+    this.debug('instruction is ' + JSON.stringify(instr))
     if (!instr) {
       throw 'Unknown instruction (opcode ' + codesString + ')'
     }
@@ -1468,6 +1464,7 @@ Z80.prototype.ld_iy_nn = function() {
 }
 
 
+// LD HL, (nn)
 Z80.prototype.opcodeTable[0x2a] = {
   funcName: 'ld_hl__nn_',
   tStates: 16,
@@ -1476,6 +1473,7 @@ Z80.prototype.opcodeTable[0x2a] = {
   args: [ ArgType.Word ]
 }
 
+// LD IX/IY, (nn)
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2a] = {
     funcName: `ld_${pref}__nn_`,
@@ -1486,6 +1484,7 @@ for (let pref in Prefixes) {
   }
 }
 
+// LD dd, (nn)
 for (let rCode in Register16Map) {
   let opCode = 0b01001011 | (rCode << 4)
   let opFuncName = `ld_${Register16Map[rCode]}__nn_`
@@ -1527,6 +1526,77 @@ Z80.prototype.ld_hl__nn_ = function() {
 Z80.prototype.ld_sp__nn_ = function() {
   this.r1.sp = this.read16(this.read16(this.pc))
   this.pc += 2
+}
+
+
+// LD (nn), HL
+Z80.prototype.opcodeTable[0x22] = {
+  funcName: 'ld__nn__hl',
+  tStates: 16,
+  cycles: 5,
+  dasm: `ld ({0}), hl`,
+  args: [ ArgType.Word ]
+}
+
+// LD (nn), IX/IY
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x22] = {
+    funcName: `ld__nn__${pref}`,
+    tStates: 16,
+    cycles: 5,
+    dasm: `ld ({0}), ${pref}`,
+    args: [ ArgType.Word ]
+  }
+}
+
+// LD (nn), dd
+for (let rCode in Register16Map) {
+  let opCode = 0b01000011 | (rCode << 4)
+  let opFuncName = `ld__nn__${Register16Map[rCode]}`
+  let disasmString = `ld ({0}), ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    tStates: 20,
+    cycles: 6,
+    dasm: disasmString,
+    args: [ ArgType.Word ]
+  }
+}
+
+Z80.prototype.ld__nn__ix = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.write16(addr, this.r1.ix)
+}
+
+Z80.prototype.ld__nn__iy = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.write16(addr, this.r1.iy)
+}
+
+Z80.prototype.ld__nn__bc = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.write16(addr, this.r1.bc)
+}
+
+Z80.prototype.ld__nn__de = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.write16(addr, this.r1.de)
+}
+
+Z80.prototype.ld__nn__hl = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.write16(addr, this.r1.hl)
+}
+
+Z80.prototype.ld__nn__sp = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.write16(addr, this.r1.sp)
 }
 
 
