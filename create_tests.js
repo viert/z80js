@@ -148,7 +148,7 @@ for (let desc in tests) {
     })
   })
   testLines.push(`
-  while (cpu.pc !== 0x${data.output.regs.pc} && cpu.tStates < ${data.output.regs.tStates}) {
+  while (cpu.tStates < ${data.output.regs.tStates}) {
     cpu.execInstruction()
   }
   `)
@@ -165,6 +165,7 @@ for (let desc in tests) {
   testLines.push(`  expect(cpu.sp).toEqual(0x${hex16(data.output.regs.sp)})`)
   testLines.push(`  expect(cpu.r).toEqual(0x${hex8(data.output.regs.r)})`)
   testLines.push(`  expect(cpu.i).toEqual(0x${hex8(data.output.regs.i)})`)
+  testLines.push(`  expect(cpu.tStates).toEqual(${data.output.regs.tStates})`)
   testLines.push(`})`)
   testLines.push('')
 }

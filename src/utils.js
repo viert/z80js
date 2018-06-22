@@ -12,6 +12,12 @@ const unsigned8 = (val) => {
   return _i8[0]
 }
 
+const usum8 = (val1, val2) => {
+  _ui8[0] = val1
+  _ui8[0] += val2
+  return _ui8[0]
+}
+
 const hex = (val, len) => {
   val = val.toString(16).toUpperCase()
   while (val.length < len) {
@@ -27,5 +33,6 @@ module.exports = {
   unot8: unot8,
   unsigned8: unsigned8,
   hex8: hex8,
-  hex16: hex16
+  hex16: hex16,
+  usum8: usum8
 }
