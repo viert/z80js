@@ -24,8 +24,8 @@ test('Test fdcb00', () => {
   mem.write8(0x0003, 0x00)
   mem.write8(0x2781, 0x50)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x85A4)
@@ -41,6 +41,7 @@ test('Test fdcb00', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb01', () => {
@@ -66,8 +67,8 @@ test('Test fdcb01', () => {
   mem.write8(0x0003, 0x01)
   mem.write8(0x5BFD, 0xCB)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5781)
@@ -83,6 +84,7 @@ test('Test fdcb01', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb02', () => {
@@ -108,8 +110,8 @@ test('Test fdcb02', () => {
   mem.write8(0x0003, 0x02)
   mem.write8(0x3E06, 0x58)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xDCA0)
@@ -125,6 +127,7 @@ test('Test fdcb02', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb03', () => {
@@ -150,8 +153,8 @@ test('Test fdcb03', () => {
   mem.write8(0x0003, 0x03)
   mem.write8(0x5821, 0x1A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5720)
@@ -167,6 +170,7 @@ test('Test fdcb03', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb04', () => {
@@ -192,8 +196,8 @@ test('Test fdcb04', () => {
   mem.write8(0x0003, 0x04)
   mem.write8(0x50D8, 0x92)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xED21)
@@ -209,6 +213,7 @@ test('Test fdcb04', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb05', () => {
@@ -234,8 +239,8 @@ test('Test fdcb05', () => {
   mem.write8(0x0003, 0x05)
   mem.write8(0xB279, 0x66)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7A8C)
@@ -251,6 +256,7 @@ test('Test fdcb05', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb06', () => {
@@ -276,8 +282,8 @@ test('Test fdcb06', () => {
   mem.write8(0x0003, 0x06)
   mem.write8(0xFF99, 0xF1)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xF2A1)
@@ -293,6 +299,7 @@ test('Test fdcb06', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb07', () => {
@@ -318,8 +325,8 @@ test('Test fdcb07', () => {
   mem.write8(0x0003, 0x07)
   mem.write8(0x080F, 0xAE)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5D09)
@@ -335,6 +342,7 @@ test('Test fdcb07', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb08', () => {
@@ -360,8 +368,8 @@ test('Test fdcb08', () => {
   mem.write8(0x0003, 0x08)
   mem.write8(0x615C, 0x83)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xA681)
@@ -377,6 +385,7 @@ test('Test fdcb08', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb09', () => {
@@ -402,8 +411,8 @@ test('Test fdcb09', () => {
   mem.write8(0x0003, 0x09)
   mem.write8(0x197A, 0x27)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5485)
@@ -419,6 +428,7 @@ test('Test fdcb09', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb0a', () => {
@@ -444,8 +454,8 @@ test('Test fdcb0a', () => {
   mem.write8(0x0003, 0x0A)
   mem.write8(0xEED7, 0x19)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB389)
@@ -461,6 +471,7 @@ test('Test fdcb0a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb0b', () => {
@@ -486,8 +497,8 @@ test('Test fdcb0b', () => {
   mem.write8(0x0003, 0x0B)
   mem.write8(0xC69B, 0xF2)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xAE28)
@@ -503,6 +514,7 @@ test('Test fdcb0b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb0c', () => {
@@ -528,8 +540,8 @@ test('Test fdcb0c', () => {
   mem.write8(0x0003, 0x0C)
   mem.write8(0x8C74, 0xAE)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8700)
@@ -545,6 +557,7 @@ test('Test fdcb0c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb0d', () => {
@@ -570,8 +583,8 @@ test('Test fdcb0d', () => {
   mem.write8(0x0003, 0x0D)
   mem.write8(0xFE3E, 0x1B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x128D)
@@ -587,6 +600,7 @@ test('Test fdcb0d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb0e', () => {
@@ -612,8 +626,8 @@ test('Test fdcb0e', () => {
   mem.write8(0x0003, 0x0E)
   mem.write8(0xF22F, 0xF7)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8DA9)
@@ -629,6 +643,7 @@ test('Test fdcb0e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb0f', () => {
@@ -654,8 +669,8 @@ test('Test fdcb0f', () => {
   mem.write8(0x0003, 0x0F)
   mem.write8(0xCE4D, 0x44)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2224)
@@ -671,6 +686,7 @@ test('Test fdcb0f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb10', () => {
@@ -696,8 +712,8 @@ test('Test fdcb10', () => {
   mem.write8(0x0003, 0x10)
   mem.write8(0x431C, 0x1C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x252C)
@@ -713,6 +729,7 @@ test('Test fdcb10', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb11', () => {
@@ -738,8 +755,8 @@ test('Test fdcb11', () => {
   mem.write8(0x0003, 0x11)
   mem.write8(0x9D0B, 0x5E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBCA8)
@@ -755,6 +772,7 @@ test('Test fdcb11', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb12', () => {
@@ -780,8 +798,8 @@ test('Test fdcb12', () => {
   mem.write8(0x0003, 0x12)
   mem.write8(0x8598, 0xA7)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4E09)
@@ -797,6 +815,7 @@ test('Test fdcb12', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb13', () => {
@@ -822,8 +841,8 @@ test('Test fdcb13', () => {
   mem.write8(0x0003, 0x13)
   mem.write8(0xE74B, 0xB3)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB225)
@@ -839,6 +858,7 @@ test('Test fdcb13', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb14', () => {
@@ -864,8 +884,8 @@ test('Test fdcb14', () => {
   mem.write8(0x0003, 0x14)
   mem.write8(0xD900, 0x06)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xAB08)
@@ -881,6 +901,7 @@ test('Test fdcb14', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb15', () => {
@@ -906,8 +927,8 @@ test('Test fdcb15', () => {
   mem.write8(0x0003, 0x15)
   mem.write8(0x2D92, 0x12)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2824)
@@ -923,6 +944,7 @@ test('Test fdcb15', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb16', () => {
@@ -948,8 +970,8 @@ test('Test fdcb16', () => {
   mem.write8(0x0003, 0x16)
   mem.write8(0xF0D7, 0x89)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0C05)
@@ -965,6 +987,7 @@ test('Test fdcb16', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb17', () => {
@@ -990,8 +1013,8 @@ test('Test fdcb17', () => {
   mem.write8(0x0003, 0x17)
   mem.write8(0x1F9D, 0xB8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7125)
@@ -1007,6 +1030,7 @@ test('Test fdcb17', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb18', () => {
@@ -1032,8 +1056,8 @@ test('Test fdcb18', () => {
   mem.write8(0x0003, 0x18)
   mem.write8(0x31D6, 0xFA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x23A8)
@@ -1049,6 +1073,7 @@ test('Test fdcb18', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb19', () => {
@@ -1074,8 +1099,8 @@ test('Test fdcb19', () => {
   mem.write8(0x0003, 0x19)
   mem.write8(0x4CD0, 0x4B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x11A5)
@@ -1091,6 +1116,7 @@ test('Test fdcb19', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb1a', () => {
@@ -1116,8 +1142,8 @@ test('Test fdcb1a', () => {
   mem.write8(0x0003, 0x1A)
   mem.write8(0x414B, 0x44)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBC24)
@@ -1133,6 +1159,7 @@ test('Test fdcb1a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb1b', () => {
@@ -1158,8 +1185,8 @@ test('Test fdcb1b', () => {
   mem.write8(0x0003, 0x1B)
   mem.write8(0x71C6, 0xB8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7A0C)
@@ -1175,6 +1202,7 @@ test('Test fdcb1b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb1c', () => {
@@ -1200,8 +1228,8 @@ test('Test fdcb1c', () => {
   mem.write8(0x0003, 0x1C)
   mem.write8(0xDEE8, 0x8F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9381)
@@ -1217,6 +1245,7 @@ test('Test fdcb1c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb1d', () => {
@@ -1242,8 +1271,8 @@ test('Test fdcb1d', () => {
   mem.write8(0x0003, 0x1D)
   mem.write8(0xD68E, 0xB7)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x978D)
@@ -1259,6 +1288,7 @@ test('Test fdcb1d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb1e', () => {
@@ -1284,8 +1314,8 @@ test('Test fdcb1e', () => {
   mem.write8(0x0003, 0x1E)
   mem.write8(0xDA72, 0x25)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2F81)
@@ -1301,6 +1331,7 @@ test('Test fdcb1e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb1f', () => {
@@ -1326,8 +1357,8 @@ test('Test fdcb1f', () => {
   mem.write8(0x0003, 0x1F)
   mem.write8(0x2110, 0x04)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8284)
@@ -1343,6 +1374,7 @@ test('Test fdcb1f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb20', () => {
@@ -1368,8 +1400,8 @@ test('Test fdcb20', () => {
   mem.write8(0x0003, 0x20)
   mem.write8(0xDA9F, 0x89)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3D05)
@@ -1385,6 +1417,7 @@ test('Test fdcb20', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb21', () => {
@@ -1410,8 +1443,8 @@ test('Test fdcb21', () => {
   mem.write8(0x0003, 0x21)
   mem.write8(0xDEB1, 0x23)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1600)
@@ -1427,6 +1460,7 @@ test('Test fdcb21', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb22', () => {
@@ -1452,8 +1486,8 @@ test('Test fdcb22', () => {
   mem.write8(0x0003, 0x22)
   mem.write8(0x88C0, 0xD4)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xADA9)
@@ -1469,6 +1503,7 @@ test('Test fdcb22', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb23', () => {
@@ -1494,8 +1529,8 @@ test('Test fdcb23', () => {
   mem.write8(0x0003, 0x23)
   mem.write8(0x524A, 0x65)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x218C)
@@ -1511,6 +1546,7 @@ test('Test fdcb23', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb24', () => {
@@ -1536,8 +1572,8 @@ test('Test fdcb24', () => {
   mem.write8(0x0003, 0x24)
   mem.write8(0xAFB2, 0x7E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1CAC)
@@ -1553,6 +1589,7 @@ test('Test fdcb24', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb25', () => {
@@ -1578,8 +1615,8 @@ test('Test fdcb25', () => {
   mem.write8(0x0003, 0x25)
   mem.write8(0x238F, 0x26)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9508)
@@ -1595,6 +1632,7 @@ test('Test fdcb25', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb26', () => {
@@ -1620,8 +1658,8 @@ test('Test fdcb26', () => {
   mem.write8(0x0003, 0x26)
   mem.write8(0xD4A1, 0xBF)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x582D)
@@ -1637,6 +1675,7 @@ test('Test fdcb26', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb27', () => {
@@ -1662,8 +1701,8 @@ test('Test fdcb27', () => {
   mem.write8(0x0003, 0x27)
   mem.write8(0x8D9B, 0xA7)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4E0D)
@@ -1679,6 +1718,7 @@ test('Test fdcb27', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb28', () => {
@@ -1704,8 +1744,8 @@ test('Test fdcb28', () => {
   mem.write8(0x0003, 0x28)
   mem.write8(0xAAC6, 0x5D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x412D)
@@ -1721,6 +1761,7 @@ test('Test fdcb28', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb29', () => {
@@ -1746,8 +1787,8 @@ test('Test fdcb29', () => {
   mem.write8(0x0003, 0x29)
   mem.write8(0x03C0, 0x84)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0B80)
@@ -1763,6 +1804,7 @@ test('Test fdcb29', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb2a', () => {
@@ -1788,8 +1830,8 @@ test('Test fdcb2a', () => {
   mem.write8(0x0003, 0x2A)
   mem.write8(0xABE0, 0xDD)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xF2AD)
@@ -1805,6 +1847,7 @@ test('Test fdcb2a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb2b', () => {
@@ -1830,8 +1873,8 @@ test('Test fdcb2b', () => {
   mem.write8(0x0003, 0x2B)
   mem.write8(0x4ADF, 0x49)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2425)
@@ -1847,6 +1890,7 @@ test('Test fdcb2b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb2c', () => {
@@ -1872,8 +1916,8 @@ test('Test fdcb2c', () => {
   mem.write8(0x0003, 0x2C)
   mem.write8(0xCCB7, 0x3C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x110C)
@@ -1889,6 +1933,7 @@ test('Test fdcb2c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb2d', () => {
@@ -1914,8 +1959,8 @@ test('Test fdcb2d', () => {
   mem.write8(0x0003, 0x2D)
   mem.write8(0xE545, 0x78)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xD02C)
@@ -1931,6 +1976,7 @@ test('Test fdcb2d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb2e', () => {
@@ -1956,8 +2002,8 @@ test('Test fdcb2e', () => {
   mem.write8(0x0003, 0x2E)
   mem.write8(0x4303, 0xAD)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xF481)
@@ -1973,6 +2019,7 @@ test('Test fdcb2e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb2f', () => {
@@ -1998,8 +2045,8 @@ test('Test fdcb2f', () => {
   mem.write8(0x0003, 0x2F)
   mem.write8(0x16E1, 0x18)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0C0C)
@@ -2015,6 +2062,7 @@ test('Test fdcb2f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb30', () => {
@@ -2040,8 +2088,8 @@ test('Test fdcb30', () => {
   mem.write8(0x0003, 0x30)
   mem.write8(0xD661, 0xA5)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xAC0D)
@@ -2057,6 +2105,7 @@ test('Test fdcb30', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb31', () => {
@@ -2082,8 +2131,8 @@ test('Test fdcb31', () => {
   mem.write8(0x0003, 0x31)
   mem.write8(0xBFD0, 0xF1)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2BA1)
@@ -2099,6 +2148,7 @@ test('Test fdcb31', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb32', () => {
@@ -2124,8 +2174,8 @@ test('Test fdcb32', () => {
   mem.write8(0x0003, 0x32)
   mem.write8(0x5AA3, 0x59)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB2A0)
@@ -2141,6 +2191,7 @@ test('Test fdcb32', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb33', () => {
@@ -2166,8 +2217,8 @@ test('Test fdcb33', () => {
   mem.write8(0x0003, 0x33)
   mem.write8(0x19E3, 0xDA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9CA1)
@@ -2183,6 +2234,7 @@ test('Test fdcb33', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb34', () => {
@@ -2208,8 +2260,8 @@ test('Test fdcb34', () => {
   mem.write8(0x0003, 0x34)
   mem.write8(0x5668, 0xD4)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x60AD)
@@ -2225,6 +2277,7 @@ test('Test fdcb34', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb35', () => {
@@ -2250,8 +2303,8 @@ test('Test fdcb35', () => {
   mem.write8(0x0003, 0x35)
   mem.write8(0x0169, 0x0B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9604)
@@ -2267,6 +2320,7 @@ test('Test fdcb35', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb36', () => {
@@ -2292,8 +2346,8 @@ test('Test fdcb36', () => {
   mem.write8(0x0003, 0x36)
   mem.write8(0x1AB8, 0x3C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xDC28)
@@ -2309,6 +2363,7 @@ test('Test fdcb36', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb37', () => {
@@ -2334,8 +2389,8 @@ test('Test fdcb37', () => {
   mem.write8(0x0003, 0x37)
   mem.write8(0xE7B7, 0x9F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3F2D)
@@ -2351,6 +2406,7 @@ test('Test fdcb37', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb38', () => {
@@ -2376,8 +2432,8 @@ test('Test fdcb38', () => {
   mem.write8(0x0003, 0x38)
   mem.write8(0xD024, 0x0D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4F05)
@@ -2393,6 +2449,7 @@ test('Test fdcb38', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb39', () => {
@@ -2418,8 +2475,8 @@ test('Test fdcb39', () => {
   mem.write8(0x0003, 0x39)
   mem.write8(0xF4B2, 0xF5)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBC29)
@@ -2435,6 +2492,7 @@ test('Test fdcb39', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb3a', () => {
@@ -2460,8 +2518,8 @@ test('Test fdcb3a', () => {
   mem.write8(0x0003, 0x3A)
   mem.write8(0xCB20, 0xA8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xD000)
@@ -2477,6 +2535,7 @@ test('Test fdcb3a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb3b', () => {
@@ -2502,8 +2561,8 @@ test('Test fdcb3b', () => {
   mem.write8(0x0003, 0x3B)
   mem.write8(0xD268, 0xB2)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x500C)
@@ -2519,6 +2578,7 @@ test('Test fdcb3b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb3c', () => {
@@ -2544,8 +2604,8 @@ test('Test fdcb3c', () => {
   mem.write8(0x0003, 0x3C)
   mem.write8(0xA7BD, 0x96)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x970C)
@@ -2561,6 +2621,7 @@ test('Test fdcb3c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb3d', () => {
@@ -2586,8 +2647,8 @@ test('Test fdcb3d', () => {
   mem.write8(0x0003, 0x3D)
   mem.write8(0xE53D, 0xFB)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7D2D)
@@ -2603,6 +2664,7 @@ test('Test fdcb3d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb3e', () => {
@@ -2628,8 +2690,8 @@ test('Test fdcb3e', () => {
   mem.write8(0x0003, 0x3E)
   mem.write8(0xB2FF, 0x50)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0D2C)
@@ -2645,6 +2707,7 @@ test('Test fdcb3e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb3f', () => {
@@ -2670,8 +2733,8 @@ test('Test fdcb3f', () => {
   mem.write8(0x0003, 0x3F)
   mem.write8(0xC1CD, 0x78)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3C2C)
@@ -2687,6 +2750,7 @@ test('Test fdcb3f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb40', () => {
@@ -2712,8 +2776,8 @@ test('Test fdcb40', () => {
   mem.write8(0x0003, 0x40)
   mem.write8(0x41D0, 0x0D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5410)
@@ -2729,6 +2793,7 @@ test('Test fdcb40', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb41', () => {
@@ -2754,8 +2819,8 @@ test('Test fdcb41', () => {
   mem.write8(0x0003, 0x41)
   mem.write8(0x0397, 0xE9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8C11)
@@ -2771,6 +2836,7 @@ test('Test fdcb41', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb42', () => {
@@ -2796,8 +2862,8 @@ test('Test fdcb42', () => {
   mem.write8(0x0003, 0x42)
   mem.write8(0x9F57, 0xA8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x555D)
@@ -2813,6 +2879,7 @@ test('Test fdcb42', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb43', () => {
@@ -2838,8 +2905,8 @@ test('Test fdcb43', () => {
   mem.write8(0x0003, 0x43)
   mem.write8(0x1FD9, 0xAA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB45C)
@@ -2855,6 +2922,7 @@ test('Test fdcb43', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb44', () => {
@@ -2880,8 +2948,8 @@ test('Test fdcb44', () => {
   mem.write8(0x0003, 0x44)
   mem.write8(0xF4F6, 0x89)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xA930)
@@ -2897,6 +2965,7 @@ test('Test fdcb44', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb45', () => {
@@ -2922,8 +2991,8 @@ test('Test fdcb45', () => {
   mem.write8(0x0003, 0x45)
   mem.write8(0x937A, 0x8D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7311)
@@ -2939,6 +3008,7 @@ test('Test fdcb45', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb46', () => {
@@ -2964,8 +3034,8 @@ test('Test fdcb46', () => {
   mem.write8(0x0003, 0x46)
   mem.write8(0x633D, 0xFE)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0E74)
@@ -2981,6 +3051,7 @@ test('Test fdcb46', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb47', () => {
@@ -3006,8 +3077,8 @@ test('Test fdcb47', () => {
   mem.write8(0x0003, 0x47)
   mem.write8(0x6DA4, 0xD6)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9B7D)
@@ -3023,6 +3094,7 @@ test('Test fdcb47', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb48', () => {
@@ -3048,8 +3120,8 @@ test('Test fdcb48', () => {
   mem.write8(0x0003, 0x48)
   mem.write8(0xABED, 0xB0)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7D7C)
@@ -3065,6 +3137,7 @@ test('Test fdcb48', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb49', () => {
@@ -3090,8 +3163,8 @@ test('Test fdcb49', () => {
   mem.write8(0x0003, 0x49)
   mem.write8(0x3E6F, 0xA9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x697C)
@@ -3107,6 +3180,7 @@ test('Test fdcb49', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb4a', () => {
@@ -3132,8 +3206,8 @@ test('Test fdcb4a', () => {
   mem.write8(0x0003, 0x4A)
   mem.write8(0xE82D, 0xDA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3139)
@@ -3149,6 +3223,7 @@ test('Test fdcb4a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb4b', () => {
@@ -3174,8 +3249,8 @@ test('Test fdcb4b', () => {
   mem.write8(0x0003, 0x4B)
   mem.write8(0x8829, 0x4E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0919)
@@ -3191,6 +3266,7 @@ test('Test fdcb4b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb4c', () => {
@@ -3216,8 +3292,8 @@ test('Test fdcb4c', () => {
   mem.write8(0x0003, 0x4C)
   mem.write8(0x7F10, 0x70)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4A7C)
@@ -3233,6 +3309,7 @@ test('Test fdcb4c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb4d', () => {
@@ -3258,8 +3335,8 @@ test('Test fdcb4d', () => {
   mem.write8(0x0003, 0x4D)
   mem.write8(0xA799, 0x78)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9F75)
@@ -3275,6 +3352,7 @@ test('Test fdcb4d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb4e', () => {
@@ -3300,8 +3378,8 @@ test('Test fdcb4e', () => {
   mem.write8(0x0003, 0x4E)
   mem.write8(0xE1E8, 0xAA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3031)
@@ -3317,6 +3395,7 @@ test('Test fdcb4e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb4f', () => {
@@ -3342,8 +3421,8 @@ test('Test fdcb4f', () => {
   mem.write8(0x0003, 0x4F)
   mem.write8(0x1C95, 0x18)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x605C)
@@ -3359,6 +3438,7 @@ test('Test fdcb4f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb50', () => {
@@ -3384,8 +3464,8 @@ test('Test fdcb50', () => {
   mem.write8(0x0003, 0x50)
   mem.write8(0xC7CA, 0xFE)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8C10)
@@ -3401,6 +3481,7 @@ test('Test fdcb50', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb51', () => {
@@ -3426,8 +3507,8 @@ test('Test fdcb51', () => {
   mem.write8(0x0003, 0x51)
   mem.write8(0x341B, 0x13)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8F75)
@@ -3443,6 +3524,7 @@ test('Test fdcb51', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb52', () => {
@@ -3468,8 +3550,8 @@ test('Test fdcb52', () => {
   mem.write8(0x0003, 0x52)
   mem.write8(0x8AF3, 0x87)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8919)
@@ -3485,6 +3567,7 @@ test('Test fdcb52', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb53', () => {
@@ -3510,8 +3593,8 @@ test('Test fdcb53', () => {
   mem.write8(0x0003, 0x53)
   mem.write8(0x7EB2, 0xE4)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xEF38)
@@ -3527,6 +3610,7 @@ test('Test fdcb53', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb54', () => {
@@ -3552,8 +3636,8 @@ test('Test fdcb54', () => {
   mem.write8(0x0003, 0x54)
   mem.write8(0x5B73, 0x07)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7218)
@@ -3569,6 +3653,7 @@ test('Test fdcb54', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb55', () => {
@@ -3594,8 +3679,8 @@ test('Test fdcb55', () => {
   mem.write8(0x0003, 0x55)
   mem.write8(0xB506, 0x46)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8530)
@@ -3611,6 +3696,7 @@ test('Test fdcb55', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb56', () => {
@@ -3636,8 +3722,8 @@ test('Test fdcb56', () => {
   mem.write8(0x0003, 0x56)
   mem.write8(0x69A1, 0xDF)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xF539)
@@ -3653,6 +3739,7 @@ test('Test fdcb56', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb57', () => {
@@ -3678,8 +3765,8 @@ test('Test fdcb57', () => {
   mem.write8(0x0003, 0x57)
   mem.write8(0xA3F7, 0x6C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3731)
@@ -3695,6 +3782,7 @@ test('Test fdcb57', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb58', () => {
@@ -3720,8 +3808,8 @@ test('Test fdcb58', () => {
   mem.write8(0x0003, 0x58)
   mem.write8(0x1EE2, 0xF6)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x755C)
@@ -3737,6 +3825,7 @@ test('Test fdcb58', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb59', () => {
@@ -3762,8 +3851,8 @@ test('Test fdcb59', () => {
   mem.write8(0x0003, 0x59)
   mem.write8(0xFB01, 0x6F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8038)
@@ -3779,6 +3868,7 @@ test('Test fdcb59', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb5a', () => {
@@ -3804,8 +3894,8 @@ test('Test fdcb5a', () => {
   mem.write8(0x0003, 0x5A)
   mem.write8(0x7B40, 0x6E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xCC38)
@@ -3821,6 +3911,7 @@ test('Test fdcb5a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb5b', () => {
@@ -3846,8 +3937,8 @@ test('Test fdcb5b', () => {
   mem.write8(0x0003, 0x5B)
   mem.write8(0x3143, 0xB1)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5C75)
@@ -3863,6 +3954,7 @@ test('Test fdcb5b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb5c', () => {
@@ -3888,8 +3980,8 @@ test('Test fdcb5c', () => {
   mem.write8(0x0003, 0x5C)
   mem.write8(0x54B2, 0xE3)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB354)
@@ -3905,6 +3997,7 @@ test('Test fdcb5c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb5d', () => {
@@ -3930,8 +4023,8 @@ test('Test fdcb5d', () => {
   mem.write8(0x0003, 0x5D)
   mem.write8(0x3B60, 0xEF)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9F39)
@@ -3947,6 +4040,7 @@ test('Test fdcb5d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb5e', () => {
@@ -3972,8 +4066,8 @@ test('Test fdcb5e', () => {
   mem.write8(0x0003, 0x5E)
   mem.write8(0xE147, 0x17)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6F75)
@@ -3989,6 +4083,7 @@ test('Test fdcb5e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb5f', () => {
@@ -4014,8 +4109,8 @@ test('Test fdcb5f', () => {
   mem.write8(0x0003, 0x5F)
   mem.write8(0xF7C6, 0xE2)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xD774)
@@ -4031,6 +4126,7 @@ test('Test fdcb5f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb60', () => {
@@ -4056,8 +4152,8 @@ test('Test fdcb60', () => {
   mem.write8(0x0003, 0x60)
   mem.write8(0x8BC9, 0xB9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1519)
@@ -4073,6 +4169,7 @@ test('Test fdcb60', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb61', () => {
@@ -4098,8 +4195,8 @@ test('Test fdcb61', () => {
   mem.write8(0x0003, 0x61)
   mem.write8(0x92A2, 0x28)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7B55)
@@ -4115,6 +4212,7 @@ test('Test fdcb61', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb62', () => {
@@ -4140,8 +4238,8 @@ test('Test fdcb62', () => {
   mem.write8(0x0003, 0x62)
   mem.write8(0x7E4E, 0x1A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBA39)
@@ -4157,6 +4255,7 @@ test('Test fdcb62', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb63', () => {
@@ -4182,8 +4281,8 @@ test('Test fdcb63', () => {
   mem.write8(0x0003, 0x63)
   mem.write8(0x1707, 0x3B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xC011)
@@ -4199,6 +4298,7 @@ test('Test fdcb63', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb64', () => {
@@ -4224,8 +4324,8 @@ test('Test fdcb64', () => {
   mem.write8(0x0003, 0x64)
   mem.write8(0xB36B, 0x8C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0C75)
@@ -4241,6 +4341,7 @@ test('Test fdcb64', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb65', () => {
@@ -4266,8 +4367,8 @@ test('Test fdcb65', () => {
   mem.write8(0x0003, 0x65)
   mem.write8(0x8A2B, 0x08)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x525D)
@@ -4283,6 +4384,7 @@ test('Test fdcb65', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb66', () => {
@@ -4308,8 +4410,8 @@ test('Test fdcb66', () => {
   mem.write8(0x0003, 0x66)
   mem.write8(0x68E5, 0x90)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5839)
@@ -4325,6 +4427,7 @@ test('Test fdcb66', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb67', () => {
@@ -4350,8 +4453,8 @@ test('Test fdcb67', () => {
   mem.write8(0x0003, 0x67)
   mem.write8(0x653D, 0x15)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3130)
@@ -4367,6 +4470,7 @@ test('Test fdcb67', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb68', () => {
@@ -4392,8 +4496,8 @@ test('Test fdcb68', () => {
   mem.write8(0x0003, 0x68)
   mem.write8(0x0388, 0x83)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xE354)
@@ -4409,6 +4513,7 @@ test('Test fdcb68', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb69', () => {
@@ -4434,8 +4539,8 @@ test('Test fdcb69', () => {
   mem.write8(0x0003, 0x69)
   mem.write8(0xA5E5, 0x01)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1874)
@@ -4451,6 +4556,7 @@ test('Test fdcb69', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb6a', () => {
@@ -4476,8 +4582,8 @@ test('Test fdcb6a', () => {
   mem.write8(0x0003, 0x6A)
   mem.write8(0x936C, 0x33)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5B11)
@@ -4493,6 +4599,7 @@ test('Test fdcb6a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb6b', () => {
@@ -4518,8 +4625,8 @@ test('Test fdcb6b', () => {
   mem.write8(0x0003, 0x6B)
   mem.write8(0xAA4E, 0x7C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBB39)
@@ -4535,6 +4642,7 @@ test('Test fdcb6b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb6c', () => {
@@ -4560,8 +4668,8 @@ test('Test fdcb6c', () => {
   mem.write8(0x0003, 0x6C)
   mem.write8(0x86C7, 0x25)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1411)
@@ -4577,6 +4685,7 @@ test('Test fdcb6c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb6d', () => {
@@ -4602,8 +4711,8 @@ test('Test fdcb6d', () => {
   mem.write8(0x0003, 0x6D)
   mem.write8(0x62B8, 0xE3)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6330)
@@ -4619,6 +4728,7 @@ test('Test fdcb6d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb6e', () => {
@@ -4644,8 +4754,8 @@ test('Test fdcb6e', () => {
   mem.write8(0x0003, 0x6E)
   mem.write8(0x41A3, 0x1E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2D54)
@@ -4661,6 +4771,7 @@ test('Test fdcb6e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb6f', () => {
@@ -4686,8 +4797,8 @@ test('Test fdcb6f', () => {
   mem.write8(0x0003, 0x6F)
   mem.write8(0x006E, 0x37)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xDF11)
@@ -4703,6 +4814,7 @@ test('Test fdcb6f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb70', () => {
@@ -4728,8 +4840,8 @@ test('Test fdcb70', () => {
   mem.write8(0x0003, 0x70)
   mem.write8(0x3E41, 0xC9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6E39)
@@ -4745,6 +4857,7 @@ test('Test fdcb70', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb71', () => {
@@ -4770,8 +4883,8 @@ test('Test fdcb71', () => {
   mem.write8(0x0003, 0x71)
   mem.write8(0x99C1, 0x3E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1B5C)
@@ -4787,6 +4900,7 @@ test('Test fdcb71', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb72', () => {
@@ -4812,8 +4926,8 @@ test('Test fdcb72', () => {
   mem.write8(0x0003, 0x72)
   mem.write8(0xFCC9, 0x4F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xE839)
@@ -4829,6 +4943,7 @@ test('Test fdcb72', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb73', () => {
@@ -4854,8 +4969,8 @@ test('Test fdcb73', () => {
   mem.write8(0x0003, 0x73)
   mem.write8(0xF652, 0x31)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1075)
@@ -4871,6 +4986,7 @@ test('Test fdcb73', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb74', () => {
@@ -4896,8 +5012,8 @@ test('Test fdcb74', () => {
   mem.write8(0x0003, 0x74)
   mem.write8(0x5E95, 0xFE)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6819)
@@ -4913,6 +5029,7 @@ test('Test fdcb74', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb75', () => {
@@ -4938,8 +5055,8 @@ test('Test fdcb75', () => {
   mem.write8(0x0003, 0x75)
   mem.write8(0x6115, 0x21)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5674)
@@ -4955,6 +5072,7 @@ test('Test fdcb75', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb76', () => {
@@ -4980,8 +5098,8 @@ test('Test fdcb76', () => {
   mem.write8(0x0003, 0x76)
   mem.write8(0x6676, 0x3A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7375)
@@ -4997,6 +5115,7 @@ test('Test fdcb76', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb77', () => {
@@ -5022,8 +5141,8 @@ test('Test fdcb77', () => {
   mem.write8(0x0003, 0x77)
   mem.write8(0x8843, 0xD8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xAB18)
@@ -5039,6 +5158,7 @@ test('Test fdcb77', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb78', () => {
@@ -5064,8 +5184,8 @@ test('Test fdcb78', () => {
   mem.write8(0x0003, 0x78)
   mem.write8(0xFF48, 0xEC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x27B9)
@@ -5081,6 +5201,7 @@ test('Test fdcb78', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb79', () => {
@@ -5106,8 +5227,8 @@ test('Test fdcb79', () => {
   mem.write8(0x0003, 0x79)
   mem.write8(0x1CD1, 0x87)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB498)
@@ -5123,6 +5244,7 @@ test('Test fdcb79', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb7a', () => {
@@ -5148,8 +5270,8 @@ test('Test fdcb7a', () => {
   mem.write8(0x0003, 0x7A)
   mem.write8(0xD965, 0xB3)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5998)
@@ -5165,6 +5287,7 @@ test('Test fdcb7a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb7b', () => {
@@ -5190,8 +5313,8 @@ test('Test fdcb7b', () => {
   mem.write8(0x0003, 0x7B)
   mem.write8(0x0A9A, 0xBD)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6398)
@@ -5207,6 +5330,7 @@ test('Test fdcb7b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb7c', () => {
@@ -5232,8 +5356,8 @@ test('Test fdcb7c', () => {
   mem.write8(0x0003, 0x7C)
   mem.write8(0xD362, 0x1B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2254)
@@ -5249,6 +5373,7 @@ test('Test fdcb7c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb7d', () => {
@@ -5274,8 +5399,8 @@ test('Test fdcb7d', () => {
   mem.write8(0x0003, 0x7D)
   mem.write8(0xABDA, 0x8A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1CB9)
@@ -5291,6 +5416,7 @@ test('Test fdcb7d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb7e', () => {
@@ -5316,8 +5442,8 @@ test('Test fdcb7e', () => {
   mem.write8(0x0003, 0x7E)
   mem.write8(0x94C4, 0x9E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5090)
@@ -5333,6 +5459,7 @@ test('Test fdcb7e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb7f', () => {
@@ -5358,8 +5485,8 @@ test('Test fdcb7f', () => {
   mem.write8(0x0003, 0x7F)
   mem.write8(0xCE0B, 0x47)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 20) {
-    cpu.execInstruction()
+  while (cpu.tStates < 20) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1B5D)
@@ -5375,6 +5502,7 @@ test('Test fdcb7f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(20)
 })
 
 test('Test fdcb80', () => {
@@ -5400,8 +5528,8 @@ test('Test fdcb80', () => {
   mem.write8(0x0003, 0x80)
   mem.write8(0x9198, 0xA9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xE196)
@@ -5417,6 +5545,7 @@ test('Test fdcb80', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb81', () => {
@@ -5442,8 +5571,8 @@ test('Test fdcb81', () => {
   mem.write8(0x0003, 0x81)
   mem.write8(0x82FA, 0xFA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3D3D)
@@ -5459,6 +5588,7 @@ test('Test fdcb81', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb82', () => {
@@ -5484,8 +5614,8 @@ test('Test fdcb82', () => {
   mem.write8(0x0003, 0x82)
   mem.write8(0x5D74, 0x9D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4E10)
@@ -5501,6 +5631,7 @@ test('Test fdcb82', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb83', () => {
@@ -5526,8 +5657,8 @@ test('Test fdcb83', () => {
   mem.write8(0x0003, 0x83)
   mem.write8(0x3772, 0xD5)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3C7F)
@@ -5543,6 +5674,7 @@ test('Test fdcb83', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb84', () => {
@@ -5568,8 +5700,8 @@ test('Test fdcb84', () => {
   mem.write8(0x0003, 0x84)
   mem.write8(0xF16D, 0xEA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6872)
@@ -5585,6 +5717,7 @@ test('Test fdcb84', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb85', () => {
@@ -5610,8 +5743,8 @@ test('Test fdcb85', () => {
   mem.write8(0x0003, 0x85)
   mem.write8(0x049F, 0xE0)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x25B3)
@@ -5627,6 +5760,7 @@ test('Test fdcb85', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb86', () => {
@@ -5652,8 +5786,8 @@ test('Test fdcb86', () => {
   mem.write8(0x0003, 0x86)
   mem.write8(0x2ACE, 0x36)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x152B)
@@ -5669,6 +5803,7 @@ test('Test fdcb86', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb87', () => {
@@ -5694,8 +5829,8 @@ test('Test fdcb87', () => {
   mem.write8(0x0003, 0x87)
   mem.write8(0x24C3, 0x65)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x641D)
@@ -5711,6 +5846,7 @@ test('Test fdcb87', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb88', () => {
@@ -5736,8 +5872,8 @@ test('Test fdcb88', () => {
   mem.write8(0x0003, 0x88)
   mem.write8(0xC5E1, 0xD6)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7D14)
@@ -5753,6 +5889,7 @@ test('Test fdcb88', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb89', () => {
@@ -5778,8 +5915,8 @@ test('Test fdcb89', () => {
   mem.write8(0x0003, 0x89)
   mem.write8(0x09C4, 0xB0)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x86C3)
@@ -5795,6 +5932,7 @@ test('Test fdcb89', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb8a', () => {
@@ -5820,8 +5958,8 @@ test('Test fdcb8a', () => {
   mem.write8(0x0003, 0x8A)
   mem.write8(0xD4CB, 0xD8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x599C)
@@ -5837,6 +5975,7 @@ test('Test fdcb8a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb8b', () => {
@@ -5862,8 +6001,8 @@ test('Test fdcb8b', () => {
   mem.write8(0x0003, 0x8B)
   mem.write8(0xC70B, 0xDC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2715)
@@ -5879,6 +6018,7 @@ test('Test fdcb8b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb8c', () => {
@@ -5904,8 +6044,8 @@ test('Test fdcb8c', () => {
   mem.write8(0x0003, 0x8C)
   mem.write8(0xA199, 0x67)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2818)
@@ -5921,6 +6061,7 @@ test('Test fdcb8c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb8d', () => {
@@ -5946,8 +6087,8 @@ test('Test fdcb8d', () => {
   mem.write8(0x0003, 0x8D)
   mem.write8(0x5632, 0x9A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x14E3)
@@ -5963,6 +6104,7 @@ test('Test fdcb8d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb8e', () => {
@@ -5988,8 +6130,8 @@ test('Test fdcb8e', () => {
   mem.write8(0x0003, 0x8E)
   mem.write8(0x4C43, 0x7F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xCB79)
@@ -6005,6 +6147,7 @@ test('Test fdcb8e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb8f', () => {
@@ -6030,8 +6173,8 @@ test('Test fdcb8f', () => {
   mem.write8(0x0003, 0x8F)
   mem.write8(0x6B25, 0x59)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x59B4)
@@ -6047,6 +6190,7 @@ test('Test fdcb8f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb90', () => {
@@ -6072,8 +6216,8 @@ test('Test fdcb90', () => {
   mem.write8(0x0003, 0x90)
   mem.write8(0xD7F2, 0x70)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1305)
@@ -6089,6 +6233,7 @@ test('Test fdcb90', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb91', () => {
@@ -6114,8 +6259,8 @@ test('Test fdcb91', () => {
   mem.write8(0x0003, 0x91)
   mem.write8(0x4791, 0x0E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x10DF)
@@ -6131,6 +6276,7 @@ test('Test fdcb91', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb92', () => {
@@ -6156,8 +6302,8 @@ test('Test fdcb92', () => {
   mem.write8(0x0003, 0x92)
   mem.write8(0x3145, 0xF6)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6A11)
@@ -6173,6 +6319,7 @@ test('Test fdcb92', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb93', () => {
@@ -6198,8 +6345,8 @@ test('Test fdcb93', () => {
   mem.write8(0x0003, 0x93)
   mem.write8(0x2992, 0x38)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x61E5)
@@ -6215,6 +6362,7 @@ test('Test fdcb93', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb94', () => {
@@ -6240,8 +6388,8 @@ test('Test fdcb94', () => {
   mem.write8(0x0003, 0x94)
   mem.write8(0xFDB1, 0x48)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x31B4)
@@ -6257,6 +6405,7 @@ test('Test fdcb94', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb95', () => {
@@ -6282,8 +6431,8 @@ test('Test fdcb95', () => {
   mem.write8(0x0003, 0x95)
   mem.write8(0xE706, 0xEB)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x337E)
@@ -6299,6 +6448,7 @@ test('Test fdcb95', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb96', () => {
@@ -6324,8 +6474,8 @@ test('Test fdcb96', () => {
   mem.write8(0x0003, 0x96)
   mem.write8(0xE66D, 0xFC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5D99)
@@ -6341,6 +6491,7 @@ test('Test fdcb96', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb97', () => {
@@ -6366,8 +6517,8 @@ test('Test fdcb97', () => {
   mem.write8(0x0003, 0x97)
   mem.write8(0x18E3, 0x9D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x99B6)
@@ -6383,6 +6534,7 @@ test('Test fdcb97', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb98', () => {
@@ -6408,8 +6560,8 @@ test('Test fdcb98', () => {
   mem.write8(0x0003, 0x98)
   mem.write8(0x4392, 0x15)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0495)
@@ -6425,6 +6577,7 @@ test('Test fdcb98', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb99', () => {
@@ -6450,8 +6603,8 @@ test('Test fdcb99', () => {
   mem.write8(0x0003, 0x99)
   mem.write8(0xD8E4, 0xB5)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2824)
@@ -6467,6 +6620,7 @@ test('Test fdcb99', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb9a', () => {
@@ -6492,8 +6646,8 @@ test('Test fdcb9a', () => {
   mem.write8(0x0003, 0x9A)
   mem.write8(0xD6B3, 0x9D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB0CC)
@@ -6509,6 +6663,7 @@ test('Test fdcb9a', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb9b', () => {
@@ -6534,8 +6689,8 @@ test('Test fdcb9b', () => {
   mem.write8(0x0003, 0x9B)
   mem.write8(0xCAA1, 0x95)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xD092)
@@ -6551,6 +6706,7 @@ test('Test fdcb9b', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb9c', () => {
@@ -6576,8 +6732,8 @@ test('Test fdcb9c', () => {
   mem.write8(0x0003, 0x9C)
   mem.write8(0x03D1, 0x78)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB58D)
@@ -6593,6 +6749,7 @@ test('Test fdcb9c', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb9d', () => {
@@ -6618,8 +6775,8 @@ test('Test fdcb9d', () => {
   mem.write8(0x0003, 0x9D)
   mem.write8(0xC06D, 0x53)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xC7E9)
@@ -6635,6 +6792,7 @@ test('Test fdcb9d', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb9e', () => {
@@ -6660,8 +6818,8 @@ test('Test fdcb9e', () => {
   mem.write8(0x0003, 0x9E)
   mem.write8(0x41A8, 0x61)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x81C7)
@@ -6677,6 +6835,7 @@ test('Test fdcb9e', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcb9f', () => {
@@ -6702,8 +6861,8 @@ test('Test fdcb9f', () => {
   mem.write8(0x0003, 0x9F)
   mem.write8(0x9D99, 0x89)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x81F5)
@@ -6719,6 +6878,7 @@ test('Test fdcb9f', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba0', () => {
@@ -6744,8 +6904,8 @@ test('Test fdcba0', () => {
   mem.write8(0x0003, 0xA0)
   mem.write8(0xD703, 0xD4)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8CCB)
@@ -6761,6 +6921,7 @@ test('Test fdcba0', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba1', () => {
@@ -6786,8 +6947,8 @@ test('Test fdcba1', () => {
   mem.write8(0x0003, 0xA1)
   mem.write8(0x66F9, 0xEC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xEEE6)
@@ -6803,6 +6964,7 @@ test('Test fdcba1', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba2', () => {
@@ -6828,8 +6990,8 @@ test('Test fdcba2', () => {
   mem.write8(0x0003, 0xA2)
   mem.write8(0x04CD, 0x47)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3F89)
@@ -6845,6 +7007,7 @@ test('Test fdcba2', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba3', () => {
@@ -6870,8 +7033,8 @@ test('Test fdcba3', () => {
   mem.write8(0x0003, 0xA3)
   mem.write8(0xAD7C, 0x59)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4439)
@@ -6887,6 +7050,7 @@ test('Test fdcba3', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba4', () => {
@@ -6912,8 +7076,8 @@ test('Test fdcba4', () => {
   mem.write8(0x0003, 0xA4)
   mem.write8(0xC133, 0xC5)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3385)
@@ -6929,6 +7093,7 @@ test('Test fdcba4', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba5', () => {
@@ -6954,8 +7119,8 @@ test('Test fdcba5', () => {
   mem.write8(0x0003, 0xA5)
   mem.write8(0xF141, 0x44)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6E70)
@@ -6971,6 +7136,7 @@ test('Test fdcba5', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba6', () => {
@@ -6996,8 +7162,8 @@ test('Test fdcba6', () => {
   mem.write8(0x0003, 0xA6)
   mem.write8(0x9469, 0xBC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x814B)
@@ -7013,6 +7179,7 @@ test('Test fdcba6', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba7', () => {
@@ -7038,8 +7205,8 @@ test('Test fdcba7', () => {
   mem.write8(0x0003, 0xA7)
   mem.write8(0x7A2A, 0x2E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2EC2)
@@ -7055,6 +7222,7 @@ test('Test fdcba7', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba8', () => {
@@ -7080,8 +7248,8 @@ test('Test fdcba8', () => {
   mem.write8(0x0003, 0xA8)
   mem.write8(0x0CEF, 0xB7)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x537C)
@@ -7097,6 +7265,7 @@ test('Test fdcba8', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcba9', () => {
@@ -7122,8 +7291,8 @@ test('Test fdcba9', () => {
   mem.write8(0x0003, 0xA9)
   mem.write8(0x0F7F, 0x8F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBA5A)
@@ -7139,6 +7308,7 @@ test('Test fdcba9', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbaa', () => {
@@ -7164,8 +7334,8 @@ test('Test fdcbaa', () => {
   mem.write8(0x0003, 0xAA)
   mem.write8(0xB3DC, 0x3A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x406A)
@@ -7181,6 +7351,7 @@ test('Test fdcbaa', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbab', () => {
@@ -7206,8 +7377,8 @@ test('Test fdcbab', () => {
   mem.write8(0x0003, 0xAB)
   mem.write8(0x8E77, 0x1F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xDA61)
@@ -7223,6 +7394,7 @@ test('Test fdcbab', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbac', () => {
@@ -7248,8 +7420,8 @@ test('Test fdcbac', () => {
   mem.write8(0x0003, 0xAC)
   mem.write8(0x0548, 0x9C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x34A3)
@@ -7265,6 +7437,7 @@ test('Test fdcbac', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbad', () => {
@@ -7290,8 +7463,8 @@ test('Test fdcbad', () => {
   mem.write8(0x0003, 0xAD)
   mem.write8(0x94DD, 0x37)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5010)
@@ -7307,6 +7480,7 @@ test('Test fdcbad', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbae', () => {
@@ -7332,8 +7506,8 @@ test('Test fdcbae', () => {
   mem.write8(0x0003, 0xAE)
   mem.write8(0x0C29, 0xA9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xEC0D)
@@ -7349,6 +7523,7 @@ test('Test fdcbae', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbaf', () => {
@@ -7374,8 +7549,8 @@ test('Test fdcbaf', () => {
   mem.write8(0x0003, 0xAF)
   mem.write8(0x26F8, 0x44)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4422)
@@ -7391,6 +7566,7 @@ test('Test fdcbaf', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb0', () => {
@@ -7416,8 +7592,8 @@ test('Test fdcbb0', () => {
   mem.write8(0x0003, 0xB0)
   mem.write8(0xA125, 0x76)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB984)
@@ -7433,6 +7609,7 @@ test('Test fdcbb0', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb1', () => {
@@ -7458,8 +7635,8 @@ test('Test fdcbb1', () => {
   mem.write8(0x0003, 0xB1)
   mem.write8(0xF31A, 0x79)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x59C3)
@@ -7475,6 +7652,7 @@ test('Test fdcbb1', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb2', () => {
@@ -7500,8 +7678,8 @@ test('Test fdcbb2', () => {
   mem.write8(0x0003, 0xB2)
   mem.write8(0x341C, 0x7B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xF310)
@@ -7517,6 +7695,7 @@ test('Test fdcbb2', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb3', () => {
@@ -7542,8 +7721,8 @@ test('Test fdcbb3', () => {
   mem.write8(0x0003, 0xB3)
   mem.write8(0x523E, 0x37)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9C05)
@@ -7559,6 +7738,7 @@ test('Test fdcbb3', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb4', () => {
@@ -7584,8 +7764,8 @@ test('Test fdcbb4', () => {
   mem.write8(0x0003, 0xB4)
   mem.write8(0x4CDC, 0xE9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3E55)
@@ -7601,6 +7781,7 @@ test('Test fdcbb4', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb5', () => {
@@ -7626,8 +7807,8 @@ test('Test fdcbb5', () => {
   mem.write8(0x0003, 0xB5)
   mem.write8(0x8F2D, 0x0F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2F3A)
@@ -7643,6 +7824,7 @@ test('Test fdcbb5', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb6', () => {
@@ -7668,8 +7850,8 @@ test('Test fdcbb6', () => {
   mem.write8(0x0003, 0xB6)
   mem.write8(0x1E50, 0x13)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xA887)
@@ -7685,6 +7867,7 @@ test('Test fdcbb6', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb7', () => {
@@ -7710,8 +7893,8 @@ test('Test fdcbb7', () => {
   mem.write8(0x0003, 0xB7)
   mem.write8(0x0069, 0x38)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3835)
@@ -7727,6 +7910,7 @@ test('Test fdcbb7', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb8', () => {
@@ -7752,8 +7936,8 @@ test('Test fdcbb8', () => {
   mem.write8(0x0003, 0xB8)
   mem.write8(0xD0B8, 0x17)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xD146)
@@ -7769,6 +7953,7 @@ test('Test fdcbb8', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbb9', () => {
@@ -7794,8 +7979,8 @@ test('Test fdcbb9', () => {
   mem.write8(0x0003, 0xB9)
   mem.write8(0xB889, 0xB4)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x757B)
@@ -7811,6 +7996,7 @@ test('Test fdcbb9', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbba', () => {
@@ -7836,8 +8022,8 @@ test('Test fdcbba', () => {
   mem.write8(0x0003, 0xBA)
   mem.write8(0x3877, 0xD6)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x43EF)
@@ -7853,6 +8039,7 @@ test('Test fdcbba', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbbb', () => {
@@ -7878,8 +8065,8 @@ test('Test fdcbbb', () => {
   mem.write8(0x0003, 0xBB)
   mem.write8(0xE305, 0x6E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xDCCB)
@@ -7895,6 +8082,7 @@ test('Test fdcbbb', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbbc', () => {
@@ -7920,8 +8108,8 @@ test('Test fdcbbc', () => {
   mem.write8(0x0003, 0xBC)
   mem.write8(0xAF04, 0xCF)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0E07)
@@ -7937,6 +8125,7 @@ test('Test fdcbbc', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbbd', () => {
@@ -7962,8 +8151,8 @@ test('Test fdcbbd', () => {
   mem.write8(0x0003, 0xBD)
   mem.write8(0xDEB7, 0x8D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x30EF)
@@ -7979,6 +8168,7 @@ test('Test fdcbbd', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbbe', () => {
@@ -8004,8 +8194,8 @@ test('Test fdcbbe', () => {
   mem.write8(0x0003, 0xBE)
   mem.write8(0x3CD7, 0xA1)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1133)
@@ -8021,6 +8211,7 @@ test('Test fdcbbe', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbbf', () => {
@@ -8046,8 +8237,8 @@ test('Test fdcbbf', () => {
   mem.write8(0x0003, 0xBF)
   mem.write8(0xBDE4, 0xAC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x2CD6)
@@ -8063,6 +8254,7 @@ test('Test fdcbbf', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc0', () => {
@@ -8088,8 +8280,8 @@ test('Test fdcbc0', () => {
   mem.write8(0x0003, 0xC0)
   mem.write8(0x2B3B, 0xEC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3666)
@@ -8105,6 +8297,7 @@ test('Test fdcbc0', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc1', () => {
@@ -8130,8 +8323,8 @@ test('Test fdcbc1', () => {
   mem.write8(0x0003, 0xC1)
   mem.write8(0xBCEE, 0xEE)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3902)
@@ -8147,6 +8340,7 @@ test('Test fdcbc1', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc2', () => {
@@ -8172,8 +8366,8 @@ test('Test fdcbc2', () => {
   mem.write8(0x0003, 0xC2)
   mem.write8(0x5AB9, 0xC2)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xAD26)
@@ -8189,6 +8383,7 @@ test('Test fdcbc2', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc3', () => {
@@ -8214,8 +8409,8 @@ test('Test fdcbc3', () => {
   mem.write8(0x0003, 0xC3)
   mem.write8(0xE6C0, 0x4F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3E6C)
@@ -8231,6 +8426,7 @@ test('Test fdcbc3', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc4', () => {
@@ -8256,8 +8452,8 @@ test('Test fdcbc4', () => {
   mem.write8(0x0003, 0xC4)
   mem.write8(0x5C99, 0x61)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBF68)
@@ -8273,6 +8469,7 @@ test('Test fdcbc4', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc5', () => {
@@ -8298,8 +8495,8 @@ test('Test fdcbc5', () => {
   mem.write8(0x0003, 0xC5)
   mem.write8(0x0264, 0xCD)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x127B)
@@ -8315,6 +8512,7 @@ test('Test fdcbc5', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc6', () => {
@@ -8340,8 +8538,8 @@ test('Test fdcbc6', () => {
   mem.write8(0x0003, 0xC6)
   mem.write8(0x76B2, 0x82)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x35DA)
@@ -8357,6 +8555,7 @@ test('Test fdcbc6', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc7', () => {
@@ -8382,8 +8581,8 @@ test('Test fdcbc7', () => {
   mem.write8(0x0003, 0xC7)
   mem.write8(0xF2A9, 0xD7)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xD73F)
@@ -8399,6 +8598,7 @@ test('Test fdcbc7', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc8', () => {
@@ -8424,8 +8624,8 @@ test('Test fdcbc8', () => {
   mem.write8(0x0003, 0xC8)
   mem.write8(0xC422, 0xE9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1F81)
@@ -8441,6 +8641,7 @@ test('Test fdcbc8', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbc9', () => {
@@ -8466,8 +8667,8 @@ test('Test fdcbc9', () => {
   mem.write8(0x0003, 0xC9)
   mem.write8(0x8BA3, 0xB7)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xED19)
@@ -8483,6 +8684,7 @@ test('Test fdcbc9', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbca', () => {
@@ -8508,8 +8710,8 @@ test('Test fdcbca', () => {
   mem.write8(0x0003, 0xCA)
   mem.write8(0x51AA, 0x90)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xC7E5)
@@ -8525,6 +8727,7 @@ test('Test fdcbca', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbcb', () => {
@@ -8550,8 +8753,8 @@ test('Test fdcbcb', () => {
   mem.write8(0x0003, 0xCB)
   mem.write8(0x9AD0, 0x70)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xBDBA)
@@ -8567,6 +8770,7 @@ test('Test fdcbcb', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbcc', () => {
@@ -8592,8 +8796,8 @@ test('Test fdcbcc', () => {
   mem.write8(0x0003, 0xCC)
   mem.write8(0x1526, 0x4E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0F4F)
@@ -8609,6 +8813,7 @@ test('Test fdcbcc', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbcd', () => {
@@ -8634,8 +8839,8 @@ test('Test fdcbcd', () => {
   mem.write8(0x0003, 0xCD)
   mem.write8(0xBB8A, 0x66)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1B79)
@@ -8651,6 +8856,7 @@ test('Test fdcbcd', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbce', () => {
@@ -8676,8 +8882,8 @@ test('Test fdcbce', () => {
   mem.write8(0x0003, 0xCE)
   mem.write8(0xB8D8, 0x45)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8E13)
@@ -8693,6 +8899,7 @@ test('Test fdcbce', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbcf', () => {
@@ -8718,8 +8925,8 @@ test('Test fdcbcf', () => {
   mem.write8(0x0003, 0xCF)
   mem.write8(0xC30C, 0x7A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7A0A)
@@ -8735,6 +8942,7 @@ test('Test fdcbcf', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd0', () => {
@@ -8760,8 +8968,8 @@ test('Test fdcbd0', () => {
   mem.write8(0x0003, 0xD0)
   mem.write8(0x3BA7, 0x20)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xE2BB)
@@ -8777,6 +8985,7 @@ test('Test fdcbd0', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd1', () => {
@@ -8802,8 +9011,8 @@ test('Test fdcbd1', () => {
   mem.write8(0x0003, 0xD1)
   mem.write8(0x8C76, 0xB9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5DF8)
@@ -8819,6 +9028,7 @@ test('Test fdcbd1', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd2', () => {
@@ -8844,8 +9054,8 @@ test('Test fdcbd2', () => {
   mem.write8(0x0003, 0xD2)
   mem.write8(0xC04C, 0x51)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9876)
@@ -8861,6 +9071,7 @@ test('Test fdcbd2', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd3', () => {
@@ -8886,8 +9097,8 @@ test('Test fdcbd3', () => {
   mem.write8(0x0003, 0xD3)
   mem.write8(0x0AC5, 0xE0)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8F90)
@@ -8903,6 +9114,7 @@ test('Test fdcbd3', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd4', () => {
@@ -8928,8 +9140,8 @@ test('Test fdcbd4', () => {
   mem.write8(0x0003, 0xD4)
   mem.write8(0x94AE, 0x7D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x15E2)
@@ -8945,6 +9157,7 @@ test('Test fdcbd4', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd5', () => {
@@ -8970,8 +9183,8 @@ test('Test fdcbd5', () => {
   mem.write8(0x0003, 0xD5)
   mem.write8(0x8650, 0x98)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1409)
@@ -8987,6 +9200,7 @@ test('Test fdcbd5', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd6', () => {
@@ -9012,8 +9226,8 @@ test('Test fdcbd6', () => {
   mem.write8(0x0003, 0xD6)
   mem.write8(0x6A6C, 0x7C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7801)
@@ -9029,6 +9243,7 @@ test('Test fdcbd6', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd7', () => {
@@ -9054,8 +9269,8 @@ test('Test fdcbd7', () => {
   mem.write8(0x0003, 0xD7)
   mem.write8(0x3669, 0x95)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x956A)
@@ -9071,6 +9286,7 @@ test('Test fdcbd7', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd8', () => {
@@ -9096,8 +9312,8 @@ test('Test fdcbd8', () => {
   mem.write8(0x0003, 0xD8)
   mem.write8(0x43B4, 0xD8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7B1B)
@@ -9113,6 +9329,7 @@ test('Test fdcbd8', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbd9', () => {
@@ -9138,8 +9355,8 @@ test('Test fdcbd9', () => {
   mem.write8(0x0003, 0xD9)
   mem.write8(0x0A7C, 0xF4)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0FAF)
@@ -9155,6 +9372,7 @@ test('Test fdcbd9', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbda', () => {
@@ -9180,8 +9398,8 @@ test('Test fdcbda', () => {
   mem.write8(0x0003, 0xDA)
   mem.write8(0xD0D8, 0x6B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9EA1)
@@ -9197,6 +9415,7 @@ test('Test fdcbda', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbdb', () => {
@@ -9222,8 +9441,8 @@ test('Test fdcbdb', () => {
   mem.write8(0x0003, 0xDB)
   mem.write8(0x8CA3, 0x15)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5EE0)
@@ -9239,6 +9458,7 @@ test('Test fdcbdb', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbdc', () => {
@@ -9264,8 +9484,8 @@ test('Test fdcbdc', () => {
   mem.write8(0x0003, 0xDC)
   mem.write8(0x599E, 0x15)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5CFA)
@@ -9281,6 +9501,7 @@ test('Test fdcbdc', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbdd', () => {
@@ -9306,8 +9527,8 @@ test('Test fdcbdd', () => {
   mem.write8(0x0003, 0xDD)
   mem.write8(0x1E09, 0x28)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8773)
@@ -9323,6 +9544,7 @@ test('Test fdcbdd', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbde', () => {
@@ -9348,8 +9570,8 @@ test('Test fdcbde', () => {
   mem.write8(0x0003, 0xDE)
   mem.write8(0xC9F7, 0x41)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8310)
@@ -9365,6 +9587,7 @@ test('Test fdcbde', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbdf', () => {
@@ -9390,8 +9613,8 @@ test('Test fdcbdf', () => {
   mem.write8(0x0003, 0xDF)
   mem.write8(0xEA56, 0xEF)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xEF0D)
@@ -9407,6 +9630,7 @@ test('Test fdcbdf', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe0', () => {
@@ -9432,8 +9656,8 @@ test('Test fdcbe0', () => {
   mem.write8(0x0003, 0xE0)
   mem.write8(0x155D, 0xB9)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x10EF)
@@ -9449,6 +9673,7 @@ test('Test fdcbe0', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe1', () => {
@@ -9474,8 +9699,8 @@ test('Test fdcbe1', () => {
   mem.write8(0x0003, 0xE1)
   mem.write8(0x0DDE, 0x16)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xE4CB)
@@ -9491,6 +9716,7 @@ test('Test fdcbe1', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe2', () => {
@@ -9516,8 +9742,8 @@ test('Test fdcbe2', () => {
   mem.write8(0x0003, 0xE2)
   mem.write8(0xE4EC, 0xC2)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x11A9)
@@ -9533,6 +9759,7 @@ test('Test fdcbe2', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe3', () => {
@@ -9558,8 +9785,8 @@ test('Test fdcbe3', () => {
   mem.write8(0x0003, 0xE3)
   mem.write8(0xAD72, 0xBA)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x8832)
@@ -9575,6 +9802,7 @@ test('Test fdcbe3', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe4', () => {
@@ -9600,8 +9828,8 @@ test('Test fdcbe4', () => {
   mem.write8(0x0003, 0xE4)
   mem.write8(0x54D6, 0x7B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3989)
@@ -9617,6 +9845,7 @@ test('Test fdcbe4', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe5', () => {
@@ -9642,8 +9871,8 @@ test('Test fdcbe5', () => {
   mem.write8(0x0003, 0xE5)
   mem.write8(0xA507, 0x4C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xE5C5)
@@ -9659,6 +9888,7 @@ test('Test fdcbe5', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe6', () => {
@@ -9684,8 +9914,8 @@ test('Test fdcbe6', () => {
   mem.write8(0x0003, 0xE6)
   mem.write8(0x8B7C, 0x45)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xFD89)
@@ -9701,6 +9931,7 @@ test('Test fdcbe6', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe7', () => {
@@ -9726,8 +9957,8 @@ test('Test fdcbe7', () => {
   mem.write8(0x0003, 0xE7)
   mem.write8(0xB5A8, 0xA6)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB625)
@@ -9743,6 +9974,7 @@ test('Test fdcbe7', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe8', () => {
@@ -9768,8 +10000,8 @@ test('Test fdcbe8', () => {
   mem.write8(0x0003, 0xE8)
   mem.write8(0x0A64, 0xD0)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x514D)
@@ -9785,6 +10017,7 @@ test('Test fdcbe8', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbe9', () => {
@@ -9810,8 +10043,8 @@ test('Test fdcbe9', () => {
   mem.write8(0x0003, 0xE9)
   mem.write8(0xA883, 0x2F)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x974E)
@@ -9827,6 +10060,7 @@ test('Test fdcbe9', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbea', () => {
@@ -9852,8 +10086,8 @@ test('Test fdcbea', () => {
   mem.write8(0x0003, 0xEA)
   mem.write8(0x7526, 0x1B)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x3EF4)
@@ -9869,6 +10103,7 @@ test('Test fdcbea', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbeb', () => {
@@ -9894,8 +10129,8 @@ test('Test fdcbeb', () => {
   mem.write8(0x0003, 0xEB)
   mem.write8(0x23E1, 0x47)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x798F)
@@ -9911,6 +10146,7 @@ test('Test fdcbeb', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbec', () => {
@@ -9936,8 +10172,8 @@ test('Test fdcbec', () => {
   mem.write8(0x0003, 0xEC)
   mem.write8(0xD2DE, 0x49)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x38A4)
@@ -9953,6 +10189,7 @@ test('Test fdcbec', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbed', () => {
@@ -9978,8 +10215,8 @@ test('Test fdcbed', () => {
   mem.write8(0x0003, 0xED)
   mem.write8(0x0F03, 0x10)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xE0BC)
@@ -9995,6 +10232,7 @@ test('Test fdcbed', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbee', () => {
@@ -10020,8 +10258,8 @@ test('Test fdcbee', () => {
   mem.write8(0x0003, 0xEE)
   mem.write8(0x42BE, 0xD0)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5FCB)
@@ -10037,6 +10275,7 @@ test('Test fdcbee', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbef', () => {
@@ -10062,8 +10301,8 @@ test('Test fdcbef', () => {
   mem.write8(0x0003, 0xEF)
   mem.write8(0x22CA, 0x09)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x29E3)
@@ -10079,6 +10318,7 @@ test('Test fdcbef', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf0', () => {
@@ -10104,8 +10344,8 @@ test('Test fdcbf0', () => {
   mem.write8(0x0003, 0xF0)
   mem.write8(0xEEE3, 0x2C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1080)
@@ -10121,6 +10361,7 @@ test('Test fdcbf0', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf1', () => {
@@ -10146,8 +10387,8 @@ test('Test fdcbf1', () => {
   mem.write8(0x0003, 0xF1)
   mem.write8(0x47B2, 0xDC)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1702)
@@ -10163,6 +10404,7 @@ test('Test fdcbf1', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf2', () => {
@@ -10188,8 +10430,8 @@ test('Test fdcbf2', () => {
   mem.write8(0x0003, 0xF2)
   mem.write8(0xEAC3, 0x5E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x732A)
@@ -10205,6 +10447,7 @@ test('Test fdcbf2', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf3', () => {
@@ -10230,8 +10473,8 @@ test('Test fdcbf3', () => {
   mem.write8(0x0003, 0xF3)
   mem.write8(0x7DC8, 0x0C)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x6B97)
@@ -10247,6 +10490,7 @@ test('Test fdcbf3', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf4', () => {
@@ -10272,8 +10516,8 @@ test('Test fdcbf4', () => {
   mem.write8(0x0003, 0xF4)
   mem.write8(0x306C, 0x0E)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7AF0)
@@ -10289,6 +10533,7 @@ test('Test fdcbf4', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf5', () => {
@@ -10314,8 +10559,8 @@ test('Test fdcbf5', () => {
   mem.write8(0x0003, 0xF5)
   mem.write8(0x6B74, 0xF8)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1370)
@@ -10331,6 +10576,7 @@ test('Test fdcbf5', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf6', () => {
@@ -10356,8 +10602,8 @@ test('Test fdcbf6', () => {
   mem.write8(0x0003, 0xF6)
   mem.write8(0xC670, 0x5D)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x7C43)
@@ -10373,6 +10619,7 @@ test('Test fdcbf6', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf7', () => {
@@ -10398,8 +10645,8 @@ test('Test fdcbf7', () => {
   mem.write8(0x0003, 0xF7)
   mem.write8(0x5727, 0x66)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x66DA)
@@ -10415,6 +10662,7 @@ test('Test fdcbf7', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf8', () => {
@@ -10440,8 +10688,8 @@ test('Test fdcbf8', () => {
   mem.write8(0x0003, 0xF8)
   mem.write8(0xDECE, 0x7A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xFA29)
@@ -10457,6 +10705,7 @@ test('Test fdcbf8', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbf9', () => {
@@ -10482,8 +10731,8 @@ test('Test fdcbf9', () => {
   mem.write8(0x0003, 0xF9)
   mem.write8(0x9A13, 0xC6)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x4662)
@@ -10499,6 +10748,7 @@ test('Test fdcbf9', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbfa', () => {
@@ -10524,8 +10774,8 @@ test('Test fdcbfa', () => {
   mem.write8(0x0003, 0xFA)
   mem.write8(0xBD82, 0xF4)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9426)
@@ -10541,6 +10791,7 @@ test('Test fdcbfa', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbfb', () => {
@@ -10566,8 +10817,8 @@ test('Test fdcbfb', () => {
   mem.write8(0x0003, 0xFB)
   mem.write8(0xF82F, 0xED)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x5343)
@@ -10583,6 +10834,7 @@ test('Test fdcbfb', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbfc', () => {
@@ -10608,8 +10860,8 @@ test('Test fdcbfc', () => {
   mem.write8(0x0003, 0xFC)
   mem.write8(0x6679, 0x65)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x0965)
@@ -10625,6 +10877,7 @@ test('Test fdcbfc', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbfd', () => {
@@ -10650,8 +10903,8 @@ test('Test fdcbfd', () => {
   mem.write8(0x0003, 0xFD)
   mem.write8(0x5D50, 0x27)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x1751)
@@ -10667,6 +10920,7 @@ test('Test fdcbfd', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbfe', () => {
@@ -10692,8 +10946,8 @@ test('Test fdcbfe', () => {
   mem.write8(0x0003, 0xFE)
   mem.write8(0x4DD7, 0x4A)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0xB4CF)
@@ -10709,6 +10963,7 @@ test('Test fdcbfe', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
 
 test('Test fdcbff', () => {
@@ -10734,8 +10989,8 @@ test('Test fdcbff', () => {
   mem.write8(0x0003, 0xFF)
   mem.write8(0x2AD1, 0x97)
 
-  while (cpu.pc !== 0x4 && cpu.tStates < 23) {
-    cpu.execInstruction()
+  while (cpu.tStates < 23) {
+    cpu.execute()
   }
   
   expect(cpu.r1.af).toEqual(0x9751)
@@ -10751,4 +11006,5 @@ test('Test fdcbff', () => {
   expect(cpu.sp).toEqual(0x0000)
   expect(cpu.r).toEqual(0x02)
   expect(cpu.i).toEqual(0x00)
+  expect(cpu.tStates).toEqual(23)
 })
