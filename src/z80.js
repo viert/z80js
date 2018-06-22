@@ -419,6 +419,7 @@ Z80.prototype.execInstruction = function() {
     }
     this.tStates += 3
     this.pc++
+    this.incr()
     opCode = this.read8(this.pc)
     if (this.debug) {
       console.log('read opCode ' + hex8(opCode))
@@ -1475,6 +1476,16 @@ Z80.prototype.opcodeTable[0x2a] = {
   args: [ ArgType.Word ]
 }
 
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2a] = {
+    funcName: `ld_${pref}__nn_`,
+    tStates: 16,
+    cycles: 5,
+    dasm: `ld ${pref}, ({0})`,
+    args: [ ArgType.Word ]
+  }
+}
+
 for (let rCode in Register16Map) {
   let opCode = 0b01001011 | (rCode << 4)
   let opFuncName = `ld_${Register16Map[rCode]}__nn_`
@@ -1488,23 +1499,33 @@ for (let rCode in Register16Map) {
   }
 }
 
+Z80.prototype.ld_ix__nn_ = function() {
+  this.r1.ix = this.read16(this.read16(this.pc))
+  this.pc += 2
+}
+
+Z80.prototype.ld_iy__nn_ = function() {
+  this.r1.iy = this.read16(this.read16(this.pc))
+  this.pc += 2
+}
+
 Z80.prototype.ld_bc__nn_ = function() {
-  this.r1.ld_bc__nn_ = this.read16(this.read16(this.pc))
+  this.r1.bc = this.read16(this.read16(this.pc))
   this.pc += 2
 }
 
 Z80.prototype.ld_de__nn_ = function() {
-  this.r1.ld_de__nn_ = this.read16(this.read16(this.pc))
+  this.r1.de = this.read16(this.read16(this.pc))
   this.pc += 2
 }
 
 Z80.prototype.ld_hl__nn_ = function() {
-  this.r1.ld_hl__nn_ = this.read16(this.read16(this.pc))
+  this.r1.hl = this.read16(this.read16(this.pc))
   this.pc += 2
 }
 
 Z80.prototype.ld_sp__nn_ = function() {
-  this.r1.ld_sp__nn_ = this.read16(this.read16(this.pc))
+  this.r1.sp = this.read16(this.read16(this.pc))
   this.pc += 2
 }
 

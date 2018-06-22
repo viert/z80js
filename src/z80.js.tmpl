@@ -85,7 +85,7 @@ const Z80 = function(memory, debug) {
   })
 
   this.tStates = 0
-  this.debug = !!debug
+  this.debugMode = !!debug
 
   // Creating registers
   this.r1 = {}
@@ -394,40 +394,37 @@ Z80.prototype.disassemble = function(addr) {
   return dasm
 }
 
+Z80.prototype.debug = function(message) {
+  if (this.debugMode) {
+    console.log(message)
+  }
+}
+
 Z80.prototype.execInstruction = function() {
   this.incr()
   let opCode = this.read8(this.pc)
-  if (this.debug) {
-    console.log('read opCode ' + hex8(opCode))
-  }
+  this.debug('read opCode ' + hex8(opCode))
   let codesString = opCode.toString(16)
   let instr = this.opcodeTable[opCode]
-  if (this.debug) {
-    console.log('instruction is ' + instr)
-  }
+  this.debug('instruction is ' + instr)
   if (!instr) {
     throw 'Unknown instruction (opcode ' + codesString + ')'
   }
 
   while ('nextTable' in instr) {
     let nextTable = instr.nextTable
-    if (this.debug) {
-      console.log('Next table reached')
-    }
+    this.debug('Next table reached')
     if (nextTable.opcodeOffset) {
       this.decr()
     }
     this.tStates += 3
     this.pc++
+    this.incr()
     opCode = this.read8(this.pc)
-    if (this.debug) {
-      console.log('read opCode ' + hex8(opCode))
-    }
+    this.debug('read opCode ' + hex8(opCode))
     codesString += ' ' + opCode.toString(16)
     instr = nextTable[opCode]
-    if (this.debug) {
-      console.log('instruction is ' + JSON.stringify(instr))
-    }
+    this.debug('instruction is ' + JSON.stringify(instr))
     if (!instr) {
       throw 'Unknown instruction (opcode ' + codesString + ')'
     }
@@ -747,6 +744,16 @@ Z80.prototype.opcodeTable[0x2a] = {
   args: [ ArgType.Word ]
 }
 
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2a] = {
+    funcName: `ld_${pref}__nn_`,
+    tStates: 16,
+    cycles: 5,
+    dasm: `ld ${pref}, ({0})`,
+    args: [ ArgType.Word ]
+  }
+}
+
 for (let rCode in Register16Map) {
   let opCode = 0b01001011 | (rCode << 4)
   let opFuncName = `ld_${Register16Map[rCode]}__nn_`
@@ -760,9 +767,9 @@ for (let rCode in Register16Map) {
   }
 }
 
-// #BEGIN ld_[bc,de,hl,sp]__nn_
+// #BEGIN ld_[ix,iy,bc,de,hl,sp]__nn_
 Z80.prototype.$0 = function() {
-  this.r1.$0 = this.read16(this.read16(this.pc))
+  this.r1.$1 = this.read16(this.read16(this.pc))
   this.pc += 2
 }
 
