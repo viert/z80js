@@ -118,7 +118,17 @@ const Z80 = function(memory, debug) {
   this._defineWordRegister('hl', 3)
   this._defineWordRegister('ix', 4)
   this._defineWordRegister('iy', 5)
+
   Object.defineProperty(this, 'sp', {
+    get: () => {
+      return this.w0[2]
+    },
+    set: (val) => {
+      this.w0[2] = val
+    }
+  })
+  // Alias
+  Object.defineProperty(this.r1, 'sp', {
     get: () => {
       return this.w0[2]
     },
@@ -736,6 +746,27 @@ Z80.prototype.opcodeTable[0x2a] = {
   dasm: `ld hl, ({0})`,
   args: [ ArgType.Word ]
 }
+
+for (let rCode in Register16Map) {
+  let opCode = 0b01001011 | (rCode << 4)
+  let opFuncName = `ld_${Register16Map[rCode]}__nn_`
+  let disasmString = `ld ${Register16Map[rCode]}, ({0})`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    tStates: 20,
+    cycles: 6,
+    dasm: disasmString,
+    args: [ ArgType.Word ]
+  }
+}
+
+// #BEGIN ld_[bc,de,hl,sp]__nn_
+Z80.prototype.$0 = function() {
+  this.r1.$0 = this.read16(this.read16(this.pc))
+  this.pc += 2
+}
+
+// #END
 
 // NOP
 Z80.prototype.opcodeTable[0x00] = {
