@@ -5,6 +5,7 @@
   "main": "compile.js",
   "scripts": {
     "build": "node compile.js",
+    "build_tests": "node create_tests.js",
     "test": "jest"
   },
   "repository": {

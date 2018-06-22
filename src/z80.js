@@ -1716,6 +1716,36 @@ Z80.prototype.nop = function() {
   // nop
 }
 
+// EX DE, HL
+Z80.prototype.opcodeTable[0xeb] = { funcName: 'ex_de_hl', dasm: 'ex de, hl', args: [], tStates: 4 }
+Z80.prototype.ex_de_hl = function() {
+  let _t = this.r1.de
+  this.r1.de = this.r1.hl
+  this.r1.hl = _t
+}
+
+// EX AF, AF'
+Z80.prototype.opcodeTable[0x08] = { funcName: 'ex_af_af_', dasm: "ex af, af'", args: [], tStates: 4 }
+Z80.prototype.ex_af_af_ = function() {
+  let _t = this.r1.af
+  this.r1.af = this.r2.af
+  this.r2.af = _t
+}
+
+// EXX
+Z80.prototype.opcodeTable[0xd9] = { funcName: 'exx', dasm: 'exx', args: [], tStates: 4 }
+Z80.prototype.exx = function() {
+  let _t = this.r1.bc
+  this.r1.bc = this.r2.bc
+  this.r2.bc = _t
+  _t = this.r1.de
+  this.r1.de = this.r2.de
+  this.r2.de = _t
+  _t = this.r1.hl
+  this.r1.hl = this.r2.hl
+  this.r2.hl = _t
+}
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
