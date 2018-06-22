@@ -21,6 +21,7 @@ mem.write8(0x0000, 0x16)
 mem.write8(0x0001, 0x12)
 
 while (cpu.pc !== 0x0002) {
+  console.log(cpu.disassemble())
   cpu.execInstruction()
 }
 cpu.dump()
