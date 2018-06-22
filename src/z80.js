@@ -18,6 +18,13 @@ const Register16Map = {
   0b11: 'sp'
 }
 
+const Register16Map2 = {
+  0b00: 'bc',
+  0b01: 'de',
+  0b10: 'hl',
+  0b11: 'af'
+}
+
 const RegisterMapHL = {
   0b100: 'h',
   0b101: 'l'
@@ -457,7 +464,6 @@ for (let dst in RegisterMap) {
     Z80.prototype.opcodeTable[opCode] = {
       funcName: opFuncName,
       tStates: 4,
-      cycles: 1,
       dasm: disasmString,
       args: []
     }
@@ -470,7 +476,6 @@ for (let dst in RegisterMap) {
       table[opCode] = {
         funcName: opFuncName,
         tStates: 4,
-        cycles: 1,
         dasm: disasmString,
         args: []
       }
@@ -972,7 +977,6 @@ for (let dst in RegisterMap) {
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     tStates: 7,
-    cycles: 2,
     dasm: disasmString,
     args: [ ArgType.Byte ]
   }
@@ -1028,7 +1032,7 @@ for (let dst in RegisterMap) {
   let opCode = 0b01000110 | (dst << 3)
   let opFuncName = `ld_${RegisterMap[dst]}__hl_`
   let disasmString = `ld ${RegisterMap[dst]}, (hl)`
-  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, cycles: 2, dasm: disasmString, args: [] }
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, dasm: disasmString, args: [] }
 }
 
 Z80.prototype.lda__hl_ = function() {
@@ -1065,7 +1069,7 @@ for (let src in RegisterMap) {
   let opCode = 0b01110000 | src
   let opFuncName = `ld__hl__${RegisterMap[src]}`
   let disasmString = `ld (hl), ${RegisterMap[src]}`
-  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, cycles: 2, dasm: disasmString, args: [] }
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, dasm: disasmString, args: [] }
 }
 
 Z80.prototype.ld__hl__a = function() {
@@ -1101,7 +1105,6 @@ Z80.prototype.ld__hl__l = function() {
 Z80.prototype.opcodeTable[0b00110110] = {
   funcName: 'ld__hl__n',
   tStates: 10,
-  cycles: 3,
   dasm: 'ld (hl), {0}',
   args: [ ArgType.Byte ]
 }
@@ -1111,9 +1114,9 @@ Z80.prototype.ld__hl__n = function() {
 }
 
 // LD A, (BC)
-Z80.prototype.opcodeTable[0b00001010] = { funcName: 'ld_a__bc_', tStates: 7, cycles: 2, dasm: 'ld a, (bc)', args: [] }
+Z80.prototype.opcodeTable[0b00001010] = { funcName: 'ld_a__bc_', tStates: 7, dasm: 'ld a, (bc)', args: [] }
 // LD A, (DE)
-Z80.prototype.opcodeTable[0b00011010] = { funcName: 'ld_a__de_', tStates: 7, cycles: 2, dasm: 'ld a, (de)', args: [] }
+Z80.prototype.opcodeTable[0b00011010] = { funcName: 'ld_a__de_', tStates: 7, dasm: 'ld a, (de)', args: [] }
 
 Z80.prototype.ld_a__bc_ = function() {
   this.r1.a = this.read8(this.r1.bc)
@@ -1125,9 +1128,9 @@ Z80.prototype.ld_a__de_ = function() {
 
 
 // LD (BC), A
-Z80.prototype.opcodeTable[0b00000010] = { funcName: 'ld__bc__a', tStates: 7, cycles: 2, dasm: 'ld (bc), a', args: [] }
+Z80.prototype.opcodeTable[0b00000010] = { funcName: 'ld__bc__a', tStates: 7, dasm: 'ld (bc), a', args: [] }
 // LD (DE), A
-Z80.prototype.opcodeTable[0b00010010] = { funcName: 'ld__de__a', tStates: 7, cycles: 2, dasm: 'ld (de), a', args: [] }
+Z80.prototype.opcodeTable[0b00010010] = { funcName: 'ld__de__a', tStates: 7, dasm: 'ld (de), a', args: [] }
 
 Z80.prototype.ld__bc__a = function() {
   this.write8(this.r1.bc, this.r1.a)
@@ -1142,7 +1145,6 @@ Z80.prototype.ld__de__a = function() {
 Z80.prototype.opcodeTable[0b00111010] = {
   funcName: 'ld_a__nn_',
   tStates: 13,
-  cycles: 4,
   dasm: 'ld a, ({0})',
   args: [ ArgType.Word ]
 }
@@ -1156,7 +1158,6 @@ Z80.prototype.ld_a__nn_ = function() {
 Z80.prototype.opcodeTable[0b00110010] = {
   funcName: 'ld__nn__a',
   tStates: 13,
-  cycles: 4,
   dasm: 'ld ({0}), a',
   args: [ ArgType.Word ]
 }
@@ -1167,9 +1168,9 @@ Z80.prototype.ld__nn__a = function() {
 }
 
 // LD A, I
-Z80.prototype.opcodeTableED[0b01010111] = { funcName: 'ld_a_i', tStates: 9, cycles: 2, dasm: 'ld a, i', args: [] }
+Z80.prototype.opcodeTableED[0b01010111] = { funcName: 'ld_a_i', tStates: 9, dasm: 'ld a, i', args: [] }
 // LD A, R
-Z80.prototype.opcodeTableED[0b01011111] = { funcName: 'ld_a_r', tStates: 9, cycles: 2, dasm: 'ld a, r', args: [] }
+Z80.prototype.opcodeTableED[0b01011111] = { funcName: 'ld_a_r', tStates: 9, dasm: 'ld a, r', args: [] }
 
 Z80.prototype.ld_a_i = function() {
   this.tStates++
@@ -1193,9 +1194,9 @@ Z80.prototype.ld_a_r = function() {
 
 
 // LD I, A
-Z80.prototype.opcodeTableED[0b01000111] = { funcName: 'ld_i_a', tStates: 9, cycles: 2, dasm: 'ld i, a', args: [] }
+Z80.prototype.opcodeTableED[0b01000111] = { funcName: 'ld_i_a', tStates: 9, dasm: 'ld i, a', args: [] }
 // LD R, A
-Z80.prototype.opcodeTableED[0b01001111] = { funcName: 'ld_r_a', tStates: 9, cycles: 2, dasm: 'ld r, a', args: [] }
+Z80.prototype.opcodeTableED[0b01001111] = { funcName: 'ld_r_a', tStates: 9, dasm: 'ld r, a', args: [] }
 
 Z80.prototype.ld_i_a = function() {
   this.tStates++
@@ -1217,7 +1218,6 @@ for (let dst in RegisterMap) {
     Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
       funcName: opFuncName,
       tStates: 15,
-      cycles: 2,
       dasm: disasmString,
       args: [ ArgType.Byte ]
     }
@@ -1304,7 +1304,6 @@ for (let src in RegisterMap) {
     Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
       funcName: opFuncName,
       tStates: 15,
-      cycles: 5,
       dasm: disasmString,
       args: [ ArgType.Byte ]
     }
@@ -1389,7 +1388,6 @@ for (let iReg in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[iReg]][0b00110110] = {
     funcName: opFuncName,
     tStates: 15,
-    cycles: 5,
     dasm: disasmString,
     args: [ ArgType.Word ]
   }
@@ -1416,7 +1414,6 @@ for (let rCode in Register16Map) {
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     tStates: 10,
-    cycles: 2,
     dasm: disasmString,
     args: [ ArgType.Word ]
   }
@@ -1427,7 +1424,6 @@ for (let regName in Prefixes) {
   Z80.prototype.opcodeTable[code].nextTable[0b00100001] = {
     funcName: `ld_${regName}_nn`,
     tStates: 10,
-    cycles: 2,
     dasm: `ld ${regName}, {0}`,
     args: [ ArgType.Word ]
   }
@@ -1468,7 +1464,6 @@ Z80.prototype.ld_iy_nn = function() {
 Z80.prototype.opcodeTable[0x2a] = {
   funcName: 'ld_hl__nn_',
   tStates: 16,
-  cycles: 5,
   dasm: `ld hl, ({0})`,
   args: [ ArgType.Word ]
 }
@@ -1478,7 +1473,6 @@ for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2a] = {
     funcName: `ld_${pref}__nn_`,
     tStates: 16,
-    cycles: 5,
     dasm: `ld ${pref}, ({0})`,
     args: [ ArgType.Word ]
   }
@@ -1492,7 +1486,6 @@ for (let rCode in Register16Map) {
   Z80.prototype.opcodeTableED[opCode] = {
     funcName: opFuncName,
     tStates: 20,
-    cycles: 6,
     dasm: disasmString,
     args: [ ArgType.Word ]
   }
@@ -1533,7 +1526,6 @@ Z80.prototype.ld_sp__nn_ = function() {
 Z80.prototype.opcodeTable[0x22] = {
   funcName: 'ld__nn__hl',
   tStates: 16,
-  cycles: 5,
   dasm: `ld ({0}), hl`,
   args: [ ArgType.Word ]
 }
@@ -1543,7 +1535,6 @@ for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x22] = {
     funcName: `ld__nn__${pref}`,
     tStates: 16,
-    cycles: 5,
     dasm: `ld ({0}), ${pref}`,
     args: [ ArgType.Word ]
   }
@@ -1557,7 +1548,6 @@ for (let rCode in Register16Map) {
   Z80.prototype.opcodeTableED[opCode] = {
     funcName: opFuncName,
     tStates: 20,
-    cycles: 6,
     dasm: disasmString,
     args: [ ArgType.Word ]
   }
@@ -1600,11 +1590,124 @@ Z80.prototype.ld__nn__sp = function() {
 }
 
 
+// LD SP, HL/IX/IY
+Z80.prototype.opcodeTable[0xf9] = { funcName: 'ld_sp_hl', tStates: 6, dasm: 'ld sp, hl', args: [] }
+Z80.prototype.ld_sp_hl = function() {
+  this.sp = this.r1.hl
+}
+
+Z80.prototype.opcodeTableDD[0xf9] = { funcName: 'ld_sp_ix', tStates: 6, dasm: 'ld sp, ix', args: [] }
+Z80.prototype.ld_sp_ix = function() {
+  this.sp = this.r1.ix
+}
+
+Z80.prototype.opcodeTableFD[0xf9] = { funcName: 'ld_sp_iy', tStates: 6, dasm: 'ld sp, iy', args: [] }
+Z80.prototype.ld_sp_iy = function() {
+  this.sp = this.r1.iy
+}
+
+// PUSH qq
+for (let rCode in Register16Map2) {
+  let opCode = 0b11000101 | (rCode << 4)
+  let opFuncName = `push_${Register16Map2[rCode]}`
+  let disasmString = `push ${Register16Map2[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    tStates: 11,
+    args: []
+  }
+}
+
+for (let pref in Prefixes) {
+  let opFuncName = `push_${pref}`
+  let disasmString = `push ${pref}`
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xe5] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    tStates: 15,
+    args: []
+  }
+}
+
+Z80.prototype.push_af = function() {
+  this.doPush(this.r1.af)
+}
+
+Z80.prototype.push_bc = function() {
+  this.doPush(this.r1.bc)
+}
+
+Z80.prototype.push_de = function() {
+  this.doPush(this.r1.de)
+}
+
+Z80.prototype.push_hl = function() {
+  this.doPush(this.r1.hl)
+}
+
+Z80.prototype.push_ix = function() {
+  this.doPush(this.r1.ix)
+}
+
+Z80.prototype.push_iy = function() {
+  this.doPush(this.r1.iy)
+}
+
+
+// POP qq
+for (let rCode in Register16Map2) {
+  let opCode = 0b11000001 | (rCode << 4)
+  let opFuncName = `pop_${Register16Map2[rCode]}`
+  let disasmString = `pop ${Register16Map2[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    tStates: 11,
+    args: []
+  }
+}
+
+for (let pref in Prefixes) {
+  let opFuncName = `pop_${pref}`
+  let disasmString = `pop ${pref}`
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xe1] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    tStates: 15,
+    args: []
+  }
+}
+
+Z80.prototype.pop_af = function() {
+  this.doPop('af')
+}
+
+Z80.prototype.pop_bc = function() {
+  this.doPop('bc')
+}
+
+Z80.prototype.pop_de = function() {
+  this.doPop('de')
+}
+
+Z80.prototype.pop_hl = function() {
+  this.doPop('hl')
+}
+
+Z80.prototype.pop_ix = function() {
+  this.doPop('ix')
+}
+
+Z80.prototype.pop_iy = function() {
+  this.doPop('iy')
+}
+
+
 // NOP
 Z80.prototype.opcodeTable[0x00] = {
   funcName: 'nop',
   tStates: 4,
-  cycles: 1,
   dasm: 'nop',
   args: []
 }
@@ -1617,7 +1720,6 @@ Z80.prototype.nop = function() {
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
   tStates: 10,
-  cycles: 3,
   dasm: 'jp {0}',
   args: [ ArgType.Word ]
 }
@@ -1634,7 +1736,6 @@ for (let cond in Conditions) {
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     tStates: 10,
-    cycles: 3,
     dasm: disasmString,
     args: [ ArgType.Word ]
   }
@@ -1714,7 +1815,6 @@ for (let p = 0; p < 8; p++) {
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     tStates: 11,
-    cycles: 3,
     dasm: disasmString,
     args: []
   }
