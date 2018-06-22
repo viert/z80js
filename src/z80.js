@@ -1746,6 +1746,14 @@ Z80.prototype.exx = function() {
   this.r2.hl = _t
 }
 
+// EX (SP), HL
+Z80.prototype.opcodeTable[0xe3] = { funcName: 'ex__sp__hl', dasm: 'ex (sp), hl', args: [], tStates: 19 }
+Z80.prototype.ex__sp__hl = function() {
+  let _t = this.r1.hl
+  this.r1.hl = this.read16(this.sp)
+  this.write16(this.sp, _t)
+}
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
