@@ -340,12 +340,9 @@ Z80.prototype.doPush = function(value) {
 }
 
 Z80.prototype.doPop = function(operandName) {
-  if (operandName in this.r1) {
-    this.r1[operandName] = this.read16(this.sp)
-  } else {
-    this[operandName] = this.read16(this.sp)
-  }
+  let value = this.read16(this.sp)
   this.sp += 2
+  return value
 }
 
 // R register
@@ -1799,27 +1796,27 @@ for (let pref in Prefixes) {
 }
 
 Z80.prototype.pop_af = function() {
-  this.doPop('af')
+  this.r1.af = this.doPop()
 }
 
 Z80.prototype.pop_bc = function() {
-  this.doPop('bc')
+  this.r1.bc = this.doPop()
 }
 
 Z80.prototype.pop_de = function() {
-  this.doPop('de')
+  this.r1.de = this.doPop()
 }
 
 Z80.prototype.pop_hl = function() {
-  this.doPop('hl')
+  this.r1.hl = this.doPop()
 }
 
 Z80.prototype.pop_ix = function() {
-  this.doPop('ix')
+  this.r1.ix = this.doPop()
 }
 
 Z80.prototype.pop_iy = function() {
-  this.doPop('iy')
+  this.r1.iy = this.doPop()
 }
 
 
@@ -1996,6 +1993,33 @@ Z80.prototype.cpi = function() {
 Z80.prototype.opcodeTableED[0xb1] = { funcName: 'cpir', dasm: 'cpir', args: 0 }
 Z80.prototype.cpir = function() {
   this.cpi()
+  if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
+    this.tStates += 5
+    this.pc -= 2
+  }
+}
+
+// CPD
+Z80.prototype.opcodeTableED[0xa9] = { funcName: 'cpd', dasm: 'cpd', args: 0 }
+Z80.prototype.cpd = function() {
+  this.tStates += 5
+  let carry = this.getFlag(f_c)
+  let value = this.doCPHL()
+  if (this.getFlag(f_h)) {
+    value--
+  }
+  this.r1.hl--
+  this.r1.bc--
+  this.valFlag(f_pv, this.r1.bc !== 0)
+  this.valFlag(f_c, carry)
+  this.valFlag(f_5, (value & (1 << 1)) !== 0)
+  this.valFlag(f_3, (value & (1 << 3)) !== 0)
+}
+
+// CPDR
+Z80.prototype.opcodeTableED[0xb9] = { funcName: 'cpdr', dasm: 'cpdr', args: 0 }
+Z80.prototype.cpdr = function() {
+  this.cpd()
   if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
     this.tStates += 5
     this.pc -= 2
