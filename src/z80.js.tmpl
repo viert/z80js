@@ -1,5 +1,5 @@
 const ParityBit = require('./parity')
-const { unot8, unsigned8, hex16, hex8, usum8, unsigned16 } = require('./utils')
+const { unot8, unsigned8, signed8, hex16, hex8, usum8, unsigned16 } = require('./utils')
 
 const RegisterMap = {
   0b111: 'a',
@@ -470,6 +470,10 @@ Z80.prototype.disassemble = function(addr) {
         break
       case ArgType.Offset:
         arg = this.memory.read8(addr++)
+        arg = signed8(arg)
+        if (arg >= 0) {
+          arg = '+' + arg
+        }
         dasm = dasm.replace(`{${argNum++}}`, `${arg}`)
         break
       case ArgType.Word:
@@ -1256,9 +1260,48 @@ for (let rCode in RegisterMap) {
   }
 }
 
-// #BEGIN [adc,sbc,add,sub]_a_[a,b,c,d,e,h,l]
+// #BEGIN [adc,sbc,add,sub]_a_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]
 Z80.prototype.$0 = function() {
   this.r1.a = this.doArithmetics(this.r1.$2, hasCarry_$1, isSub_$1)
+}
+
+// #END
+
+// ADD/ADC/SUB/SBC a, n
+Z80.prototype.opcodeTable[0xc6] = { funcName: 'add_a_n', dasm: 'add a, {0}', args: [ ArgType.Byte ] }
+Z80.prototype.opcodeTable[0xce] = { funcName: 'adc_a_n', dasm: 'adc a, {0}', args: [ ArgType.Byte ] }
+Z80.prototype.opcodeTable[0xde] = { funcName: 'sbc_a_n', dasm: 'sbc a, {0}', args: [ ArgType.Byte ] }
+Z80.prototype.opcodeTable[0xd6] = { funcName: 'sub_a_n', dasm: 'sub {0}', args: [ ArgType.Byte ] }
+
+// #BEGIN [adc,add,sbc,sub]_a_n
+Z80.prototype.$0 = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.pc++), hasCarry_$1, isSub_$1)
+}
+
+// #END
+
+// ADD a, (hl/ix+d/iy+d)
+Z80.prototype.opcodeTable[0x86] = { funcName: 'add_a__hl_', dasm: 'add a, (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x86] = {
+    funcName: `add_a__${pref}_d_`,
+    dasm: `add a, (${pref}{0})`,
+    args: [ ArgType.Offset ]
+  }
+}
+
+// #BEGIN [adc,sbc,add,sub]_a__hl_
+Z80.prototype.$0 = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl), hasCarry_$1, isSub_$1)
+}
+
+// #END
+
+// #BEGIN [adc,sbc,add,sub]_a__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_$1, isSub_$1)
 }
 
 // #END

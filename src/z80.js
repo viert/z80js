@@ -1,5 +1,5 @@
 const ParityBit = require('./parity')
-const { unot8, unsigned8, hex16, hex8, usum8, unsigned16 } = require('./utils')
+const { unot8, unsigned8, signed8, hex16, hex8, usum8, unsigned16 } = require('./utils')
 
 const RegisterMap = {
   0b111: 'a',
@@ -470,6 +470,10 @@ Z80.prototype.disassemble = function(addr) {
         break
       case ArgType.Offset:
         arg = this.memory.read8(addr++)
+        arg = signed8(arg)
+        if (arg >= 0) {
+          arg = '+' + arg
+        }
         dasm = dasm.replace(`{${argNum++}}`, `${arg}`)
         break
       case ArgType.Word:
@@ -2116,6 +2120,22 @@ Z80.prototype.adc_a_l = function() {
   this.r1.a = this.doArithmetics(this.r1.l, hasCarry_adc, isSub_adc)
 }
 
+Z80.prototype.adc_a_ixh = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixh, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_ixl = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixl, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_iyh = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyh, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_iyl = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyl, hasCarry_adc, isSub_adc)
+}
+
 Z80.prototype.sbc_a_a = function() {
   this.r1.a = this.doArithmetics(this.r1.a, hasCarry_sbc, isSub_sbc)
 }
@@ -2142,6 +2162,22 @@ Z80.prototype.sbc_a_h = function() {
 
 Z80.prototype.sbc_a_l = function() {
   this.r1.a = this.doArithmetics(this.r1.l, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_ixh = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixh, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_ixl = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixl, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_iyh = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyh, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_iyl = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyl, hasCarry_sbc, isSub_sbc)
 }
 
 Z80.prototype.add_a_a = function() {
@@ -2172,6 +2208,22 @@ Z80.prototype.add_a_l = function() {
   this.r1.a = this.doArithmetics(this.r1.l, hasCarry_add, isSub_add)
 }
 
+Z80.prototype.add_a_ixh = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixh, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_ixl = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixl, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_iyh = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyh, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_iyl = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyl, hasCarry_add, isSub_add)
+}
+
 Z80.prototype.sub_a_a = function() {
   this.r1.a = this.doArithmetics(this.r1.a, hasCarry_sub, isSub_sub)
 }
@@ -2198,6 +2250,121 @@ Z80.prototype.sub_a_h = function() {
 
 Z80.prototype.sub_a_l = function() {
   this.r1.a = this.doArithmetics(this.r1.l, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_ixh = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixh, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_ixl = function() {
+  this.r1.a = this.doArithmetics(this.r1.ixl, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_iyh = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyh, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_iyl = function() {
+  this.r1.a = this.doArithmetics(this.r1.iyl, hasCarry_sub, isSub_sub)
+}
+
+
+// ADD/ADC/SUB/SBC a, n
+Z80.prototype.opcodeTable[0xc6] = { funcName: 'add_a_n', dasm: 'add a, {0}', args: [ ArgType.Byte ] }
+Z80.prototype.opcodeTable[0xce] = { funcName: 'adc_a_n', dasm: 'adc a, {0}', args: [ ArgType.Byte ] }
+Z80.prototype.opcodeTable[0xde] = { funcName: 'sbc_a_n', dasm: 'sbc a, {0}', args: [ ArgType.Byte ] }
+Z80.prototype.opcodeTable[0xd6] = { funcName: 'sub_a_n', dasm: 'sub {0}', args: [ ArgType.Byte ] }
+
+Z80.prototype.adc_a_n = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.pc++), hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.add_a_n = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.pc++), hasCarry_add, isSub_add)
+}
+
+Z80.prototype.sbc_a_n = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.pc++), hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sub_a_n = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.pc++), hasCarry_sub, isSub_sub)
+}
+
+
+// ADD a, (hl/ix+d/iy+d)
+Z80.prototype.opcodeTable[0x86] = { funcName: 'add_a__hl_', dasm: 'add a, (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x86] = {
+    funcName: `add_a__${pref}_d_`,
+    dasm: `add a, (${pref}{0})`,
+    args: [ ArgType.Offset ]
+  }
+}
+
+Z80.prototype.adc_a__hl_ = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl), hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.sbc_a__hl_ = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl), hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.add_a__hl_ = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl), hasCarry_add, isSub_add)
+}
+
+Z80.prototype.sub_a__hl_ = function() {
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl), hasCarry_sub, isSub_sub)
+}
+
+
+Z80.prototype.adc_a__ix_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a__iy_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.sbc_a__ix_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a__iy_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.add_a__ix_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a__iy_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_add, isSub_add)
+}
+
+Z80.prototype.sub_a__ix_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a__iy_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sub, isSub_sub)
 }
 
 
