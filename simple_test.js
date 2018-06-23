@@ -3,7 +3,7 @@ const Memory = require('./src/memory')
 
 let mem = new Memory()
 let cpu = new Z80(mem, true)
-cpu.r1.af = 0x0e00
+cpu.r1.af = 0x0007
 cpu.r1.bc = 0x0000
 cpu.r1.de = 0x0000
 cpu.r1.hl = 0x0000
@@ -17,15 +17,15 @@ cpu.sp = 0x0000
 cpu.pc = 0x0000
 cpu.i = 0x00
 cpu.r = 0x00
-mem.write8(0x0000, 0x32)
-mem.write8(0x0001, 0xac)
-mem.write8(0x0002, 0xad)
+mem.write8(0x0000, 0xfa)
+mem.write8(0x0001, 0x1b)
+mem.write8(0x0002, 0xe1)
 
 console.log('INITIAL')
 cpu.dump()
 console.log('')
 
-while (cpu.tStates < 13) {
+while (cpu.tStates < 10) {
   console.log(cpu.disassemble().dasm)
   cpu.execute()
   cpu.dump()

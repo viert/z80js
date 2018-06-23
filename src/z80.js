@@ -231,7 +231,8 @@ Z80.prototype._defineWordRegister = function(name, position) {
 }
 
 Z80.prototype.dump = function() {
-  console.log(`PC: ${hex16(this.pc)}        tStates: ${this.tStates}`)
+  console.log('=============================')
+  console.log(`PC: ${hex16(this.pc)}     tStates: ${this.tStates}`)
   console.log(`SP: ${hex16(this.sp)}`)
   console.log('')
   console.log(`AF: ${hex16(this.r1.af)}         AF': ${hex16(this.r2.af)}`)
@@ -270,6 +271,7 @@ Z80.prototype.dump = function() {
     flags.push('S')
   }
   console.log(`FLAGS: ${flags.join(' ')}`)
+  console.log('=============================\n')
 }
 
 // Flag operations
@@ -388,7 +390,7 @@ Z80.prototype.disassemble = function(addr) {
 
   let instr = this.opcodeTable[opCode]
   if (!instr) {
-    return 'Error disassembling ' + codes.map((c) => hex8(c)).join(' ')
+    return { dasm: 'Error disassembling ' + codes.map((c) => hex8(c)).join(' '), nextAddr: addr }
   }
 
   while ('nextTable' in instr) {
@@ -398,7 +400,7 @@ Z80.prototype.disassemble = function(addr) {
 
     instr = nextTable[opCode]
     if (!instr) {
-      return 'Error disassembling ' + codes.map((c) => hex8(c)).join(' ')
+      return { dasm: 'Error disassembling ' + codes.map((c) => hex8(c)).join(' '), nextAddr: addr }
     }
   }
 
@@ -437,10 +439,12 @@ Z80.prototype.execute = function() {
   let opCode
   let offset = 0
   let operation
+  let codes = []
 
   this.debug('execute() started, t =', this.tStates)
   while (true) {
     opCode = this.read8(this.pc + offset)
+    codes.push(opCode)
     this.debug('memory read, t =', this.tStates)
     this.pc++
     this.tStates++
@@ -448,7 +452,13 @@ Z80.prototype.execute = function() {
     this.incr()
 
     operation = current[opCode]
+    if (!operation) {
+      throw 'Instruction ' + codes.map((i) => hex8(i)).join(' ') + ' not declared'
+    }
     if (operation.funcName) {
+      if (!(operation.funcName in this)) {
+        throw 'Instruction ' + codes.map((i) => hex8(i)).join(' ') + ' not implemented'
+      }
       this.pc -= offset
       this.debug('Running ' + operation.funcName + '(), t =', this.tStates)
       this[operation.funcName].call(this)
@@ -457,7 +467,7 @@ Z80.prototype.execute = function() {
     } else {
       if (operation.nextTable) {
         current = operation.nextTable
-        offset = current.offset || 0
+        offset = current.opcodeOffset || 0
         if (offset > 0) {
           this.decr()
         }
@@ -1594,18 +1604,21 @@ Z80.prototype.ld__nn__sp = function() {
 
 
 // LD SP, HL/IX/IY
-Z80.prototype.opcodeTable[0xf9] = { funcName: 'ld_sp_hl', tStates: 6, dasm: 'ld sp, hl', args: [] }
+Z80.prototype.opcodeTable[0xf9] = { funcName: 'ld_sp_hl', dasm: 'ld sp, hl', args: [] }
 Z80.prototype.ld_sp_hl = function() {
+  this.tStates += 2
   this.sp = this.r1.hl
 }
 
-Z80.prototype.opcodeTableDD[0xf9] = { funcName: 'ld_sp_ix', tStates: 6, dasm: 'ld sp, ix', args: [] }
+Z80.prototype.opcodeTableDD[0xf9] = { funcName: 'ld_sp_ix', dasm: 'ld sp, ix', args: [] }
 Z80.prototype.ld_sp_ix = function() {
+  this.tStates += 2
   this.sp = this.r1.ix
 }
 
-Z80.prototype.opcodeTableFD[0xf9] = { funcName: 'ld_sp_iy', tStates: 6, dasm: 'ld sp, iy', args: [] }
+Z80.prototype.opcodeTableFD[0xf9] = { funcName: 'ld_sp_iy', dasm: 'ld sp, iy', args: [] }
 Z80.prototype.ld_sp_iy = function() {
+  this.tStates += 2
   this.sp = this.r1.iy
 }
 
@@ -1822,64 +1835,80 @@ for (let cond in Conditions) {
 }
 
 Z80.prototype.jp_c_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_c)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
 }
 
 Z80.prototype.jp_nc_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_nc)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
 }
 
 Z80.prototype.jp_z_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_z)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
 }
 
 Z80.prototype.jp_nz_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_nz)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
 }
 
 Z80.prototype.jp_pe_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_pe)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
 }
 
 Z80.prototype.jp_po_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_po)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
 }
 
 Z80.prototype.jp_p_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_p)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
 }
 
 Z80.prototype.jp_m_nn = function() {
+  // no matter if the condition is true we spend 6 tstates to read the addr
+  let addr = this.read16(this.pc)
   if (this.condition(c_m)) {
-    this.pc = this.read16(this.pc)
+    this.pc = addr
   } else {
     this.pc += 2
   }
