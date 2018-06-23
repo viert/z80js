@@ -971,6 +971,7 @@ for (let pref in Prefixes) {
 
 // #BEGIN push_[af,bc,de,hl,ix,iy]
 Z80.prototype.$0 = function() {
+  this.tStates++
   this.doPush(this.r1.$1)
 }
 
@@ -1079,6 +1080,7 @@ for (let pref in Prefixes) {
 
 // #BEGIN ex__sp__[hl,ix,iy]
 Z80.prototype.$0 = function() {
+  this.tStates += 3
   let _t = this.r1.$1
   this.r1.$1 = this.read16(this.sp)
   this.write16(this.sp, _t)

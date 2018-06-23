@@ -1749,26 +1749,32 @@ for (let pref in Prefixes) {
 }
 
 Z80.prototype.push_af = function() {
+  this.tStates++
   this.doPush(this.r1.af)
 }
 
 Z80.prototype.push_bc = function() {
+  this.tStates++
   this.doPush(this.r1.bc)
 }
 
 Z80.prototype.push_de = function() {
+  this.tStates++
   this.doPush(this.r1.de)
 }
 
 Z80.prototype.push_hl = function() {
+  this.tStates++
   this.doPush(this.r1.hl)
 }
 
 Z80.prototype.push_ix = function() {
+  this.tStates++
   this.doPush(this.r1.ix)
 }
 
 Z80.prototype.push_iy = function() {
+  this.tStates++
   this.doPush(this.r1.iy)
 }
 
@@ -1893,18 +1899,21 @@ for (let pref in Prefixes) {
 }
 
 Z80.prototype.ex__sp__hl = function() {
+  this.tStates += 3
   let _t = this.r1.hl
   this.r1.hl = this.read16(this.sp)
   this.write16(this.sp, _t)
 }
 
 Z80.prototype.ex__sp__ix = function() {
+  this.tStates += 3
   let _t = this.r1.ix
   this.r1.ix = this.read16(this.sp)
   this.write16(this.sp, _t)
 }
 
 Z80.prototype.ex__sp__iy = function() {
+  this.tStates += 3
   let _t = this.r1.iy
   this.r1.iy = this.read16(this.sp)
   this.write16(this.sp, _t)
