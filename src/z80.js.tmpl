@@ -53,6 +53,16 @@ const c_pe = 0b101
 const c_p = 0b110
 const c_m = 0b111
 
+const hasCarry_adc = true
+const hasCarry_sbc = true
+const hasCarry_add = false
+const hasCarry_sub = false
+
+const isSub_adc = false
+const isSub_sbc = true
+const isSub_add = false
+const isSub_sub = false
+
 const ArgType = {
   Byte: 1,
   Word: 2,
@@ -1148,7 +1158,7 @@ Z80.prototype.lddr = function() {
 }
 
 // CPI
-Z80.prototype.opcodeTableED[0xa1] = { funcName: 'cpi', dasm: 'cpi', args: 0 }
+Z80.prototype.opcodeTableED[0xa1] = { funcName: 'cpi', dasm: 'cpi', args: [] }
 Z80.prototype.cpi = function() {
   this.tStates += 5
   let carry = this.getFlag(f_c)
@@ -1165,7 +1175,7 @@ Z80.prototype.cpi = function() {
 }
 
 // CPIR
-Z80.prototype.opcodeTableED[0xb1] = { funcName: 'cpir', dasm: 'cpir', args: 0 }
+Z80.prototype.opcodeTableED[0xb1] = { funcName: 'cpir', dasm: 'cpir', args: [] }
 Z80.prototype.cpir = function() {
   this.cpi()
   if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
@@ -1175,7 +1185,7 @@ Z80.prototype.cpir = function() {
 }
 
 // CPD
-Z80.prototype.opcodeTableED[0xa9] = { funcName: 'cpd', dasm: 'cpd', args: 0 }
+Z80.prototype.opcodeTableED[0xa9] = { funcName: 'cpd', dasm: 'cpd', args: [] }
 Z80.prototype.cpd = function() {
   this.tStates += 5
   let carry = this.getFlag(f_c)
@@ -1192,7 +1202,7 @@ Z80.prototype.cpd = function() {
 }
 
 // CPDR
-Z80.prototype.opcodeTableED[0xb9] = { funcName: 'cpdr', dasm: 'cpdr', args: 0 }
+Z80.prototype.opcodeTableED[0xb9] = { funcName: 'cpdr', dasm: 'cpdr', args: [] }
 Z80.prototype.cpdr = function() {
   this.cpd()
   if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
@@ -1200,6 +1210,26 @@ Z80.prototype.cpdr = function() {
     this.pc -= 2
   }
 }
+
+// ADD A, r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10000000 | rCode
+  let rName = RegisterMap[rCode]
+  let opFuncName = `add_a_${rName}`
+  let disasmString = `add a, ${rName}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// #BEGIN [adc,sbc,add,sub]_a_[a,b,c,d,e,h,l]
+Z80.prototype.$0 = function() {
+  this.r1.a = this.doArithmetics(this.r1.$2, hasCarry_$1, isSub_$1)
+}
+
+// #END
 
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {

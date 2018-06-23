@@ -53,6 +53,16 @@ const c_pe = 0b101
 const c_p = 0b110
 const c_m = 0b111
 
+const hasCarry_adc = true
+const hasCarry_sbc = true
+const hasCarry_add = false
+const hasCarry_sub = false
+
+const isSub_adc = false
+const isSub_sbc = true
+const isSub_add = false
+const isSub_sub = false
+
 const ArgType = {
   Byte: 1,
   Word: 2,
@@ -1973,7 +1983,7 @@ Z80.prototype.lddr = function() {
 }
 
 // CPI
-Z80.prototype.opcodeTableED[0xa1] = { funcName: 'cpi', dasm: 'cpi', args: 0 }
+Z80.prototype.opcodeTableED[0xa1] = { funcName: 'cpi', dasm: 'cpi', args: [] }
 Z80.prototype.cpi = function() {
   this.tStates += 5
   let carry = this.getFlag(f_c)
@@ -1990,7 +2000,7 @@ Z80.prototype.cpi = function() {
 }
 
 // CPIR
-Z80.prototype.opcodeTableED[0xb1] = { funcName: 'cpir', dasm: 'cpir', args: 0 }
+Z80.prototype.opcodeTableED[0xb1] = { funcName: 'cpir', dasm: 'cpir', args: [] }
 Z80.prototype.cpir = function() {
   this.cpi()
   if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
@@ -2000,7 +2010,7 @@ Z80.prototype.cpir = function() {
 }
 
 // CPD
-Z80.prototype.opcodeTableED[0xa9] = { funcName: 'cpd', dasm: 'cpd', args: 0 }
+Z80.prototype.opcodeTableED[0xa9] = { funcName: 'cpd', dasm: 'cpd', args: [] }
 Z80.prototype.cpd = function() {
   this.tStates += 5
   let carry = this.getFlag(f_c)
@@ -2017,7 +2027,7 @@ Z80.prototype.cpd = function() {
 }
 
 // CPDR
-Z80.prototype.opcodeTableED[0xb9] = { funcName: 'cpdr', dasm: 'cpdr', args: 0 }
+Z80.prototype.opcodeTableED[0xb9] = { funcName: 'cpdr', dasm: 'cpdr', args: [] }
 Z80.prototype.cpdr = function() {
   this.cpd()
   if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
@@ -2025,6 +2035,132 @@ Z80.prototype.cpdr = function() {
     this.pc -= 2
   }
 }
+
+// ADD A, r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10000000 | rCode
+  let rName = RegisterMap[rCode]
+  let opFuncName = `add_a_${rName}`
+  let disasmString = `add a, ${rName}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+Z80.prototype.adc_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.sbc_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.add_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.sub_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_sub, isSub_sub)
+}
+
 
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
