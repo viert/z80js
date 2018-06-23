@@ -1,5 +1,5 @@
 const ParityBit = require('./parity')
-const { unot8, unsigned8, hex16, hex8, usum8 } = require('./utils')
+const { unot8, unsigned8, hex16, hex8, usum8, unsigned16 } = require('./utils')
 
 const RegisterMap = {
   0b111: 'a',
@@ -52,6 +52,16 @@ const c_po = 0b100
 const c_pe = 0b101
 const c_p = 0b110
 const c_m = 0b111
+
+const hasCarry_adc = true
+const hasCarry_sbc = true
+const hasCarry_add = false
+const hasCarry_sub = false
+
+const isSub_adc = false
+const isSub_sbc = true
+const isSub_add = false
+const isSub_sub = false
 
 const ArgType = {
   Byte: 1,
@@ -108,8 +118,8 @@ const Z80 = function(memory, debug) {
     return this.read8(addr) | (this.read8(addr + 1) << 8)
   }
   this.write16 = (addr, value) => {
-    let high = (val & 0xff00) >> 8
-    let low = val & 0xff
+    let high = (value & 0xff00) >> 8
+    let low = value & 0xff
     this.write8(addr, low)
     this.write8(addr + 1, high)
   }
@@ -342,12 +352,9 @@ Z80.prototype.doPush = function(value) {
 }
 
 Z80.prototype.doPop = function(operandName) {
-  if (operandName in this.r1) {
-    this.r1[operandName] = this.read16(this.sp)
-  } else {
-    this[operandName] = this.read16(this.sp)
-  }
+  let value = this.read16(this.sp)
   this.sp += 2
+  return value
 }
 
 // R register
@@ -357,6 +364,49 @@ Z80.prototype.incr = function() {
 
 Z80.prototype.decr = function() {
   this.r = (this.r & 0x80) | ((this.r - 1) & 0x7f)
+}
+
+// Arithmetics
+Z80.prototype.doArithmetics = function(value, withCarry, isSub) {
+  let res
+  if (isSub) {
+    this.setFlag(f_n)
+    this.valFlag(f_h, (((this.r1.a & 0x0f) - (value & 0x0f)) & 0x10) !== 0)
+    res = unsigned16(this.r1.a - value)
+    if (withCarry && this.getFlag(f_c)) {
+      res--
+    }
+  } else {
+    this.resFlag(f_n)
+    this.valFlag(f_h, (((this.r1.a & 0x0f) + (value & 0x0f)) & 0x10) !== 0)
+    res = unsigned16(this.r1.a + value)
+    if (withCarry && this.getFlag(f_c)) {
+      res++
+    }
+  }
+  this.valFlag(f_s, (res & 0x80) !== 0)
+  this.valFlag(f_c, (res & 0x100) !== 0)
+  this.valFlag(f_z, (res & 0xff) === 0)
+
+  let minuedSign = this.r1.a & 0x80
+  let subtrahendSign = value & 0x80
+  let resultSign = res & 0x80
+  let overflow
+  if (isSub) {
+    overflow = minuedSign !== subtrahendSign && resultSign !== minuedSign
+  } else {
+    overflow = minuedSign === subtrahendSign && resultSign !== minuedSign
+  }
+  this.valFlag(f_pv, overflow)
+  this.adjustFlags(unsigned8(res & 0xff))
+  return res & 0xff
+}
+
+Z80.prototype.doCPHL = function() {
+  let val = this.read8(this.r1.hl)
+  let result = this.doArithmetics(val, false, true)
+  this.adjustFlags(val)
+  return result
 }
 
 // Creating opcode tables
@@ -375,8 +425,12 @@ Z80.prototype.opcodeTable[0xcb] = { nextTable: Z80.prototype.opcodeTableCB }
 Z80.prototype.opcodeTable[0xed] = { nextTable: Z80.prototype.opcodeTableED }
 Z80.prototype.opcodeTable[0xdd] = { nextTable: Z80.prototype.opcodeTableDD }
 Z80.prototype.opcodeTable[0xfd] = { nextTable: Z80.prototype.opcodeTableFD }
-Z80.prototype.opcodeTableDD[0xcb] = { nextTable: Z80.prototype.opcodeTableDDCB }
-Z80.prototype.opcodeTableFD[0xcb] = { nextTable: Z80.prototype.opcodeTableFDCB }
+Z80.prototype.opcodeTableDD[0xcb] = {
+  nextTable: Z80.prototype.opcodeTableDDCB
+}
+Z80.prototype.opcodeTableFD[0xcb] = {
+  nextTable: Z80.prototype.opcodeTableFDCB
+}
 
 Z80.prototype.disassemble = function(addr) {
   let codes = []
@@ -1059,7 +1113,12 @@ for (let dst in RegisterMap) {
   let opCode = 0b01000110 | (dst << 3)
   let opFuncName = `ld_${RegisterMap[dst]}__hl_`
   let disasmString = `ld ${RegisterMap[dst]}, (hl)`
-  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, dasm: disasmString, args: [] }
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    tStates: 7,
+    dasm: disasmString,
+    args: []
+  }
 }
 
 Z80.prototype.lda__hl_ = function() {
@@ -1096,7 +1155,12 @@ for (let src in RegisterMap) {
   let opCode = 0b01110000 | src
   let opFuncName = `ld__hl__${RegisterMap[src]}`
   let disasmString = `ld (hl), ${RegisterMap[src]}`
-  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, tStates: 7, dasm: disasmString, args: [] }
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    tStates: 7,
+    dasm: disasmString,
+    args: []
+  }
 }
 
 Z80.prototype.ld__hl__a = function() {
@@ -1140,9 +1204,19 @@ Z80.prototype.ld__hl__n = function() {
 }
 
 // LD A, (BC)
-Z80.prototype.opcodeTable[0b00001010] = { funcName: 'ld_a__bc_', tStates: 7, dasm: 'ld a, (bc)', args: [] }
+Z80.prototype.opcodeTable[0b00001010] = {
+  funcName: 'ld_a__bc_',
+  tStates: 7,
+  dasm: 'ld a, (bc)',
+  args: []
+}
 // LD A, (DE)
-Z80.prototype.opcodeTable[0b00011010] = { funcName: 'ld_a__de_', tStates: 7, dasm: 'ld a, (de)', args: [] }
+Z80.prototype.opcodeTable[0b00011010] = {
+  funcName: 'ld_a__de_',
+  tStates: 7,
+  dasm: 'ld a, (de)',
+  args: []
+}
 
 Z80.prototype.ld_a__bc_ = function() {
   this.r1.a = this.read8(this.r1.bc)
@@ -1154,9 +1228,19 @@ Z80.prototype.ld_a__de_ = function() {
 
 
 // LD (BC), A
-Z80.prototype.opcodeTable[0b00000010] = { funcName: 'ld__bc__a', tStates: 7, dasm: 'ld (bc), a', args: [] }
+Z80.prototype.opcodeTable[0b00000010] = {
+  funcName: 'ld__bc__a',
+  tStates: 7,
+  dasm: 'ld (bc), a',
+  args: []
+}
 // LD (DE), A
-Z80.prototype.opcodeTable[0b00010010] = { funcName: 'ld__de__a', tStates: 7, dasm: 'ld (de), a', args: [] }
+Z80.prototype.opcodeTable[0b00010010] = {
+  funcName: 'ld__de__a',
+  tStates: 7,
+  dasm: 'ld (de), a',
+  args: []
+}
 
 Z80.prototype.ld__bc__a = function() {
   this.write8(this.r1.bc, this.r1.a)
@@ -1192,9 +1276,19 @@ Z80.prototype.ld__nn__a = function() {
 }
 
 // LD A, I
-Z80.prototype.opcodeTableED[0b01010111] = { funcName: 'ld_a_i', tStates: 9, dasm: 'ld a, i', args: [] }
+Z80.prototype.opcodeTableED[0b01010111] = {
+  funcName: 'ld_a_i',
+  tStates: 9,
+  dasm: 'ld a, i',
+  args: []
+}
 // LD A, R
-Z80.prototype.opcodeTableED[0b01011111] = { funcName: 'ld_a_r', tStates: 9, dasm: 'ld a, r', args: [] }
+Z80.prototype.opcodeTableED[0b01011111] = {
+  funcName: 'ld_a_r',
+  tStates: 9,
+  dasm: 'ld a, r',
+  args: []
+}
 
 Z80.prototype.ld_a_i = function() {
   this.tStates++
@@ -1218,9 +1312,19 @@ Z80.prototype.ld_a_r = function() {
 
 
 // LD I, A
-Z80.prototype.opcodeTableED[0b01000111] = { funcName: 'ld_i_a', tStates: 9, dasm: 'ld i, a', args: [] }
+Z80.prototype.opcodeTableED[0b01000111] = {
+  funcName: 'ld_i_a',
+  tStates: 9,
+  dasm: 'ld i, a',
+  args: []
+}
 // LD R, A
-Z80.prototype.opcodeTableED[0b01001111] = { funcName: 'ld_r_a', tStates: 9, dasm: 'ld r, a', args: [] }
+Z80.prototype.opcodeTableED[0b01001111] = {
+  funcName: 'ld_r_a',
+  tStates: 9,
+  dasm: 'ld r, a',
+  args: []
+}
 
 Z80.prototype.ld_i_a = function() {
   this.tStates++
@@ -1692,27 +1796,27 @@ for (let pref in Prefixes) {
 }
 
 Z80.prototype.pop_af = function() {
-  this.doPop('af')
+  this.r1.af = this.doPop()
 }
 
 Z80.prototype.pop_bc = function() {
-  this.doPop('bc')
+  this.r1.bc = this.doPop()
 }
 
 Z80.prototype.pop_de = function() {
-  this.doPop('de')
+  this.r1.de = this.doPop()
 }
 
 Z80.prototype.pop_hl = function() {
-  this.doPop('hl')
+  this.r1.hl = this.doPop()
 }
 
 Z80.prototype.pop_ix = function() {
-  this.doPop('ix')
+  this.r1.ix = this.doPop()
 }
 
 Z80.prototype.pop_iy = function() {
-  this.doPop('iy')
+  this.r1.iy = this.doPop()
 }
 
 
@@ -1728,7 +1832,12 @@ Z80.prototype.nop = function() {
 }
 
 // EX DE, HL
-Z80.prototype.opcodeTable[0xeb] = { funcName: 'ex_de_hl', dasm: 'ex de, hl', args: [], tStates: 4 }
+Z80.prototype.opcodeTable[0xeb] = {
+  funcName: 'ex_de_hl',
+  dasm: 'ex de, hl',
+  args: [],
+  tStates: 4
+}
 Z80.prototype.ex_de_hl = function() {
   let _t = this.r1.de
   this.r1.de = this.r1.hl
@@ -1736,7 +1845,12 @@ Z80.prototype.ex_de_hl = function() {
 }
 
 // EX AF, AF'
-Z80.prototype.opcodeTable[0x08] = { funcName: 'ex_af_af_', dasm: "ex af, af'", args: [], tStates: 4 }
+Z80.prototype.opcodeTable[0x08] = {
+  funcName: 'ex_af_af_',
+  dasm: "ex af, af'",
+  args: [],
+  tStates: 4
+}
 Z80.prototype.ex_af_af_ = function() {
   let _t = this.r1.af
   this.r1.af = this.r2.af
@@ -1744,7 +1858,12 @@ Z80.prototype.ex_af_af_ = function() {
 }
 
 // EXX
-Z80.prototype.opcodeTable[0xd9] = { funcName: 'exx', dasm: 'exx', args: [], tStates: 4 }
+Z80.prototype.opcodeTable[0xd9] = {
+  funcName: 'exx',
+  dasm: 'exx',
+  args: [],
+  tStates: 4
+}
 Z80.prototype.exx = function() {
   let _t = this.r1.bc
   this.r1.bc = this.r2.bc
@@ -1758,7 +1877,12 @@ Z80.prototype.exx = function() {
 }
 
 // EX (SP), HL/IX/IY
-Z80.prototype.opcodeTable[0xe3] = { funcName: 'ex__sp__hl', dasm: 'ex (sp), hl', args: [], tStates: 19 }
+Z80.prototype.opcodeTable[0xe3] = {
+  funcName: 'ex__sp__hl',
+  dasm: 'ex (sp), hl',
+  args: [],
+  tStates: 19
+}
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xe3] = {
     funcName: `ex__sp__${pref}`,
@@ -1788,7 +1912,12 @@ Z80.prototype.ex__sp__iy = function() {
 
 
 // LDI
-Z80.prototype.opcodeTableED[0xa0] = { funcName: 'ldi', dasm: 'ldi', args: [], tStates: 16 }
+Z80.prototype.opcodeTableED[0xa0] = {
+  funcName: 'ldi',
+  dasm: 'ldi',
+  args: [],
+  tStates: 16
+}
 Z80.prototype.ldi = function() {
   this.tStates += 2
   let val = this.read8(this.r1.hl++)
@@ -1802,7 +1931,11 @@ Z80.prototype.ldi = function() {
 }
 
 // LDIR
-Z80.prototype.opcodeTableED[0xb0] = { funcName: 'ldir', dasm: 'ldir', args: [], tStates: 16 }
+Z80.prototype.opcodeTableED[0xb0] = {
+  funcName: 'ldir',
+  dasm: 'ldir',
+  args: []
+}
 Z80.prototype.ldir = function() {
   this.ldi()
   if (this.r1.bc !== 0) {
@@ -1810,6 +1943,214 @@ Z80.prototype.ldir = function() {
     this.pc -= 2
   }
 }
+
+// LDD
+Z80.prototype.opcodeTableED[0xa8] = { funcName: 'ldd', dasm: 'ldd', args: [] }
+Z80.prototype.ldd = function() {
+  this.tStates += 2
+  let val = this.read8(this.r1.hl--)
+  this.write8(this.r1.de--, val)
+  this.r1.bc--
+  let sum = usum8(this.r1.a, val)
+  this.valFlag(f_5, (sum & 0x02) !== 0)
+  this.valFlag(f_3, (sum & f_3) !== 0)
+  this.resFlag(f_h | f_n)
+  this.valFlag(f_pv, this.r1.bc !== 0)
+}
+
+// LDDR
+Z80.prototype.opcodeTableED[0xb8] = {
+  funcName: 'lddr',
+  dasm: 'lddr',
+  args: []
+}
+Z80.prototype.lddr = function() {
+  this.ldd()
+  if (this.r1.bc !== 0) {
+    this.tStates += 5
+    this.pc -= 2
+  }
+}
+
+// CPI
+Z80.prototype.opcodeTableED[0xa1] = { funcName: 'cpi', dasm: 'cpi', args: [] }
+Z80.prototype.cpi = function() {
+  this.tStates += 5
+  let carry = this.getFlag(f_c)
+  let value = this.doCPHL()
+  if (this.getFlag(f_h)) {
+    value--
+  }
+  this.r1.hl++
+  this.r1.bc--
+  this.valFlag(f_pv, this.r1.bc !== 0)
+  this.valFlag(f_c, carry)
+  this.valFlag(f_5, (value & (1 << 2)) !== 0)
+  this.valFlag(f_3, (value & (1 << 3)) !== 0)
+}
+
+// CPIR
+Z80.prototype.opcodeTableED[0xb1] = { funcName: 'cpir', dasm: 'cpir', args: [] }
+Z80.prototype.cpir = function() {
+  this.cpi()
+  if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
+    this.tStates += 5
+    this.pc -= 2
+  }
+}
+
+// CPD
+Z80.prototype.opcodeTableED[0xa9] = { funcName: 'cpd', dasm: 'cpd', args: [] }
+Z80.prototype.cpd = function() {
+  this.tStates += 5
+  let carry = this.getFlag(f_c)
+  let value = this.doCPHL()
+  if (this.getFlag(f_h)) {
+    value--
+  }
+  this.r1.hl--
+  this.r1.bc--
+  this.valFlag(f_pv, this.r1.bc !== 0)
+  this.valFlag(f_c, carry)
+  this.valFlag(f_5, (value & (1 << 1)) !== 0)
+  this.valFlag(f_3, (value & (1 << 3)) !== 0)
+}
+
+// CPDR
+Z80.prototype.opcodeTableED[0xb9] = { funcName: 'cpdr', dasm: 'cpdr', args: [] }
+Z80.prototype.cpdr = function() {
+  this.cpd()
+  if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
+    this.tStates += 5
+    this.pc -= 2
+  }
+}
+
+// ADD A, r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10000000 | rCode
+  let rName = RegisterMap[rCode]
+  let opFuncName = `add_a_${rName}`
+  let disasmString = `add a, ${rName}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+Z80.prototype.adc_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.sbc_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.add_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.sub_a_a = function() {
+  this.r1.a = this.doArithmetics(this.r1.a, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_b = function() {
+  this.r1.a = this.doArithmetics(this.r1.b, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_c = function() {
+  this.r1.a = this.doArithmetics(this.r1.c, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_d = function() {
+  this.r1.a = this.doArithmetics(this.r1.d, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_e = function() {
+  this.r1.a = this.doArithmetics(this.r1.e, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_h = function() {
+  this.r1.a = this.doArithmetics(this.r1.h, hasCarry_sub, isSub_sub)
+}
+
+Z80.prototype.sub_a_l = function() {
+  this.r1.a = this.doArithmetics(this.r1.l, hasCarry_sub, isSub_sub)
+}
+
 
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
