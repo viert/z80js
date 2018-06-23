@@ -2302,6 +2302,36 @@ for (let pref in Prefixes) {
   }
 }
 
+// ADC a, (hl/ix+d/iy+d)
+Z80.prototype.opcodeTable[0x8e] = { funcName: 'adc_a__hl_', dasm: 'adc a, (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x8e] = {
+    funcName: `adc_a__${pref}_d_`,
+    dasm: `adc a, (${pref}{0})`,
+    args: [ ArgType.Offset ]
+  }
+}
+
+// SUB a, (hl/ix+d/iy+d)
+Z80.prototype.opcodeTable[0x96] = { funcName: 'sub_a__hl_', dasm: 'sub (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x96] = {
+    funcName: `sub_a__${pref}_d_`,
+    dasm: `sub (${pref}{0})`,
+    args: [ ArgType.Offset ]
+  }
+}
+
+// SBC a, (hl/ix+d/iy+d)
+Z80.prototype.opcodeTable[0x9e] = { funcName: 'sbc_a__hl_', dasm: 'sbc a, (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x9e] = {
+    funcName: `sbc_a__${pref}_d_`,
+    dasm: `sbc a, (${pref}{0})`,
+    args: [ ArgType.Offset ]
+  }
+}
+
 Z80.prototype.adc_a__hl_ = function() {
   this.r1.a = this.doArithmetics(this.read8(this.r1.hl), hasCarry_adc, isSub_adc)
 }
