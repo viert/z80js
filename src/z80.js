@@ -61,7 +61,7 @@ const hasCarry_sub = false
 const isSub_adc = false
 const isSub_sbc = true
 const isSub_add = false
-const isSub_sub = false
+const isSub_sub = true
 
 const ArgType = {
   Byte: 1,
@@ -368,6 +368,7 @@ Z80.prototype.decr = function() {
 
 // Arithmetics
 Z80.prototype.doArithmetics = function(value, withCarry, isSub) {
+  this.debug(`doArithmetics val=${value}, carry=${withCarry}, isSub=${isSub}`)
   let res
   if (isSub) {
     this.setFlag(f_n)
@@ -2041,6 +2042,45 @@ for (let rCode in RegisterMap) {
   let rName = RegisterMap[rCode]
   let opFuncName = `add_a_${rName}`
   let disasmString = `add a, ${rName}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// ADC A, r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10001000 | rCode
+  let rName = RegisterMap[rCode]
+  let opFuncName = `adc_a_${rName}`
+  let disasmString = `adc a, ${rName}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// SUB A, r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10010000 | rCode
+  let rName = RegisterMap[rCode]
+  let opFuncName = `sub_a_${rName}`
+  let disasmString = `sub ${rName}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// SBC A, r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10011000 | rCode
+  let rName = RegisterMap[rCode]
+  let opFuncName = `sbc_a_${rName}`
+  let disasmString = `sbc a, ${rName}`
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     dasm: disasmString,
