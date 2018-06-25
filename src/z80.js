@@ -2627,6 +2627,30 @@ for (let rCode in Register16Map) {
   }
 }
 
+// ADC ---//----
+for (let rCode in Register16Map) {
+  let opCode = 0b01001010 | (rCode << 4)
+  let opFuncName = `adc_hl_${Register16Map[rCode]}`
+  let disasmString = `adc hl, ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// SBC ---//----
+for (let rCode in Register16Map) {
+  let opCode = 0b01000010 | (rCode << 4)
+  let opFuncName = `sbc_hl_${Register16Map[rCode]}`
+  let disasmString = `sbc hl, ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
 Z80.prototype.add_hl_hl = function() {
   this.tStates += 7
   this.r1.hl = this.doAddWord(this.r1.hl, this.r1.hl, hasCarry_add, isSub_add)
@@ -3262,6 +3286,97 @@ Z80.prototype.dec__iy_d_ = function() {
   this.write8(addr, this.doIncDec(value, isDec_dec))
 }
 
+
+// INC ss
+for (let rCode in Register16Map) {
+  let opCode = 0b00000011 | (rCode << 4)
+  let opFuncName = `inc_${Register16Map[rCode]}`
+  let disasmString = `inc ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+for (let pref in Prefixes) {
+  let opFuncName = `inc_${pref}`
+  let disasmString = `inc ${pref}`
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x23] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// DEC ss
+for (let rCode in Register16Map) {
+  let opCode = 0b00001011 | (rCode << 4)
+  let opFuncName = `dec_${Register16Map[rCode]}`
+  let disasmString = `dec ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+for (let pref in Prefixes) {
+  let opFuncName = `dec_${pref}`
+  let disasmString = `dec ${pref}`
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2b] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+Z80.prototype.inc_hl = function() {
+  this.tStates += 2
+  this.r1.hl++
+}
+Z80.prototype.inc_sp = function() {
+  this.tStates += 2
+  this.r1.sp++
+}
+Z80.prototype.inc_de = function() {
+  this.tStates += 2
+  this.r1.de++
+}
+Z80.prototype.inc_bc = function() {
+  this.tStates += 2
+  this.r1.bc++
+}
+Z80.prototype.inc_ix = function() {
+  this.tStates += 2
+  this.r1.ix++
+}
+Z80.prototype.inc_iy = function() {
+  this.tStates += 2
+  this.r1.iy++
+}
+Z80.prototype.dec_hl = function() {
+  this.tStates += 2
+  this.r1.hl--
+}
+Z80.prototype.dec_sp = function() {
+  this.tStates += 2
+  this.r1.sp--
+}
+Z80.prototype.dec_de = function() {
+  this.tStates += 2
+  this.r1.de--
+}
+Z80.prototype.dec_bc = function() {
+  this.tStates += 2
+  this.r1.bc--
+}
+Z80.prototype.dec_ix = function() {
+  this.tStates += 2
+  this.r1.ix--
+}
+Z80.prototype.dec_iy = function() {
+  this.tStates += 2
+  this.r1.iy--
+}
 
 // DAA
 Z80.prototype.opcodeTable[0x27] = { funcName: 'daa', dasm: 'daa', args: [] }

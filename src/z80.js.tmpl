@@ -1565,6 +1565,30 @@ for (let rCode in Register16Map) {
   }
 }
 
+// ADC ---//----
+for (let rCode in Register16Map) {
+  let opCode = 0b01001010 | (rCode << 4)
+  let opFuncName = `adc_hl_${Register16Map[rCode]}`
+  let disasmString = `adc hl, ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// SBC ---//----
+for (let rCode in Register16Map) {
+  let opCode = 0b01000010 | (rCode << 4)
+  let opFuncName = `sbc_hl_${Register16Map[rCode]}`
+  let disasmString = `sbc hl, ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
 // #BEGIN [add,adc,sbc]_hl_[hl,bc,de,sp]
 Z80.prototype.$0 = function() {
   this.tStates += 7
@@ -1775,6 +1799,61 @@ Z80.prototype.$0 = function() {
   this.write8(addr, this.doIncDec(value, isDec_$1))
 }
 
+// #END
+
+// INC ss
+for (let rCode in Register16Map) {
+  let opCode = 0b00000011 | (rCode << 4)
+  let opFuncName = `inc_${Register16Map[rCode]}`
+  let disasmString = `inc ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+for (let pref in Prefixes) {
+  let opFuncName = `inc_${pref}`
+  let disasmString = `inc ${pref}`
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x23] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// DEC ss
+for (let rCode in Register16Map) {
+  let opCode = 0b00001011 | (rCode << 4)
+  let opFuncName = `dec_${Register16Map[rCode]}`
+  let disasmString = `dec ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+for (let pref in Prefixes) {
+  let opFuncName = `dec_${pref}`
+  let disasmString = `dec ${pref}`
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2b] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// #BEGIN inc_[hl,sp,de,bc,ix,iy]
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  this.r1.$1++
+}
+// #END
+// #BEGIN dec_[hl,sp,de,bc,ix,iy]
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  this.r1.$1--
+}
 // #END
 
 // DAA
