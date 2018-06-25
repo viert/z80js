@@ -2136,6 +2136,34 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+// RET
+Z80.prototype.opcodeTable[0xc9] = { funcName: 'ret', dasm: 'ret', args: [] }
+Z80.prototype.ret = function() {
+  this.pc = this.doPop()
+}
+
+// RET cc
+for (let cond in Conditions) {
+  let opCode = 0b11000000 | (Conditions[cond] << 3)
+  let opFuncName = `ret_${cond}`
+  let disasmString = `ret ${cond}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: [ArgType.Word]
+  }
+}
+
+// #BEGIN ret_[c,m,nc,nz,p,pe,po,z]
+Z80.prototype.$0 = function() {
+  this.tStates++
+  if (this.condition(c_$1)) {
+    this.ret()
+  }
+}
+
+// #END
+
 // RST p
 for (let p = 0; p < 8; p++) {
   let vector = p << 3

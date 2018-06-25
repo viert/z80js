@@ -3840,6 +3840,81 @@ Z80.prototype.call_z_nn = function() {
 }
 
 
+// RET
+Z80.prototype.opcodeTable[0xc9] = { funcName: 'ret', dasm: 'ret', args: [] }
+Z80.prototype.ret = function() {
+  this.pc = this.doPop()
+}
+
+// RET cc
+for (let cond in Conditions) {
+  let opCode = 0b11000000 | (Conditions[cond] << 3)
+  let opFuncName = `ret_${cond}`
+  let disasmString = `ret ${cond}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: [ArgType.Word]
+  }
+}
+
+Z80.prototype.ret_c = function() {
+  this.tStates++
+  if (this.condition(c_c)) {
+    this.ret()
+  }
+}
+
+Z80.prototype.ret_m = function() {
+  this.tStates++
+  if (this.condition(c_m)) {
+    this.ret()
+  }
+}
+
+Z80.prototype.ret_nc = function() {
+  this.tStates++
+  if (this.condition(c_nc)) {
+    this.ret()
+  }
+}
+
+Z80.prototype.ret_nz = function() {
+  this.tStates++
+  if (this.condition(c_nz)) {
+    this.ret()
+  }
+}
+
+Z80.prototype.ret_p = function() {
+  this.tStates++
+  if (this.condition(c_p)) {
+    this.ret()
+  }
+}
+
+Z80.prototype.ret_pe = function() {
+  this.tStates++
+  if (this.condition(c_pe)) {
+    this.ret()
+  }
+}
+
+Z80.prototype.ret_po = function() {
+  this.tStates++
+  if (this.condition(c_po)) {
+    this.ret()
+  }
+}
+
+Z80.prototype.ret_z = function() {
+  this.tStates++
+  if (this.condition(c_z)) {
+    this.ret()
+  }
+}
+
+
 // RST p
 for (let p = 0; p < 8; p++) {
   let vector = p << 3
