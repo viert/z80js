@@ -1712,6 +1712,30 @@ Z80.prototype.cpl = function() {
   this.adjustFlags(this.r1.a)
 }
 
+// NEG
+Z80.prototype.opcodeTableED[0x44] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.neg = function() {
+  let _t = this.r1.a
+  this.r1.a = 0
+  this.r1.a = this.doArithmetics(_t, false, true)
+  this.setFlag(f_n)
+}
+
+// CCF
+Z80.prototype.opcodeTable[0x3f] = { funcName: 'ccf', dasm: 'ccf', args: [] }
+Z80.prototype.ccf = function() {
+  this.valFlag(f_c, !this.getFlag(f_c))
+  this.resFlag(f_n)
+  this.adjustFlags(this.r1.a)
+}
+// SCF
+Z80.prototype.opcodeTable[0x37] = { funcName: 'scf', dasm: 'scf', args: [] }
+Z80.prototype.scf = function() {
+  this.setFlag(f_c)
+  this.resFlag(f_n | f_h)
+  this.adjustFlags(this.r1.a)
+}
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
