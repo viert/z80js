@@ -35,6 +35,8 @@ const Prefixes = {
   iy: 0xfd
 }
 
+// S Z 5 H 3 PV N C
+
 const f_c = 1
 const f_n = 2
 const f_pv = 4
@@ -62,6 +64,9 @@ const isSub_adc = false
 const isSub_sbc = true
 const isSub_add = false
 const isSub_sub = true
+
+const isDec_inc = false
+const isDec_dec = true
 
 const ArgType = {
   Byte: 1,
@@ -354,6 +359,31 @@ Z80.prototype.doPush = function(value) {
 Z80.prototype.doPop = function(operandName) {
   let value = this.read16(this.sp)
   this.sp += 2
+  return value
+}
+
+Z80.prototype.doIncDec = function(value, isDec) {
+  this.debug(`doIncDec(${value}, ${isDec})`)
+  if (isDec) {
+    this.valFlag(f_pv, (value & 0x80) !== 0 && ((value - 1) & 0x80) === 0)
+    this.debug(`f_pv set to ${this.getFlag(f_pv)}`)
+    value = unsigned8(value - 1)
+    this.valFlag(f_h, (value & 0x0f) === 0x0f)
+    this.debug(`f_h set to ${this.getFlag(f_h)}`)
+  } else {
+    this.valFlag(f_pv, (value & 0x80) === 0 && ((value + 1) & 0x80) !== 0)
+    this.debug(`f_pv set to ${this.getFlag(f_pv)}`)
+    value = unsigned8(value + 1)
+    this.valFlag(f_h, (value & 0x0f) === 0)
+    this.debug(`f_h set to ${this.getFlag(f_h)}`)
+  }
+  this.debug(`value was set to ${value}`)
+  this.valFlag(f_s, (value & 0x80) !== 0)
+  this.valFlag(f_z, value === 0)
+  this.valFlag(f_n, isDec)
+  this.debug(`flags before adjusting: ${this.r1.f}`)
+  this.adjustFlags(value)
+  this.debug(`flags after adjusting: ${this.r1.f}`)
   return value
 }
 
@@ -2889,6 +2919,175 @@ Z80.prototype.cp_n = function() {
   this.adjustFlags(value)
 }
 
+// INC r
+for (let rCode in RegisterMap) {
+  let opCode = 0b00000100 | (rCode << 3)
+  let opFuncName = `inc_${RegisterMap[rCode]}`
+  let disasmString = `inc ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+// INC (HL/IX+d/IY+d)
+Z80.prototype.opcodeTable[0x34] = { funcName: 'inc__hl_', dasm: 'inc (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x34] = {
+    funcName: `inc__${pref}_d_`,
+    dasm: `inc ${pref}{0}`,
+    args: [ArgType.Offset]
+  }
+}
+
+// DEC r
+for (let rCode in RegisterMap) {
+  let opCode = 0b00000101 | (rCode << 3)
+  let opFuncName = `dec_${RegisterMap[rCode]}`
+  let disasmString = `dec ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+// DEC (HL/IX+d/IY+d)
+Z80.prototype.opcodeTable[0x35] = { funcName: 'dec__hl_', dasm: 'dec (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x35] = {
+    funcName: `dec__${pref}_d_`,
+    dasm: `dec ${pref}{0}`,
+    args: [ArgType.Offset]
+  }
+}
+
+Z80.prototype.inc_a = function() {
+  this.r1.a = this.doIncDec(this.r1.a, isDec_inc)
+}
+
+Z80.prototype.inc_b = function() {
+  this.r1.b = this.doIncDec(this.r1.b, isDec_inc)
+}
+
+Z80.prototype.inc_c = function() {
+  this.r1.c = this.doIncDec(this.r1.c, isDec_inc)
+}
+
+Z80.prototype.inc_d = function() {
+  this.r1.d = this.doIncDec(this.r1.d, isDec_inc)
+}
+
+Z80.prototype.inc_e = function() {
+  this.r1.e = this.doIncDec(this.r1.e, isDec_inc)
+}
+
+Z80.prototype.inc_h = function() {
+  this.r1.h = this.doIncDec(this.r1.h, isDec_inc)
+}
+
+Z80.prototype.inc_l = function() {
+  this.r1.l = this.doIncDec(this.r1.l, isDec_inc)
+}
+
+Z80.prototype.inc_ixh = function() {
+  this.r1.ixh = this.doIncDec(this.r1.ixh, isDec_inc)
+}
+
+Z80.prototype.inc_ixl = function() {
+  this.r1.ixl = this.doIncDec(this.r1.ixl, isDec_inc)
+}
+
+Z80.prototype.inc_iyh = function() {
+  this.r1.iyh = this.doIncDec(this.r1.iyh, isDec_inc)
+}
+
+Z80.prototype.inc_iyl = function() {
+  this.r1.iyl = this.doIncDec(this.r1.iyl, isDec_inc)
+}
+
+Z80.prototype.dec_a = function() {
+  this.r1.a = this.doIncDec(this.r1.a, isDec_dec)
+}
+
+Z80.prototype.dec_b = function() {
+  this.r1.b = this.doIncDec(this.r1.b, isDec_dec)
+}
+
+Z80.prototype.dec_c = function() {
+  this.r1.c = this.doIncDec(this.r1.c, isDec_dec)
+}
+
+Z80.prototype.dec_d = function() {
+  this.r1.d = this.doIncDec(this.r1.d, isDec_dec)
+}
+
+Z80.prototype.dec_e = function() {
+  this.r1.e = this.doIncDec(this.r1.e, isDec_dec)
+}
+
+Z80.prototype.dec_h = function() {
+  this.r1.h = this.doIncDec(this.r1.h, isDec_dec)
+}
+
+Z80.prototype.dec_l = function() {
+  this.r1.l = this.doIncDec(this.r1.l, isDec_dec)
+}
+
+Z80.prototype.dec_ixh = function() {
+  this.r1.ixh = this.doIncDec(this.r1.ixh, isDec_dec)
+}
+
+Z80.prototype.dec_ixl = function() {
+  this.r1.ixl = this.doIncDec(this.r1.ixl, isDec_dec)
+}
+
+Z80.prototype.dec_iyh = function() {
+  this.r1.iyh = this.doIncDec(this.r1.iyh, isDec_dec)
+}
+
+Z80.prototype.dec_iyl = function() {
+  this.r1.iyl = this.doIncDec(this.r1.iyl, isDec_dec)
+}
+
+
+Z80.prototype.inc__hl_ = function() {
+  this.tStates++
+  let value = this.read8(this.r1.hl)
+  this.write8(this.r1.hl, this.doIncDec(value, isDec_inc))
+}
+
+Z80.prototype.dec__hl_ = function() {
+  this.tStates++
+  let value = this.read8(this.r1.hl)
+  this.write8(this.r1.hl, this.doIncDec(value, isDec_dec))
+}
+
+
+Z80.prototype.inc__ix_d_ = function() {
+  this.tStates += 6
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  let value = this.read8(addr)
+  this.write8(addr, this.doIncDec(value, isDec_inc))
+}
+
+Z80.prototype.inc__iy_d_ = function() {
+  this.tStates += 6
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  let value = this.read8(addr)
+  this.write8(addr, this.doIncDec(value, isDec_inc))
+}
+
+Z80.prototype.dec__ix_d_ = function() {
+  this.tStates += 6
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  let value = this.read8(addr)
+  this.write8(addr, this.doIncDec(value, isDec_dec))
+}
+
+Z80.prototype.dec__iy_d_ = function() {
+  this.tStates += 6
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  let value = this.read8(addr)
+  this.write8(addr, this.doIncDec(value, isDec_dec))
+}
+
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
@@ -3006,44 +3205,52 @@ for (let p = 0; p < 8; p++) {
   }
 }
 
-// Z80.prototype.rst_00h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x00
-// }
+Z80.prototype.rst_00h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x00
+}
 
-// Z80.prototype.rst_08h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x08
-// }
+Z80.prototype.rst_08h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x08
+}
 
-// Z80.prototype.rst_10h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x10
-// }
+Z80.prototype.rst_10h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x10
+}
 
-// Z80.prototype.rst_18h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x18
-// }
+Z80.prototype.rst_18h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x18
+}
 
-// Z80.prototype.rst_20h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x20
-// }
+Z80.prototype.rst_20h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x20
+}
 
-// Z80.prototype.rst_28h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x28
-// }
+Z80.prototype.rst_28h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x28
+}
 
-// Z80.prototype.rst_30h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x30
-// }
+Z80.prototype.rst_30h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x30
+}
 
-// Z80.prototype.rst_38h = function() {
-//   this.doPush(this.pc)
-//   this.pc = 0x38
-// }
+Z80.prototype.rst_38h = function() {
+  this.tStates += 1
+  this.doPush(this.pc)
+  this.pc = 0x38
+}
 
 module.exports = Z80
