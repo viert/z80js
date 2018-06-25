@@ -1559,6 +1559,54 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+// CP r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10111000 | rCode
+  let opFuncName = `cp_${RegisterMap[rCode]}`
+  let disasmString = `cp ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+// CP n
+Z80.prototype.opcodeTable[0xfe] = { funcName: 'cp_n', dasm: 'cp {0}', args: [ArgType.Byte] }
+// CP (HL/IX+d/IY+d)
+Z80.prototype.opcodeTable[0xbe] = { funcName: 'cp__hl_', dasm: 'cp (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xbe] = {
+    funcName: `cp__${pref}_d_`,
+    dasm: `cp ${pref}{0}`,
+    args: [ArgType.Offset]
+  }
+}
+
+// #BEGIN cp_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]
+Z80.prototype.$0 = function() {
+  this.doArithmetics(this.r1.$1, false, true)
+  this.adjustFlags(this.r1.$1)
+}
+
+// #END
+
+Z80.prototype.cp__hl_ = function() {
+  this.doCPHL()
+}
+
+// #BEGIN cp__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  let value = this.read8(this.r1.$1 + offset)
+  this.doArithmetics(value, false, true)
+  this.adjustFlags(value)
+}
+
+// #END
+
+Z80.prototype.cp_n = function() {
+  let value = this.read8(this.pc++)
+  this.doArithmetics(value, false, true)
+  this.adjustFlags(value)
+}
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',

@@ -2787,6 +2787,108 @@ Z80.prototype.xor__iy_d_ = function() {
 }
 
 
+// CP r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10111000 | rCode
+  let opFuncName = `cp_${RegisterMap[rCode]}`
+  let disasmString = `cp ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+// CP n
+Z80.prototype.opcodeTable[0xfe] = { funcName: 'cp_n', dasm: 'cp {0}', args: [ArgType.Byte] }
+// CP (HL/IX+d/IY+d)
+Z80.prototype.opcodeTable[0xbe] = { funcName: 'cp__hl_', dasm: 'cp (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xbe] = {
+    funcName: `cp__${pref}_d_`,
+    dasm: `cp ${pref}{0}`,
+    args: [ArgType.Offset]
+  }
+}
+
+Z80.prototype.cp_a = function() {
+  this.doArithmetics(this.r1.a, false, true)
+  this.adjustFlags(this.r1.a)
+}
+
+Z80.prototype.cp_b = function() {
+  this.doArithmetics(this.r1.b, false, true)
+  this.adjustFlags(this.r1.b)
+}
+
+Z80.prototype.cp_c = function() {
+  this.doArithmetics(this.r1.c, false, true)
+  this.adjustFlags(this.r1.c)
+}
+
+Z80.prototype.cp_d = function() {
+  this.doArithmetics(this.r1.d, false, true)
+  this.adjustFlags(this.r1.d)
+}
+
+Z80.prototype.cp_e = function() {
+  this.doArithmetics(this.r1.e, false, true)
+  this.adjustFlags(this.r1.e)
+}
+
+Z80.prototype.cp_h = function() {
+  this.doArithmetics(this.r1.h, false, true)
+  this.adjustFlags(this.r1.h)
+}
+
+Z80.prototype.cp_l = function() {
+  this.doArithmetics(this.r1.l, false, true)
+  this.adjustFlags(this.r1.l)
+}
+
+Z80.prototype.cp_ixh = function() {
+  this.doArithmetics(this.r1.ixh, false, true)
+  this.adjustFlags(this.r1.ixh)
+}
+
+Z80.prototype.cp_ixl = function() {
+  this.doArithmetics(this.r1.ixl, false, true)
+  this.adjustFlags(this.r1.ixl)
+}
+
+Z80.prototype.cp_iyh = function() {
+  this.doArithmetics(this.r1.iyh, false, true)
+  this.adjustFlags(this.r1.iyh)
+}
+
+Z80.prototype.cp_iyl = function() {
+  this.doArithmetics(this.r1.iyl, false, true)
+  this.adjustFlags(this.r1.iyl)
+}
+
+
+Z80.prototype.cp__hl_ = function() {
+  this.doCPHL()
+}
+
+Z80.prototype.cp__ix_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  let value = this.read8(this.r1.ix + offset)
+  this.doArithmetics(value, false, true)
+  this.adjustFlags(value)
+}
+
+Z80.prototype.cp__iy_d_ = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  let value = this.read8(this.r1.iy + offset)
+  this.doArithmetics(value, false, true)
+  this.adjustFlags(value)
+}
+
+
+Z80.prototype.cp_n = function() {
+  let value = this.read8(this.pc++)
+  this.doArithmetics(value, false, true)
+  this.adjustFlags(value)
+}
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
