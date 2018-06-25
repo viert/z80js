@@ -451,6 +451,39 @@ Z80.prototype.doArithmetics = function(value, withCarry, isSub) {
   return res & 0xff
 }
 
+Z80.prototype.doAddWord = function(a1, a2, withCarry, isSub) {
+  if (withCarry && this.getFlag(f_c)) {
+    a2++
+  }
+
+  let sum = a1
+  if (isSub) {
+    sum -= a2
+    this.valFlag(f_h, (((a1 & 0x0fff) - (a2 & 0x0fff)) & 0x1000) !== 0)
+  } else {
+    sum += a2
+    this.valFlag(f_h, (((a1 & 0x0fff) + (a2 & 0x0fff)) & 0x1000) !== 0)
+  }
+  this.valFlag(f_c, (sum & 0x10000) !== 0)
+  if (withCarry || isSub) {
+    let minuedSign = a1 & 0x8000
+    let subtrahendSign = a2 & 0x8000
+    let resultSign = sum & 0x8000
+    let overflow
+    if (isSub) {
+      overflow = minuedSign != subtrahendSign && resultSign != minuedSign
+    } else {
+      overflow = minuedSign == subtrahendSign && resultSign != minuedSign
+    }
+    this.valFlag(f_pv, overflow)
+    this.valFlag(f_s, resultSign !== 0)
+    this.valFlag(f_z, sum === 0)
+  }
+  this.valFlag(f_n, isSub)
+  this.adjustFlags(unsigned8(sum >> 8))
+  return unsigned16(sum)
+}
+
 Z80.prototype.do_and = function(value) {
   this.r1.a &= value
   this.adjustLogicFlag(true)
@@ -1520,6 +1553,34 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+// ADD HL, BC/DE/HL/SP
+for (let rCode in Register16Map) {
+  let opCode = 0b00001001 | (rCode << 4)
+  let opFuncName = `add_hl_${Register16Map[rCode]}`
+  let disasmString = `add hl, ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// #BEGIN [add,adc,sbc]_hl_[hl,bc,de,sp]
+Z80.prototype.$0 = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.$2, hasCarry_$1, isSub_$1)
+}
+
+// #END
+
+// #BEGIN add_[ix,iy]_[ix,iy,bc,de,sp]
+Z80.prototype.$0 = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.$2, false, false)
+}
+
+// #END
+
 // AND r
 for (let rCode in RegisterMap) {
   let opCode = 0b10100000 | rCode
@@ -1768,6 +1829,18 @@ Z80.prototype.$0 = function() {
   this.iff1 = ie_$1
   this.iff2 = ie_$1
   this.deferInt = true
+}
+
+// #END
+
+// IM
+Z80.prototype.opcodeTableED[0x46] = { funcName: 'im_0', dasm: 'im 0', args: [] }
+Z80.prototype.opcodeTableED[0x56] = { funcName: 'im_1', dasm: 'im 1', args: [] }
+Z80.prototype.opcodeTableED[0x5e] = { funcName: 'im_2', dasm: 'im 2', args: [] }
+
+// #BEGIN im_[0,1,2]
+Z80.prototype.$0 = function() {
+  this.im = $1
 }
 
 // #END

@@ -451,6 +451,39 @@ Z80.prototype.doArithmetics = function(value, withCarry, isSub) {
   return res & 0xff
 }
 
+Z80.prototype.doAddWord = function(a1, a2, withCarry, isSub) {
+  if (withCarry && this.getFlag(f_c)) {
+    a2++
+  }
+
+  let sum = a1
+  if (isSub) {
+    sum -= a2
+    this.valFlag(f_h, (((a1 & 0x0fff) - (a2 & 0x0fff)) & 0x1000) !== 0)
+  } else {
+    sum += a2
+    this.valFlag(f_h, (((a1 & 0x0fff) + (a2 & 0x0fff)) & 0x1000) !== 0)
+  }
+  this.valFlag(f_c, (sum & 0x10000) !== 0)
+  if (withCarry || isSub) {
+    let minuedSign = a1 & 0x8000
+    let subtrahendSign = a2 & 0x8000
+    let resultSign = sum & 0x8000
+    let overflow
+    if (isSub) {
+      overflow = minuedSign != subtrahendSign && resultSign != minuedSign
+    } else {
+      overflow = minuedSign == subtrahendSign && resultSign != minuedSign
+    }
+    this.valFlag(f_pv, overflow)
+    this.valFlag(f_s, resultSign !== 0)
+    this.valFlag(f_z, sum === 0)
+  }
+  this.valFlag(f_n, isSub)
+  this.adjustFlags(unsigned8(sum >> 8))
+  return unsigned16(sum)
+}
+
 Z80.prototype.do_and = function(value) {
   this.r1.a &= value
   this.adjustLogicFlag(true)
@@ -2582,6 +2615,130 @@ Z80.prototype.sub_a__iy_d_ = function() {
 }
 
 
+// ADD HL, BC/DE/HL/SP
+for (let rCode in Register16Map) {
+  let opCode = 0b00001001 | (rCode << 4)
+  let opFuncName = `add_hl_${Register16Map[rCode]}`
+  let disasmString = `add hl, ${Register16Map[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+Z80.prototype.add_hl_hl = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.hl, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_hl_bc = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.bc, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_hl_de = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.de, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.add_hl_sp = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.sp, hasCarry_add, isSub_add)
+}
+
+Z80.prototype.adc_hl_hl = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.hl, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_hl_bc = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.bc, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_hl_de = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.de, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.adc_hl_sp = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.sp, hasCarry_adc, isSub_adc)
+}
+
+Z80.prototype.sbc_hl_hl = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.hl, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_hl_bc = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.bc, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_hl_de = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.de, hasCarry_sbc, isSub_sbc)
+}
+
+Z80.prototype.sbc_hl_sp = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.sp, hasCarry_sbc, isSub_sbc)
+}
+
+
+Z80.prototype.add_ix_ix = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.ix, false, false)
+}
+
+Z80.prototype.add_ix_iy = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.iy, false, false)
+}
+
+Z80.prototype.add_ix_bc = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.bc, false, false)
+}
+
+Z80.prototype.add_ix_de = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.de, false, false)
+}
+
+Z80.prototype.add_ix_sp = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.sp, false, false)
+}
+
+Z80.prototype.add_iy_ix = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.ix, false, false)
+}
+
+Z80.prototype.add_iy_iy = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.iy, false, false)
+}
+
+Z80.prototype.add_iy_bc = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.bc, false, false)
+}
+
+Z80.prototype.add_iy_de = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.de, false, false)
+}
+
+Z80.prototype.add_iy_sp = function() {
+  this.tStates += 7
+  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.sp, false, false)
+}
+
+
 // AND r
 for (let rCode in RegisterMap) {
   let opCode = 0b10100000 | rCode
@@ -3163,6 +3320,24 @@ Z80.prototype.ei = function() {
   this.iff1 = ie_ei
   this.iff2 = ie_ei
   this.deferInt = true
+}
+
+
+// IM
+Z80.prototype.opcodeTableED[0x46] = { funcName: 'im_0', dasm: 'im 0', args: [] }
+Z80.prototype.opcodeTableED[0x56] = { funcName: 'im_1', dasm: 'im 1', args: [] }
+Z80.prototype.opcodeTableED[0x5e] = { funcName: 'im_2', dasm: 'im 2', args: [] }
+
+Z80.prototype.im_0 = function() {
+  this.im = 0
+}
+
+Z80.prototype.im_1 = function() {
+  this.im = 1
+}
+
+Z80.prototype.im_2 = function() {
+  this.im = 2
 }
 
 
