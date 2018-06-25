@@ -109,6 +109,8 @@ const Z80 = function(memory, debug) {
   }
   this.memory = memory
 
+  this.debugMode = debug
+
   this.read8 = addr => {
     this.tStates += 3
     let value = memory.read8(addr)
@@ -567,6 +569,87 @@ Z80.prototype.doCPHL = function() {
   let result = this.doArithmetics(val, false, true)
   this.adjustFlags(val)
   return result
+}
+
+Z80.prototype.do_rlc = function(value, adjust) {
+  this.valFlag(f_c, (value & 0x80) !== 0)
+  value = unsigned8(value << 1)
+  let cy = this.getFlag(f_c) ? 1 : 0
+  value |= cy
+  this.debug('rlc flags before adjusting ' + hex8(this.r1.f))
+  this.adjustFlags(value)
+  this.debug('rlc flags after adjusting ' + hex8(this.r1.f))
+  this.resFlag(f_h | f_n)
+  this.debug('rlc flags after reset ' + hex8(this.r1.f))
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  this.debug('rlc flags after adjust szp ' + hex8(this.r1.f))
+  return value
+}
+
+Z80.prototype.do_rrc = function(value, adjust) {
+  this.valFlag(f_c, (value & 0x01) !== 0)
+  value = unsigned8(value >> 1)
+  let cy = this.getFlag(f_c) ? 0x80 : 0
+  value |= cy
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  return value
+}
+
+Z80.prototype.do_rl = function(value, adjust) {
+  let cy = this.getFlag(f_c) ? 1 : 0
+  this.valFlag(f_c, (value & 0x80) !== 0)
+  value = unsigned8(value << 1)
+  value |= cy
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  return value
+}
+
+Z80.prototype.do_rr = function(value, adjust) {
+  let cy = this.getFlag(f_c) ? 0x80 : 0
+  this.valFlag(f_c, (value & 0x01) !== 0)
+  value = unsigned8(value >> 1)
+  value |= cy
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  return value
+}
+
+Z80.prototype.do_sl = function(value, isArithmetics) {
+  this.valFlag(f_c, (value & 0x80) !== 0)
+  value = unsigned8(value << 1)
+  if (!isArithmetics) {
+    value |= 1
+  }
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(value)
+  return value
+}
+
+Z80.prototype.do_sr = function(value, isArithmetics) {
+  let bit = value & 0x80
+  this.valFlag(f_c, (value & 0x01) !== 0)
+  value = unsigned8(value >> 1)
+  if (!isArithmetics) {
+    value |= b
+  }
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(value)
+  return value
 }
 
 // Creating opcode tables
@@ -3456,6 +3539,28 @@ Z80.prototype.im_2 = function() {
 }
 
 
+Z80.prototype.opcodeTable[0x07] = { funcName: 'rlca', dasm: 'rlca', args: [] }
+Z80.prototype.opcodeTable[0x17] = { funcName: 'rla', dasm: 'rla', args: [] }
+Z80.prototype.opcodeTable[0x0f] = { funcName: 'rrca', dasm: 'rrca', args: [] }
+Z80.prototype.opcodeTable[0x1f] = { funcName: 'rra', dasm: 'rra', args: [] }
+
+Z80.prototype.rla = function() {
+  this.r1.a = this.do_rl(this.r1.a, false)
+}
+
+Z80.prototype.rra = function() {
+  this.r1.a = this.do_rr(this.r1.a, false)
+}
+
+Z80.prototype.rlca = function() {
+  this.r1.a = this.do_rlc(this.r1.a, false)
+}
+
+Z80.prototype.rrca = function() {
+  this.r1.a = this.do_rrc(this.r1.a, false)
+}
+
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
@@ -3556,6 +3661,51 @@ Z80.prototype.jp_m_nn = function() {
     this.pc = addr
   } else {
     this.pc += 2
+  }
+}
+
+
+Z80.prototype.opcodeTable[0x18] = { funcName: 'jr_pc_e', dasm: 'jr pc{0}', args: [ArgType.Offset] }
+Z80.prototype.jr_pc_e = function() {
+  let offset = signed8(this.read8(this.pc++))
+  this.tStates += 5
+  this.pc = this.pc + offset
+}
+
+Z80.prototype.opcodeTable[0x38] = { funcName: 'jr_c_pc_e', dasm: 'jr c, pc{0}', args: [ArgType.Offset] }
+Z80.prototype.opcodeTable[0x30] = { funcName: 'jr_nc_pc_e', dasm: 'jr nc, pc{0}', args: [ArgType.Offset] }
+Z80.prototype.opcodeTable[0x28] = { funcName: 'jr_z_pc_e', dasm: 'jr z, pc{0}', args: [ArgType.Offset] }
+Z80.prototype.opcodeTable[0x20] = { funcName: 'jr_nz_pc_e', dasm: 'jr nz, pc{0}', args: [ArgType.Offset] }
+
+Z80.prototype.jr_c_pc_e = function() {
+  let offset = signed8(this.read8(this.pc++))
+  if (this.condition(c_c)) {
+    this.tStates += 5
+    this.pc = this.pc + offset
+  }
+}
+
+Z80.prototype.jr_nc_pc_e = function() {
+  let offset = signed8(this.read8(this.pc++))
+  if (this.condition(c_nc)) {
+    this.tStates += 5
+    this.pc = this.pc + offset
+  }
+}
+
+Z80.prototype.jr_z_pc_e = function() {
+  let offset = signed8(this.read8(this.pc++))
+  if (this.condition(c_z)) {
+    this.tStates += 5
+    this.pc = this.pc + offset
+  }
+}
+
+Z80.prototype.jr_nz_pc_e = function() {
+  let offset = signed8(this.read8(this.pc++))
+  if (this.condition(c_nz)) {
+    this.tStates += 5
+    this.pc = this.pc + offset
   }
 }
 
