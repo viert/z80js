@@ -403,17 +403,17 @@ Z80.prototype.doArithmetics = function(value, withCarry, isSub) {
   return res & 0xff
 }
 
-Z80.prototype.doAnd = function(value) {
+Z80.prototype.do_and = function(value) {
   this.r1.a &= value
   this.adjustLogicFlag(true)
 }
 
-Z80.prototype.doOr = function(value) {
+Z80.prototype.do_or = function(value) {
   this.r1.a |= value
   this.adjustLogicFlag(false)
 }
 
-Z80.prototype.doXor = function(value) {
+Z80.prototype.do_xor = function(value) {
   this.r1.a ^= value
   this.adjustLogicFlag(false)
 }
@@ -867,7 +867,7 @@ for (let dst in RegisterMap) {
 
 // #BEGIN ld_[a,b,c,d,e,h,l]__[ix,iy]_d_
 Z80.prototype.$0 = function() {
-  let offset = unsigned8(this.read8(this.pc++))
+  let offset = signed8(this.read8(this.pc++))
   this.r1.$1 = this.read8(this.$2 + offset)
 }
 
@@ -889,7 +889,7 @@ for (let src in RegisterMap) {
 
 // #BEGIN ld_[a,b,c,d,e,h,l]__[ix,iy]_d_
 Z80.prototype.$0 = function() {
-  let offset = unsigned8(this.read8(this.pc++))
+  let offset = signed8(this.read8(this.pc++))
   this.write8(this.$2 + offset, this.r1.$1)
 }
 
@@ -908,7 +908,7 @@ for (let iReg in Prefixes) {
 
 // #BEGIN ld__[ix,iy]_d__n
 Z80.prototype.$0 = function() {
-  let offset = unsigned8(this.read8(this.pc++))
+  let offset = signed8(this.read8(this.pc++))
   let n = this.read8(this.pc++)
   this.write8(this.$1 + offset, n)
 }
@@ -1468,6 +1468,93 @@ Z80.prototype.$0 = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
   this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_$1, isSub_$1)
+}
+
+// #END
+
+// AND r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10100000 | rCode
+  let opFuncName = `and_${RegisterMap[rCode]}`
+  let disasmString = `and ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+// AND n
+Z80.prototype.opcodeTable[0xe6] = { funcName: 'and_n', dasm: 'and {0}', args: [ArgType.Byte] }
+// AND (HL/IX+d/IY+d)
+Z80.prototype.opcodeTable[0xa6] = { funcName: 'and__hl_', dasm: 'and (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xa6] = {
+    funcName: `add__${pref}_d_`,
+    dasm: `add ${pref}{0}`,
+    args: [ArgType.Offset]
+  }
+}
+
+// OR r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10110000 | rCode
+  let opFuncName = `or_${RegisterMap[rCode]}`
+  let disasmString = `or ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+// OR n
+Z80.prototype.opcodeTable[0xf6] = { funcName: 'or_n', dasm: 'or {0}', args: [ArgType.Byte] }
+// OR (HL/IX+d/IY+d)
+Z80.prototype.opcodeTable[0xb6] = { funcName: 'or__hl_', dasm: 'or (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xb6] = {
+    funcName: `or__${pref}_d_`,
+    dasm: `or ${pref}{0}`,
+    args: [ArgType.Offset]
+  }
+}
+
+// XOR r
+for (let rCode in RegisterMap) {
+  let opCode = 0b10101000 | rCode
+  let opFuncName = `xor_${RegisterMap[rCode]}`
+  let disasmString = `xor ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+// XOR n
+Z80.prototype.opcodeTable[0xee] = { funcName: 'xor_n', dasm: 'xor {0}', args: [ArgType.Byte] }
+// XOR (HL/IX+d/IY+d)
+Z80.prototype.opcodeTable[0xae] = { funcName: 'xor__hl_', dasm: 'xor (hl)', args: [] }
+for (let pref in Prefixes) {
+  Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xae] = {
+    funcName: `xor__${pref}_d_`,
+    dasm: `xor ${pref}{0}`,
+    args: [ArgType.Offset]
+  }
+}
+
+// #BEGIN [and,or,xor]_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]
+Z80.prototype.$0 = function() {
+  this.do_$1(this.r1.$2)
+}
+
+// #END
+
+// #BEGIN [and,or,xor]_n
+Z80.prototype.$0 = function() {
+  this.do_$1(this.read8(this.pc++))
+}
+
+// #END
+
+// #BEGIN [and,or,xor]__hl_
+Z80.prototype.$0 = function() {
+  this.do_$1(this.read8(this.r1.hl))
+}
+
+// #END
+
+// #BEGIN [and,or,xor]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 5
+  let offset = signed8(this.read8(this.pc++))
+  this.do_$1(this.read8(this.r1.$2 + offset))
 }
 
 // #END
