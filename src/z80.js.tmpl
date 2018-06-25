@@ -1704,6 +1704,14 @@ Z80.prototype.daa = function() {
   this.doDAA()
 }
 
+// CPL
+Z80.prototype.opcodeTable[0x2f] = { funcName: 'cpl', dasm: 'cpl', args: [] }
+Z80.prototype.cpl = function() {
+  this.r1.a = ~this.r1.a
+  this.setFlag(f_h | f_n)
+  this.adjustFlags(this.r1.a)
+}
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
