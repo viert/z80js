@@ -68,6 +68,9 @@ const isSub_sub = true
 const isDec_inc = false
 const isDec_dec = true
 
+const ie_ei = true
+const ie_di = false
+
 const ArgType = {
   Byte: 1,
   Word: 2,
@@ -128,9 +131,6 @@ const Z80 = function(memory, debug) {
     this.write8(addr, low)
     this.write8(addr + 1, high)
   }
-
-  this.tStates = 0
-  this.debugMode = !!debug
 
   // Creating registers
   this.r1 = {}
@@ -205,6 +205,24 @@ const Z80 = function(memory, debug) {
       this.b0[3] = val
     }
   })
+
+  this.reset()
+}
+
+Z80.prototype.reset = function() {
+  this.pc = 0
+  this.r1.f = 0
+  this.im = 0
+  this.iff1 = false
+  this.iff2 = false
+  this.r = 0
+  this.i = 0
+  this.halted = false
+  this.tStates = 0
+  this.nmiRequested = false
+  this.intRequested = false
+  this.deferInt = false
+  this.execIntVector = false
 }
 
 Z80.prototype._defineByteRegister = function(name, position) {
@@ -1240,31 +1258,31 @@ for (let dst in RegisterMap) {
   }
 }
 
-Z80.prototype.lda__hl_ = function() {
+Z80.prototype.ld_a__hl_ = function() {
   this.r1.a = this.read8(this.r1.hl)
 }
 
-Z80.prototype.ldb__hl_ = function() {
+Z80.prototype.ld_b__hl_ = function() {
   this.r1.b = this.read8(this.r1.hl)
 }
 
-Z80.prototype.ldc__hl_ = function() {
+Z80.prototype.ld_c__hl_ = function() {
   this.r1.c = this.read8(this.r1.hl)
 }
 
-Z80.prototype.ldd__hl_ = function() {
+Z80.prototype.ld_d__hl_ = function() {
   this.r1.d = this.read8(this.r1.hl)
 }
 
-Z80.prototype.lde__hl_ = function() {
+Z80.prototype.ld_e__hl_ = function() {
   this.r1.e = this.read8(this.r1.hl)
 }
 
-Z80.prototype.ldh__hl_ = function() {
+Z80.prototype.ld_h__hl_ = function() {
   this.r1.h = this.read8(this.r1.hl)
 }
 
-Z80.prototype.ldl__hl_ = function() {
+Z80.prototype.ld_l__hl_ = function() {
   this.r1.l = this.read8(this.r1.hl)
 }
 
@@ -3125,6 +3143,28 @@ Z80.prototype.scf = function() {
   this.resFlag(f_n | f_h)
   this.adjustFlags(this.r1.a)
 }
+// HALT
+Z80.prototype.opcodeTable[0x76] = { funcName: 'halt', dasm: 'halt', args: [] }
+Z80.prototype.halt = function() {
+  this.halted = true
+  this.pc--
+}
+// DI
+Z80.prototype.opcodeTable[0xf3] = { funcName: 'di', dasm: 'di', args: [] }
+Z80.prototype.opcodeTable[0xfb] = { funcName: 'ei', dasm: 'ei', args: [] }
+
+Z80.prototype.di = function() {
+  this.iff1 = ie_di
+  this.iff2 = ie_di
+  this.deferInt = true
+}
+
+Z80.prototype.ei = function() {
+  this.iff1 = ie_ei
+  this.iff2 = ie_ei
+  this.deferInt = true
+}
+
 
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {

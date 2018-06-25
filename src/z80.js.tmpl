@@ -68,6 +68,9 @@ const isSub_sub = true
 const isDec_inc = false
 const isDec_dec = true
 
+const ie_ei = true
+const ie_di = false
+
 const ArgType = {
   Byte: 1,
   Word: 2,
@@ -128,9 +131,6 @@ const Z80 = function(memory, debug) {
     this.write8(addr, low)
     this.write8(addr + 1, high)
   }
-
-  this.tStates = 0
-  this.debugMode = !!debug
 
   // Creating registers
   this.r1 = {}
@@ -205,6 +205,24 @@ const Z80 = function(memory, debug) {
       this.b0[3] = val
     }
   })
+
+  this.reset()
+}
+
+Z80.prototype.reset = function() {
+  this.pc = 0
+  this.r1.f = 0
+  this.im = 0
+  this.iff1 = false
+  this.iff2 = false
+  this.r = 0
+  this.i = 0
+  this.halted = false
+  this.tStates = 0
+  this.nmiRequested = false
+  this.intRequested = false
+  this.deferInt = false
+  this.execIntVector = false
 }
 
 Z80.prototype._defineByteRegister = function(name, position) {
@@ -724,7 +742,7 @@ for (let dst in RegisterMap) {
   }
 }
 
-// #BEGIN ld[a,b,c,d,e,h,l]__hl_
+// #BEGIN ld_[a,b,c,d,e,h,l]__hl_
 Z80.prototype.$0 = function() {
   this.r1.$1 = this.read8(this.r1.hl)
 }
@@ -1735,6 +1753,24 @@ Z80.prototype.scf = function() {
   this.resFlag(f_n | f_h)
   this.adjustFlags(this.r1.a)
 }
+// HALT
+Z80.prototype.opcodeTable[0x76] = { funcName: 'halt', dasm: 'halt', args: [] }
+Z80.prototype.halt = function() {
+  this.halted = true
+  this.pc--
+}
+// DI
+Z80.prototype.opcodeTable[0xf3] = { funcName: 'di', dasm: 'di', args: [] }
+Z80.prototype.opcodeTable[0xfb] = { funcName: 'ei', dasm: 'ei', args: [] }
+
+// #BEGIN [di,ei]
+Z80.prototype.$0 = function() {
+  this.iff1 = ie_$1
+  this.iff2 = ie_$1
+  this.deferInt = true
+}
+
+// #END
 
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
