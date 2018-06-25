@@ -569,6 +569,83 @@ Z80.prototype.doCPHL = function() {
   return result
 }
 
+Z80.prototype.do_rlc = function(value, adjust) {
+  this.valFlag(f_c, (value & 0x80) !== 0)
+  value = unsigned8(value << 1)
+  let cy = this.getFlag(f_c) ? 1 : 0
+  value |= cy
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  return value
+}
+
+Z80.prototype.do_rrc = function(value, adjust) {
+  this.valFlag(f_c, (value & 0x01) !== 0)
+  value = unsigned8(value >> 1)
+  let cy = this.getFlag(f_c) ? 0x80 : 0
+  value |= cy
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  return value
+}
+
+Z80.prototype.do_rl = function(value, adjust) {
+  let cy = this.getFlag(f_c) ? 1 : 0
+  this.valFlag(f_c, (value & 0x80) !== 0)
+  value = unsigned8(value << 1)
+  value |= cy
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  return value
+}
+
+Z80.prototype.do_rr = function(value, adjust) {
+  let cy = this.getFlag(f_c) ? 0x80 : 0
+  this.valFlag(f_c, (value & 0x01) !== 0)
+  value = unsigned8(value >> 1)
+  value |= cy
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  if (adjust) {
+    this.adjustFlagSZP(value)
+  }
+  return value
+}
+
+Z80.prototype.do_sl = function(value, isArithmetics) {
+  this.valFlag(f_c, (value & 0x80) !== 0)
+  value = unsigned8(value << 1)
+  if (!isArithmetics) {
+    value |= 1
+  }
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(value)
+  return value
+}
+
+Z80.prototype.do_sr = function(value, isArithmetics) {
+  let bit = value & 0x80
+  this.valFlag(f_c, (value & 0x01) !== 0)
+  value = unsigned8(value >> 1)
+  if (!isArithmetics) {
+    value |= b
+  }
+  this.adjustFlags(value)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(value)
+  return value
+}
+
 // Creating opcode tables
 Z80.prototype.opcodeTable = new Array(256)
 Z80.prototype.opcodeTableCB = new Array(256)
