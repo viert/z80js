@@ -3088,6 +3088,12 @@ Z80.prototype.dec__iy_d_ = function() {
 }
 
 
+// DAA
+Z80.prototype.opcodeTable[0x27] = { funcName: 'daa', dasm: 'daa', args: [] }
+Z80.prototype.daa = function() {
+  this.doDAA()
+}
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
