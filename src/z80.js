@@ -3710,6 +3710,7 @@ Z80.prototype.jr_nz_pc_e = function() {
 }
 
 
+// JP (HL/IX/IY)
 Z80.prototype.opcodeTable[0xe9] = { funcName: 'jp__hl_', dasm: 'jp (hl)', args: [] }
 Z80.prototype.opcodeTableDD[0xe9] = { funcName: 'jp__ix_', dasm: 'jp (ix)', args: [] }
 Z80.prototype.opcodeTableFD[0xe9] = { funcName: 'jp__iy_', dasm: 'jp (iy)', args: [] }
@@ -3724,6 +3725,7 @@ Z80.prototype.jp__iy_ = function() {
   this.pc = this.r1.iy
 }
 
+// DJNZ
 Z80.prototype.opcodeTable[0x10] = { funcName: 'djnz_pc_e', dasm: 'djnz pc{0}', args: [ArgType.Offset] }
 Z80.prototype.djnz_pc_e = function() {
   this.tStates++
@@ -3734,6 +3736,109 @@ Z80.prototype.djnz_pc_e = function() {
     this.pc = this.pc + offset
   }
 }
+
+// CALL nn
+Z80.prototype.opcodeTable[0xcd] = { funcName: 'call_nn', dasm: 'call {0}', args: [ArgType.Word] }
+Z80.prototype.call_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.tStates++
+  this.doPush(this.pc)
+  this.pc = addr
+}
+
+// CALL cc, nn
+for (let cond in Conditions) {
+  let opCode = 0b11000100 | (Conditions[cond] << 3)
+  let opFuncName = `call_${cond}_nn`
+  let disasmString = `call ${cond}, {0}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: [ArgType.Word]
+  }
+}
+
+Z80.prototype.call_c_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_c)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+Z80.prototype.call_m_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_m)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+Z80.prototype.call_nc_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_nc)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+Z80.prototype.call_nz_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_nz)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+Z80.prototype.call_p_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_p)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+Z80.prototype.call_pe_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_pe)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+Z80.prototype.call_po_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_po)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+Z80.prototype.call_z_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_z)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
 
 // RST p
 for (let p = 0; p < 8; p++) {

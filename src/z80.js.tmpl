@@ -2078,6 +2078,7 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+// JP (HL/IX/IY)
 Z80.prototype.opcodeTable[0xe9] = { funcName: 'jp__hl_', dasm: 'jp (hl)', args: [] }
 Z80.prototype.opcodeTableDD[0xe9] = { funcName: 'jp__ix_', dasm: 'jp (ix)', args: [] }
 Z80.prototype.opcodeTableFD[0xe9] = { funcName: 'jp__iy_', dasm: 'jp (iy)', args: [] }
@@ -2088,6 +2089,7 @@ Z80.prototype.$0 = function() {
 }
 // #END
 
+// DJNZ
 Z80.prototype.opcodeTable[0x10] = { funcName: 'djnz_pc_e', dasm: 'djnz pc{0}', args: [ArgType.Offset] }
 Z80.prototype.djnz_pc_e = function() {
   this.tStates++
@@ -2098,6 +2100,41 @@ Z80.prototype.djnz_pc_e = function() {
     this.pc = this.pc + offset
   }
 }
+
+// CALL nn
+Z80.prototype.opcodeTable[0xcd] = { funcName: 'call_nn', dasm: 'call {0}', args: [ArgType.Word] }
+Z80.prototype.call_nn = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  this.tStates++
+  this.doPush(this.pc)
+  this.pc = addr
+}
+
+// CALL cc, nn
+for (let cond in Conditions) {
+  let opCode = 0b11000100 | (Conditions[cond] << 3)
+  let opFuncName = `call_${cond}_nn`
+  let disasmString = `call ${cond}, {0}`
+  Z80.prototype.opcodeTable[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: [ArgType.Word]
+  }
+}
+
+// #BEGIN call_[c,m,nc,nz,p,pe,po,z]_nn
+Z80.prototype.$0 = function() {
+  let addr = this.read16(this.pc)
+  this.pc += 2
+  if (this.condition(c_$1)) {
+    this.tStates++
+    this.doPush(this.pc)
+    this.pc = addr
+  }
+}
+
+// #END
 
 // RST p
 for (let p = 0; p < 8; p++) {
