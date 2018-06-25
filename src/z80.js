@@ -1,5 +1,13 @@
 const ParityBit = require('./parity')
-const { unot8, unsigned8, signed8, hex16, hex8, usum8, unsigned16 } = require('./utils')
+const {
+  unot8,
+  unsigned8,
+  signed8,
+  hex16,
+  hex8,
+  usum8,
+  unsigned16
+} = require('./utils')
 
 const RegisterMap = {
   0b111: 'a',
@@ -80,7 +88,7 @@ const Conditions = {
   m: c_m
 }
 
-const MemoryMethods = [ 'read8', 'read16', 'write8', 'write16' ]
+const MemoryMethods = ['read8', 'read16', 'write8', 'write16']
 
 // Z80 constructor
 
@@ -101,7 +109,7 @@ const Z80 = function(memory, debug) {
   }
   this.memory = memory
 
-  this.read8 = (addr) => {
+  this.read8 = addr => {
     this.tStates += 3
     let value = memory.read8(addr)
     this.debug(`Reading memory address 0x${hex16(addr)} = 0x${hex8(value)}`)
@@ -114,7 +122,7 @@ const Z80 = function(memory, debug) {
     memory.write8(addr, value)
   }
 
-  this.read16 = (addr) => {
+  this.read16 = addr => {
     return this.read8(addr) | (this.read8(addr + 1) << 8)
   }
   this.write16 = (addr, value) => {
@@ -163,7 +171,7 @@ const Z80 = function(memory, debug) {
     get: () => {
       return this.w0[2]
     },
-    set: (val) => {
+    set: val => {
       this.w0[2] = val
     }
   })
@@ -172,7 +180,7 @@ const Z80 = function(memory, debug) {
     get: () => {
       return this.w0[2]
     },
-    set: (val) => {
+    set: val => {
       this.w0[2] = val
     }
   })
@@ -180,7 +188,7 @@ const Z80 = function(memory, debug) {
     get: () => {
       return this.w0[0]
     },
-    set: (val) => {
+    set: val => {
       this.w0[0] = val
     }
   })
@@ -188,7 +196,7 @@ const Z80 = function(memory, debug) {
     get: () => {
       return this.b0[2]
     },
-    set: (val) => {
+    set: val => {
       this.b0[2] = val
     }
   })
@@ -196,7 +204,7 @@ const Z80 = function(memory, debug) {
     get: () => {
       return this.b0[3]
     },
-    set: (val) => {
+    set: val => {
       this.b0[3] = val
     }
   })
@@ -207,7 +215,7 @@ Z80.prototype._defineByteRegister = function(name, position) {
     get: () => {
       return this.b1[position]
     },
-    set: (value) => {
+    set: value => {
       this.b1[position] = value
     }
   })
@@ -215,7 +223,7 @@ Z80.prototype._defineByteRegister = function(name, position) {
     get: () => {
       return this.b2[position]
     },
-    set: (value) => {
+    set: value => {
       this.b2[position] = value
     }
   })
@@ -226,7 +234,7 @@ Z80.prototype._defineWordRegister = function(name, position) {
     get: () => {
       return this.w1[position]
     },
-    set: (value) => {
+    set: value => {
       this.w1[position] = value
     }
   })
@@ -234,7 +242,7 @@ Z80.prototype._defineWordRegister = function(name, position) {
     get: () => {
       return this.w2[position]
     },
-    set: (value) => {
+    set: value => {
       this.w2[position] = value
     }
   })
@@ -403,6 +411,84 @@ Z80.prototype.doArithmetics = function(value, withCarry, isSub) {
   return res & 0xff
 }
 
+Z80.prototype.doAnd = function(value) {
+  this.r1.a &= value
+  this.adjustLogicFlag(true)
+}
+
+Z80.prototype.doOr = function(value) {
+  this.r1.a |= value
+  this.adjustLogicFlag(false)
+}
+
+Z80.prototype.doXor = function(value) {
+  this.r1.a ^= value
+  this.adjustLogicFlag(false)
+}
+
+Z80.prototype.doBit = function(b, val) {
+  if ((val & (1 << b)) !== 0) {
+    this.resFlag(f_z | f_pv)
+  } else {
+    this.setFlag(f_z | f_pv)
+  }
+  this.setFlag(f_h)
+  this.resFlag(f_n)
+  this.resFlag(f_s)
+  if (b === 7 && !this.getFlag(f_z)) {
+    this.setFlag(f_s)
+  }
+}
+
+Z80.prototype.doBitR = function(b, val) {
+  this.doBit(b, val)
+  this.valFlag(f_5, (val & f_5) !== 0)
+  this.valFlag(f_3, (val & f_3) !== 0)
+}
+
+Z80.prototype.doBitIndexed = function(b, addr) {
+  let val = this.read8(addr)
+  this.doBit(b, val)
+  let high = addr >> 8
+  this.valFlag(f_5, (high & f_5) !== 0)
+  this.valFlag(f_3, (high & f_3) !== 0)
+}
+
+Z80.prototype.doSetRes = function(state, pos, val) {
+  if (state) {
+    return val | (1 << pos)
+  } else {
+    return val & ~(1 << pos)
+  }
+}
+
+Z80.prototype.doDAA = function() {
+  let factor = 0
+  let carry = false
+
+  if (this.r1.a > 0x99 || this.getFlag(f_c)) {
+    factor |= 0x60
+    carry = true
+  }
+  if ((this.r1.a & 0x0f) > 9 || this.getFlag(f_h)) {
+    factor |= 0x06
+  }
+
+  let a = this.r1.a
+  if (this.getFlag(f_n)) {
+    this.r1.a -= factor
+  } else {
+    this.r1.a += factor
+  }
+
+  this.valFlag(f_h, ((a ^ this.r1.a) & 0x10) !== 0)
+  this.valFlag(f_c, carry)
+  this.valFlag(f_s, (this.r1.a & 0x80) !== 0)
+  this.valFlag(f_z, this.r1.a === 0)
+  this.valFlag(f_pv, ParityBit[this.r1.a])
+  this.adjustFlags(this.r1.a)
+}
+
 Z80.prototype.doCPHL = function() {
   let val = this.read8(this.r1.hl)
   let result = this.doArithmetics(val, false, true)
@@ -445,7 +531,10 @@ Z80.prototype.disassemble = function(addr) {
 
   let instr = this.opcodeTable[opCode]
   if (!instr) {
-    return { dasm: 'Error disassembling ' + codes.map((c) => hex8(c)).join(' '), nextAddr: addr }
+    return {
+      dasm: 'Error disassembling ' + codes.map(c => hex8(c)).join(' '),
+      nextAddr: addr
+    }
   }
 
   while ('nextTable' in instr) {
@@ -455,14 +544,17 @@ Z80.prototype.disassemble = function(addr) {
 
     instr = nextTable[opCode]
     if (!instr) {
-      return { dasm: 'Error disassembling ' + codes.map((c) => hex8(c)).join(' '), nextAddr: addr }
+      return {
+        dasm: 'Error disassembling ' + codes.map(c => hex8(c)).join(' '),
+        nextAddr: addr
+      }
     }
   }
 
   let { dasm, args } = instr
   let argNum = 0
   let arg
-  args.forEach((argType) => {
+  args.forEach(argType => {
     switch (argType) {
       case ArgType.Byte:
         arg = this.memory.read8(addr++)
@@ -488,7 +580,9 @@ Z80.prototype.disassemble = function(addr) {
 
 Z80.prototype.debug = function() {
   if (this.debugMode) {
-    let data = [ 'CPU debug:' ].concat(Array.prototype.map.call(arguments, (i) => i))
+    let data = ['CPU debug:'].concat(
+      Array.prototype.map.call(arguments, i => i)
+    )
     console.log.apply(console, data)
   }
 }
@@ -512,11 +606,13 @@ Z80.prototype.execute = function() {
 
     operation = current[opCode]
     if (!operation) {
-      throw 'Instruction ' + codes.map((i) => hex8(i)).join(' ') + ' not declared'
+      throw 'Instruction ' + codes.map(i => hex8(i)).join(' ') + ' not declared'
     }
     if (operation.funcName) {
       if (!(operation.funcName in this)) {
-        throw 'Instruction ' + codes.map((i) => hex8(i)).join(' ') + ' not implemented'
+        throw 'Instruction ' +
+          codes.map(i => hex8(i)).join(' ') +
+          ' not implemented'
       }
       this.pc -= offset
       this.debug('Running ' + operation.funcName + '(), t =', this.tStates)
@@ -556,8 +652,14 @@ for (let dst in RegisterMap) {
       args: []
     }
     for (let pref in Prefixes) {
-      let nsrcRegName = srcRegName === 'l' || srcRegName === 'h' ? pref + srcRegName : srcRegName
-      let ndstRegName = dstRegName === 'l' || dstRegName === 'h' ? pref + dstRegName : dstRegName
+      let nsrcRegName =
+        srcRegName === 'l' || srcRegName === 'h'
+          ? pref + srcRegName
+          : srcRegName
+      let ndstRegName =
+        dstRegName === 'l' || dstRegName === 'h'
+          ? pref + dstRegName
+          : dstRegName
       opFuncName = `ld_${ndstRegName}_${nsrcRegName}`
       disasmString = `ld ${ndstRegName}, ${nsrcRegName}`
       let table = Z80.prototype.opcodeTable[Prefixes[pref]].nextTable
@@ -1064,7 +1166,7 @@ for (let dst in RegisterMap) {
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     dasm: disasmString,
-    args: [ ArgType.Byte ]
+    args: [ArgType.Byte]
   }
 }
 
@@ -1201,7 +1303,7 @@ Z80.prototype.ld__hl__l = function() {
 Z80.prototype.opcodeTable[0b00110110] = {
   funcName: 'ld__hl__n',
   dasm: 'ld (hl), {0}',
-  args: [ ArgType.Byte ]
+  args: [ArgType.Byte]
 }
 
 Z80.prototype.ld__hl__n = function() {
@@ -1260,7 +1362,7 @@ Z80.prototype.ld__de__a = function() {
 Z80.prototype.opcodeTable[0b00111010] = {
   funcName: 'ld_a__nn_',
   dasm: 'ld a, ({0})',
-  args: [ ArgType.Word ]
+  args: [ArgType.Word]
 }
 
 Z80.prototype.ld_a__nn_ = function() {
@@ -1272,7 +1374,7 @@ Z80.prototype.ld_a__nn_ = function() {
 Z80.prototype.opcodeTable[0b00110010] = {
   funcName: 'ld__nn__a',
   dasm: 'ld ({0}), a',
-  args: [ ArgType.Word ]
+  args: [ArgType.Word]
 }
 
 Z80.prototype.ld__nn__a = function() {
@@ -1351,7 +1453,7 @@ for (let dst in RegisterMap) {
     Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
       funcName: opFuncName,
       dasm: disasmString,
-      args: [ ArgType.Byte ]
+      args: [ArgType.Byte]
     }
   }
 }
@@ -1436,7 +1538,7 @@ for (let src in RegisterMap) {
     Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
       funcName: opFuncName,
       dasm: disasmString,
-      args: [ ArgType.Byte ]
+      args: [ArgType.Byte]
     }
   }
 }
@@ -1519,7 +1621,7 @@ for (let iReg in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[iReg]][0b00110110] = {
     funcName: opFuncName,
     dasm: disasmString,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 
@@ -1544,7 +1646,7 @@ for (let rCode in Register16Map) {
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     dasm: disasmString,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 
@@ -1553,7 +1655,7 @@ for (let regName in Prefixes) {
   Z80.prototype.opcodeTable[code].nextTable[0b00100001] = {
     funcName: `ld_${regName}_nn`,
     dasm: `ld ${regName}, {0}`,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 
@@ -1592,7 +1694,7 @@ Z80.prototype.ld_iy_nn = function() {
 Z80.prototype.opcodeTable[0x2a] = {
   funcName: 'ld_hl__nn_',
   dasm: `ld hl, ({0})`,
-  args: [ ArgType.Word ]
+  args: [ArgType.Word]
 }
 
 // LD IX/IY, (nn)
@@ -1600,7 +1702,7 @@ for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x2a] = {
     funcName: `ld_${pref}__nn_`,
     dasm: `ld ${pref}, ({0})`,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 
@@ -1612,7 +1714,7 @@ for (let rCode in Register16Map) {
   Z80.prototype.opcodeTableED[opCode] = {
     funcName: opFuncName,
     dasm: disasmString,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 
@@ -1651,7 +1753,7 @@ Z80.prototype.ld_sp__nn_ = function() {
 Z80.prototype.opcodeTable[0x22] = {
   funcName: 'ld__nn__hl',
   dasm: `ld ({0}), hl`,
-  args: [ ArgType.Word ]
+  args: [ArgType.Word]
 }
 
 // LD (nn), IX/IY
@@ -1659,7 +1761,7 @@ for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x22] = {
     funcName: `ld__nn__${pref}`,
     dasm: `ld ({0}), ${pref}`,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 
@@ -1671,7 +1773,7 @@ for (let rCode in Register16Map) {
   Z80.prototype.opcodeTableED[opCode] = {
     funcName: opFuncName,
     dasm: disasmString,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 
@@ -1713,19 +1815,31 @@ Z80.prototype.ld__nn__sp = function() {
 
 
 // LD SP, HL/IX/IY
-Z80.prototype.opcodeTable[0xf9] = { funcName: 'ld_sp_hl', dasm: 'ld sp, hl', args: [] }
+Z80.prototype.opcodeTable[0xf9] = {
+  funcName: 'ld_sp_hl',
+  dasm: 'ld sp, hl',
+  args: []
+}
 Z80.prototype.ld_sp_hl = function() {
   this.tStates += 2
   this.sp = this.r1.hl
 }
 
-Z80.prototype.opcodeTableDD[0xf9] = { funcName: 'ld_sp_ix', dasm: 'ld sp, ix', args: [] }
+Z80.prototype.opcodeTableDD[0xf9] = {
+  funcName: 'ld_sp_ix',
+  dasm: 'ld sp, ix',
+  args: []
+}
 Z80.prototype.ld_sp_ix = function() {
   this.tStates += 2
   this.sp = this.r1.ix
 }
 
-Z80.prototype.opcodeTableFD[0xf9] = { funcName: 'ld_sp_iy', dasm: 'ld sp, iy', args: [] }
+Z80.prototype.opcodeTableFD[0xf9] = {
+  funcName: 'ld_sp_iy',
+  dasm: 'ld sp, iy',
+  args: []
+}
 Z80.prototype.ld_sp_iy = function() {
   this.tStates += 2
   this.sp = this.r1.iy
@@ -2270,10 +2384,26 @@ Z80.prototype.sub_a_iyl = function() {
 
 
 // ADD/ADC/SUB/SBC a, n
-Z80.prototype.opcodeTable[0xc6] = { funcName: 'add_a_n', dasm: 'add a, {0}', args: [ ArgType.Byte ] }
-Z80.prototype.opcodeTable[0xce] = { funcName: 'adc_a_n', dasm: 'adc a, {0}', args: [ ArgType.Byte ] }
-Z80.prototype.opcodeTable[0xde] = { funcName: 'sbc_a_n', dasm: 'sbc a, {0}', args: [ ArgType.Byte ] }
-Z80.prototype.opcodeTable[0xd6] = { funcName: 'sub_a_n', dasm: 'sub {0}', args: [ ArgType.Byte ] }
+Z80.prototype.opcodeTable[0xc6] = {
+  funcName: 'add_a_n',
+  dasm: 'add a, {0}',
+  args: [ArgType.Byte]
+}
+Z80.prototype.opcodeTable[0xce] = {
+  funcName: 'adc_a_n',
+  dasm: 'adc a, {0}',
+  args: [ArgType.Byte]
+}
+Z80.prototype.opcodeTable[0xde] = {
+  funcName: 'sbc_a_n',
+  dasm: 'sbc a, {0}',
+  args: [ArgType.Byte]
+}
+Z80.prototype.opcodeTable[0xd6] = {
+  funcName: 'sub_a_n',
+  dasm: 'sub {0}',
+  args: [ArgType.Byte]
+}
 
 Z80.prototype.adc_a_n = function() {
   this.r1.a = this.doArithmetics(this.read8(this.pc++), hasCarry_adc, isSub_adc)
@@ -2293,42 +2423,58 @@ Z80.prototype.sub_a_n = function() {
 
 
 // ADD a, (hl/ix+d/iy+d)
-Z80.prototype.opcodeTable[0x86] = { funcName: 'add_a__hl_', dasm: 'add a, (hl)', args: [] }
+Z80.prototype.opcodeTable[0x86] = {
+  funcName: 'add_a__hl_',
+  dasm: 'add a, (hl)',
+  args: []
+}
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x86] = {
     funcName: `add_a__${pref}_d_`,
     dasm: `add a, (${pref}{0})`,
-    args: [ ArgType.Offset ]
+    args: [ArgType.Offset]
   }
 }
 
 // ADC a, (hl/ix+d/iy+d)
-Z80.prototype.opcodeTable[0x8e] = { funcName: 'adc_a__hl_', dasm: 'adc a, (hl)', args: [] }
+Z80.prototype.opcodeTable[0x8e] = {
+  funcName: 'adc_a__hl_',
+  dasm: 'adc a, (hl)',
+  args: []
+}
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x8e] = {
     funcName: `adc_a__${pref}_d_`,
     dasm: `adc a, (${pref}{0})`,
-    args: [ ArgType.Offset ]
+    args: [ArgType.Offset]
   }
 }
 
 // SUB a, (hl/ix+d/iy+d)
-Z80.prototype.opcodeTable[0x96] = { funcName: 'sub_a__hl_', dasm: 'sub (hl)', args: [] }
+Z80.prototype.opcodeTable[0x96] = {
+  funcName: 'sub_a__hl_',
+  dasm: 'sub (hl)',
+  args: []
+}
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x96] = {
     funcName: `sub_a__${pref}_d_`,
     dasm: `sub (${pref}{0})`,
-    args: [ ArgType.Offset ]
+    args: [ArgType.Offset]
   }
 }
 
 // SBC a, (hl/ix+d/iy+d)
-Z80.prototype.opcodeTable[0x9e] = { funcName: 'sbc_a__hl_', dasm: 'sbc a, (hl)', args: [] }
+Z80.prototype.opcodeTable[0x9e] = {
+  funcName: 'sbc_a__hl_',
+  dasm: 'sbc a, (hl)',
+  args: []
+}
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0x9e] = {
     funcName: `sbc_a__${pref}_d_`,
     dasm: `sbc a, (${pref}{0})`,
-    args: [ ArgType.Offset ]
+    args: [ArgType.Offset]
   }
 }
 
@@ -2352,49 +2498,81 @@ Z80.prototype.sub_a__hl_ = function() {
 Z80.prototype.adc_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_adc, isSub_adc)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_adc,
+    isSub_adc
+  )
 }
 
 Z80.prototype.adc_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_adc, isSub_adc)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_adc,
+    isSub_adc
+  )
 }
 
 Z80.prototype.sbc_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sbc, isSub_sbc)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_sbc,
+    isSub_sbc
+  )
 }
 
 Z80.prototype.sbc_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sbc, isSub_sbc)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_sbc,
+    isSub_sbc
+  )
 }
 
 Z80.prototype.add_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_add, isSub_add)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_add,
+    isSub_add
+  )
 }
 
 Z80.prototype.add_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_add, isSub_add)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_add,
+    isSub_add
+  )
 }
 
 Z80.prototype.sub_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sub, isSub_sub)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_sub,
+    isSub_sub
+  )
 }
 
 Z80.prototype.sub_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sub, isSub_sub)
+  this.r1.a = this.doArithmetics(
+    this.read8(this.r1.hl + offset),
+    hasCarry_sub,
+    isSub_sub
+  )
 }
 
 
@@ -2402,7 +2580,7 @@ Z80.prototype.sub_a__iy_d_ = function() {
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
   dasm: 'jp {0}',
-  args: [ ArgType.Word ]
+  args: [ArgType.Word]
 }
 
 Z80.prototype.jp_nn = function() {
@@ -2417,7 +2595,7 @@ for (let cond in Conditions) {
   Z80.prototype.opcodeTable[opCode] = {
     funcName: opFuncName,
     dasm: disasmString,
-    args: [ ArgType.Word ]
+    args: [ArgType.Word]
   }
 }
 

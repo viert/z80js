@@ -1,13 +1,5 @@
 const ParityBit = require('./parity')
-const {
-  unot8,
-  unsigned8,
-  signed8,
-  hex16,
-  hex8,
-  usum8,
-  unsigned16
-} = require('./utils')
+const { unot8, unsigned8, signed8, hex16, hex8, usum8, unsigned16 } = require('./utils')
 
 const RegisterMap = {
   0b111: 'a',
@@ -580,9 +572,7 @@ Z80.prototype.disassemble = function(addr) {
 
 Z80.prototype.debug = function() {
   if (this.debugMode) {
-    let data = ['CPU debug:'].concat(
-      Array.prototype.map.call(arguments, i => i)
-    )
+    let data = ['CPU debug:'].concat(Array.prototype.map.call(arguments, i => i))
     console.log.apply(console, data)
   }
 }
@@ -610,9 +600,7 @@ Z80.prototype.execute = function() {
     }
     if (operation.funcName) {
       if (!(operation.funcName in this)) {
-        throw 'Instruction ' +
-          codes.map(i => hex8(i)).join(' ') +
-          ' not implemented'
+        throw 'Instruction ' + codes.map(i => hex8(i)).join(' ') + ' not implemented'
       }
       this.pc -= offset
       this.debug('Running ' + operation.funcName + '(), t =', this.tStates)
@@ -652,14 +640,8 @@ for (let dst in RegisterMap) {
       args: []
     }
     for (let pref in Prefixes) {
-      let nsrcRegName =
-        srcRegName === 'l' || srcRegName === 'h'
-          ? pref + srcRegName
-          : srcRegName
-      let ndstRegName =
-        dstRegName === 'l' || dstRegName === 'h'
-          ? pref + dstRegName
-          : dstRegName
+      let nsrcRegName = srcRegName === 'l' || srcRegName === 'h' ? pref + srcRegName : srcRegName
+      let ndstRegName = dstRegName === 'l' || dstRegName === 'h' ? pref + dstRegName : dstRegName
       opFuncName = `ld_${ndstRegName}_${nsrcRegName}`
       disasmString = `ld ${ndstRegName}, ${nsrcRegName}`
       let table = Z80.prototype.opcodeTable[Prefixes[pref]].nextTable
@@ -1286,7 +1268,11 @@ Z80.prototype.cpi = function() {
 }
 
 // CPIR
-Z80.prototype.opcodeTableED[0xb1] = { funcName: 'cpir', dasm: 'cpir', args: [] }
+Z80.prototype.opcodeTableED[0xb1] = {
+  funcName: 'cpir',
+  dasm: 'cpir',
+  args: []
+}
 Z80.prototype.cpir = function() {
   this.cpi()
   if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
@@ -1313,7 +1299,11 @@ Z80.prototype.cpd = function() {
 }
 
 // CPDR
-Z80.prototype.opcodeTableED[0xb9] = { funcName: 'cpdr', dasm: 'cpdr', args: [] }
+Z80.prototype.opcodeTableED[0xb9] = {
+  funcName: 'cpdr',
+  dasm: 'cpdr',
+  args: []
+}
 Z80.prototype.cpdr = function() {
   this.cpd()
   if (this.r1.bc !== 0 && !this.getFlag(f_z)) {
@@ -1477,11 +1467,7 @@ Z80.prototype.$0 = function() {
 Z80.prototype.$0 = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(
-    this.read8(this.r1.hl + offset),
-    hasCarry_$1,
-    isSub_$1
-  )
+  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_$1, isSub_$1)
 }
 
 // #END
