@@ -3710,6 +3710,31 @@ Z80.prototype.jr_nz_pc_e = function() {
 }
 
 
+Z80.prototype.opcodeTable[0xe9] = { funcName: 'jp__hl_', dasm: 'jp (hl)', args: [] }
+Z80.prototype.opcodeTableDD[0xe9] = { funcName: 'jp__ix_', dasm: 'jp (ix)', args: [] }
+Z80.prototype.opcodeTableFD[0xe9] = { funcName: 'jp__iy_', dasm: 'jp (iy)', args: [] }
+
+Z80.prototype.jp__hl_ = function() {
+  this.pc = this.r1.hl
+}
+Z80.prototype.jp__ix_ = function() {
+  this.pc = this.r1.ix
+}
+Z80.prototype.jp__iy_ = function() {
+  this.pc = this.r1.iy
+}
+
+Z80.prototype.opcodeTable[0x10] = { funcName: 'djnz_pc_e', dasm: 'djnz pc{0}', args: [ArgType.Offset] }
+Z80.prototype.djnz_pc_e = function() {
+  this.tStates++
+  let offset = signed8(this.read8(this.pc++))
+  this.r1.b--
+  if (this.r1.b !== 0) {
+    this.tStates += 5
+    this.pc = this.pc + offset
+  }
+}
+
 // RST p
 for (let p = 0; p < 8; p++) {
   let vector = p << 3
