@@ -3903,6 +3903,16 @@ for (let rCode in RegisterMap) {
 Z80.prototype.opcodeTableCB[0x2e] = { funcName: 'sra__hl_', dasm: 'sra (hl)', args: [] }
 Z80.prototype.opcodeTableDDCB[0x2e] = { funcName: 'sra__ix_d_', dasm: 'sra (ix{0})', args: [ArgType.Offset] }
 Z80.prototype.opcodeTableFDCB[0x2e] = { funcName: 'sra__iy_d_', dasm: 'sra (iy{0})', args: [ArgType.Offset] }
+// SLL m
+for (let rCode in RegisterMap) {
+  let opCode = 0b00110000 | rCode
+  let opFuncName = `sll_${RegisterMap[rCode]}`
+  let disasmString = `sll ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+Z80.prototype.opcodeTableCB[0x36] = { funcName: 'sll__hl_', dasm: 'sll (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x36] = { funcName: 'sll__ix_d_', dasm: 'sll (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x36] = { funcName: 'sll__iy_d_', dasm: 'sll (iy{0})', args: [ArgType.Offset] }
 // SRL m
 for (let rCode in RegisterMap) {
   let opCode = 0b00111000 | rCode
