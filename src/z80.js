@@ -3890,6 +3890,26 @@ for (let rCode in RegisterMap) {
 Z80.prototype.opcodeTableCB[0x26] = { funcName: 'sla__hl_', dasm: 'sla (hl)', args: [] }
 Z80.prototype.opcodeTableDDCB[0x26] = { funcName: 'sla__ix_d_', dasm: 'sla (ix{0})', args: [ArgType.Offset] }
 Z80.prototype.opcodeTableFDCB[0x26] = { funcName: 'sla__iy_d_', dasm: 'sla (iy{0})', args: [ArgType.Offset] }
+// SRA m
+for (let rCode in RegisterMap) {
+  let opCode = 0b00101000 | rCode
+  let opFuncName = `sra_${RegisterMap[rCode]}`
+  let disasmString = `sra ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+Z80.prototype.opcodeTableCB[0x2e] = { funcName: 'sra__hl_', dasm: 'sra (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x2e] = { funcName: 'sra__ix_d_', dasm: 'sra (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x2e] = { funcName: 'sra__iy_d_', dasm: 'sra (iy{0})', args: [ArgType.Offset] }
+// SRL m
+for (let rCode in RegisterMap) {
+  let opCode = 0b00111000 | rCode
+  let opFuncName = `srl_${RegisterMap[rCode]}`
+  let disasmString = `srl ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+Z80.prototype.opcodeTableCB[0x3e] = { funcName: 'srl__hl_', dasm: 'srl (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x3e] = { funcName: 'srl__ix_d_', dasm: 'srl (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x3e] = { funcName: 'srl__iy_d_', dasm: 'srl (iy{0})', args: [ArgType.Offset] }
 
 Z80.prototype.sll_a = function() {
   this.r1.a = this.do_sl(this.r1.a, isArithmetics_l)
@@ -4145,6 +4165,33 @@ Z80.prototype.sra__iy_d_ = function() {
   this.write8(addr, this.do_sr(this.read8(addr), isArithmetics_a))
 }
 
+
+// RLD
+Z80.prototype.opcodeTableED[0x6f] = { funcName: 'rld', dasm: 'rld', args: [] }
+Z80.prototype.rld = function() {
+  this.tStates += 4
+  let ah = this.r1.a & 0x0f
+  let hl = this.read8(this.r1.hl)
+  this.r1.a = (this.r1.a & 0xf0) | ((hl & 0xf0) >> 4)
+  hl = (hl << 4) | ah
+  this.write8(this.r1.hl, hl)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.a)
+  this.adjustFlags(this.r1.a)
+}
+
+// RRD
+Z80.prototype.opcodeTableED[0x67] = { funcName: 'rrd', dasm: 'rrd', args: [] }
+Z80.prototype.rrd = function() {
+  this.tStates += 4
+  let ah = this.r1.a & 0x0f
+  let hl = this.read8(this.r1.hl)
+  this.r1.a = (this.r1.a & 0xf0) | (hl & 0x0f)
+  hl = (hl >> 4) | (ah << 4)
+  this.write8(this.r1.hl, hl)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.a)
+}
 
 // IN A, (n)
 Z80.prototype.opcodeTable[0xdb] = { funcName: 'in_a__n_', dasm: 'in a, (0x{0})', args: [ArgType.Byte] }
