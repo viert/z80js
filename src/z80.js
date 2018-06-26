@@ -3641,6 +3641,7 @@ Z80.prototype.in_l__c_ = function() {
 }
 
 
+// INI
 Z80.prototype.opcodeTableED[0xa2] = { funcName: 'ini', dasm: 'ini', args: [] }
 Z80.prototype.ini = function() {
   this.tStates++
@@ -3652,6 +3653,38 @@ Z80.prototype.ini = function() {
   this.valFlag(f_h, fv > 0xff)
   this.valFlag(f_c, fv > 0xff)
   this.valFlag(f_pv, ParityBit[(fv & 7) ^ this.r1.b])
+}
+// INIR
+Z80.prototype.opcodeTableED[0xb2] = { funcName: 'inir', dasm: 'inir', args: [] }
+Z80.prototype.inir = function() {
+  this.ini()
+  if (this.r1.b !== 0) {
+    this.tStates += 5
+    this.pc -= 2
+  }
+}
+
+// IND
+Z80.prototype.opcodeTableED[0xaa] = { funcName: 'ind', dasm: 'ind', args: [] }
+Z80.prototype.ind = function() {
+  this.tStates++
+  let value = this.ioread(this.r1.bc)
+  this.write8(this.r1.hl--, value)
+  this.r1.b = this.doIncDec(this.r1.b, isDec_dec)
+  this.valFlag(f_n, (value & 0x80) !== 0)
+  let fv = value + ((this.r1.c - 1) & 0xff)
+  this.valFlag(f_h, fv > 0xff)
+  this.valFlag(f_c, fv > 0xff)
+  this.valFlag(f_pv, ParityBit[(fv & 7) ^ this.r1.b])
+}
+// INDR
+Z80.prototype.opcodeTableED[0xba] = { funcName: 'indr', dasm: 'indr', args: [] }
+Z80.prototype.indr = function() {
+  this.ind()
+  if (this.r1.b !== 0) {
+    this.tStates += 5
+    this.pc -= 2
+  }
 }
 
 // OUT (C), r
@@ -3694,6 +3727,56 @@ Z80.prototype.out__c__l = function() {
   this.iowrite(this.r1.bc, this.r1.l)
 }
 
+
+// OUTI
+Z80.prototype.opcodeTableED[0xa3] = { funcName: 'outi', dasm: 'outi', args: [] }
+Z80.prototype.outi = function() {
+  this.tStates++
+  let value = this.read8(this.r1.hl++)
+  this.r1.b = this.doIncDec(this.r1.b, isDec_dec)
+
+  this.iowrite(this.r1.bc, value)
+  let fv = value + this.r1.l
+  this.valFlag(f_n, (value & 0x80) !== 0)
+  this.valFlag(f_h, fv > 0xff)
+  this.valFlag(f_c, fv > 0xff)
+  this.valFlag(f_pv, ParityBit[(fv & 7) ^ this.r1.b])
+  this.adjustFlags(this.r1.b)
+}
+// OTIR
+Z80.prototype.opcodeTableED[0xb3] = { funcName: 'otir', dasm: 'otir', args: [] }
+Z80.prototype.otir = function() {
+  this.outi()
+  if (this.r1.b !== 0) {
+    this.tStates += 5
+    this.pc -= 2
+  }
+}
+
+// OUTD
+Z80.prototype.opcodeTableED[0xab] = { funcName: 'outd', dasm: 'outd', args: [] }
+Z80.prototype.outd = function() {
+  this.tStates++
+  let value = this.read8(this.r1.hl--)
+  this.r1.b = this.doIncDec(this.r1.b, isDec_dec)
+
+  this.iowrite(this.r1.bc, value)
+  let fv = value + this.r1.l
+  this.valFlag(f_n, (value & 0x80) !== 0)
+  this.valFlag(f_h, fv > 0xff)
+  this.valFlag(f_c, fv > 0xff)
+  this.valFlag(f_pv, ParityBit[(fv & 7) ^ this.r1.b])
+  this.adjustFlags(this.r1.b)
+}
+// OTDR
+Z80.prototype.opcodeTableED[0xbb] = { funcName: 'otdr', dasm: 'otdr', args: [] }
+Z80.prototype.otdr = function() {
+  this.outd()
+  if (this.r1.b !== 0) {
+    this.tStates += 5
+    this.pc -= 2
+  }
+}
 
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
