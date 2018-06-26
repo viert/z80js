@@ -578,15 +578,11 @@ Z80.prototype.do_rlc = function(value, adjust) {
   value = unsigned8(value << 1)
   let cy = this.getFlag(f_c) ? 1 : 0
   value |= cy
-  this.debug('rlc flags before adjusting ' + hex8(this.r1.f))
   this.adjustFlags(value)
-  this.debug('rlc flags after adjusting ' + hex8(this.r1.f))
   this.resFlag(f_h | f_n)
-  this.debug('rlc flags after reset ' + hex8(this.r1.f))
   if (adjust) {
     this.adjustFlagSZP(value)
   }
-  this.debug('rlc flags after adjust szp ' + hex8(this.r1.f))
   return value
 }
 
@@ -3541,6 +3537,9 @@ Z80.prototype.im_2 = function() {
 }
 
 
+//
+// ROTATE INSTRUCTIONS
+//
 Z80.prototype.opcodeTable[0x07] = { funcName: 'rlca', dasm: 'rlca', args: [] }
 Z80.prototype.opcodeTable[0x17] = { funcName: 'rla', dasm: 'rla', args: [] }
 Z80.prototype.opcodeTable[0x0f] = { funcName: 'rrca', dasm: 'rrca', args: [] }
@@ -3560,6 +3559,216 @@ Z80.prototype.rlca = function() {
 
 Z80.prototype.rrca = function() {
   this.r1.a = this.do_rrc(this.r1.a, false)
+}
+
+
+for (let rCode in RegisterMap) {
+  let opCode = rCode
+  let opFuncName = `rlc_${RegisterMap[rCode]}`
+  let disasmString = `rlc ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x06] = { funcName: 'rlc__hl_', dasm: 'rlc (hl)', args: [] }
+
+Z80.prototype.rlc_a = function() {
+  this.r1.a = this.do_rlc(this.r1.a, true)
+}
+
+Z80.prototype.rlc_b = function() {
+  this.r1.b = this.do_rlc(this.r1.b, true)
+}
+
+Z80.prototype.rlc_c = function() {
+  this.r1.c = this.do_rlc(this.r1.c, true)
+}
+
+Z80.prototype.rlc_d = function() {
+  this.r1.d = this.do_rlc(this.r1.d, true)
+}
+
+Z80.prototype.rlc_e = function() {
+  this.r1.e = this.do_rlc(this.r1.e, true)
+}
+
+Z80.prototype.rlc_h = function() {
+  this.r1.h = this.do_rlc(this.r1.h, true)
+}
+
+Z80.prototype.rlc_l = function() {
+  this.r1.l = this.do_rlc(this.r1.l, true)
+}
+
+Z80.prototype.rlc_ixh = function() {
+  this.r1.ixh = this.do_rlc(this.r1.ixh, true)
+}
+
+Z80.prototype.rlc_ixl = function() {
+  this.r1.ixl = this.do_rlc(this.r1.ixl, true)
+}
+
+Z80.prototype.rlc_iyh = function() {
+  this.r1.iyh = this.do_rlc(this.r1.iyh, true)
+}
+
+Z80.prototype.rlc_iyl = function() {
+  this.r1.iyl = this.do_rlc(this.r1.iyl, true)
+}
+
+Z80.prototype.rrc_a = function() {
+  this.r1.a = this.do_rrc(this.r1.a, true)
+}
+
+Z80.prototype.rrc_b = function() {
+  this.r1.b = this.do_rrc(this.r1.b, true)
+}
+
+Z80.prototype.rrc_c = function() {
+  this.r1.c = this.do_rrc(this.r1.c, true)
+}
+
+Z80.prototype.rrc_d = function() {
+  this.r1.d = this.do_rrc(this.r1.d, true)
+}
+
+Z80.prototype.rrc_e = function() {
+  this.r1.e = this.do_rrc(this.r1.e, true)
+}
+
+Z80.prototype.rrc_h = function() {
+  this.r1.h = this.do_rrc(this.r1.h, true)
+}
+
+Z80.prototype.rrc_l = function() {
+  this.r1.l = this.do_rrc(this.r1.l, true)
+}
+
+Z80.prototype.rrc_ixh = function() {
+  this.r1.ixh = this.do_rrc(this.r1.ixh, true)
+}
+
+Z80.prototype.rrc_ixl = function() {
+  this.r1.ixl = this.do_rrc(this.r1.ixl, true)
+}
+
+Z80.prototype.rrc_iyh = function() {
+  this.r1.iyh = this.do_rrc(this.r1.iyh, true)
+}
+
+Z80.prototype.rrc_iyl = function() {
+  this.r1.iyl = this.do_rrc(this.r1.iyl, true)
+}
+
+Z80.prototype.rl_a = function() {
+  this.r1.a = this.do_rl(this.r1.a, true)
+}
+
+Z80.prototype.rl_b = function() {
+  this.r1.b = this.do_rl(this.r1.b, true)
+}
+
+Z80.prototype.rl_c = function() {
+  this.r1.c = this.do_rl(this.r1.c, true)
+}
+
+Z80.prototype.rl_d = function() {
+  this.r1.d = this.do_rl(this.r1.d, true)
+}
+
+Z80.prototype.rl_e = function() {
+  this.r1.e = this.do_rl(this.r1.e, true)
+}
+
+Z80.prototype.rl_h = function() {
+  this.r1.h = this.do_rl(this.r1.h, true)
+}
+
+Z80.prototype.rl_l = function() {
+  this.r1.l = this.do_rl(this.r1.l, true)
+}
+
+Z80.prototype.rl_ixh = function() {
+  this.r1.ixh = this.do_rl(this.r1.ixh, true)
+}
+
+Z80.prototype.rl_ixl = function() {
+  this.r1.ixl = this.do_rl(this.r1.ixl, true)
+}
+
+Z80.prototype.rl_iyh = function() {
+  this.r1.iyh = this.do_rl(this.r1.iyh, true)
+}
+
+Z80.prototype.rl_iyl = function() {
+  this.r1.iyl = this.do_rl(this.r1.iyl, true)
+}
+
+Z80.prototype.rr_a = function() {
+  this.r1.a = this.do_rr(this.r1.a, true)
+}
+
+Z80.prototype.rr_b = function() {
+  this.r1.b = this.do_rr(this.r1.b, true)
+}
+
+Z80.prototype.rr_c = function() {
+  this.r1.c = this.do_rr(this.r1.c, true)
+}
+
+Z80.prototype.rr_d = function() {
+  this.r1.d = this.do_rr(this.r1.d, true)
+}
+
+Z80.prototype.rr_e = function() {
+  this.r1.e = this.do_rr(this.r1.e, true)
+}
+
+Z80.prototype.rr_h = function() {
+  this.r1.h = this.do_rr(this.r1.h, true)
+}
+
+Z80.prototype.rr_l = function() {
+  this.r1.l = this.do_rr(this.r1.l, true)
+}
+
+Z80.prototype.rr_ixh = function() {
+  this.r1.ixh = this.do_rr(this.r1.ixh, true)
+}
+
+Z80.prototype.rr_ixl = function() {
+  this.r1.ixl = this.do_rr(this.r1.ixl, true)
+}
+
+Z80.prototype.rr_iyh = function() {
+  this.r1.iyh = this.do_rr(this.r1.iyh, true)
+}
+
+Z80.prototype.rr_iyl = function() {
+  this.r1.iyl = this.do_rr(this.r1.iyl, true)
+}
+
+
+Z80.prototype.rlc__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_rlc(this.read8(this.r1.hl), true))
+}
+
+Z80.prototype.rrc__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_rrc(this.read8(this.r1.hl), true))
+}
+
+Z80.prototype.rl__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_rl(this.read8(this.r1.hl), true))
+}
+
+Z80.prototype.rr__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_rr(this.read8(this.r1.hl), true))
 }
 
 

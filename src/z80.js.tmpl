@@ -578,15 +578,11 @@ Z80.prototype.do_rlc = function(value, adjust) {
   value = unsigned8(value << 1)
   let cy = this.getFlag(f_c) ? 1 : 0
   value |= cy
-  this.debug('rlc flags before adjusting ' + hex8(this.r1.f))
   this.adjustFlags(value)
-  this.debug('rlc flags after adjusting ' + hex8(this.r1.f))
   this.resFlag(f_h | f_n)
-  this.debug('rlc flags after reset ' + hex8(this.r1.f))
   if (adjust) {
     this.adjustFlagSZP(value)
   }
-  this.debug('rlc flags after adjust szp ' + hex8(this.r1.f))
   return value
 }
 
@@ -2009,6 +2005,9 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+//
+// ROTATE INSTRUCTIONS
+//
 Z80.prototype.opcodeTable[0x07] = { funcName: 'rlca', dasm: 'rlca', args: [] }
 Z80.prototype.opcodeTable[0x17] = { funcName: 'rla', dasm: 'rla', args: [] }
 Z80.prototype.opcodeTable[0x0f] = { funcName: 'rrca', dasm: 'rrca', args: [] }
@@ -2017,6 +2016,33 @@ Z80.prototype.opcodeTable[0x1f] = { funcName: 'rra', dasm: 'rra', args: [] }
 // #BEGIN [rl,rr,rlc,rrc]a
 Z80.prototype.$0 = function() {
   this.r1.a = this.do_$1(this.r1.a, false)
+}
+
+// #END
+
+for (let rCode in RegisterMap) {
+  let opCode = rCode
+  let opFuncName = `rlc_${RegisterMap[rCode]}`
+  let disasmString = `rlc ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x06] = { funcName: 'rlc__hl_', dasm: 'rlc (hl)', args: [] }
+
+// #BEGIN [rlc,rrc,rl,rr]_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]
+Z80.prototype.$0 = function() {
+  this.r1.$2 = this.do_$1(this.r1.$2, true)
+}
+
+// #END
+
+// #BEGIN [rlc,rrc,rl,rr]__hl_
+Z80.prototype.$0 = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_$1(this.read8(this.r1.hl), true))
 }
 
 // #END
