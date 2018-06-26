@@ -3562,6 +3562,7 @@ Z80.prototype.rrca = function() {
 }
 
 
+// RLC s
 for (let rCode in RegisterMap) {
   let opCode = rCode
   let opFuncName = `rlc_${RegisterMap[rCode]}`
@@ -3573,6 +3574,53 @@ for (let rCode in RegisterMap) {
   }
 }
 Z80.prototype.opcodeTableCB[0x06] = { funcName: 'rlc__hl_', dasm: 'rlc (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x06] = { funcName: 'rlc__ix_d_', dasm: 'rlc (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x06] = { funcName: 'rlc__iy_d_', dasm: 'rlc (iy{0})', args: [ArgType.Offset] }
+
+// RL s
+for (let rCode in RegisterMap) {
+  let opCode = 0b00010000 | rCode
+  let opFuncName = `rl_${RegisterMap[rCode]}`
+  let disasmString = `rl ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x16] = { funcName: 'rl__hl_', dasm: 'rl (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x16] = { funcName: 'rl__ix_d_', dasm: 'rl (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x16] = { funcName: 'rl__iy_d_', dasm: 'rl (iy{0})', args: [ArgType.Offset] }
+
+// RRC s
+for (let rCode in RegisterMap) {
+  let opCode = 0b00001000 | rCode
+  let opFuncName = `rrc_${RegisterMap[rCode]}`
+  let disasmString = `rrc ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x0e] = { funcName: 'rrc__hl_', dasm: 'rrc (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x0e] = { funcName: 'rrc__ix_d_', dasm: 'rrc (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x0e] = { funcName: 'rrc__iy_d_', dasm: 'rrc (iy{0})', args: [ArgType.Offset] }
+
+// RR s
+for (let rCode in RegisterMap) {
+  let opCode = 0b00011000 | rCode
+  let opFuncName = `rr_${RegisterMap[rCode]}`
+  let disasmString = `rr ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x1e] = { funcName: 'rr__hl_', dasm: 'rr (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x1e] = { funcName: 'rr__ix_d_', dasm: 'rr (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x1e] = { funcName: 'rr__iy_d_', dasm: 'rr (iy{0})', args: [ArgType.Offset] }
 
 Z80.prototype.rlc_a = function() {
   this.r1.a = this.do_rlc(this.r1.a, true)
@@ -3769,6 +3817,63 @@ Z80.prototype.rl__hl_ = function() {
 Z80.prototype.rr__hl_ = function() {
   this.tStates++
   this.write8(this.r1.hl, this.do_rr(this.read8(this.r1.hl), true))
+}
+
+
+Z80.prototype.rlc__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_rlc(this.read8(addr), true))
+}
+
+Z80.prototype.rlc__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_rlc(this.read8(addr), true))
+}
+
+Z80.prototype.rrc__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_rrc(this.read8(addr), true))
+}
+
+Z80.prototype.rrc__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_rrc(this.read8(addr), true))
+}
+
+Z80.prototype.rl__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_rl(this.read8(addr), true))
+}
+
+Z80.prototype.rl__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_rl(this.read8(addr), true))
+}
+
+Z80.prototype.rr__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_rr(this.read8(addr), true))
+}
+
+Z80.prototype.rr__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_rr(this.read8(addr), true))
 }
 
 

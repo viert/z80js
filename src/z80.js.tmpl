@@ -2020,6 +2020,7 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+// RLC s
 for (let rCode in RegisterMap) {
   let opCode = rCode
   let opFuncName = `rlc_${RegisterMap[rCode]}`
@@ -2031,6 +2032,53 @@ for (let rCode in RegisterMap) {
   }
 }
 Z80.prototype.opcodeTableCB[0x06] = { funcName: 'rlc__hl_', dasm: 'rlc (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x06] = { funcName: 'rlc__ix_d_', dasm: 'rlc (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x06] = { funcName: 'rlc__iy_d_', dasm: 'rlc (iy{0})', args: [ArgType.Offset] }
+
+// RL s
+for (let rCode in RegisterMap) {
+  let opCode = 0b00010000 | rCode
+  let opFuncName = `rl_${RegisterMap[rCode]}`
+  let disasmString = `rl ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x16] = { funcName: 'rl__hl_', dasm: 'rl (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x16] = { funcName: 'rl__ix_d_', dasm: 'rl (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x16] = { funcName: 'rl__iy_d_', dasm: 'rl (iy{0})', args: [ArgType.Offset] }
+
+// RRC s
+for (let rCode in RegisterMap) {
+  let opCode = 0b00001000 | rCode
+  let opFuncName = `rrc_${RegisterMap[rCode]}`
+  let disasmString = `rrc ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x0e] = { funcName: 'rrc__hl_', dasm: 'rrc (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x0e] = { funcName: 'rrc__ix_d_', dasm: 'rrc (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x0e] = { funcName: 'rrc__iy_d_', dasm: 'rrc (iy{0})', args: [ArgType.Offset] }
+
+// RR s
+for (let rCode in RegisterMap) {
+  let opCode = 0b00011000 | rCode
+  let opFuncName = `rr_${RegisterMap[rCode]}`
+  let disasmString = `rr ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+Z80.prototype.opcodeTableCB[0x1e] = { funcName: 'rr__hl_', dasm: 'rr (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x1e] = { funcName: 'rr__ix_d_', dasm: 'rr (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x1e] = { funcName: 'rr__iy_d_', dasm: 'rr (iy{0})', args: [ArgType.Offset] }
 
 // #BEGIN [rlc,rrc,rl,rr]_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]
 Z80.prototype.$0 = function() {
@@ -2043,6 +2091,16 @@ Z80.prototype.$0 = function() {
 Z80.prototype.$0 = function() {
   this.tStates++
   this.write8(this.r1.hl, this.do_$1(this.read8(this.r1.hl), true))
+}
+
+// #END
+
+// #BEGIN [rlc,rrc,rl,rr]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.$2 + offset
+  this.write8(addr, this.do_$1(this.read8(addr), true))
 }
 
 // #END
