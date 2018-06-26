@@ -66,6 +66,9 @@ const isDec_dec = true
 const ie_ei = true
 const ie_di = false
 
+const isArithmetics_a = true
+const isArithmetics_l = false
+
 const ArgType = {
   Byte: 1,
   Word: 2,
@@ -2101,6 +2104,42 @@ Z80.prototype.$0 = function() {
   let offset = signed8(this.read8(this.pc++))
   let addr = this.r1.$2 + offset
   this.write8(addr, this.do_$1(this.read8(addr), true))
+}
+
+// #END
+
+// SLA m
+for (let rCode in RegisterMap) {
+  let opCode = 0b00100000 | rCode
+  let opFuncName = `sla_${RegisterMap[rCode]}`
+  let disasmString = `sla ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+Z80.prototype.opcodeTableCB[0x26] = { funcName: 'sla__hl_', dasm: 'sla (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x26] = { funcName: 'sla__ix_d_', dasm: 'sla (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x26] = { funcName: 'sla__iy_d_', dasm: 'sla (iy{0})', args: [ArgType.Offset] }
+
+// #BEGIN [sl,sr][l,a]_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]
+Z80.prototype.$0 = function() {
+  this.r1.$3 = this.do_$1(this.r1.$3, isArithmetics_$2)
+}
+
+// #END
+
+// #BEGIN [sl,sr][l,a]__hl_
+Z80.prototype.$0 = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_$1(this.read8(this.r1.hl), isArithmetics_$2))
+}
+
+// #END
+
+// #BEGIN [sl,sr][l,a]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.$3 + offset
+  this.write8(addr, this.do_$1(this.read8(addr), isArithmetics_$2))
 }
 
 // #END

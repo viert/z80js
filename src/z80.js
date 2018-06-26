@@ -66,6 +66,9 @@ const isDec_dec = true
 const ie_ei = true
 const ie_di = false
 
+const isArithmetics_a = true
+const isArithmetics_l = false
+
 const ArgType = {
   Byte: 1,
   Word: 2,
@@ -3874,6 +3877,272 @@ Z80.prototype.rr__iy_d_ = function() {
   let offset = signed8(this.read8(this.pc++))
   let addr = this.r1.iy + offset
   this.write8(addr, this.do_rr(this.read8(addr), true))
+}
+
+
+// SLA m
+for (let rCode in RegisterMap) {
+  let opCode = 0b00100000 | rCode
+  let opFuncName = `sla_${RegisterMap[rCode]}`
+  let disasmString = `sla ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+}
+Z80.prototype.opcodeTableCB[0x26] = { funcName: 'sla__hl_', dasm: 'sla (hl)', args: [] }
+Z80.prototype.opcodeTableDDCB[0x26] = { funcName: 'sla__ix_d_', dasm: 'sla (ix{0})', args: [ArgType.Offset] }
+Z80.prototype.opcodeTableFDCB[0x26] = { funcName: 'sla__iy_d_', dasm: 'sla (iy{0})', args: [ArgType.Offset] }
+
+Z80.prototype.sll_a = function() {
+  this.r1.a = this.do_sl(this.r1.a, isArithmetics_l)
+}
+
+Z80.prototype.sll_b = function() {
+  this.r1.b = this.do_sl(this.r1.b, isArithmetics_l)
+}
+
+Z80.prototype.sll_c = function() {
+  this.r1.c = this.do_sl(this.r1.c, isArithmetics_l)
+}
+
+Z80.prototype.sll_d = function() {
+  this.r1.d = this.do_sl(this.r1.d, isArithmetics_l)
+}
+
+Z80.prototype.sll_e = function() {
+  this.r1.e = this.do_sl(this.r1.e, isArithmetics_l)
+}
+
+Z80.prototype.sll_h = function() {
+  this.r1.h = this.do_sl(this.r1.h, isArithmetics_l)
+}
+
+Z80.prototype.sll_l = function() {
+  this.r1.l = this.do_sl(this.r1.l, isArithmetics_l)
+}
+
+Z80.prototype.sll_ixh = function() {
+  this.r1.ixh = this.do_sl(this.r1.ixh, isArithmetics_l)
+}
+
+Z80.prototype.sll_ixl = function() {
+  this.r1.ixl = this.do_sl(this.r1.ixl, isArithmetics_l)
+}
+
+Z80.prototype.sll_iyh = function() {
+  this.r1.iyh = this.do_sl(this.r1.iyh, isArithmetics_l)
+}
+
+Z80.prototype.sll_iyl = function() {
+  this.r1.iyl = this.do_sl(this.r1.iyl, isArithmetics_l)
+}
+
+Z80.prototype.sla_a = function() {
+  this.r1.a = this.do_sl(this.r1.a, isArithmetics_a)
+}
+
+Z80.prototype.sla_b = function() {
+  this.r1.b = this.do_sl(this.r1.b, isArithmetics_a)
+}
+
+Z80.prototype.sla_c = function() {
+  this.r1.c = this.do_sl(this.r1.c, isArithmetics_a)
+}
+
+Z80.prototype.sla_d = function() {
+  this.r1.d = this.do_sl(this.r1.d, isArithmetics_a)
+}
+
+Z80.prototype.sla_e = function() {
+  this.r1.e = this.do_sl(this.r1.e, isArithmetics_a)
+}
+
+Z80.prototype.sla_h = function() {
+  this.r1.h = this.do_sl(this.r1.h, isArithmetics_a)
+}
+
+Z80.prototype.sla_l = function() {
+  this.r1.l = this.do_sl(this.r1.l, isArithmetics_a)
+}
+
+Z80.prototype.sla_ixh = function() {
+  this.r1.ixh = this.do_sl(this.r1.ixh, isArithmetics_a)
+}
+
+Z80.prototype.sla_ixl = function() {
+  this.r1.ixl = this.do_sl(this.r1.ixl, isArithmetics_a)
+}
+
+Z80.prototype.sla_iyh = function() {
+  this.r1.iyh = this.do_sl(this.r1.iyh, isArithmetics_a)
+}
+
+Z80.prototype.sla_iyl = function() {
+  this.r1.iyl = this.do_sl(this.r1.iyl, isArithmetics_a)
+}
+
+Z80.prototype.srl_a = function() {
+  this.r1.a = this.do_sr(this.r1.a, isArithmetics_l)
+}
+
+Z80.prototype.srl_b = function() {
+  this.r1.b = this.do_sr(this.r1.b, isArithmetics_l)
+}
+
+Z80.prototype.srl_c = function() {
+  this.r1.c = this.do_sr(this.r1.c, isArithmetics_l)
+}
+
+Z80.prototype.srl_d = function() {
+  this.r1.d = this.do_sr(this.r1.d, isArithmetics_l)
+}
+
+Z80.prototype.srl_e = function() {
+  this.r1.e = this.do_sr(this.r1.e, isArithmetics_l)
+}
+
+Z80.prototype.srl_h = function() {
+  this.r1.h = this.do_sr(this.r1.h, isArithmetics_l)
+}
+
+Z80.prototype.srl_l = function() {
+  this.r1.l = this.do_sr(this.r1.l, isArithmetics_l)
+}
+
+Z80.prototype.srl_ixh = function() {
+  this.r1.ixh = this.do_sr(this.r1.ixh, isArithmetics_l)
+}
+
+Z80.prototype.srl_ixl = function() {
+  this.r1.ixl = this.do_sr(this.r1.ixl, isArithmetics_l)
+}
+
+Z80.prototype.srl_iyh = function() {
+  this.r1.iyh = this.do_sr(this.r1.iyh, isArithmetics_l)
+}
+
+Z80.prototype.srl_iyl = function() {
+  this.r1.iyl = this.do_sr(this.r1.iyl, isArithmetics_l)
+}
+
+Z80.prototype.sra_a = function() {
+  this.r1.a = this.do_sr(this.r1.a, isArithmetics_a)
+}
+
+Z80.prototype.sra_b = function() {
+  this.r1.b = this.do_sr(this.r1.b, isArithmetics_a)
+}
+
+Z80.prototype.sra_c = function() {
+  this.r1.c = this.do_sr(this.r1.c, isArithmetics_a)
+}
+
+Z80.prototype.sra_d = function() {
+  this.r1.d = this.do_sr(this.r1.d, isArithmetics_a)
+}
+
+Z80.prototype.sra_e = function() {
+  this.r1.e = this.do_sr(this.r1.e, isArithmetics_a)
+}
+
+Z80.prototype.sra_h = function() {
+  this.r1.h = this.do_sr(this.r1.h, isArithmetics_a)
+}
+
+Z80.prototype.sra_l = function() {
+  this.r1.l = this.do_sr(this.r1.l, isArithmetics_a)
+}
+
+Z80.prototype.sra_ixh = function() {
+  this.r1.ixh = this.do_sr(this.r1.ixh, isArithmetics_a)
+}
+
+Z80.prototype.sra_ixl = function() {
+  this.r1.ixl = this.do_sr(this.r1.ixl, isArithmetics_a)
+}
+
+Z80.prototype.sra_iyh = function() {
+  this.r1.iyh = this.do_sr(this.r1.iyh, isArithmetics_a)
+}
+
+Z80.prototype.sra_iyl = function() {
+  this.r1.iyl = this.do_sr(this.r1.iyl, isArithmetics_a)
+}
+
+
+Z80.prototype.sll__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_sl(this.read8(this.r1.hl), isArithmetics_l))
+}
+
+Z80.prototype.sla__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_sl(this.read8(this.r1.hl), isArithmetics_a))
+}
+
+Z80.prototype.srl__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_sr(this.read8(this.r1.hl), isArithmetics_l))
+}
+
+Z80.prototype.sra__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.do_sr(this.read8(this.r1.hl), isArithmetics_a))
+}
+
+
+Z80.prototype.sll__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_sl(this.read8(addr), isArithmetics_l))
+}
+
+Z80.prototype.sll__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_sl(this.read8(addr), isArithmetics_l))
+}
+
+Z80.prototype.sla__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_sl(this.read8(addr), isArithmetics_a))
+}
+
+Z80.prototype.sla__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_sl(this.read8(addr), isArithmetics_a))
+}
+
+Z80.prototype.srl__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_sr(this.read8(addr), isArithmetics_l))
+}
+
+Z80.prototype.srl__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_sr(this.read8(addr), isArithmetics_l))
+}
+
+Z80.prototype.sra__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.do_sr(this.read8(addr), isArithmetics_a))
+}
+
+Z80.prototype.sra__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.do_sr(this.read8(addr), isArithmetics_a))
 }
 
 
