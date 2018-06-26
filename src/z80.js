@@ -69,6 +69,9 @@ const ie_di = false
 const isArithmetics_a = true
 const isArithmetics_l = false
 
+const state_set = true
+const state_res = false
+
 const ArgType = {
   Byte: 1,
   Word: 2,
@@ -644,8 +647,8 @@ Z80.prototype.do_sr = function(value, isArithmetics) {
   let bit = value & 0x80
   this.valFlag(f_c, (value & 0x01) !== 0)
   value = unsigned8(value >> 1)
-  if (!isArithmetics) {
-    value |= b
+  if (isArithmetics) {
+    value |= bit
   }
   this.adjustFlags(value)
   this.resFlag(f_h | f_n)
@@ -2653,49 +2656,49 @@ Z80.prototype.sub_a__hl_ = function() {
 Z80.prototype.adc_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_adc, isSub_adc)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.ix + offset), hasCarry_adc, isSub_adc)
 }
 
 Z80.prototype.adc_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_adc, isSub_adc)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.iy + offset), hasCarry_adc, isSub_adc)
 }
 
 Z80.prototype.sbc_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sbc, isSub_sbc)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.ix + offset), hasCarry_sbc, isSub_sbc)
 }
 
 Z80.prototype.sbc_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sbc, isSub_sbc)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.iy + offset), hasCarry_sbc, isSub_sbc)
 }
 
 Z80.prototype.add_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_add, isSub_add)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.ix + offset), hasCarry_add, isSub_add)
 }
 
 Z80.prototype.add_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_add, isSub_add)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.iy + offset), hasCarry_add, isSub_add)
 }
 
 Z80.prototype.sub_a__ix_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sub, isSub_sub)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.ix + offset), hasCarry_sub, isSub_sub)
 }
 
 Z80.prototype.sub_a__iy_d_ = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.a = this.doArithmetics(this.read8(this.r1.hl + offset), hasCarry_sub, isSub_sub)
+  this.r1.a = this.doArithmetics(this.read8(this.r1.iy + offset), hasCarry_sub, isSub_sub)
 }
 
 
@@ -4200,11 +4203,11 @@ for (let b = 0; b < 8; b++) {
     let opFuncName = `bit_${b}_${RegisterMap[rCode]}`
     let disasmString = `bit ${b}, ${RegisterMap[rCode]}`
     Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
-    opCode = 0b01000110 | (b << 3)
-    Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
-    Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `bit_${b}__ix_d_`, dasm: `bit ${b}, (ix{0})`, args: [] }
-    Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `bit_${b}__iy_d_`, dasm: `bit ${b}, (iy{0})`, args: [] }
   }
+  let opCode = 0b01000110 | (b << 3)
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
+  Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `bit_${b}__ix_d_`, dasm: `bit ${b}, (ix{0})`, args: [] }
+  Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `bit_${b}__iy_d_`, dasm: `bit ${b}, (iy{0})`, args: [] }
 }
 
 Z80.prototype.bit_0_a = function() {
@@ -4583,6 +4586,788 @@ Z80.prototype.bit_7__iy_d_ = function() {
   let offset = signed8(this.read8(this.pc++))
   let addr = this.r1.iy + offset
   this.doBitIndexed(7, addr)
+}
+
+
+// SET/RES
+for (let b = 0; b < 8; b++) {
+  for (let rCode in RegisterMap) {
+    let opCode = 0b11000000 | (b << 3) | rCode
+    let opFuncName = `set_${b}_${RegisterMap[rCode]}`
+    let disasmString = `set ${b}, ${RegisterMap[rCode]}`
+    Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+  }
+  let opCode = 0b11000110 | (b << 3)
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: `set_${b}__hl_`, dasm: `set ${b}, (hl)`, args: [] }
+  Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `set_${b}__ix_d_`, dasm: `set ${b}, (ix{0})`, args: [] }
+  Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `set_${b}__iy_d_`, dasm: `set ${b}, (iy{0})`, args: [] }
+}
+
+for (let b = 0; b < 8; b++) {
+  for (let rCode in RegisterMap) {
+    let opCode = 0b10000000 | (b << 3) | rCode
+    let opFuncName = `res_${b}_${RegisterMap[rCode]}`
+    let disasmString = `res ${b}, ${RegisterMap[rCode]}`
+    Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+  }
+  let opCode = 0b10000110 | (b << 3)
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: `res_${b}__hl_`, dasm: `res ${b}, (hl)`, args: [] }
+  Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `res_${b}__ix_d_`, dasm: `res ${b}, (ix{0})`, args: [] }
+  Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `res_${b}__iy_d_`, dasm: `res ${b}, (iy{0})`, args: [] }
+}
+
+Z80.prototype.set_0_a = function() {
+  this.r1.a = this.doSetRes(state_set, 0, this.r1.a)
+}
+
+Z80.prototype.set_0_b = function() {
+  this.r1.b = this.doSetRes(state_set, 0, this.r1.b)
+}
+
+Z80.prototype.set_0_c = function() {
+  this.r1.c = this.doSetRes(state_set, 0, this.r1.c)
+}
+
+Z80.prototype.set_0_d = function() {
+  this.r1.d = this.doSetRes(state_set, 0, this.r1.d)
+}
+
+Z80.prototype.set_0_e = function() {
+  this.r1.e = this.doSetRes(state_set, 0, this.r1.e)
+}
+
+Z80.prototype.set_0_h = function() {
+  this.r1.h = this.doSetRes(state_set, 0, this.r1.h)
+}
+
+Z80.prototype.set_0_l = function() {
+  this.r1.l = this.doSetRes(state_set, 0, this.r1.l)
+}
+
+Z80.prototype.set_1_a = function() {
+  this.r1.a = this.doSetRes(state_set, 1, this.r1.a)
+}
+
+Z80.prototype.set_1_b = function() {
+  this.r1.b = this.doSetRes(state_set, 1, this.r1.b)
+}
+
+Z80.prototype.set_1_c = function() {
+  this.r1.c = this.doSetRes(state_set, 1, this.r1.c)
+}
+
+Z80.prototype.set_1_d = function() {
+  this.r1.d = this.doSetRes(state_set, 1, this.r1.d)
+}
+
+Z80.prototype.set_1_e = function() {
+  this.r1.e = this.doSetRes(state_set, 1, this.r1.e)
+}
+
+Z80.prototype.set_1_h = function() {
+  this.r1.h = this.doSetRes(state_set, 1, this.r1.h)
+}
+
+Z80.prototype.set_1_l = function() {
+  this.r1.l = this.doSetRes(state_set, 1, this.r1.l)
+}
+
+Z80.prototype.set_2_a = function() {
+  this.r1.a = this.doSetRes(state_set, 2, this.r1.a)
+}
+
+Z80.prototype.set_2_b = function() {
+  this.r1.b = this.doSetRes(state_set, 2, this.r1.b)
+}
+
+Z80.prototype.set_2_c = function() {
+  this.r1.c = this.doSetRes(state_set, 2, this.r1.c)
+}
+
+Z80.prototype.set_2_d = function() {
+  this.r1.d = this.doSetRes(state_set, 2, this.r1.d)
+}
+
+Z80.prototype.set_2_e = function() {
+  this.r1.e = this.doSetRes(state_set, 2, this.r1.e)
+}
+
+Z80.prototype.set_2_h = function() {
+  this.r1.h = this.doSetRes(state_set, 2, this.r1.h)
+}
+
+Z80.prototype.set_2_l = function() {
+  this.r1.l = this.doSetRes(state_set, 2, this.r1.l)
+}
+
+Z80.prototype.set_3_a = function() {
+  this.r1.a = this.doSetRes(state_set, 3, this.r1.a)
+}
+
+Z80.prototype.set_3_b = function() {
+  this.r1.b = this.doSetRes(state_set, 3, this.r1.b)
+}
+
+Z80.prototype.set_3_c = function() {
+  this.r1.c = this.doSetRes(state_set, 3, this.r1.c)
+}
+
+Z80.prototype.set_3_d = function() {
+  this.r1.d = this.doSetRes(state_set, 3, this.r1.d)
+}
+
+Z80.prototype.set_3_e = function() {
+  this.r1.e = this.doSetRes(state_set, 3, this.r1.e)
+}
+
+Z80.prototype.set_3_h = function() {
+  this.r1.h = this.doSetRes(state_set, 3, this.r1.h)
+}
+
+Z80.prototype.set_3_l = function() {
+  this.r1.l = this.doSetRes(state_set, 3, this.r1.l)
+}
+
+Z80.prototype.set_4_a = function() {
+  this.r1.a = this.doSetRes(state_set, 4, this.r1.a)
+}
+
+Z80.prototype.set_4_b = function() {
+  this.r1.b = this.doSetRes(state_set, 4, this.r1.b)
+}
+
+Z80.prototype.set_4_c = function() {
+  this.r1.c = this.doSetRes(state_set, 4, this.r1.c)
+}
+
+Z80.prototype.set_4_d = function() {
+  this.r1.d = this.doSetRes(state_set, 4, this.r1.d)
+}
+
+Z80.prototype.set_4_e = function() {
+  this.r1.e = this.doSetRes(state_set, 4, this.r1.e)
+}
+
+Z80.prototype.set_4_h = function() {
+  this.r1.h = this.doSetRes(state_set, 4, this.r1.h)
+}
+
+Z80.prototype.set_4_l = function() {
+  this.r1.l = this.doSetRes(state_set, 4, this.r1.l)
+}
+
+Z80.prototype.set_5_a = function() {
+  this.r1.a = this.doSetRes(state_set, 5, this.r1.a)
+}
+
+Z80.prototype.set_5_b = function() {
+  this.r1.b = this.doSetRes(state_set, 5, this.r1.b)
+}
+
+Z80.prototype.set_5_c = function() {
+  this.r1.c = this.doSetRes(state_set, 5, this.r1.c)
+}
+
+Z80.prototype.set_5_d = function() {
+  this.r1.d = this.doSetRes(state_set, 5, this.r1.d)
+}
+
+Z80.prototype.set_5_e = function() {
+  this.r1.e = this.doSetRes(state_set, 5, this.r1.e)
+}
+
+Z80.prototype.set_5_h = function() {
+  this.r1.h = this.doSetRes(state_set, 5, this.r1.h)
+}
+
+Z80.prototype.set_5_l = function() {
+  this.r1.l = this.doSetRes(state_set, 5, this.r1.l)
+}
+
+Z80.prototype.set_6_a = function() {
+  this.r1.a = this.doSetRes(state_set, 6, this.r1.a)
+}
+
+Z80.prototype.set_6_b = function() {
+  this.r1.b = this.doSetRes(state_set, 6, this.r1.b)
+}
+
+Z80.prototype.set_6_c = function() {
+  this.r1.c = this.doSetRes(state_set, 6, this.r1.c)
+}
+
+Z80.prototype.set_6_d = function() {
+  this.r1.d = this.doSetRes(state_set, 6, this.r1.d)
+}
+
+Z80.prototype.set_6_e = function() {
+  this.r1.e = this.doSetRes(state_set, 6, this.r1.e)
+}
+
+Z80.prototype.set_6_h = function() {
+  this.r1.h = this.doSetRes(state_set, 6, this.r1.h)
+}
+
+Z80.prototype.set_6_l = function() {
+  this.r1.l = this.doSetRes(state_set, 6, this.r1.l)
+}
+
+Z80.prototype.set_7_a = function() {
+  this.r1.a = this.doSetRes(state_set, 7, this.r1.a)
+}
+
+Z80.prototype.set_7_b = function() {
+  this.r1.b = this.doSetRes(state_set, 7, this.r1.b)
+}
+
+Z80.prototype.set_7_c = function() {
+  this.r1.c = this.doSetRes(state_set, 7, this.r1.c)
+}
+
+Z80.prototype.set_7_d = function() {
+  this.r1.d = this.doSetRes(state_set, 7, this.r1.d)
+}
+
+Z80.prototype.set_7_e = function() {
+  this.r1.e = this.doSetRes(state_set, 7, this.r1.e)
+}
+
+Z80.prototype.set_7_h = function() {
+  this.r1.h = this.doSetRes(state_set, 7, this.r1.h)
+}
+
+Z80.prototype.set_7_l = function() {
+  this.r1.l = this.doSetRes(state_set, 7, this.r1.l)
+}
+
+Z80.prototype.res_0_a = function() {
+  this.r1.a = this.doSetRes(state_res, 0, this.r1.a)
+}
+
+Z80.prototype.res_0_b = function() {
+  this.r1.b = this.doSetRes(state_res, 0, this.r1.b)
+}
+
+Z80.prototype.res_0_c = function() {
+  this.r1.c = this.doSetRes(state_res, 0, this.r1.c)
+}
+
+Z80.prototype.res_0_d = function() {
+  this.r1.d = this.doSetRes(state_res, 0, this.r1.d)
+}
+
+Z80.prototype.res_0_e = function() {
+  this.r1.e = this.doSetRes(state_res, 0, this.r1.e)
+}
+
+Z80.prototype.res_0_h = function() {
+  this.r1.h = this.doSetRes(state_res, 0, this.r1.h)
+}
+
+Z80.prototype.res_0_l = function() {
+  this.r1.l = this.doSetRes(state_res, 0, this.r1.l)
+}
+
+Z80.prototype.res_1_a = function() {
+  this.r1.a = this.doSetRes(state_res, 1, this.r1.a)
+}
+
+Z80.prototype.res_1_b = function() {
+  this.r1.b = this.doSetRes(state_res, 1, this.r1.b)
+}
+
+Z80.prototype.res_1_c = function() {
+  this.r1.c = this.doSetRes(state_res, 1, this.r1.c)
+}
+
+Z80.prototype.res_1_d = function() {
+  this.r1.d = this.doSetRes(state_res, 1, this.r1.d)
+}
+
+Z80.prototype.res_1_e = function() {
+  this.r1.e = this.doSetRes(state_res, 1, this.r1.e)
+}
+
+Z80.prototype.res_1_h = function() {
+  this.r1.h = this.doSetRes(state_res, 1, this.r1.h)
+}
+
+Z80.prototype.res_1_l = function() {
+  this.r1.l = this.doSetRes(state_res, 1, this.r1.l)
+}
+
+Z80.prototype.res_2_a = function() {
+  this.r1.a = this.doSetRes(state_res, 2, this.r1.a)
+}
+
+Z80.prototype.res_2_b = function() {
+  this.r1.b = this.doSetRes(state_res, 2, this.r1.b)
+}
+
+Z80.prototype.res_2_c = function() {
+  this.r1.c = this.doSetRes(state_res, 2, this.r1.c)
+}
+
+Z80.prototype.res_2_d = function() {
+  this.r1.d = this.doSetRes(state_res, 2, this.r1.d)
+}
+
+Z80.prototype.res_2_e = function() {
+  this.r1.e = this.doSetRes(state_res, 2, this.r1.e)
+}
+
+Z80.prototype.res_2_h = function() {
+  this.r1.h = this.doSetRes(state_res, 2, this.r1.h)
+}
+
+Z80.prototype.res_2_l = function() {
+  this.r1.l = this.doSetRes(state_res, 2, this.r1.l)
+}
+
+Z80.prototype.res_3_a = function() {
+  this.r1.a = this.doSetRes(state_res, 3, this.r1.a)
+}
+
+Z80.prototype.res_3_b = function() {
+  this.r1.b = this.doSetRes(state_res, 3, this.r1.b)
+}
+
+Z80.prototype.res_3_c = function() {
+  this.r1.c = this.doSetRes(state_res, 3, this.r1.c)
+}
+
+Z80.prototype.res_3_d = function() {
+  this.r1.d = this.doSetRes(state_res, 3, this.r1.d)
+}
+
+Z80.prototype.res_3_e = function() {
+  this.r1.e = this.doSetRes(state_res, 3, this.r1.e)
+}
+
+Z80.prototype.res_3_h = function() {
+  this.r1.h = this.doSetRes(state_res, 3, this.r1.h)
+}
+
+Z80.prototype.res_3_l = function() {
+  this.r1.l = this.doSetRes(state_res, 3, this.r1.l)
+}
+
+Z80.prototype.res_4_a = function() {
+  this.r1.a = this.doSetRes(state_res, 4, this.r1.a)
+}
+
+Z80.prototype.res_4_b = function() {
+  this.r1.b = this.doSetRes(state_res, 4, this.r1.b)
+}
+
+Z80.prototype.res_4_c = function() {
+  this.r1.c = this.doSetRes(state_res, 4, this.r1.c)
+}
+
+Z80.prototype.res_4_d = function() {
+  this.r1.d = this.doSetRes(state_res, 4, this.r1.d)
+}
+
+Z80.prototype.res_4_e = function() {
+  this.r1.e = this.doSetRes(state_res, 4, this.r1.e)
+}
+
+Z80.prototype.res_4_h = function() {
+  this.r1.h = this.doSetRes(state_res, 4, this.r1.h)
+}
+
+Z80.prototype.res_4_l = function() {
+  this.r1.l = this.doSetRes(state_res, 4, this.r1.l)
+}
+
+Z80.prototype.res_5_a = function() {
+  this.r1.a = this.doSetRes(state_res, 5, this.r1.a)
+}
+
+Z80.prototype.res_5_b = function() {
+  this.r1.b = this.doSetRes(state_res, 5, this.r1.b)
+}
+
+Z80.prototype.res_5_c = function() {
+  this.r1.c = this.doSetRes(state_res, 5, this.r1.c)
+}
+
+Z80.prototype.res_5_d = function() {
+  this.r1.d = this.doSetRes(state_res, 5, this.r1.d)
+}
+
+Z80.prototype.res_5_e = function() {
+  this.r1.e = this.doSetRes(state_res, 5, this.r1.e)
+}
+
+Z80.prototype.res_5_h = function() {
+  this.r1.h = this.doSetRes(state_res, 5, this.r1.h)
+}
+
+Z80.prototype.res_5_l = function() {
+  this.r1.l = this.doSetRes(state_res, 5, this.r1.l)
+}
+
+Z80.prototype.res_6_a = function() {
+  this.r1.a = this.doSetRes(state_res, 6, this.r1.a)
+}
+
+Z80.prototype.res_6_b = function() {
+  this.r1.b = this.doSetRes(state_res, 6, this.r1.b)
+}
+
+Z80.prototype.res_6_c = function() {
+  this.r1.c = this.doSetRes(state_res, 6, this.r1.c)
+}
+
+Z80.prototype.res_6_d = function() {
+  this.r1.d = this.doSetRes(state_res, 6, this.r1.d)
+}
+
+Z80.prototype.res_6_e = function() {
+  this.r1.e = this.doSetRes(state_res, 6, this.r1.e)
+}
+
+Z80.prototype.res_6_h = function() {
+  this.r1.h = this.doSetRes(state_res, 6, this.r1.h)
+}
+
+Z80.prototype.res_6_l = function() {
+  this.r1.l = this.doSetRes(state_res, 6, this.r1.l)
+}
+
+Z80.prototype.res_7_a = function() {
+  this.r1.a = this.doSetRes(state_res, 7, this.r1.a)
+}
+
+Z80.prototype.res_7_b = function() {
+  this.r1.b = this.doSetRes(state_res, 7, this.r1.b)
+}
+
+Z80.prototype.res_7_c = function() {
+  this.r1.c = this.doSetRes(state_res, 7, this.r1.c)
+}
+
+Z80.prototype.res_7_d = function() {
+  this.r1.d = this.doSetRes(state_res, 7, this.r1.d)
+}
+
+Z80.prototype.res_7_e = function() {
+  this.r1.e = this.doSetRes(state_res, 7, this.r1.e)
+}
+
+Z80.prototype.res_7_h = function() {
+  this.r1.h = this.doSetRes(state_res, 7, this.r1.h)
+}
+
+Z80.prototype.res_7_l = function() {
+  this.r1.l = this.doSetRes(state_res, 7, this.r1.l)
+}
+
+
+Z80.prototype.set_0__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 0, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.set_1__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 1, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.set_2__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 2, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.set_3__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 3, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.set_4__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 4, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.set_5__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 5, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.set_6__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 6, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.set_7__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_set, 7, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_0__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 0, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_1__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 1, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_2__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 2, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_3__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 3, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_4__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 4, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_5__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 5, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_6__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 6, this.read8(this.r1.hl)))
+}
+
+Z80.prototype.res_7__hl_ = function() {
+  this.tStates++
+  this.write8(this.r1.hl, this.doSetRes(state_res, 7, this.read8(this.r1.hl)))
+}
+
+
+Z80.prototype.set_0__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 0, this.read8(addr)))
+}
+
+Z80.prototype.set_0__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 0, this.read8(addr)))
+}
+
+Z80.prototype.set_1__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 1, this.read8(addr)))
+}
+
+Z80.prototype.set_1__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 1, this.read8(addr)))
+}
+
+Z80.prototype.set_2__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 2, this.read8(addr)))
+}
+
+Z80.prototype.set_2__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 2, this.read8(addr)))
+}
+
+Z80.prototype.set_3__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 3, this.read8(addr)))
+}
+
+Z80.prototype.set_3__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 3, this.read8(addr)))
+}
+
+Z80.prototype.set_4__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 4, this.read8(addr)))
+}
+
+Z80.prototype.set_4__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 4, this.read8(addr)))
+}
+
+Z80.prototype.set_5__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 5, this.read8(addr)))
+}
+
+Z80.prototype.set_5__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 5, this.read8(addr)))
+}
+
+Z80.prototype.set_6__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 6, this.read8(addr)))
+}
+
+Z80.prototype.set_6__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 6, this.read8(addr)))
+}
+
+Z80.prototype.set_7__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_set, 7, this.read8(addr)))
+}
+
+Z80.prototype.set_7__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_set, 7, this.read8(addr)))
+}
+
+Z80.prototype.res_0__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 0, this.read8(addr)))
+}
+
+Z80.prototype.res_0__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 0, this.read8(addr)))
+}
+
+Z80.prototype.res_1__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 1, this.read8(addr)))
+}
+
+Z80.prototype.res_1__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 1, this.read8(addr)))
+}
+
+Z80.prototype.res_2__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 2, this.read8(addr)))
+}
+
+Z80.prototype.res_2__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 2, this.read8(addr)))
+}
+
+Z80.prototype.res_3__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 3, this.read8(addr)))
+}
+
+Z80.prototype.res_3__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 3, this.read8(addr)))
+}
+
+Z80.prototype.res_4__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 4, this.read8(addr)))
+}
+
+Z80.prototype.res_4__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 4, this.read8(addr)))
+}
+
+Z80.prototype.res_5__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 5, this.read8(addr)))
+}
+
+Z80.prototype.res_5__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 5, this.read8(addr)))
+}
+
+Z80.prototype.res_6__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 6, this.read8(addr)))
+}
+
+Z80.prototype.res_6__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 6, this.read8(addr)))
+}
+
+Z80.prototype.res_7__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.write8(addr, this.doSetRes(state_res, 7, this.read8(addr)))
+}
+
+Z80.prototype.res_7__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.write8(addr, this.doSetRes(state_res, 7, this.read8(addr)))
 }
 
 
