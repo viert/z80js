@@ -3641,6 +3641,19 @@ Z80.prototype.in_l__c_ = function() {
 }
 
 
+Z80.prototype.opcodeTableED[0xa2] = { funcName: 'ini', dasm: 'ini', args: [] }
+Z80.prototype.ini = function() {
+  this.tStates++
+  let value = this.ioread(this.r1.bc)
+  this.write8(this.r1.hl++, value)
+  this.r1.b = this.doIncDec(this.r1.b, isDec_dec)
+  this.valFlag(f_n, (value & 0x80) !== 0)
+  let fv = value + ((this.r1.c + 1) & 0xff)
+  this.valFlag(f_h, fv > 0xff)
+  this.valFlag(f_c, fv > 0xff)
+  this.valFlag(f_pv, ParityBit[(fv & 7) ^ this.r1.b])
+}
+
 // OUT (C), r
 for (let rCode in RegisterMap) {
   let opCode = 0b01000001 | (rCode << 3)
