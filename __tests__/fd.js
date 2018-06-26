@@ -1,9 +1,11 @@
 const Memory = require("../src/memory")
 const Z80 = require("../src/z80")
+const { FakePort } = require("../src/port")
 
 test('Test fd09', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x466A
   cpu.r1.bc = 0xA623
   cpu.r1.de = 0xBAB2
@@ -43,7 +45,8 @@ test('Test fd09', () => {
 
 test('Test fd19', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xB3E5
   cpu.r1.bc = 0x5336
   cpu.r1.de = 0x76CB
@@ -83,7 +86,8 @@ test('Test fd19', () => {
 
 test('Test fd21', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xC924
   cpu.r1.bc = 0x5C83
   cpu.r1.de = 0xE0E2
@@ -125,7 +129,8 @@ test('Test fd21', () => {
 
 test('Test fd22', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x1235
   cpu.r1.bc = 0xF0B6
   cpu.r1.de = 0xB74C
@@ -167,7 +172,8 @@ test('Test fd22', () => {
 
 test('Test fd23', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x69F2
   cpu.r1.bc = 0xC1D3
   cpu.r1.de = 0x0F6F
@@ -207,7 +213,8 @@ test('Test fd23', () => {
 
 test('Test fd24', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x5554
   cpu.r1.bc = 0x9684
   cpu.r1.de = 0xD36A
@@ -247,7 +254,8 @@ test('Test fd24', () => {
 
 test('Test fd25', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xCD0B
   cpu.r1.bc = 0xB5E4
   cpu.r1.de = 0xA754
@@ -287,7 +295,8 @@ test('Test fd25', () => {
 
 test('Test fd26', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x2452
   cpu.r1.bc = 0x300B
   cpu.r1.de = 0xB4A1
@@ -328,7 +337,8 @@ test('Test fd26', () => {
 
 test('Test fd29', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x5812
   cpu.r1.bc = 0x49D0
   cpu.r1.de = 0xEC95
@@ -368,7 +378,8 @@ test('Test fd29', () => {
 
 test('Test fd2a', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x0F82
   cpu.r1.bc = 0x3198
   cpu.r1.de = 0x87E3
@@ -412,7 +423,8 @@ test('Test fd2a', () => {
 
 test('Test fd2b', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xAB27
   cpu.r1.bc = 0x942F
   cpu.r1.de = 0x82FA
@@ -452,7 +464,8 @@ test('Test fd2b', () => {
 
 test('Test fd2c', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x665D
   cpu.r1.bc = 0x0AB1
   cpu.r1.de = 0x5656
@@ -492,7 +505,8 @@ test('Test fd2c', () => {
 
 test('Test fd2d', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x32FB
   cpu.r1.bc = 0xF78A
   cpu.r1.de = 0xB906
@@ -532,7 +546,8 @@ test('Test fd2d', () => {
 
 test('Test fd2e', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x2114
   cpu.r1.bc = 0x4923
   cpu.r1.de = 0x6E65
@@ -573,7 +588,8 @@ test('Test fd2e', () => {
 
 test('Test fd34', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xD56A
   cpu.r1.bc = 0x6F24
   cpu.r1.de = 0x7DF7
@@ -615,7 +631,8 @@ test('Test fd34', () => {
 
 test('Test fd35', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x8CDA
   cpu.r1.bc = 0x35D8
   cpu.r1.de = 0x7C1A
@@ -657,7 +674,8 @@ test('Test fd35', () => {
 
 test('Test fd36', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xE0F9
   cpu.r1.bc = 0xAE1F
   cpu.r1.de = 0x4AEF
@@ -699,7 +717,8 @@ test('Test fd36', () => {
 
 test('Test fd39', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x2603
   cpu.r1.bc = 0x726F
   cpu.r1.de = 0x9C7F
@@ -739,7 +758,8 @@ test('Test fd39', () => {
 
 test('Test fd44', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x0E58
   cpu.r1.bc = 0x7192
   cpu.r1.de = 0x3580
@@ -779,7 +799,8 @@ test('Test fd44', () => {
 
 test('Test fd45', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x6555
   cpu.r1.bc = 0xA488
   cpu.r1.de = 0x5AE8
@@ -819,7 +840,8 @@ test('Test fd45', () => {
 
 test('Test fd46', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x87F3
   cpu.r1.bc = 0x17D5
   cpu.r1.de = 0x5EEA
@@ -861,7 +883,8 @@ test('Test fd46', () => {
 
 test('Test fd4c', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x7E6B
   cpu.r1.bc = 0xBD4B
   cpu.r1.de = 0x24B6
@@ -901,7 +924,8 @@ test('Test fd4c', () => {
 
 test('Test fd4d', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x50CF
   cpu.r1.bc = 0xE3FE
   cpu.r1.de = 0x998E
@@ -941,7 +965,8 @@ test('Test fd4d', () => {
 
 test('Test fd4e', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x2C0F
   cpu.r1.bc = 0x69D7
   cpu.r1.de = 0x748A
@@ -983,7 +1008,8 @@ test('Test fd4e', () => {
 
 test('Test fd54', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xD7F9
   cpu.r1.bc = 0xF65B
   cpu.r1.de = 0xB001
@@ -1023,7 +1049,8 @@ test('Test fd54', () => {
 
 test('Test fd55', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xAB98
   cpu.r1.bc = 0xFDAB
   cpu.r1.de = 0x254A
@@ -1063,7 +1090,8 @@ test('Test fd55', () => {
 
 test('Test fd56', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xD3E8
   cpu.r1.bc = 0xDF10
   cpu.r1.de = 0x5442
@@ -1105,7 +1133,8 @@ test('Test fd56', () => {
 
 test('Test fd5c', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x11D5
   cpu.r1.bc = 0xC489
   cpu.r1.de = 0xE220
@@ -1145,7 +1174,8 @@ test('Test fd5c', () => {
 
 test('Test fd5d', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xE945
   cpu.r1.bc = 0xDBAE
   cpu.r1.de = 0x32EA
@@ -1185,7 +1215,8 @@ test('Test fd5d', () => {
 
 test('Test fd5e', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x6F3B
   cpu.r1.bc = 0xE9DC
   cpu.r1.de = 0x7A06
@@ -1227,7 +1258,8 @@ test('Test fd5e', () => {
 
 test('Test fd60', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x8579
   cpu.r1.bc = 0x005D
   cpu.r1.de = 0xD9EE
@@ -1267,7 +1299,8 @@ test('Test fd60', () => {
 
 test('Test fd61', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x5682
   cpu.r1.bc = 0xDBC3
   cpu.r1.de = 0xB495
@@ -1307,7 +1340,8 @@ test('Test fd61', () => {
 
 test('Test fd62', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x906B
   cpu.r1.bc = 0xF52E
   cpu.r1.de = 0xF3D8
@@ -1347,7 +1381,8 @@ test('Test fd62', () => {
 
 test('Test fd63', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x9D59
   cpu.r1.bc = 0xBEB9
   cpu.r1.de = 0xD826
@@ -1387,7 +1422,8 @@ test('Test fd63', () => {
 
 test('Test fd64', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x7B0E
   cpu.r1.bc = 0xE394
   cpu.r1.de = 0x8A25
@@ -1427,7 +1463,8 @@ test('Test fd64', () => {
 
 test('Test fd65', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xB827
   cpu.r1.bc = 0xEB4F
   cpu.r1.de = 0xF666
@@ -1467,7 +1504,8 @@ test('Test fd65', () => {
 
 test('Test fd66', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x9129
   cpu.r1.bc = 0xE4EE
   cpu.r1.de = 0xE3A3
@@ -1509,7 +1547,8 @@ test('Test fd66', () => {
 
 test('Test fd67', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xDB7A
   cpu.r1.bc = 0xB40B
   cpu.r1.de = 0x7B58
@@ -1549,7 +1588,8 @@ test('Test fd67', () => {
 
 test('Test fd68', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x4D1D
   cpu.r1.bc = 0x4FD9
   cpu.r1.de = 0x783E
@@ -1589,7 +1629,8 @@ test('Test fd68', () => {
 
 test('Test fd69', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x1589
   cpu.r1.bc = 0x5CEB
   cpu.r1.de = 0xB5DB
@@ -1629,7 +1670,8 @@ test('Test fd69', () => {
 
 test('Test fd6a', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x607A
   cpu.r1.bc = 0xE035
   cpu.r1.de = 0x5BB9
@@ -1669,7 +1711,8 @@ test('Test fd6a', () => {
 
 test('Test fd6b', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xDB2A
   cpu.r1.bc = 0xE244
   cpu.r1.de = 0x1182
@@ -1709,7 +1752,8 @@ test('Test fd6b', () => {
 
 test('Test fd6c', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xA0BE
   cpu.r1.bc = 0x34EF
   cpu.r1.de = 0x8FCD
@@ -1749,7 +1793,8 @@ test('Test fd6c', () => {
 
 test('Test fd6d', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xFDFC
   cpu.r1.bc = 0x727A
   cpu.r1.de = 0xB839
@@ -1789,7 +1834,8 @@ test('Test fd6d', () => {
 
 test('Test fd6e', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xCFD4
   cpu.r1.bc = 0x6EF1
   cpu.r1.de = 0xC07D
@@ -1831,7 +1877,8 @@ test('Test fd6e', () => {
 
 test('Test fd6f', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x8E1D
   cpu.r1.bc = 0xA138
   cpu.r1.de = 0xF20A
@@ -1871,7 +1918,8 @@ test('Test fd6f', () => {
 
 test('Test fd70', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x2677
   cpu.r1.bc = 0x33C5
   cpu.r1.de = 0xC0DC
@@ -1912,7 +1960,8 @@ test('Test fd70', () => {
 
 test('Test fd71', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x892E
   cpu.r1.bc = 0x04AE
   cpu.r1.de = 0xD67F
@@ -1953,7 +2002,8 @@ test('Test fd71', () => {
 
 test('Test fd72', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xD2DC
   cpu.r1.bc = 0xC23C
   cpu.r1.de = 0xDD54
@@ -1994,7 +2044,8 @@ test('Test fd72', () => {
 
 test('Test fd73', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x49EF
   cpu.r1.bc = 0xBFF2
   cpu.r1.de = 0x8409
@@ -2035,7 +2086,8 @@ test('Test fd73', () => {
 
 test('Test fd74', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x9479
   cpu.r1.bc = 0x9817
   cpu.r1.de = 0xFA2E
@@ -2076,7 +2128,8 @@ test('Test fd74', () => {
 
 test('Test fd75', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xC8D6
   cpu.r1.bc = 0x6AA4
   cpu.r1.de = 0x180E
@@ -2117,7 +2170,8 @@ test('Test fd75', () => {
 
 test('Test fd77', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x6F9E
   cpu.r1.bc = 0x7475
   cpu.r1.de = 0x78AD
@@ -2158,7 +2212,8 @@ test('Test fd77', () => {
 
 test('Test fd7c', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xF228
   cpu.r1.bc = 0x93FC
   cpu.r1.de = 0xA3D4
@@ -2198,7 +2253,8 @@ test('Test fd7c', () => {
 
 test('Test fd7d', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x93E5
   cpu.r1.bc = 0x3CBE
   cpu.r1.de = 0x02C3
@@ -2238,7 +2294,8 @@ test('Test fd7d', () => {
 
 test('Test fd7e', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x1596
   cpu.r1.bc = 0xDABA
   cpu.r1.de = 0x147B
@@ -2280,7 +2337,8 @@ test('Test fd7e', () => {
 
 test('Test fd84', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xBFBA
   cpu.r1.bc = 0x7CAE
   cpu.r1.de = 0xC4DA
@@ -2320,7 +2378,8 @@ test('Test fd84', () => {
 
 test('Test fd85', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x52DD
   cpu.r1.bc = 0x1DEA
   cpu.r1.de = 0x324F
@@ -2360,7 +2419,8 @@ test('Test fd85', () => {
 
 test('Test fd86', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xFC9C
   cpu.r1.bc = 0xB882
   cpu.r1.de = 0x43F9
@@ -2402,7 +2462,8 @@ test('Test fd86', () => {
 
 test('Test fd8c', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xFD9C
   cpu.r1.bc = 0x42B1
   cpu.r1.de = 0x5E8A
@@ -2442,7 +2503,8 @@ test('Test fd8c', () => {
 
 test('Test fd8d', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x9301
   cpu.r1.bc = 0x7750
   cpu.r1.de = 0x8AD6
@@ -2482,7 +2544,8 @@ test('Test fd8d', () => {
 
 test('Test fd8e', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x41EE
   cpu.r1.bc = 0x398F
   cpu.r1.de = 0xF6DC
@@ -2524,7 +2587,8 @@ test('Test fd8e', () => {
 
 test('Test fd94', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x0431
   cpu.r1.bc = 0xD255
   cpu.r1.de = 0xB9D6
@@ -2564,7 +2628,8 @@ test('Test fd94', () => {
 
 test('Test fd95', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x8B5D
   cpu.r1.bc = 0xB455
   cpu.r1.de = 0x2388
@@ -2604,7 +2669,8 @@ test('Test fd95', () => {
 
 test('Test fd96', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xA0C6
   cpu.r1.bc = 0x22AC
   cpu.r1.de = 0x0413
@@ -2646,7 +2712,8 @@ test('Test fd96', () => {
 
 test('Test fd9c', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xA44A
   cpu.r1.bc = 0x3ECF
   cpu.r1.de = 0xCED3
@@ -2686,7 +2753,8 @@ test('Test fd9c', () => {
 
 test('Test fd9d', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x06C0
   cpu.r1.bc = 0x8BD0
   cpu.r1.de = 0x131B
@@ -2726,7 +2794,8 @@ test('Test fd9d', () => {
 
 test('Test fd9e', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xB983
   cpu.r1.bc = 0x981F
   cpu.r1.de = 0xBB8E
@@ -2768,7 +2837,8 @@ test('Test fd9e', () => {
 
 test('Test fda4', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xB079
   cpu.r1.bc = 0x79C0
   cpu.r1.de = 0x2C7C
@@ -2808,7 +2878,8 @@ test('Test fda4', () => {
 
 test('Test fda5', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x01D2
   cpu.r1.bc = 0x654D
   cpu.r1.de = 0x9653
@@ -2848,7 +2919,8 @@ test('Test fda5', () => {
 
 test('Test fda6', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xDDB8
   cpu.r1.bc = 0x40BB
   cpu.r1.de = 0x3742
@@ -2890,7 +2962,8 @@ test('Test fda6', () => {
 
 test('Test fdac', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x7A43
   cpu.r1.bc = 0x72E3
   cpu.r1.de = 0xDD4D
@@ -2930,7 +3003,8 @@ test('Test fdac', () => {
 
 test('Test fdad', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x7D8E
   cpu.r1.bc = 0x2573
   cpu.r1.de = 0x19CC
@@ -2970,7 +3044,8 @@ test('Test fdad', () => {
 
 test('Test fdae', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xA0DA
   cpu.r1.bc = 0xBC27
   cpu.r1.de = 0x257B
@@ -3012,7 +3087,8 @@ test('Test fdae', () => {
 
 test('Test fdb4', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x4F95
   cpu.r1.bc = 0x3461
   cpu.r1.de = 0xF173
@@ -3052,7 +3128,8 @@ test('Test fdb4', () => {
 
 test('Test fdb5', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x17F6
   cpu.r1.bc = 0xE6EA
   cpu.r1.de = 0xF919
@@ -3092,7 +3169,8 @@ test('Test fdb5', () => {
 
 test('Test fdb6', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xDB37
   cpu.r1.bc = 0x3509
   cpu.r1.de = 0xD6CA
@@ -3134,7 +3212,8 @@ test('Test fdb6', () => {
 
 test('Test fdbc', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xB4FC
   cpu.r1.bc = 0x9302
   cpu.r1.de = 0xE35D
@@ -3174,7 +3253,8 @@ test('Test fdbc', () => {
 
 test('Test fdbd', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x391C
   cpu.r1.bc = 0x7B82
   cpu.r1.de = 0xDFEB
@@ -3214,7 +3294,8 @@ test('Test fdbd', () => {
 
 test('Test fdbe', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x0970
   cpu.r1.bc = 0x0B31
   cpu.r1.de = 0xF4AD
@@ -3256,7 +3337,8 @@ test('Test fdbe', () => {
 
 test('Test fde1', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x828E
   cpu.r1.bc = 0x078B
   cpu.r1.de = 0x1E35
@@ -3298,7 +3380,8 @@ test('Test fde1', () => {
 
 test('Test fde3', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0x4298
   cpu.r1.bc = 0xC805
   cpu.r1.de = 0x6030
@@ -3340,7 +3423,8 @@ test('Test fde3', () => {
 
 test('Test fde5', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xD139
   cpu.r1.bc = 0xAA0D
   cpu.r1.de = 0xBF2B
@@ -3380,7 +3464,8 @@ test('Test fde5', () => {
 
 test('Test fde9', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xC14F
   cpu.r1.bc = 0x2EB6
   cpu.r1.de = 0xEDF0
@@ -3420,7 +3505,8 @@ test('Test fde9', () => {
 
 test('Test fdf9', () => {
   let mem = new Memory()
-  let cpu = new Z80(mem)
+  let io = new FakePort()
+  let cpu = new Z80(mem, io)
   cpu.r1.af = 0xC260
   cpu.r1.bc = 0x992E
   cpu.r1.de = 0xD544

@@ -25,11 +25,6 @@ const Register16Map2 = {
   0b11: 'af'
 }
 
-const RegisterMapHL = {
-  0b100: 'h',
-  0b101: 'l'
-}
-
 const Prefixes = {
   ix: 0xdd,
   iy: 0xfd
@@ -88,11 +83,9 @@ const Conditions = {
   m: c_m
 }
 
-const MemoryMethods = ['read8', 'read16', 'write8', 'write16']
-
 // Z80 constructor
 
-const Z80 = function(memory, debug) {
+const Z80 = function(memory, io, debug) {
   if (!(this instanceof Z80)) {
     throw 'Z80 is a constructor, use "new" keyword'
   }
@@ -108,7 +101,7 @@ const Z80 = function(memory, debug) {
     throw 'Memory instance should have read8 method'
   }
   this.memory = memory
-
+  this.io = io
   this.debugMode = debug
 
   this.read8 = addr => {
@@ -132,6 +125,15 @@ const Z80 = function(memory, debug) {
     let low = value & 0xff
     this.write8(addr, low)
     this.write8(addr + 1, high)
+  }
+
+  this.ioread = addr => {
+    this.tStates += 4
+    return this.io.read(addr)
+  }
+  this.iowrite = (addr, value) => {
+    this.tStates += 4
+    return this.io.write(addr, value)
   }
 
   // Creating registers
@@ -3560,6 +3562,22 @@ Z80.prototype.rrca = function() {
   this.r1.a = this.do_rrc(this.r1.a, false)
 }
 
+
+// IN A, (n)
+Z80.prototype.opcodeTable[0xdb] = { funcName: 'in_a__n_', dasm: 'in a, (0x{0})', args: [ArgType.Byte] }
+Z80.prototype.in_a__n_ = function() {
+  let port = this.read8(this.pc++)
+  port = (this.r1.a << 8) | port
+  this.r1.a = this.ioread(port)
+}
+
+// OUT (n), A
+Z80.prototype.opcodeTable[0xd3] = { funcName: 'out__n__a', dasm: 'out (0x{0}), a', args: [ArgType.Byte] }
+Z80.prototype.out__n__a = function() {
+  let port = this.read8(this.pc++)
+  port = (this.r1.a << 8) | port
+  this.iowrite(port, this.r1.a)
+}
 
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {

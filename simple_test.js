@@ -1,8 +1,10 @@
 const Z80 = require('./src/z80')
 const Memory = require('./src/memory')
+const { FakePort } = require('./src/port')
 
 let mem = new Memory()
-let cpu = new Z80(mem, true)
+let io = new FakePort()
+let cpu = new Z80(mem, io, true)
 cpu.r1.af = 0x8800
 cpu.r1.bc = 0x0000
 cpu.r1.de = 0x0000
