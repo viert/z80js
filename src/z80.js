@@ -3579,6 +3579,109 @@ Z80.prototype.out__n__a = function() {
   this.iowrite(port, this.r1.a)
 }
 
+// IN r, (C)
+for (let rCode in RegisterMap) {
+  let opCode = 0b01000000 | (rCode << 3)
+  let opFuncName = `in_${RegisterMap[rCode]}__c_`
+  let disasmString = `in ${RegisterMap[rCode]}, (c)`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+Z80.prototype.in_a__c_ = function() {
+  this.r1.a = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.a)
+  this.adjustFlags(this.r1.a)
+}
+
+Z80.prototype.in_b__c_ = function() {
+  this.r1.b = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.b)
+  this.adjustFlags(this.r1.b)
+}
+
+Z80.prototype.in_c__c_ = function() {
+  this.r1.c = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.c)
+  this.adjustFlags(this.r1.c)
+}
+
+Z80.prototype.in_d__c_ = function() {
+  this.r1.d = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.d)
+  this.adjustFlags(this.r1.d)
+}
+
+Z80.prototype.in_e__c_ = function() {
+  this.r1.e = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.e)
+  this.adjustFlags(this.r1.e)
+}
+
+Z80.prototype.in_h__c_ = function() {
+  this.r1.h = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.h)
+  this.adjustFlags(this.r1.h)
+}
+
+Z80.prototype.in_l__c_ = function() {
+  this.r1.l = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.l)
+  this.adjustFlags(this.r1.l)
+}
+
+
+// OUT (C), r
+for (let rCode in RegisterMap) {
+  let opCode = 0b01000001 | (rCode << 3)
+  let opFuncName = `out__c__${RegisterMap[rCode]}`
+  let disasmString = `out (c), ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+Z80.prototype.out__c__a = function() {
+  this.iowrite(this.r1.bc, this.r1.a)
+}
+
+Z80.prototype.out__c__b = function() {
+  this.iowrite(this.r1.bc, this.r1.b)
+}
+
+Z80.prototype.out__c__c = function() {
+  this.iowrite(this.r1.bc, this.r1.c)
+}
+
+Z80.prototype.out__c__d = function() {
+  this.iowrite(this.r1.bc, this.r1.d)
+}
+
+Z80.prototype.out__c__e = function() {
+  this.iowrite(this.r1.bc, this.r1.e)
+}
+
+Z80.prototype.out__c__h = function() {
+  this.iowrite(this.r1.bc, this.r1.h)
+}
+
+Z80.prototype.out__c__l = function() {
+  this.iowrite(this.r1.bc, this.r1.l)
+}
+
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',

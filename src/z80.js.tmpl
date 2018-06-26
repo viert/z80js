@@ -2037,6 +2037,47 @@ Z80.prototype.out__n__a = function() {
   this.iowrite(port, this.r1.a)
 }
 
+// IN r, (C)
+for (let rCode in RegisterMap) {
+  let opCode = 0b01000000 | (rCode << 3)
+  let opFuncName = `in_${RegisterMap[rCode]}__c_`
+  let disasmString = `in ${RegisterMap[rCode]}, (c)`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// #BEGIN in_[a,b,c,d,e,h,l]__c_
+Z80.prototype.$0 = function() {
+  this.r1.$1 = this.ioread(this.r1.bc)
+  this.resFlag(f_h | f_n)
+  this.adjustFlagSZP(this.r1.$1)
+  this.adjustFlags(this.r1.$1)
+}
+
+// #END
+
+// OUT (C), r
+for (let rCode in RegisterMap) {
+  let opCode = 0b01000001 | (rCode << 3)
+  let opFuncName = `out__c__${RegisterMap[rCode]}`
+  let disasmString = `out (c), ${RegisterMap[rCode]}`
+  Z80.prototype.opcodeTableED[opCode] = {
+    funcName: opFuncName,
+    dasm: disasmString,
+    args: []
+  }
+}
+
+// #BEGIN out__c__[a,b,c,d,e,h,l]
+Z80.prototype.$0 = function() {
+  this.iowrite(this.r1.bc, this.r1.$1)
+}
+
+// #END
+
 // JP nn
 Z80.prototype.opcodeTable[0xc3] = {
   funcName: 'jp_nn',
