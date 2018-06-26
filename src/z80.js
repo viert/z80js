@@ -4193,6 +4193,399 @@ Z80.prototype.rrd = function() {
   this.adjustFlagSZP(this.r1.a)
 }
 
+// BIT
+for (let b = 0; b < 8; b++) {
+  for (let rCode in RegisterMap) {
+    let opCode = 0b01000000 | (b << 3) | rCode
+    let opFuncName = `bit_${b}_${RegisterMap[rCode]}`
+    let disasmString = `bit ${b}, ${RegisterMap[rCode]}`
+    Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+    opCode = 0b01000110 | (b << 3)
+    Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
+    Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `bit_${b}__ix_d_`, dasm: `bit ${b}, (ix{0})`, args: [] }
+    Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `bit_${b}__iy_d_`, dasm: `bit ${b}, (iy{0})`, args: [] }
+  }
+}
+
+Z80.prototype.bit_0_a = function() {
+  this.doBitR(0, this.r1.a)
+}
+
+Z80.prototype.bit_0_b = function() {
+  this.doBitR(0, this.r1.b)
+}
+
+Z80.prototype.bit_0_c = function() {
+  this.doBitR(0, this.r1.c)
+}
+
+Z80.prototype.bit_0_d = function() {
+  this.doBitR(0, this.r1.d)
+}
+
+Z80.prototype.bit_0_e = function() {
+  this.doBitR(0, this.r1.e)
+}
+
+Z80.prototype.bit_0_h = function() {
+  this.doBitR(0, this.r1.h)
+}
+
+Z80.prototype.bit_0_l = function() {
+  this.doBitR(0, this.r1.l)
+}
+
+Z80.prototype.bit_1_a = function() {
+  this.doBitR(1, this.r1.a)
+}
+
+Z80.prototype.bit_1_b = function() {
+  this.doBitR(1, this.r1.b)
+}
+
+Z80.prototype.bit_1_c = function() {
+  this.doBitR(1, this.r1.c)
+}
+
+Z80.prototype.bit_1_d = function() {
+  this.doBitR(1, this.r1.d)
+}
+
+Z80.prototype.bit_1_e = function() {
+  this.doBitR(1, this.r1.e)
+}
+
+Z80.prototype.bit_1_h = function() {
+  this.doBitR(1, this.r1.h)
+}
+
+Z80.prototype.bit_1_l = function() {
+  this.doBitR(1, this.r1.l)
+}
+
+Z80.prototype.bit_2_a = function() {
+  this.doBitR(2, this.r1.a)
+}
+
+Z80.prototype.bit_2_b = function() {
+  this.doBitR(2, this.r1.b)
+}
+
+Z80.prototype.bit_2_c = function() {
+  this.doBitR(2, this.r1.c)
+}
+
+Z80.prototype.bit_2_d = function() {
+  this.doBitR(2, this.r1.d)
+}
+
+Z80.prototype.bit_2_e = function() {
+  this.doBitR(2, this.r1.e)
+}
+
+Z80.prototype.bit_2_h = function() {
+  this.doBitR(2, this.r1.h)
+}
+
+Z80.prototype.bit_2_l = function() {
+  this.doBitR(2, this.r1.l)
+}
+
+Z80.prototype.bit_3_a = function() {
+  this.doBitR(3, this.r1.a)
+}
+
+Z80.prototype.bit_3_b = function() {
+  this.doBitR(3, this.r1.b)
+}
+
+Z80.prototype.bit_3_c = function() {
+  this.doBitR(3, this.r1.c)
+}
+
+Z80.prototype.bit_3_d = function() {
+  this.doBitR(3, this.r1.d)
+}
+
+Z80.prototype.bit_3_e = function() {
+  this.doBitR(3, this.r1.e)
+}
+
+Z80.prototype.bit_3_h = function() {
+  this.doBitR(3, this.r1.h)
+}
+
+Z80.prototype.bit_3_l = function() {
+  this.doBitR(3, this.r1.l)
+}
+
+Z80.prototype.bit_4_a = function() {
+  this.doBitR(4, this.r1.a)
+}
+
+Z80.prototype.bit_4_b = function() {
+  this.doBitR(4, this.r1.b)
+}
+
+Z80.prototype.bit_4_c = function() {
+  this.doBitR(4, this.r1.c)
+}
+
+Z80.prototype.bit_4_d = function() {
+  this.doBitR(4, this.r1.d)
+}
+
+Z80.prototype.bit_4_e = function() {
+  this.doBitR(4, this.r1.e)
+}
+
+Z80.prototype.bit_4_h = function() {
+  this.doBitR(4, this.r1.h)
+}
+
+Z80.prototype.bit_4_l = function() {
+  this.doBitR(4, this.r1.l)
+}
+
+Z80.prototype.bit_5_a = function() {
+  this.doBitR(5, this.r1.a)
+}
+
+Z80.prototype.bit_5_b = function() {
+  this.doBitR(5, this.r1.b)
+}
+
+Z80.prototype.bit_5_c = function() {
+  this.doBitR(5, this.r1.c)
+}
+
+Z80.prototype.bit_5_d = function() {
+  this.doBitR(5, this.r1.d)
+}
+
+Z80.prototype.bit_5_e = function() {
+  this.doBitR(5, this.r1.e)
+}
+
+Z80.prototype.bit_5_h = function() {
+  this.doBitR(5, this.r1.h)
+}
+
+Z80.prototype.bit_5_l = function() {
+  this.doBitR(5, this.r1.l)
+}
+
+Z80.prototype.bit_6_a = function() {
+  this.doBitR(6, this.r1.a)
+}
+
+Z80.prototype.bit_6_b = function() {
+  this.doBitR(6, this.r1.b)
+}
+
+Z80.prototype.bit_6_c = function() {
+  this.doBitR(6, this.r1.c)
+}
+
+Z80.prototype.bit_6_d = function() {
+  this.doBitR(6, this.r1.d)
+}
+
+Z80.prototype.bit_6_e = function() {
+  this.doBitR(6, this.r1.e)
+}
+
+Z80.prototype.bit_6_h = function() {
+  this.doBitR(6, this.r1.h)
+}
+
+Z80.prototype.bit_6_l = function() {
+  this.doBitR(6, this.r1.l)
+}
+
+Z80.prototype.bit_7_a = function() {
+  this.doBitR(7, this.r1.a)
+}
+
+Z80.prototype.bit_7_b = function() {
+  this.doBitR(7, this.r1.b)
+}
+
+Z80.prototype.bit_7_c = function() {
+  this.doBitR(7, this.r1.c)
+}
+
+Z80.prototype.bit_7_d = function() {
+  this.doBitR(7, this.r1.d)
+}
+
+Z80.prototype.bit_7_e = function() {
+  this.doBitR(7, this.r1.e)
+}
+
+Z80.prototype.bit_7_h = function() {
+  this.doBitR(7, this.r1.h)
+}
+
+Z80.prototype.bit_7_l = function() {
+  this.doBitR(7, this.r1.l)
+}
+
+
+Z80.prototype.bit_0__hl_ = function() {
+  this.tStates++
+  this.doBitR(0, this.read8(this.r1.hl))
+}
+
+Z80.prototype.bit_1__hl_ = function() {
+  this.tStates++
+  this.doBitR(1, this.read8(this.r1.hl))
+}
+
+Z80.prototype.bit_2__hl_ = function() {
+  this.tStates++
+  this.doBitR(2, this.read8(this.r1.hl))
+}
+
+Z80.prototype.bit_3__hl_ = function() {
+  this.tStates++
+  this.doBitR(3, this.read8(this.r1.hl))
+}
+
+Z80.prototype.bit_4__hl_ = function() {
+  this.tStates++
+  this.doBitR(4, this.read8(this.r1.hl))
+}
+
+Z80.prototype.bit_5__hl_ = function() {
+  this.tStates++
+  this.doBitR(5, this.read8(this.r1.hl))
+}
+
+Z80.prototype.bit_6__hl_ = function() {
+  this.tStates++
+  this.doBitR(6, this.read8(this.r1.hl))
+}
+
+Z80.prototype.bit_7__hl_ = function() {
+  this.tStates++
+  this.doBitR(7, this.read8(this.r1.hl))
+}
+
+
+Z80.prototype.bit_0__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(0, addr)
+}
+
+Z80.prototype.bit_0__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(0, addr)
+}
+
+Z80.prototype.bit_1__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(1, addr)
+}
+
+Z80.prototype.bit_1__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(1, addr)
+}
+
+Z80.prototype.bit_2__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(2, addr)
+}
+
+Z80.prototype.bit_2__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(2, addr)
+}
+
+Z80.prototype.bit_3__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(3, addr)
+}
+
+Z80.prototype.bit_3__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(3, addr)
+}
+
+Z80.prototype.bit_4__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(4, addr)
+}
+
+Z80.prototype.bit_4__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(4, addr)
+}
+
+Z80.prototype.bit_5__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(5, addr)
+}
+
+Z80.prototype.bit_5__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(5, addr)
+}
+
+Z80.prototype.bit_6__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(6, addr)
+}
+
+Z80.prototype.bit_6__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(6, addr)
+}
+
+Z80.prototype.bit_7__ix_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.ix + offset
+  this.doBitIndexed(7, addr)
+}
+
+Z80.prototype.bit_7__iy_d_ = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.iy + offset
+  this.doBitIndexed(7, addr)
+}
+
+
 // IN A, (n)
 Z80.prototype.opcodeTable[0xdb] = { funcName: 'in_a__n_', dasm: 'in a, (0x{0})', args: [ArgType.Byte] }
 Z80.prototype.in_a__n_ = function() {

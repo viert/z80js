@@ -2191,6 +2191,45 @@ Z80.prototype.rrd = function() {
   this.adjustFlagSZP(this.r1.a)
 }
 
+// BIT
+for (let b = 0; b < 8; b++) {
+  for (let rCode in RegisterMap) {
+    let opCode = 0b01000000 | (b << 3) | rCode
+    let opFuncName = `bit_${b}_${RegisterMap[rCode]}`
+    let disasmString = `bit ${b}, ${RegisterMap[rCode]}`
+    Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
+    opCode = 0b01000110 | (b << 3)
+    Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
+    Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `bit_${b}__ix_d_`, dasm: `bit ${b}, (ix{0})`, args: [] }
+    Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `bit_${b}__iy_d_`, dasm: `bit ${b}, (iy{0})`, args: [] }
+  }
+}
+
+// #BEGIN bit_[0,1,2,3,4,5,6,7]_[a,b,c,d,e,h,l]
+Z80.prototype.$0 = function() {
+  this.doBitR($1, this.r1.$2)
+}
+
+// #END
+
+// #BEGIN bit_[0,1,2,3,4,5,6,7]__hl_
+Z80.prototype.$0 = function() {
+  this.tStates++
+  this.doBitR($1, this.read8(this.r1.hl))
+}
+
+// #END
+
+// #BEGIN bit_[0,1,2,3,4,5,6,7]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.$2 + offset
+  this.doBitIndexed($1, addr)
+}
+
+// #END
+
 // IN A, (n)
 Z80.prototype.opcodeTable[0xdb] = { funcName: 'in_a__n_', dasm: 'in a, (0x{0})', args: [ArgType.Byte] }
 Z80.prototype.in_a__n_ = function() {
