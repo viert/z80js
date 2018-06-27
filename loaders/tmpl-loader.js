@@ -1,5 +1,3 @@
-const fs = require('fs')
-const path = require('path')
 const WaitForTemplate = 0
 const ReadTemplate = 1
 const FuncNameExpression = /\[([^\]]+)\]/
@@ -10,10 +8,10 @@ const expandFuncTemplate = function(funcNameTemplate, vars) {
     vars = []
   }
   if (!FuncNameExpression.test(funcNameTemplate)) {
-    return [ [ funcNameTemplate, vars ] ]
+    return [[funcNameTemplate, vars]]
   } else {
     let variants = FuncNameExpression.exec(funcNameTemplate)[1].split(',')
-    variants.forEach((variant) => {
+    variants.forEach(variant => {
       results = results.concat(
         expandFuncTemplate(funcNameTemplate.replace(FuncNameExpression, variant), vars.concat(variant))
       )
@@ -24,9 +22,9 @@ const expandFuncTemplate = function(funcNameTemplate, vars) {
 
 const compileFunction = function(funcNameTemplate, funcImplementation) {
   let lines = []
-  expandFuncTemplate(funcNameTemplate).forEach((data) => {
-    let vars = [ data[0] ].concat(data[1])
-    funcImplementation.forEach((line) => {
+  expandFuncTemplate(funcNameTemplate).forEach(data => {
+    let vars = [data[0]].concat(data[1])
+    funcImplementation.forEach(line => {
       vars.forEach((v, i) => {
         let varNameRegexp = new RegExp('\\$' + i.toString(), 'g')
         line = line.replace(varNameRegexp, v)
@@ -37,13 +35,13 @@ const compileFunction = function(funcNameTemplate, funcImplementation) {
   return lines
 }
 
-const compile = function(template) {
+module.exports = function(template) {
   let result = []
   let state = WaitForTemplate
   let funcNameTemplate
   let funcImplementation
 
-  template.split('\n').forEach((line) => {
+  template.split('\n').forEach(line => {
     if (state === WaitForTemplate) {
       let idx = line.indexOf('#BEGIN ')
       if (idx >= 0) {
@@ -67,7 +65,3 @@ const compile = function(template) {
   }
   return result.join('\n')
 }
-
-let template = fs.readFileSync(path.resolve(__dirname, 'src/z80.js.tmpl'))
-let compiled = compile(template.toString())
-fs.writeFileSync(path.resolve(__dirname, 'src/z80.js'), compiled)

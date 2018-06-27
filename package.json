@@ -4,7 +4,7 @@
   "description": "",
   "main": "compile.js",
   "scripts": {
-    "build": "node compile.js",
+    "build": "webpack",
     "build_tests": "node create_tests.js",
     "test": "jest"
   },
@@ -16,6 +16,10 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/viert/zcg#readme",
   "devDependencies": {
-    "jest": "^23.1.0"
+    "babel": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "jest": "^23.1.0",
+    "webpack": "^4.12.2",
+    "webpack-cli": "^3.0.8"
   }
 }
