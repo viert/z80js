@@ -1,5 +1,5 @@
 const Memory = require("../src/memory")
-const Z80 = require("../src/z80")
+const Z80 = require("../dist/z80bundle")
 const { FakePort } = require("../src/port")
 
 test('Test ed40', () => {

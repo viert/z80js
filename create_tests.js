@@ -1,8 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const Z80 = require('./src/z80')
-const Memory = require('./src/memory')
-const { NotImplemented } = require('./src/errors')
 const { hex16, hex8 } = require('./src/utils')
 const tests = {}
 
@@ -94,7 +91,6 @@ let expected = fs.readFileSync(path.resolve(__dirname, 'tests.expected'))
 expected = expected.toString().split('\n')
 prepareTestsOutput(expected)
 
-// let testLines = [ 'const Memory = require("./src/memory")', 'const Z80 = require("./src/z80")' ]
 let testRenders = {
   main: [],
   cb: [],
@@ -175,7 +171,7 @@ for (let key in testRenders) {
   let fileName = path.resolve(__dirname, `__tests__/${key}.js`)
   let lines = [
     'const Memory = require("../src/memory")',
-    'const Z80 = require("../src/z80")',
+    'const Z80 = require("../dist/z80bundle")',
     'const { FakePort } = require("../src/port")',
     ''
   ].concat(testRenders[key])

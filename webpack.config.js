@@ -2,7 +2,6 @@ const path = require('path')
 
 module.exports = {
   target: 'node',
-  mode: 'development',
   entry: './src/z80.js.tmpl',
   output: {
     filename: 'z80bundle.js',
