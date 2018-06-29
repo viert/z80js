@@ -2643,6 +2643,26 @@ Z80.prototype.$0 = function() {
 
 // #END
 
+let retnDeclaration = { funcName: 'retn', dasm: 'retn', args: [] }
+Z80.prototype.opcodeTableED[0x45] = retnDeclaration
+Z80.prototype.opcodeTableED[0x55] = retnDeclaration
+Z80.prototype.opcodeTableED[0x65] = retnDeclaration
+Z80.prototype.opcodeTableED[0x75] = retnDeclaration
+Z80.prototype.opcodeTableED[0x5d] = retnDeclaration
+Z80.prototype.opcodeTableED[0x6d] = retnDeclaration
+Z80.prototype.opcodeTableED[0x7d] = retnDeclaration
+
+Z80.prototype.retn = function() {
+  this.iff1 = this.iff2
+  this.ret()
+}
+
+Z80.prototype.opcodeTableED[0x4d] = { funcName: 'reti', dasm: 'reti', args: [] }
+Z80.prototype.reti = function() {
+  this.iff1 = this.iff2
+  this.ret()
+}
+
 // RST p
 for (let p = 0; p < 8; p++) {
   let vector = p << 3
