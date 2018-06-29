@@ -2010,6 +2010,13 @@ Z80.prototype.cpl = function() {
 
 // NEG
 Z80.prototype.opcodeTableED[0x44] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.opcodeTableED[0x54] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.opcodeTableED[0x64] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.opcodeTableED[0x74] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.opcodeTableED[0x4c] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.opcodeTableED[0x5c] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.opcodeTableED[0x6c] = { funcName: 'neg', dasm: 'neg', args: [] }
+Z80.prototype.opcodeTableED[0x7c] = { funcName: 'neg', dasm: 'neg', args: [] }
 Z80.prototype.neg = function() {
   let _t = this.r1.a
   this.r1.a = 0
