@@ -1492,6 +1492,10 @@ for (let rCode in RegisterMap) {
     args: []
   }
 }
+Z80.prototype.opcodeTableDD[0x84] = { funcName: 'add_a_ixh', dasm: 'add a, ixh', args: [] }
+Z80.prototype.opcodeTableDD[0x85] = { funcName: 'add_a_ixl', dasm: 'add a, ixl', args: [] }
+Z80.prototype.opcodeTableFD[0x84] = { funcName: 'add_a_iyh', dasm: 'add a, iyh', args: [] }
+Z80.prototype.opcodeTableFD[0x85] = { funcName: 'add_a_iyl', dasm: 'add a, iyl', args: [] }
 
 // ADC A, r
 for (let rCode in RegisterMap) {
@@ -1505,6 +1509,10 @@ for (let rCode in RegisterMap) {
     args: []
   }
 }
+Z80.prototype.opcodeTableDD[0x8c] = { funcName: 'adc_a_ixh', dasm: 'adc a, ixh', args: [] }
+Z80.prototype.opcodeTableDD[0x8d] = { funcName: 'adc_a_ixl', dasm: 'adc a, ixl', args: [] }
+Z80.prototype.opcodeTableFD[0x8c] = { funcName: 'adc_a_iyh', dasm: 'adc a, iyh', args: [] }
+Z80.prototype.opcodeTableFD[0x8d] = { funcName: 'adc_a_iyl', dasm: 'adc a, iyl', args: [] }
 
 // SUB A, r
 for (let rCode in RegisterMap) {
@@ -1518,6 +1526,10 @@ for (let rCode in RegisterMap) {
     args: []
   }
 }
+Z80.prototype.opcodeTableDD[0x94] = { funcName: 'sub_a_ixh', dasm: 'sub ixh', args: [] }
+Z80.prototype.opcodeTableDD[0x95] = { funcName: 'sub_a_ixl', dasm: 'sub ixl', args: [] }
+Z80.prototype.opcodeTableFD[0x94] = { funcName: 'sub_a_iyh', dasm: 'sub iyh', args: [] }
+Z80.prototype.opcodeTableFD[0x95] = { funcName: 'sub_a_iyl', dasm: 'sub iyl', args: [] }
 
 // SBC A, r
 for (let rCode in RegisterMap) {
@@ -1531,6 +1543,10 @@ for (let rCode in RegisterMap) {
     args: []
   }
 }
+Z80.prototype.opcodeTableDD[0x9c] = { funcName: 'sbc_a_ixh', dasm: 'sbc a, ixh', args: [] }
+Z80.prototype.opcodeTableDD[0x9d] = { funcName: 'sbc_a_ixl', dasm: 'sbc a, ixl', args: [] }
+Z80.prototype.opcodeTableFD[0x9c] = { funcName: 'sbc_a_iyh', dasm: 'sbc a, iyh', args: [] }
+Z80.prototype.opcodeTableFD[0x9d] = { funcName: 'sbc_a_iyl', dasm: 'sbc a, iyl', args: [] }
 
 // #BEGIN [adc,sbc,add,sub]_a_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]
 Z80.prototype.$0 = function() {
@@ -1699,14 +1715,19 @@ for (let rCode in RegisterMap) {
   let disasmString = `and ${RegisterMap[rCode]}`
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
 }
+Z80.prototype.opcodeTableDD[0xa4] = { funcName: 'and_ixh', dasm: 'and ixh', args: [] }
+Z80.prototype.opcodeTableDD[0xa5] = { funcName: 'and_ixl', dasm: 'and ixl', args: [] }
+Z80.prototype.opcodeTableFD[0xa4] = { funcName: 'and_iyh', dasm: 'and iyh', args: [] }
+Z80.prototype.opcodeTableFD[0xa5] = { funcName: 'and_iyl', dasm: 'and iyl', args: [] }
+
 // AND n
 Z80.prototype.opcodeTable[0xe6] = { funcName: 'and_n', dasm: 'and {0}', args: [ArgType.Byte] }
 // AND (HL/IX+d/IY+d)
 Z80.prototype.opcodeTable[0xa6] = { funcName: 'and__hl_', dasm: 'and (hl)', args: [] }
 for (let pref in Prefixes) {
   Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xa6] = {
-    funcName: `add__${pref}_d_`,
-    dasm: `add ${pref}{0}`,
+    funcName: `and__${pref}_d_`,
+    dasm: `and ${pref}{0}`,
     args: [ArgType.Offset]
   }
 }
@@ -1718,6 +1739,11 @@ for (let rCode in RegisterMap) {
   let disasmString = `or ${RegisterMap[rCode]}`
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
 }
+Z80.prototype.opcodeTableDD[0xb4] = { funcName: 'or_ixh', dasm: 'or ixh', args: [] }
+Z80.prototype.opcodeTableDD[0xb5] = { funcName: 'or_ixl', dasm: 'or ixl', args: [] }
+Z80.prototype.opcodeTableFD[0xb4] = { funcName: 'or_iyh', dasm: 'or iyh', args: [] }
+Z80.prototype.opcodeTableFD[0xb5] = { funcName: 'or_iyl', dasm: 'or iyl', args: [] }
+
 // OR n
 Z80.prototype.opcodeTable[0xf6] = { funcName: 'or_n', dasm: 'or {0}', args: [ArgType.Byte] }
 // OR (HL/IX+d/IY+d)
@@ -1737,6 +1763,11 @@ for (let rCode in RegisterMap) {
   let disasmString = `xor ${RegisterMap[rCode]}`
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
 }
+Z80.prototype.opcodeTableDD[0xac] = { funcName: 'xor_ixh', dasm: 'xor ixh', args: [] }
+Z80.prototype.opcodeTableDD[0xad] = { funcName: 'xor_ixl', dasm: 'xor ixl', args: [] }
+Z80.prototype.opcodeTableFD[0xac] = { funcName: 'xor_iyh', dasm: 'xor iyh', args: [] }
+Z80.prototype.opcodeTableFD[0xad] = { funcName: 'xor_iyl', dasm: 'xor iyl', args: [] }
+
 // XOR n
 Z80.prototype.opcodeTable[0xee] = { funcName: 'xor_n', dasm: 'xor {0}', args: [ArgType.Byte] }
 // XOR (HL/IX+d/IY+d)
@@ -1786,6 +1817,11 @@ for (let rCode in RegisterMap) {
   let disasmString = `cp ${RegisterMap[rCode]}`
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
 }
+Z80.prototype.opcodeTableDD[0xbc] = { funcName: 'cp_ixh', dasm: 'cp ixh', args: [] }
+Z80.prototype.opcodeTableDD[0xbd] = { funcName: 'cp_ixl', dasm: 'cp ixl', args: [] }
+Z80.prototype.opcodeTableFD[0xbc] = { funcName: 'cp_iyh', dasm: 'cp iyh', args: [] }
+Z80.prototype.opcodeTableFD[0xbd] = { funcName: 'cp_iyl', dasm: 'cp iyl', args: [] }
+
 // CP n
 Z80.prototype.opcodeTable[0xfe] = { funcName: 'cp_n', dasm: 'cp {0}', args: [ArgType.Byte] }
 // CP (HL/IX+d/IY+d)
