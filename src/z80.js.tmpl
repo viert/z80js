@@ -2037,8 +2037,13 @@ Z80.prototype.$0 = function() {
 
 // IM
 Z80.prototype.opcodeTableED[0x46] = { funcName: 'im_0', dasm: 'im 0', args: [] }
+Z80.prototype.opcodeTableED[0x4e] = { funcName: 'im_0', dasm: 'im 0', args: [] }
+Z80.prototype.opcodeTableED[0x66] = { funcName: 'im_0', dasm: 'im 0', args: [] }
+Z80.prototype.opcodeTableED[0x6e] = { funcName: 'im_0', dasm: 'im 0', args: [] }
 Z80.prototype.opcodeTableED[0x56] = { funcName: 'im_1', dasm: 'im 1', args: [] }
+Z80.prototype.opcodeTableED[0x76] = { funcName: 'im_1', dasm: 'im 1', args: [] }
 Z80.prototype.opcodeTableED[0x5e] = { funcName: 'im_2', dasm: 'im 2', args: [] }
+Z80.prototype.opcodeTableED[0x7e] = { funcName: 'im_2', dasm: 'im 2', args: [] }
 
 // #BEGIN im_[0,1,2]
 Z80.prototype.$0 = function() {
