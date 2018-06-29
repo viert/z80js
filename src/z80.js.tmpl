@@ -2735,12 +2735,44 @@ for (let b = 0; b < 8; b++) {
   }
 }
 
+for (let rCode in RegisterMap) {
+  let iMap = {
+    0b00: 'sla',
+    0b01: 'sra',
+    0b10: 'sll',
+    0b11: 'srl'
+  }
+  for (let op in iMap) {
+    for (let pref in Prefixes) {
+      let opCode = 0b00100000 | (op << 3) | rCode
+      let opFuncName = `ld_${RegisterMap[rCode]}_${iMap[op]}__${pref}_d_`
+      let disasmString = `ld ${RegisterMap[rCode]}, ${iMap[op]} (${pref}{0})`
+      Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xcb].nextTable[opCode] = {
+        funcName: opFuncName,
+        dasm: disasmString,
+        args: [ArgType.Offset]
+      }
+    }
+  }
+}
+
 // #BEGIN ld_[a,b,c,d,e,h,l]_[set,res]_[0,1,2,3,4,5,6,7]__[ix,iy]_d_
 Z80.prototype.$0 = function() {
   this.tStates += 2
   let offset = signed8(this.read8(this.pc++))
   let addr = this.r1.$4 + offset
   this.r1.$1 = this.doSetRes(bitState_$2, $3, this.read8(addr))
+  this.write8(addr, this.r1.$1)
+}
+
+// #END
+
+// #BEGIN ld_[a,b,c,d,e,h,l]_[sl,sr][a,l]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.$4 + offset
+  this.r1.$1 = this.do_$2(this.read8(addr), isArithmetics_$3)
   this.write8(addr, this.r1.$1)
 }
 
