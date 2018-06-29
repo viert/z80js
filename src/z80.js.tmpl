@@ -1885,6 +1885,11 @@ for (let rCode in RegisterMap) {
   let disasmString = `inc ${RegisterMap[rCode]}`
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
 }
+Z80.prototype.opcodeTableDD[0x24] = { funcName: 'inc_ixh', dasm: 'inc ixh', args: [] }
+Z80.prototype.opcodeTableDD[0x2c] = { funcName: 'inc_ixl', dasm: 'inc ixl', args: [] }
+Z80.prototype.opcodeTableFD[0x24] = { funcName: 'inc_iyh', dasm: 'inc iyh', args: [] }
+Z80.prototype.opcodeTableFD[0x2c] = { funcName: 'inc_iyl', dasm: 'inc iyl', args: [] }
+
 // INC (HL/IX+d/IY+d)
 Z80.prototype.opcodeTable[0x34] = { funcName: 'inc__hl_', dasm: 'inc (hl)', args: [] }
 for (let pref in Prefixes) {
@@ -1902,6 +1907,11 @@ for (let rCode in RegisterMap) {
   let disasmString = `dec ${RegisterMap[rCode]}`
   Z80.prototype.opcodeTable[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
 }
+Z80.prototype.opcodeTableDD[0x25] = { funcName: 'dec_ixh', dasm: 'dec ixh', args: [] }
+Z80.prototype.opcodeTableDD[0x2d] = { funcName: 'dec_ixl', dasm: 'dec ixl', args: [] }
+Z80.prototype.opcodeTableFD[0x25] = { funcName: 'dec_iyh', dasm: 'dec iyh', args: [] }
+Z80.prototype.opcodeTableFD[0x2d] = { funcName: 'dec_iyl', dasm: 'dec iyl', args: [] }
+
 // DEC (HL/IX+d/IY+d)
 Z80.prototype.opcodeTable[0x35] = { funcName: 'dec__hl_', dasm: 'dec (hl)', args: [] }
 for (let pref in Prefixes) {
@@ -2388,8 +2398,13 @@ for (let rCode in RegisterMap) {
     args: []
   }
 }
+Z80.prototype.opcodeTableED[0x70] = {
+  funcName: 'in_f__c_',
+  dasm: 'in f, (c)',
+  args: []
+}
 
-// #BEGIN in_[a,b,c,d,e,h,l]__c_
+// #BEGIN in_[a,b,c,d,e,f,h,l]__c_
 Z80.prototype.$0 = function() {
   this.r1.$1 = this.ioread(this.r1.bc)
   this.resFlag(f_h | f_n)
