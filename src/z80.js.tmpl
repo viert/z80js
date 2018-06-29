@@ -1023,7 +1023,7 @@ for (let dst in RegisterMap) {
   for (let iReg in Prefixes) {
     let opFuncName = `ld_${RegisterMap[dst]}__${iReg}_d_`
     let disasmString = `ld ${RegisterMap[dst]}, (${iReg}+{0})`
-    Z80.prototype.opcodeTable[Prefixes[iReg]][opCode] = {
+    Z80.prototype.opcodeTable[Prefixes[iReg]].nextTable[opCode] = {
       funcName: opFuncName,
       dasm: disasmString,
       args: [ArgType.Byte]
@@ -1035,7 +1035,7 @@ for (let dst in RegisterMap) {
 Z80.prototype.$0 = function() {
   this.tStates += 5
   let offset = signed8(this.read8(this.pc++))
-  this.r1.$1 = this.read8(this.$2 + offset)
+  this.r1.$1 = this.read8(this.r1.$2 + offset)
 }
 
 // #END
@@ -1067,7 +1067,7 @@ Z80.prototype.$0 = function() {
 for (let iReg in Prefixes) {
   let opFuncName = `ld__${iReg}_d__n`
   let disasmString = `ld (${iReg}+{0}), {1}`
-  Z80.prototype.opcodeTable[Prefixes[iReg]][0b00110110] = {
+  Z80.prototype.opcodeTable[Prefixes[iReg]].nextTable[0b00110110] = {
     funcName: opFuncName,
     dasm: disasmString,
     args: [ArgType.Word]
@@ -1076,6 +1076,7 @@ for (let iReg in Prefixes) {
 
 // #BEGIN ld__[ix,iy]_d__n
 Z80.prototype.$0 = function() {
+  this.tStates += 2
   let offset = signed8(this.read8(this.pc++))
   let n = this.read8(this.pc++)
   this.write8(this.$1 + offset, n)
