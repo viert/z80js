@@ -1,17 +1,16 @@
 # z80js
 
-Z80js is a work-in-progress Javascript Z80 disassembler and program debugger.
-It's highly inspired by libz80 library by Gabriel Gambetta but apart from complete Go port
+z80js is a Javascript Z80 disassembler and program debugger.
+
+It's highly inspired by libz80 C library by Gabriel Gambetta but apart from my complete Go port
 https://github.com/viert/z80 this one is done from scratch with more accurate timings, smarter
 code generation and designed to pass well-known z80 fuse tests (included).
 
-At the moment all non-prefixed codes are finished and passing all the tests. Most of prefixed officially documented
-Z80 instructions http://www.zilog.com/manage_directlink.php?filepath=docs/z80/um0080&extn=.pdf are implemented and
-passing tests. Disassembler works properly for those.
+All officially documented Z80 instructions http://www.zilog.com/manage_directlink.php?filepath=docs/z80/um0080&extn=.pdf are implemented and passing tests.
 
-Z80js is designed to work in browsers and being developed to become a part of http://t.z80online.net online Z80 assembler/debugger
+z80js is designed to work in browsers and being developed to become a part of http://t.z80online.net online Z80 assembler/debugger
 
-### Compiling
+### Building
 
 - `git clone`
 - `npm i` to install dependencies
@@ -31,3 +30,6 @@ data being passed via the high byte of a port, i.e. if you read from a port 0xFE
 `debug` is a boolean to switch the debug mode on and off. In debug mode the library logs a lot of debug data during running commands.
 
 After creating a cpu instance just run `cpu.execute()` - this will run a single cpu instruction located where PC register points.
+
+`cpu.disassemble(addr)` disassembles an instruction by address `addr`. If no argument is given, the next instruction is being disassembled (i.e. addr equals cpu's PC register). For convenience `disassemble` method returns an object with fields
+`dasm` containing the disassembled code string and `nextAddr` for you to know what the address of the following instruction is.
