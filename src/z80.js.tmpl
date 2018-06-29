@@ -69,8 +69,8 @@ const ie_di = false
 const isArithmetics_a = true
 const isArithmetics_l = false
 
-const state_set = true
-const state_res = false
+const bitState_set = true
+const bitState_res = false
 
 const ArgType = {
   Byte: 1,
@@ -2212,10 +2212,12 @@ for (let b = 0; b < 8; b++) {
     let disasmString = `bit ${b}, ${RegisterMap[rCode]}`
     Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
   }
-  let opCode = 0b01000110 | (b << 3)
-  Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
-  Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `bit_${b}__ix_d_`, dasm: `bit ${b}, (ix{0})`, args: [] }
-  Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `bit_${b}__iy_d_`, dasm: `bit ${b}, (iy{0})`, args: [] }
+  for (let s = 0; s < 8; s++) {
+    let opCode = 0b01000000 | (b << 3) | s
+    Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
+    Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `bit_${b}__ix_d_`, dasm: `bit ${b}, (ix{0})`, args: [] }
+    Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `bit_${b}__iy_d_`, dasm: `bit ${b}, (iy{0})`, args: [] }
+  }
 }
 
 // #BEGIN bit_[0,1,2,3,4,5,6,7]_[a,b,c,d,e,h,l]
@@ -2272,7 +2274,7 @@ for (let b = 0; b < 8; b++) {
 
 // #BEGIN [set,res]_[0,1,2,3,4,5,6,7]_[a,b,c,d,e,h,l]
 Z80.prototype.$0 = function() {
-  this.r1.$3 = this.doSetRes(state_$1, $2, this.r1.$3)
+  this.r1.$3 = this.doSetRes(bitState_$1, $2, this.r1.$3)
 }
 
 // #END
@@ -2280,7 +2282,7 @@ Z80.prototype.$0 = function() {
 // #BEGIN [set,res]_[0,1,2,3,4,5,6,7]__hl_
 Z80.prototype.$0 = function() {
   this.tStates++
-  this.write8(this.r1.hl, this.doSetRes(state_$1, $2, this.read8(this.r1.hl)))
+  this.write8(this.r1.hl, this.doSetRes(bitState_$1, $2, this.read8(this.r1.hl)))
 }
 
 // #END
@@ -2290,7 +2292,7 @@ Z80.prototype.$0 = function() {
   this.tStates += 2
   let offset = signed8(this.read8(this.pc++))
   let addr = this.r1.$3 + offset
-  this.write8(addr, this.doSetRes(state_$1, $2, this.read8(addr)))
+  this.write8(addr, this.doSetRes(bitState_$1, $2, this.read8(addr)))
 }
 
 // #END
@@ -2394,6 +2396,11 @@ for (let rCode in RegisterMap) {
 // #BEGIN out__c__[a,b,c,d,e,h,l]
 Z80.prototype.$0 = function() {
   this.iowrite(this.r1.bc, this.r1.$1)
+}
+
+Z80.prototype.opcodeTableED[0x71] = { funcName: 'out__c__0', dasm: 'out (c), 0', args: [] }
+Z80.prototype.out__c__0 = function() {
+  this.iowrite(this.r1.bc, 0)
 }
 
 // #END
@@ -2614,5 +2621,45 @@ Z80.prototype.$0 = function() {
 }
 
   #END */
+
+// Sophisticated indexed acc loads
+for (let b = 0; b < 8; b++) {
+  let opCode
+  for (let rCode in RegisterMap) {
+    opCode = 0b10000000 | rCode | (b << 3)
+    Z80.prototype.opcodeTableDDCB[opCode] = {
+      funcName: `ld_${RegisterMap[rCode]}_res_${b}__ix_d_`,
+      dasm: `ld ${RegisterMap[rCode]}, res ${b}, (ix{0})`,
+      args: [ArgType.Offset]
+    }
+    Z80.prototype.opcodeTableFDCB[opCode] = {
+      funcName: `ld_${RegisterMap[rCode]}_res_${b}__iy_d_`,
+      dasm: `ld ${RegisterMap[rCode]}, res ${b}, (iy{0})`,
+      args: [ArgType.Offset]
+    }
+    opCode = 0b11000000 | rCode | (b << 3)
+    Z80.prototype.opcodeTableDDCB[opCode] = {
+      funcName: `ld_${RegisterMap[rCode]}_set_${b}__ix_d_`,
+      dasm: `ld ${RegisterMap[rCode]}, set ${b}, (ix{0})`,
+      args: [ArgType.Offset]
+    }
+    Z80.prototype.opcodeTableFDCB[opCode] = {
+      funcName: `ld_${RegisterMap[rCode]}_set_${b}__iy_d_`,
+      dasm: `ld ${RegisterMap[rCode]}, set ${b}, (iy{0})`,
+      args: [ArgType.Offset]
+    }
+  }
+}
+
+// #BEGIN ld_[a,b,c,d,e,h,l]_[set,res]_[0,1,2,3,4,5,6,7]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.$4 + offset
+  this.r1.$1 = this.doSetRes(bitState_$2, $3, this.read8(addr))
+  this.write8(addr, this.r1.$1)
+}
+
+// #END
 
 module.exports = Z80
