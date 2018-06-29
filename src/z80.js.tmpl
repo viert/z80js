@@ -672,12 +672,13 @@ Z80.prototype.opcodeTable[0xcb] = { nextTable: Z80.prototype.opcodeTableCB }
 Z80.prototype.opcodeTable[0xed] = { nextTable: Z80.prototype.opcodeTableED }
 Z80.prototype.opcodeTable[0xdd] = { nextTable: Z80.prototype.opcodeTableDD }
 Z80.prototype.opcodeTable[0xfd] = { nextTable: Z80.prototype.opcodeTableFD }
-Z80.prototype.opcodeTableDD[0xcb] = {
-  nextTable: Z80.prototype.opcodeTableDDCB
-}
-Z80.prototype.opcodeTableFD[0xcb] = {
-  nextTable: Z80.prototype.opcodeTableFDCB
-}
+Z80.prototype.opcodeTableDD[0xcb] = { nextTable: Z80.prototype.opcodeTableDDCB }
+Z80.prototype.opcodeTableFD[0xcb] = { nextTable: Z80.prototype.opcodeTableFDCB }
+
+Z80.prototype.opcodeTableDD[0xdd] = { nextTable: Z80.prototype.opcodeTableDD }
+Z80.prototype.opcodeTableDD[0xfd] = { nextTable: Z80.prototype.opcodeTableFD }
+Z80.prototype.opcodeTableFD[0xdd] = { nextTable: Z80.prototype.opcodeTableDD }
+Z80.prototype.opcodeTableFD[0xfd] = { nextTable: Z80.prototype.opcodeTableFD }
 
 Z80.prototype.disassemble = function(addr) {
   let codes = []
@@ -2792,5 +2793,46 @@ Z80.prototype.$0 = function() {
 }
 
 // #END
+
+for (let rCode in RegisterMap) {
+  let iMap = {
+    0b00: 'rlc',
+    0b01: 'rrc',
+    0b10: 'rl',
+    0b11: 'rr'
+  }
+  for (let op in iMap) {
+    for (let pref in Prefixes) {
+      let opCode = rCode | (op << 3)
+      let opFuncName = `ld_${RegisterMap[rCode]}_${iMap[op]}__${pref}_d_`
+      let disasmString = `ld ${RegisterMap[rCode]}, ${iMap[op]} (${pref}{0})`
+      Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[0xcb].nextTable[opCode] = {
+        funcName: opFuncName,
+        dasm: disasmString,
+        args: [ArgType.Offset]
+      }
+    }
+  }
+}
+
+// #BEGIN ld_[a,b,c,d,e,h,l]_[rl,rlc,rr,rrc]__[ix,iy]_d_
+Z80.prototype.$0 = function() {
+  this.tStates += 2
+  let offset = signed8(this.read8(this.pc++))
+  let addr = this.r1.$3 + offset
+  this.r1.$1 = this.do_$2(this.read8(addr), true)
+  this.write8(addr, this.r1.$1)
+}
+
+// #END
+
+for (let code = 0; code < 256; code++) {
+  if (!Z80.prototype.opcodeTableDD[code]) {
+    Z80.prototype.opcodeTableDD[code] = Z80.prototype.opcodeTable[code]
+  }
+  if (!Z80.prototype.opcodeTableFD[code]) {
+    Z80.prototype.opcodeTableFD[code] = Z80.prototype.opcodeTable[code]
+  }
+}
 
 module.exports = Z80
