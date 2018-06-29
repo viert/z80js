@@ -2212,9 +2212,10 @@ for (let b = 0; b < 8; b++) {
     let disasmString = `bit ${b}, ${RegisterMap[rCode]}`
     Z80.prototype.opcodeTableCB[opCode] = { funcName: opFuncName, dasm: disasmString, args: [] }
   }
+  let opCode = 0b01000110 | (b << 3)
+  Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
   for (let s = 0; s < 8; s++) {
     let opCode = 0b01000000 | (b << 3) | s
-    Z80.prototype.opcodeTableCB[opCode] = { funcName: `bit_${b}__hl_`, dasm: `bit ${b}, (hl)`, args: [] }
     Z80.prototype.opcodeTableDDCB[opCode] = { funcName: `bit_${b}__ix_d_`, dasm: `bit ${b}, (ix{0})`, args: [] }
     Z80.prototype.opcodeTableFDCB[opCode] = { funcName: `bit_${b}__iy_d_`, dasm: `bit ${b}, (iy{0})`, args: [] }
   }
