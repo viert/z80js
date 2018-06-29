@@ -841,6 +841,10 @@ for (let dst in RegisterMap) {
     args: [ArgType.Byte]
   }
 }
+Z80.prototype.opcodeTableDD[0x26] = { funcName: 'ld_ixh_n', dasm: 'ld ixh, {0}', args: [ArgType.Byte] }
+Z80.prototype.opcodeTableDD[0x2e] = { funcName: 'ld_ixl_n', dasm: 'ld ixl, {0}', args: [ArgType.Byte] }
+Z80.prototype.opcodeTableFD[0x26] = { funcName: 'ld_iyh_n', dasm: 'ld iyh, {0}', args: [ArgType.Byte] }
+Z80.prototype.opcodeTableFD[0x2e] = { funcName: 'ld_iyl_n', dasm: 'ld iyl, {0}', args: [ArgType.Byte] }
 
 // #BEGIN ld_[a,b,c,d,e,h,l,ixh,ixl,iyh,iyl]_n
 Z80.prototype.$0 = function() {
@@ -1667,6 +1671,16 @@ for (let rCode in Register16Map) {
     dasm: disasmString,
     args: []
   }
+  for (let pref in Prefixes) {
+    let sReg = Register16Map[rCode] === 'hl' ? pref : Register16Map[rCode]
+    opFuncName = `add_${pref}_${sReg}`
+    disasmString = `add ${pref}, ${sReg}`
+    Z80.prototype.opcodeTable[Prefixes[pref]].nextTable[opCode] = {
+      funcName: opFuncName,
+      dasm: disasmString,
+      args: []
+    }
+  }
 }
 
 // ADC ---//----
@@ -1704,7 +1718,7 @@ Z80.prototype.$0 = function() {
 // #BEGIN add_[ix,iy]_[ix,iy,bc,de,sp]
 Z80.prototype.$0 = function() {
   this.tStates += 7
-  this.r1.hl = this.doAddWord(this.r1.hl, this.r1.$2, false, false)
+  this.r1.$1 = this.doAddWord(this.r1.$1, this.r1.$2, false, false)
 }
 
 // #END
