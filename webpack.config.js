@@ -2,11 +2,11 @@ const path = require('path')
 
 module.exports = {
   target: 'node',
-  mode: 'development',
+  mode: 'production',
   entry: './src/z80.js.tmpl',
   output: {
-    filename: 'z80bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    filename: 'index.js',
+    path: __dirname,
     library: 'Z80',
     libraryTarget: 'umd',
     umdNamedDefine: true
