@@ -1,8 +1,7 @@
 {
-  "name": "libz80js",
+  "name": "z80js",
   "version": "1.0.0",
-  "description": "",
-  "main": "compile.js",
+  "description": "z80 cpu emulator library",
   "scripts": {
     "build": "webpack",
     "build_tests": "node create_tests.js",
@@ -10,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/viert/zcg.git"
+    "url": "git+ssh://git@github.com/viert/z80js.git"
   },
   "author": "Pavel Vorobyov <aquavitale@yandex.ru> (https://facebook.com/viert.fm)",
   "license": "MIT",
-  "homepage": "https://bitbucket.org/viert/zcg#readme",
+  "homepage": "https://github.com/viert/z80js#readme",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-preset-env": "^1.7.0",
