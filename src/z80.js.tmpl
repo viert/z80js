@@ -732,7 +732,7 @@ Z80.prototype.disassemble = function(addr) {
       case ArgType.Word:
         arg = this.memory.read8(addr) | (this.memory.read8(addr + 1) << 8)
         addr += 2
-        dasm = dasm.replace(`{${argNum++}}`, `0x${hex16(arg)}`)
+        dasm = dasm.replace(`{${argNum++}}`, `$${hex16(arg)}`)
         break
     }
   })

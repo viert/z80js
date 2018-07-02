@@ -1,6 +1,6 @@
 {
   "name": "z80js",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "description": "z80 cpu emulator library",
   "scripts": {
     "build": "webpack",
