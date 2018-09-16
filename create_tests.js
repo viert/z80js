@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { hex16, hex8 } = require('./src/utils')
+const { hex16, hex8, unsigned8 } = require('./src/utils')
 const tests = {}
 
 function readRegs(regs, regs2) {
@@ -119,6 +119,7 @@ for (let desc in tests) {
     testLines = testRenders['main']
   }
   let description = 'Test ' + desc
+  description = description.trim()
   let data = tests[desc]
   testLines.push(`test('${description}', () => {`)
   testLines.push(`  let mem = new Memory()`)
@@ -141,7 +142,7 @@ for (let desc in tests) {
   data.mem.forEach(memItem => {
     let i = memItem.start
     memItem.data.forEach(byte => {
-      testLines.push(`  mem.write8(0x${hex16(i++)}, 0x${hex8(byte)})`)
+      testLines.push(`  mem.write8(0x${hex16(i++)}, 0x${hex8(unsigned8(byte))})`)
     })
   })
   testLines.push(`
@@ -171,7 +172,7 @@ for (let key in testRenders) {
   let fileName = path.resolve(__dirname, `__tests__/${key}.js`)
   let lines = [
     'const Memory = require("../src/memory")',
-    'const Z80 = require("../dist/z80bundle")',
+    'const Z80 = require("../index")',
     'const { FakePort } = require("../src/port")',
     ''
   ].concat(testRenders[key])
