@@ -22,9 +22,7 @@ test('Test cb00', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x00)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA806, 0x76)
-  mem.write8(0xA807, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -66,9 +64,7 @@ test('Test cb01', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x01)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xEF65, 0xFB)
-  mem.write8(0xEF66, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -110,9 +106,7 @@ test('Test cb02', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x02)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA7F2, 0x4A)
-  mem.write8(0xA7F3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -154,9 +148,7 @@ test('Test cb03', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x03)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xCA71, 0xE7)
-  mem.write8(0xCA72, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -198,9 +190,7 @@ test('Test cb04', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x04)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x67B0, 0xCD)
-  mem.write8(0x67B1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -242,9 +232,7 @@ test('Test cb05', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x05)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xCB32, 0x1B)
-  mem.write8(0xCB33, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -286,9 +274,7 @@ test('Test cb06', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x06)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5B04, 0xD4)
-  mem.write8(0x5B05, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -330,9 +316,7 @@ test('Test cb07', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x07)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xDCAA, 0x8D)
-  mem.write8(0xDCAB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -374,9 +358,7 @@ test('Test cb08', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x08)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2EE2, 0x53)
-  mem.write8(0x2EE3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -418,9 +400,7 @@ test('Test cb09', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x09)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x59C6, 0x9E)
-  mem.write8(0x59C7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -462,9 +442,7 @@ test('Test cb0a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x0A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x63AD, 0x96)
-  mem.write8(0x63AE, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -506,9 +484,7 @@ test('Test cb0b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x0B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0289, 0x37)
-  mem.write8(0x028A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -550,9 +526,7 @@ test('Test cb0c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x0C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x34D9, 0x50)
-  mem.write8(0x34DA, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -594,9 +568,7 @@ test('Test cb0d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x0D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x519A, 0x7A)
-  mem.write8(0x519B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -638,9 +610,7 @@ test('Test cb0e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x0E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x543E, 0xD2)
-  mem.write8(0x543F, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -682,9 +652,7 @@ test('Test cb0f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x0F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x070B, 0x86)
-  mem.write8(0x070C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -726,9 +694,7 @@ test('Test cb10', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x10)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0D74, 0x3D)
-  mem.write8(0x0D75, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -770,9 +736,7 @@ test('Test cb11', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x11)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xED42, 0xB7)
-  mem.write8(0xED43, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -814,9 +778,7 @@ test('Test cb12', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x12)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x29C6, 0x88)
-  mem.write8(0x29C7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -858,9 +820,7 @@ test('Test cb13', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x13)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3ED7, 0xEA)
-  mem.write8(0x3ED8, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -902,9 +862,7 @@ test('Test cb14', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x14)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7C9A, 0x0F)
-  mem.write8(0x7C9B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -946,9 +904,7 @@ test('Test cb15', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x15)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x03E2, 0xBC)
-  mem.write8(0x03E3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -990,9 +946,7 @@ test('Test cb16', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x16)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x684E, 0xC3)
-  mem.write8(0x684F, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -1034,9 +988,7 @@ test('Test cb17', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x17)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0FA2, 0x23)
-  mem.write8(0x0FA3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1078,9 +1030,7 @@ test('Test cb18', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x18)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x9596, 0xB6)
-  mem.write8(0x9597, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1122,9 +1072,7 @@ test('Test cb19', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x19)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x71C8, 0x85)
-  mem.write8(0x71C9, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1166,9 +1114,7 @@ test('Test cb1a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x1A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5279, 0x26)
-  mem.write8(0x527A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1210,9 +1156,7 @@ test('Test cb1b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x1B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xE8B4, 0xB9)
-  mem.write8(0xE8B5, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1254,9 +1198,7 @@ test('Test cb1c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x1C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x311D, 0x11)
-  mem.write8(0x311E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1298,9 +1240,7 @@ test('Test cb1d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x1D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xE451, 0x47)
-  mem.write8(0xE452, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1342,9 +1282,7 @@ test('Test cb1e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x1E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x00EF, 0x91)
-  mem.write8(0x00F0, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -1386,9 +1324,7 @@ test('Test cb1f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x1F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xACE7, 0x82)
-  mem.write8(0xACE8, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1430,9 +1366,7 @@ test('Test cb20', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x20)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xCCB6, 0x1A)
-  mem.write8(0xCCB7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1474,9 +1408,7 @@ test('Test cb21', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x21)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x37A8, 0xDD)
-  mem.write8(0x37A9, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1518,9 +1450,7 @@ test('Test cb22', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x22)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0641, 0x4D)
-  mem.write8(0x0642, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1562,9 +1492,7 @@ test('Test cb23', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x23)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xAA59, 0xC1)
-  mem.write8(0xAA5A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1606,9 +1534,7 @@ test('Test cb24', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x24)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x84B6, 0x80)
-  mem.write8(0x84B7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1650,9 +1576,7 @@ test('Test cb25', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x25)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x85BC, 0xEF)
-  mem.write8(0x85BD, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1694,9 +1618,7 @@ test('Test cb26', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x26)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x283A, 0xEE)
-  mem.write8(0x283B, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -1738,9 +1660,7 @@ test('Test cb27', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x27)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5EA2, 0xBD)
-  mem.write8(0x5EA3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1782,9 +1702,7 @@ test('Test cb28', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x28)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x021B, 0x90)
-  mem.write8(0x021C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1826,9 +1744,7 @@ test('Test cb29', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x29)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC306, 0x5C)
-  mem.write8(0xC307, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1870,9 +1786,7 @@ test('Test cb2a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x2A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3473, 0x34)
-  mem.write8(0x3474, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1914,9 +1828,7 @@ test('Test cb2b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x2B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xB78A, 0xAB)
-  mem.write8(0xB78B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -1958,9 +1870,7 @@ test('Test cb2c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x2C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1E7B, 0x2C)
-  mem.write8(0x1E7C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2002,9 +1912,7 @@ test('Test cb2d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x2D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x78EA, 0x85)
-  mem.write8(0x78EB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2046,9 +1954,7 @@ test('Test cb2e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x2E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x24BF, 0xB5)
-  mem.write8(0x24C0, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -2090,9 +1996,7 @@ test('Test cb2f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x2F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5C65, 0xC9)
-  mem.write8(0x5C66, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2134,9 +2038,7 @@ test('Test cb30', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x30)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x656B, 0x32)
-  mem.write8(0x656C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2178,9 +2080,7 @@ test('Test cb31', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x31)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x75A4, 0x0C)
-  mem.write8(0x75A5, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2222,9 +2122,7 @@ test('Test cb32', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x32)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5E56, 0x8D)
-  mem.write8(0x5E57, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2266,9 +2164,7 @@ test('Test cb33', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x33)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x038F, 0xBA)
-  mem.write8(0x0390, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2310,9 +2206,7 @@ test('Test cb34', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x34)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xFB38, 0x07)
-  mem.write8(0xFB39, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2354,9 +2248,7 @@ test('Test cb35', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x35)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7861, 0x72)
-  mem.write8(0x7862, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2398,9 +2290,7 @@ test('Test cb36', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x36)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6D38, 0xF1)
-  mem.write8(0x6D39, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -2442,9 +2332,7 @@ test('Test cb37', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x37)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6E56, 0xF8)
-  mem.write8(0x6E57, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2486,9 +2374,7 @@ test('Test cb38', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x38)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4FF2, 0xAA)
-  mem.write8(0x4FF3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2530,9 +2416,7 @@ test('Test cb39', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x39)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3C17, 0x61)
-  mem.write8(0x3C18, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2574,9 +2458,7 @@ test('Test cb3a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x3A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xF1B1, 0x6E)
-  mem.write8(0xF1B2, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2618,9 +2500,7 @@ test('Test cb3b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x3B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7419, 0x11)
-  mem.write8(0x741A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2662,9 +2542,7 @@ test('Test cb3c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x3C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2AD8, 0x8D)
-  mem.write8(0x2AD9, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2706,9 +2584,7 @@ test('Test cb3d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x3D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x46CD, 0xF9)
-  mem.write8(0x46CE, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2750,9 +2626,7 @@ test('Test cb3e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x3E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA96C, 0xA0)
-  mem.write8(0xA96D, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -2794,9 +2668,7 @@ test('Test cb3f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x3F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x77F0, 0x7C)
-  mem.write8(0x77F1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2838,9 +2710,7 @@ test('Test cb40', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x40)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x505F, 0x59)
-  mem.write8(0x5060, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2882,9 +2752,7 @@ test('Test cb41', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x41)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7BE9, 0xF7)
-  mem.write8(0x7BEA, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2926,9 +2794,7 @@ test('Test cb42', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x42)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x551F, 0xC9)
-  mem.write8(0x5520, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -2970,9 +2836,7 @@ test('Test cb43', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x43)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBAB4, 0x76)
-  mem.write8(0xBAB5, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3014,9 +2878,7 @@ test('Test cb44', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x44)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5B92, 0x78)
-  mem.write8(0x5B93, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3058,9 +2920,7 @@ test('Test cb45', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x45)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x409B, 0x64)
-  mem.write8(0x409C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3102,9 +2962,7 @@ test('Test cb46', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x46)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6131, 0xD5)
-  mem.write8(0x6132, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -3146,7 +3004,6 @@ test('Test cb47_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x47)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3188,9 +3045,7 @@ test('Test cb47', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x47)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x8A8C, 0x0E)
-  mem.write8(0x8A8D, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3232,9 +3087,7 @@ test('Test cb48', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x48)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6DE0, 0x8C)
-  mem.write8(0x6DE1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3276,9 +3129,7 @@ test('Test cb49', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x49)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA040, 0x5F)
-  mem.write8(0xA041, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3320,9 +3171,7 @@ test('Test cb4a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x4A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x77A4, 0x96)
-  mem.write8(0x77A5, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3364,9 +3213,7 @@ test('Test cb4b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x4B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x40CA, 0x8A)
-  mem.write8(0x40CB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3408,9 +3255,7 @@ test('Test cb4c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x4C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6D5D, 0xE7)
-  mem.write8(0x6D5E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3452,9 +3297,7 @@ test('Test cb4d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x4D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x158D, 0xE0)
-  mem.write8(0x158E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3496,9 +3339,7 @@ test('Test cb4e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x4E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xADA3, 0x5B)
-  mem.write8(0xADA4, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -3540,7 +3381,6 @@ test('Test cb4f_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x4F)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3582,9 +3422,7 @@ test('Test cb4f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x4F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0BCC, 0xA3)
-  mem.write8(0x0BCD, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3626,9 +3464,7 @@ test('Test cb50', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x50)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x84D2, 0x6A)
-  mem.write8(0x84D3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3670,9 +3506,7 @@ test('Test cb51', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x51)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xAAFC, 0xA6)
-  mem.write8(0xAAFD, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3714,9 +3548,7 @@ test('Test cb52', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x52)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xAC44, 0x00)
-  mem.write8(0xAC45, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3758,9 +3590,7 @@ test('Test cb53', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x53)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7C75, 0xAB)
-  mem.write8(0x7C76, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3802,9 +3632,7 @@ test('Test cb54', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x54)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1999, 0x98)
-  mem.write8(0x199A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3846,9 +3674,7 @@ test('Test cb55', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x55)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xFB4B, 0x0B)
-  mem.write8(0xFB4C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3890,9 +3716,7 @@ test('Test cb56', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x56)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBBF9, 0x10)
-  mem.write8(0xBBFA, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -3934,7 +3758,6 @@ test('Test cb57_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x57)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -3976,9 +3799,7 @@ test('Test cb57', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x57)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xDA50, 0x30)
-  mem.write8(0xDA51, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4020,9 +3841,7 @@ test('Test cb58', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x58)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1479, 0xA0)
-  mem.write8(0x147A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4064,9 +3883,7 @@ test('Test cb59', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x59)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2075, 0xC1)
-  mem.write8(0x2076, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4108,9 +3925,7 @@ test('Test cb5a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x5A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD99B, 0xE8)
-  mem.write8(0xD99C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4152,9 +3967,7 @@ test('Test cb5b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x5B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1691, 0xC7)
-  mem.write8(0x1692, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4196,9 +4009,7 @@ test('Test cb5c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x5C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x13E9, 0xAE)
-  mem.write8(0x13EA, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4240,9 +4051,7 @@ test('Test cb5d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x5D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xEE49, 0xA6)
-  mem.write8(0xEE4A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4284,9 +4093,7 @@ test('Test cb5e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x5E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x349A, 0x3C)
-  mem.write8(0x349B, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -4328,7 +4135,6 @@ test('Test cb5f_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x5F)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4370,9 +4176,7 @@ test('Test cb5f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x5F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6133, 0x90)
-  mem.write8(0x6134, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4414,9 +4218,7 @@ test('Test cb60', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x60)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5273, 0x0A)
-  mem.write8(0x5274, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4458,9 +4260,7 @@ test('Test cb61', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x61)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7C44, 0x77)
-  mem.write8(0x7C45, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4502,9 +4302,7 @@ test('Test cb62', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x62)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x8CC5, 0xAF)
-  mem.write8(0x8CC6, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4546,9 +4344,7 @@ test('Test cb63', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x63)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x84CA, 0xE6)
-  mem.write8(0x84CB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4590,9 +4386,7 @@ test('Test cb64', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x64)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xEA94, 0x0C)
-  mem.write8(0xEA95, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4634,9 +4428,7 @@ test('Test cb65', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x65)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x427A, 0xEE)
-  mem.write8(0x427B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4678,9 +4470,7 @@ test('Test cb66', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x66)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA44F, 0xD2)
-  mem.write8(0xA450, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -4722,7 +4512,6 @@ test('Test cb67_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x67)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4764,9 +4553,7 @@ test('Test cb67', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x67)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x394D, 0x10)
-  mem.write8(0x394E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4808,9 +4595,7 @@ test('Test cb68', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x68)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xDDD2, 0x16)
-  mem.write8(0xDDD3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4852,9 +4637,7 @@ test('Test cb69', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x69)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1DBA, 0x8A)
-  mem.write8(0x1DBB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4896,9 +4679,7 @@ test('Test cb6a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x6A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4E09, 0xD5)
-  mem.write8(0x4E0A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4940,9 +4721,7 @@ test('Test cb6b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x6B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1CA9, 0x86)
-  mem.write8(0x1CAA, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -4984,9 +4763,7 @@ test('Test cb6c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x6C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5605, 0x2B)
-  mem.write8(0x5606, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5028,9 +4805,7 @@ test('Test cb6d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x6D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD9AD, 0x4E)
-  mem.write8(0xD9AE, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5072,9 +4847,7 @@ test('Test cb6e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x6E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD8BA, 0x31)
-  mem.write8(0xD8BB, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -5116,7 +4889,6 @@ test('Test cb6f_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x6F)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5158,9 +4930,7 @@ test('Test cb6f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x6F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4D34, 0x78)
-  mem.write8(0x4D35, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5202,9 +4972,7 @@ test('Test cb70', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x70)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xF913, 0xCF)
-  mem.write8(0xF914, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5246,9 +5014,7 @@ test('Test cb71', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x71)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x42FE, 0x24)
-  mem.write8(0x42FF, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5290,9 +5056,7 @@ test('Test cb72', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x72)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xAD11, 0x3B)
-  mem.write8(0xAD12, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5334,9 +5098,7 @@ test('Test cb73', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x73)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2ECC, 0xE0)
-  mem.write8(0x2ECD, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5378,9 +5140,7 @@ test('Test cb74', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x74)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x983D, 0xFA)
-  mem.write8(0x983E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5422,9 +5182,7 @@ test('Test cb75', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x75)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD18D, 0x11)
-  mem.write8(0xD18E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5466,9 +5224,7 @@ test('Test cb76', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x76)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBC71, 0x18)
-  mem.write8(0xBC72, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -5510,7 +5266,6 @@ test('Test cb77_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x77)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5552,9 +5307,7 @@ test('Test cb77', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x77)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x736D, 0x36)
-  mem.write8(0x736E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5596,9 +5349,7 @@ test('Test cb78', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x78)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC76A, 0x1F)
-  mem.write8(0xC76B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5640,9 +5391,7 @@ test('Test cb79', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x79)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x39E8, 0x98)
-  mem.write8(0x39E9, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5684,9 +5433,7 @@ test('Test cb7a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x7A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD9AF, 0xED)
-  mem.write8(0xD9B0, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5728,9 +5475,7 @@ test('Test cb7b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x7B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6BD0, 0xA5)
-  mem.write8(0x6BD1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5772,9 +5517,7 @@ test('Test cb7c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x7C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x063B, 0x34)
-  mem.write8(0x063C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5816,9 +5559,7 @@ test('Test cb7d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x7D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5F9B, 0x97)
-  mem.write8(0x5F9C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5860,9 +5601,7 @@ test('Test cb7e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x7E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA25E, 0xD7)
-  mem.write8(0xA25F, 0xFF)
 
   while (cpu.tStates < 12) {
     cpu.execute()
@@ -5904,7 +5643,6 @@ test('Test cb7f_1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x7F)
-  mem.write8(0x0002, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5946,9 +5684,7 @@ test('Test cb7f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x7F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x185B, 0xF1)
-  mem.write8(0x185C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -5990,9 +5726,7 @@ test('Test cb80', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x80)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA706, 0x0A)
-  mem.write8(0xA707, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6034,9 +5768,7 @@ test('Test cb81', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x81)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6616, 0x74)
-  mem.write8(0x6617, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6078,9 +5810,7 @@ test('Test cb82', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x82)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4572, 0x2F)
-  mem.write8(0x4573, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6122,9 +5852,7 @@ test('Test cb83', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x83)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xAE9A, 0x16)
-  mem.write8(0xAE9B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6166,9 +5894,7 @@ test('Test cb84', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x84)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD6C0, 0x72)
-  mem.write8(0xD6C1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6210,9 +5936,7 @@ test('Test cb85', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x85)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xDDA0, 0x8A)
-  mem.write8(0xDDA1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6254,9 +5978,7 @@ test('Test cb86', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x86)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1B48, 0x62)
-  mem.write8(0x1B49, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -6298,9 +6020,7 @@ test('Test cb87', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x87)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xDFC5, 0xDE)
-  mem.write8(0xDFC6, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6342,9 +6062,7 @@ test('Test cb88', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x88)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x674D, 0x5F)
-  mem.write8(0x674E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6386,9 +6104,7 @@ test('Test cb89', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x89)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1BD7, 0xF2)
-  mem.write8(0x1BD8, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6430,9 +6146,7 @@ test('Test cb8a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x8A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xB98E, 0x2F)
-  mem.write8(0xB98F, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6474,9 +6188,7 @@ test('Test cb8b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x8B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4A07, 0x3F)
-  mem.write8(0x4A08, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6518,9 +6230,7 @@ test('Test cb8c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x8C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xDAEF, 0x0C)
-  mem.write8(0xDAF0, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6562,9 +6272,7 @@ test('Test cb8d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x8D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBD72, 0x13)
-  mem.write8(0xBD73, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6606,9 +6314,7 @@ test('Test cb8e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x8E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x63A7, 0xD4)
-  mem.write8(0x63A8, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -6650,9 +6356,7 @@ test('Test cb8f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x8F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1C1A, 0x37)
-  mem.write8(0x1C1B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6694,9 +6398,7 @@ test('Test cb90', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x90)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC73C, 0xA2)
-  mem.write8(0xC73D, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6738,9 +6440,7 @@ test('Test cb91', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x91)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x97E0, 0x5E)
-  mem.write8(0x97E1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6782,9 +6482,7 @@ test('Test cb92', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x92)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x83D0, 0x2B)
-  mem.write8(0x83D1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6826,9 +6524,7 @@ test('Test cb93', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x93)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2234, 0xA0)
-  mem.write8(0x2235, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6870,9 +6566,7 @@ test('Test cb94', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x94)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD6A6, 0xD0)
-  mem.write8(0xD6A7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6914,9 +6608,7 @@ test('Test cb95', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x95)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x36FF, 0xCD)
-  mem.write8(0x3700, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -6958,9 +6650,7 @@ test('Test cb96', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x96)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3324, 0x21)
-  mem.write8(0x3325, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -7002,9 +6692,7 @@ test('Test cb97', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x97)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x97BC, 0x75)
-  mem.write8(0x97BD, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7046,9 +6734,7 @@ test('Test cb98', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x98)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5D5E, 0xA4)
-  mem.write8(0x5D5F, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7090,9 +6776,7 @@ test('Test cb99', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x99)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x8BEC, 0x0B)
-  mem.write8(0x8BED, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7134,9 +6818,7 @@ test('Test cb9a', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x9A)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xDCB2, 0x09)
-  mem.write8(0xDCB3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7178,9 +6860,7 @@ test('Test cb9b', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x9B)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2BD6, 0xD3)
-  mem.write8(0x2BD7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7222,9 +6902,7 @@ test('Test cb9c', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x9C)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC7A0, 0x75)
-  mem.write8(0xC7A1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7266,9 +6944,7 @@ test('Test cb9d', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x9D)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0800, 0xCD)
-  mem.write8(0x0801, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7310,9 +6986,7 @@ test('Test cb9e', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x9E)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3A65, 0x2A)
-  mem.write8(0x3A66, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -7354,9 +7028,7 @@ test('Test cb9f', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0x9F)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x72F6, 0x72)
-  mem.write8(0x72F7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7398,9 +7070,7 @@ test('Test cba0', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA0)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC80D, 0xC0)
-  mem.write8(0xC80E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7442,9 +7112,7 @@ test('Test cba1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA1)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD0BA, 0xBD)
-  mem.write8(0xD0BB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7486,9 +7154,7 @@ test('Test cba2', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA2)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6FC0, 0x61)
-  mem.write8(0x6FC1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7530,9 +7196,7 @@ test('Test cba3', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA3)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6666, 0x8E)
-  mem.write8(0x6667, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7574,9 +7238,7 @@ test('Test cba4', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA4)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x8BB1, 0xBB)
-  mem.write8(0x8BB2, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7618,9 +7280,7 @@ test('Test cba5', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA5)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x88CA, 0x4F)
-  mem.write8(0x88CB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7662,9 +7322,7 @@ test('Test cba6', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA6)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xE70D, 0x27)
-  mem.write8(0xE70E, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -7706,9 +7364,7 @@ test('Test cba7', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA7)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC77B, 0xFF)
-  mem.write8(0xC77C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7750,9 +7406,7 @@ test('Test cba8', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA8)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC9E7, 0x46)
-  mem.write8(0xC9E8, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7794,9 +7448,7 @@ test('Test cba9', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xA9)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xCE0B, 0x39)
-  mem.write8(0xCE0C, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7838,9 +7490,7 @@ test('Test cbaa', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xAA)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xFED5, 0xB0)
-  mem.write8(0xFED6, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7882,9 +7532,7 @@ test('Test cbab', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xAB)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0812, 0xF2)
-  mem.write8(0x0813, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7926,9 +7574,7 @@ test('Test cbac', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xAC)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xFFAA, 0x09)
-  mem.write8(0xFFAB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -7970,9 +7616,7 @@ test('Test cbad', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xAD)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xAE15, 0x30)
-  mem.write8(0xAE16, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8014,9 +7658,7 @@ test('Test cbae', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xAE)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x190E, 0x66)
-  mem.write8(0x190F, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -8058,9 +7700,7 @@ test('Test cbaf', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xAF)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5877, 0x62)
-  mem.write8(0x5878, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8102,9 +7742,7 @@ test('Test cbb0', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB0)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xC3BA, 0x4C)
-  mem.write8(0xC3BB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8146,9 +7784,7 @@ test('Test cbb1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB1)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1190, 0xE3)
-  mem.write8(0x1191, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8190,9 +7826,7 @@ test('Test cbb2', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB2)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6FF5, 0x04)
-  mem.write8(0x6FF6, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8234,9 +7868,7 @@ test('Test cbb3', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB3)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5CB1, 0x43)
-  mem.write8(0x5CB2, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8278,9 +7910,7 @@ test('Test cbb4', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB4)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xE1BB, 0x78)
-  mem.write8(0xE1BC, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8322,9 +7952,7 @@ test('Test cbb5', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB5)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4BBA, 0x70)
-  mem.write8(0x4BBB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8366,9 +7994,7 @@ test('Test cbb6', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB6)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4FAB, 0xA5)
-  mem.write8(0x4FAC, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -8410,9 +8036,7 @@ test('Test cbb7', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB7)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD4A2, 0xF2)
-  mem.write8(0xD4A3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8454,9 +8078,7 @@ test('Test cbb8', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB8)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD249, 0xC4)
-  mem.write8(0xD24A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8498,9 +8120,7 @@ test('Test cbb9', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xB9)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5DEE, 0xCC)
-  mem.write8(0x5DEF, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8542,9 +8162,7 @@ test('Test cbba', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xBA)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x34C9, 0xBC)
-  mem.write8(0x34CA, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8586,9 +8204,7 @@ test('Test cbbb', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xBB)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xCB30, 0xF4)
-  mem.write8(0xCB31, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8630,9 +8246,7 @@ test('Test cbbc', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xBC)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7B6E, 0x45)
-  mem.write8(0x7B6F, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8674,9 +8288,7 @@ test('Test cbbd', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xBD)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x10B8, 0x35)
-  mem.write8(0x10B9, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8718,9 +8330,7 @@ test('Test cbbe', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xBE)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x77D5, 0xEA)
-  mem.write8(0x77D6, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -8762,9 +8372,7 @@ test('Test cbbf', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xBF)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x15DE, 0x1D)
-  mem.write8(0x15DF, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8806,9 +8414,7 @@ test('Test cbc0', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC0)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xB3A1, 0x5C)
-  mem.write8(0xB3A2, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8850,9 +8456,7 @@ test('Test cbc1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC1)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3343, 0xAA)
-  mem.write8(0x3344, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8894,9 +8498,7 @@ test('Test cbc2', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC2)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xE1F3, 0x14)
-  mem.write8(0xE1F4, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8938,9 +8540,7 @@ test('Test cbc3', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC3)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x8F3A, 0x81)
-  mem.write8(0x8F3B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -8982,9 +8582,7 @@ test('Test cbc4', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC4)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5876, 0x9D)
-  mem.write8(0x5877, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9026,9 +8624,7 @@ test('Test cbc5', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC5)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4107, 0xCC)
-  mem.write8(0x4108, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9070,9 +8666,7 @@ test('Test cbc6', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC6)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xF0BE, 0x9C)
-  mem.write8(0xF0BF, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -9114,9 +8708,7 @@ test('Test cbc7', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC7)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x583F, 0x58)
-  mem.write8(0x5840, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9158,9 +8750,7 @@ test('Test cbc8', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC8)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7CF3, 0x75)
-  mem.write8(0x7CF4, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9202,9 +8792,7 @@ test('Test cbc9', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xC9)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x72DB, 0x87)
-  mem.write8(0x72DC, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9246,9 +8834,7 @@ test('Test cbca', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xCA)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xFBC7, 0x1A)
-  mem.write8(0xFBC8, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9290,9 +8876,7 @@ test('Test cbcb', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xCB)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xF70D, 0xA1)
-  mem.write8(0xF70E, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9334,9 +8918,7 @@ test('Test cbcc', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xCC)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x18FD, 0xFE)
-  mem.write8(0x18FE, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9378,9 +8960,7 @@ test('Test cbcd', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xCD)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2602, 0x2D)
-  mem.write8(0x2603, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9422,9 +9002,7 @@ test('Test cbce', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xCE)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x8EC6, 0xBF)
-  mem.write8(0x8EC7, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -9466,9 +9044,7 @@ test('Test cbcf', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xCF)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x98A0, 0xD4)
-  mem.write8(0x98A1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9510,9 +9086,7 @@ test('Test cbd0', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD0)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1724, 0x30)
-  mem.write8(0x1725, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9554,9 +9128,7 @@ test('Test cbd1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD1)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x47F4, 0xC7)
-  mem.write8(0x47F5, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9598,9 +9170,7 @@ test('Test cbd2', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD2)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x7528, 0x4F)
-  mem.write8(0x7529, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9642,9 +9212,7 @@ test('Test cbd3', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD3)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5FBA, 0x3A)
-  mem.write8(0x5FBB, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9686,9 +9254,7 @@ test('Test cbd4', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD4)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBF2E, 0x71)
-  mem.write8(0xBF2F, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9730,9 +9296,7 @@ test('Test cbd5', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD5)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x8A77, 0x52)
-  mem.write8(0x8A78, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9774,9 +9338,7 @@ test('Test cbd6', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD6)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6029, 0xB7)
-  mem.write8(0x602A, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -9818,9 +9380,7 @@ test('Test cbd7', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD7)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x290A, 0x42)
-  mem.write8(0x290B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9862,9 +9422,7 @@ test('Test cbd8', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD8)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6D7E, 0x6E)
-  mem.write8(0x6D7F, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9906,9 +9464,7 @@ test('Test cbd9', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xD9)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xEFC6, 0x5B)
-  mem.write8(0xEFC7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9950,9 +9506,7 @@ test('Test cbda', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xDA)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1C87, 0xB9)
-  mem.write8(0x1C88, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -9994,9 +9548,7 @@ test('Test cbdb', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xDB)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBC48, 0xEF)
-  mem.write8(0xBC49, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10038,9 +9590,7 @@ test('Test cbdc', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xDC)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xB125, 0x0E)
-  mem.write8(0xB126, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10082,9 +9632,7 @@ test('Test cbdd', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xDD)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5B9F, 0x94)
-  mem.write8(0x5BA0, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10126,9 +9674,7 @@ test('Test cbde', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xDE)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBA03, 0x93)
-  mem.write8(0xBA04, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -10170,9 +9716,7 @@ test('Test cbdf', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xDF)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0FA1, 0xC5)
-  mem.write8(0x0FA2, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10214,9 +9758,7 @@ test('Test cbe0', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE0)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3744, 0x54)
-  mem.write8(0x3745, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10258,9 +9800,7 @@ test('Test cbe1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE1)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5334, 0x85)
-  mem.write8(0x5335, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10302,9 +9842,7 @@ test('Test cbe2', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE2)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3A4C, 0x47)
-  mem.write8(0x3A4D, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10346,9 +9884,7 @@ test('Test cbe3', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE3)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2E78, 0x48)
-  mem.write8(0x2E79, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10390,9 +9926,7 @@ test('Test cbe4', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE4)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0978, 0x84)
-  mem.write8(0x0979, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10434,9 +9968,7 @@ test('Test cbe5', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE5)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xB48F, 0xCF)
-  mem.write8(0xB490, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10478,9 +10010,7 @@ test('Test cbe6', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE6)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x9F9B, 0xF6)
-  mem.write8(0x9F9C, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -10522,9 +10052,7 @@ test('Test cbe7', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE7)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xF2E0, 0xCF)
-  mem.write8(0xF2E1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10566,9 +10094,7 @@ test('Test cbe8', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE8)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x4A05, 0xE6)
-  mem.write8(0x4A06, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10610,9 +10136,7 @@ test('Test cbe9', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xE9)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA4D0, 0xB2)
-  mem.write8(0xA4D1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10654,9 +10178,7 @@ test('Test cbea', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xEA)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xF32A, 0x9C)
-  mem.write8(0xF32B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10698,9 +10220,7 @@ test('Test cbeb', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xEB)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x1A1A, 0x21)
-  mem.write8(0x1A1B, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10742,9 +10262,7 @@ test('Test cbec', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xEC)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xBA08, 0x82)
-  mem.write8(0xBA09, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10786,9 +10304,7 @@ test('Test cbed', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xED)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2DEC, 0xCB)
-  mem.write8(0x2DED, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10830,9 +10346,7 @@ test('Test cbee', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xEE)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xE90D, 0xF1)
-  mem.write8(0xE90E, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -10874,9 +10388,7 @@ test('Test cbef', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xEF)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x2C39, 0xC8)
-  mem.write8(0x2C3A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10918,9 +10430,7 @@ test('Test cbf0', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF0)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x6FF5, 0xF6)
-  mem.write8(0x6FF6, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -10962,9 +10472,7 @@ test('Test cbf1', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF1)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x5E1C, 0x37)
-  mem.write8(0x5E1D, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11006,9 +10514,7 @@ test('Test cbf2', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF2)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x9819, 0xE4)
-  mem.write8(0x981A, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11050,9 +10556,7 @@ test('Test cbf3', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF3)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x263F, 0xA1)
-  mem.write8(0x2640, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11094,9 +10598,7 @@ test('Test cbf4', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF4)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x75D9, 0x3F)
-  mem.write8(0x75DA, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11138,9 +10640,7 @@ test('Test cbf5', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF5)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x47E6, 0xCE)
-  mem.write8(0x47E7, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11182,9 +10682,7 @@ test('Test cbf6', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF6)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xA9BC, 0xB1)
-  mem.write8(0xA9BD, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -11226,9 +10724,7 @@ test('Test cbf7', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF7)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x188C, 0x6C)
-  mem.write8(0x188D, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11270,9 +10766,7 @@ test('Test cbf8', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF8)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD2B0, 0xCB)
-  mem.write8(0xD2B1, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11314,9 +10808,7 @@ test('Test cbf9', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xF9)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x0730, 0xAE)
-  mem.write8(0x0731, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11358,9 +10850,7 @@ test('Test cbfa', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xFA)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xED03, 0x27)
-  mem.write8(0xED04, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11402,9 +10892,7 @@ test('Test cbfb', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xFB)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xD1AE, 0xF2)
-  mem.write8(0xD1AF, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11446,9 +10934,7 @@ test('Test cbfc', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xFC)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x500F, 0x94)
-  mem.write8(0x5010, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11490,9 +10976,7 @@ test('Test cbfd', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xFD)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x28C5, 0xAB)
-  mem.write8(0x28C6, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()
@@ -11534,9 +11018,7 @@ test('Test cbfe', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xFE)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0x3A24, 0xC3)
-  mem.write8(0x3A25, 0xFF)
 
   while (cpu.tStates < 15) {
     cpu.execute()
@@ -11578,9 +11060,7 @@ test('Test cbff', () => {
   cpu.r = 0x00
   mem.write8(0x0000, 0xCB)
   mem.write8(0x0001, 0xFF)
-  mem.write8(0x0002, 0xFF)
   mem.write8(0xE3F2, 0x25)
-  mem.write8(0xE3F3, 0xFF)
 
   while (cpu.tStates < 8) {
     cpu.execute()

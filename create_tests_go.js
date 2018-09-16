@@ -34,7 +34,7 @@ function readMem(input) {
   let dump = input.split(/\s+/)
   return {
     start: parseInt(dump[0], 16),
-    data: dump.slice(1, dump.length - 1).map(item => parseInt(item, 16))
+    data: dump.slice(1, dump.length - 1).filter(item => item != "-1").map(item => parseInt(item, 16))
   }
 }
 
@@ -118,7 +118,7 @@ for (let desc in tests) {
   } else {
     testLines = testRenders['main']
   }
-  let funcName = 'Test' + desc.toUpperCase()
+  let funcName = 'Test' + desc.toUpperCase().trim()
   let data = tests[desc]
   testLines.push('')
   testLines.push(`func ${funcName}(t *testing.T) {`)

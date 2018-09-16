@@ -1,6 +1,6 @@
 const fs = require('fs')
 const path = require('path')
-const { hex16, hex8, unsigned8 } = require('./src/utils')
+const { hex16, hex8 } = require('./src/utils')
 const tests = {}
 
 function readRegs(regs, regs2) {
@@ -32,10 +32,11 @@ function readRegs(regs, regs2) {
 
 function readMem(input) {
   let dump = input.split(/\s+/)
-  return {
+  let data = {
     start: parseInt(dump[0], 16),
-    data: dump.slice(1, dump.length - 1).map(item => parseInt(item, 16))
+    data: dump.slice(1, dump.length - 1).filter(item => item != "-1").map(item => parseInt(item, 16))
   }
+  return data
 }
 
 function prepareTestsInput(input) {
@@ -48,6 +49,7 @@ function prepareTestsInput(input) {
     let desc = input[i++]
     let regs = readRegs(input[i++], input[i++])
     let mem = []
+
     while (input[i].trim() !== '-1') {
       mem.push(readMem(input[i++]))
     }
@@ -142,7 +144,7 @@ for (let desc in tests) {
   data.mem.forEach(memItem => {
     let i = memItem.start
     memItem.data.forEach(byte => {
-      testLines.push(`  mem.write8(0x${hex16(i++)}, 0x${hex8(unsigned8(byte))})`)
+      testLines.push(`  mem.write8(0x${hex16(i++)}, 0x${hex8(byte)})`)
     })
   })
   testLines.push(`
