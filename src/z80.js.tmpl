@@ -113,6 +113,10 @@ const Z80 = function(memory, io, debug) {
   this.read8 = addr => {
     this.tStates += 3
     let value = memory.read8(addr)
+    if (typeof value === "undefined" || value == null) {
+      this.debug(`Error reading memory address 0x${hex16(addr)}, value is ${value}`)
+      return value
+    }
     this.debug(`Reading memory address 0x${hex16(addr)} = 0x${hex8(value)}`)
     return value
   }

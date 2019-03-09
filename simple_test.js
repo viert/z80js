@@ -1,4 +1,4 @@
-const Z80 = require('./dist/z80bundle')
+const Z80 = require('./index')
 const Memory = require('./src/memory')
 const { FakePort } = require('./src/port')
 
